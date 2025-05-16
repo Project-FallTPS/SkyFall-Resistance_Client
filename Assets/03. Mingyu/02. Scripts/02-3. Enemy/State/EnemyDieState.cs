@@ -5,13 +5,11 @@ using UnityEngine;
 public class EnemyDieState : IEnemyState
 {
     private EnemyController _enemyController;
-    private Enemy _enemy;
     private IEnumerator _dieCoroutine;
 
     public EnemyDieState(EnemyController enemyController)
     {
         _enemyController = enemyController;
-        _enemy = _enemyController.GetComponent<Enemy>();
     }
 
     public void Enter()
