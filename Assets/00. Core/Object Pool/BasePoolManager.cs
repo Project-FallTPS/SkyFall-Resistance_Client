@@ -8,7 +8,7 @@ public abstract class BasePoolManager<TEnum, TPoolInfo> : Singleton<BasePoolMana
 {
     [SerializeField] protected List<TPoolInfo> _poolInfoList;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
         base.Awake();
         Initialize();
