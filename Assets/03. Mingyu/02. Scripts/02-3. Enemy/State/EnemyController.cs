@@ -13,13 +13,10 @@ public class EnemyController : MonoBehaviour
     private Dictionary<EEnemyState, IEnemyState> _enemyStateDict = new Dictionary<EEnemyState, IEnemyState>();
     public Dictionary<EEnemyState, IEnemyState> EnemyStateDict { get => _enemyStateDict; set => _enemyStateDict = value; }
 
-    private Vector3 _startPosition;
-    public Vector3 StartPosition => _startPosition;
-
-
     [Header("Components")]
-    private CharacterController _characterController;
-    public CharacterController CharacterController => _characterController;
+    private SphereCollider _enemyCollider;
+    public SphereCollider EnemyCollider => _enemyCollider;
+
     private EnemyData _enemyData;
     public EnemyData EnemyData { get => _enemyData; set => _enemyData = value; }
 
@@ -36,14 +33,12 @@ public class EnemyController : MonoBehaviour
         _enemyStateDict.Add(EEnemyState.Damaged, new EnemyDamagedState(this));
         _enemyStateDict.Add(EEnemyState.Die, new EnemyDieState(this));
 
-
-        _characterController = GetComponent<CharacterController>();
+        _enemyCollider = GetComponent<SphereCollider>();
         _player = GameObject.FindGameObjectWithTag(nameof(ETags.Player));
     }
 
     private void OnEnable()
     {
-        _startPosition = transform.position;
         _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
     }
 
