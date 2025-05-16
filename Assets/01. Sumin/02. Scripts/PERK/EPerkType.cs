@@ -1,0 +1,4 @@
+public enum EPerkType
+{
+    Count,
+}
