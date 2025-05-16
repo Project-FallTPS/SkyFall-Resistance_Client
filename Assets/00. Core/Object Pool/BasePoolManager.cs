@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public abstract class BasePoolManager<TEnum, TPoolInfo> : MonoBehaviour
+public abstract class BasePoolManager<TEnum, TPoolInfo> : Singleton<BasePoolManager<TEnum, TPoolInfo>>
     where TEnum : Enum
     where TPoolInfo : BasePoolInfo<TEnum>
 {
@@ -10,6 +10,7 @@ public abstract class BasePoolManager<TEnum, TPoolInfo> : MonoBehaviour
 
     protected virtual void Awake()
     {
+        base.Awake();
         Initialize();
     }
 
