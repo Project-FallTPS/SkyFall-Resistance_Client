@@ -11,6 +11,7 @@ public class ParallaxManager : Singleton<ParallaxManager>
         public float MoveSpeed;
     }
 
+    [SerializeField]
     private List<ParallaxLayerSet> _environmentLayers = new List<ParallaxLayerSet>();
 
     private void Start()
