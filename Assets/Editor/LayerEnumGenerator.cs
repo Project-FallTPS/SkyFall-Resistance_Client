@@ -5,7 +5,7 @@ using UnityEngine;
 public class LayerEnumGenerator : MonoBehaviour
 {
     [SerializeField]
-    private const string _directory = "Assets/03. Mingyu/02.Scripts/02-20. Util";
+    private const string _directory = "Assets/03. Mingyu/02. Scripts/02-20. Util";
     private const string _layerEnumFilePath = _directory + "/Layers.cs";
 
     [MenuItem("Tools/Generate Layer Enum")]

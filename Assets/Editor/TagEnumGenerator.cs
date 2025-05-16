@@ -5,7 +5,7 @@ using UnityEngine;
 public class TagEnumGenerator : MonoBehaviour
 {
     [SerializeField]
-    private const string _directory = "Assets/03. Mingyu/02.Scripts/02-20. Util";
+    private const string _directory = "Assets/03. Mingyu/02. Scripts/02-20. Util";
     private const string _tagEnumFilePath = _directory + "/Tags.cs";
 
     [MenuItem("Tools/Generate Tag Enum")]
