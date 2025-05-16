@@ -337,3 +337,123 @@ MonoBehaviour:
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
     IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/01. Scene
+    Ordinal: 27
+    Priority: 0
+    IconType: 10
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/02. Scripts
+    Ordinal: 28
+    Priority: 0
+    IconType: 20
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/03. Prefabs
+    Ordinal: 29
+    Priority: 0
+    IconType: 50
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/04. Images
+    Ordinal: 30
+    Priority: 0
+    IconType: 60
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/05. Models
+    Ordinal: 31
+    Priority: 0
+    IconType: 80
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/06. Sounds
+    Ordinal: 32
+    Priority: 0
+    IconType: 120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/07. Animations
+    Ordinal: 33
+    Priority: 0
+    IconType: 160
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/08. Materials
+    Ordinal: 34
+    Priority: 0
+    IconType: 190
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/09. VFX
+    Ordinal: 35
+    Priority: 0
+    IconType: 210
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/03. Mingyu/20. External Assets
+    Ordinal: 36
+    Priority: 0
+    IconType: 3540
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
