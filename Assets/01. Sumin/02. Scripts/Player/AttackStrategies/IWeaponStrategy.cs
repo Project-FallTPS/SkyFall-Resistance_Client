@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public interface IWeaponStrategy
 {
     public float GetDamage();
