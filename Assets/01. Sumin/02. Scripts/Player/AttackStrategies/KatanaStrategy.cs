@@ -4,7 +4,7 @@ using UnityEngine.Rendering.Universal;
 public class KatanaStrategy : IWeaponStrategy
 {
     private WeaponData _weaponData;
-    private GameObject _player;
+    private PlayerAttackHandler _player;
 
     [Header("# Target Dash")]
     private float _dashDuration = 0.1f;
@@ -13,23 +13,23 @@ public class KatanaStrategy : IWeaponStrategy
     private Vector3 _dashStartPos;
     private Vector3 _dashTargetPos;
 
-    public KatanaStrategy(GameObject player)
+    public KatanaStrategy(PlayerAttackHandler player)
     {
-        _weaponData = WeaponManager.Instance.GetWeaponData(EWeaponType.Katana);
+        _weaponData = player.WeaponStat.GetWeaponData(EWeaponType.Katana);
         _player = player;
     }
 
     public float GetDamage()
     {
         float baseDamage = _weaponData.Damage;
-        float bonus = PlayerStatManager.Instance.GetStat(EStatType.Damage);
+        float bonus = _player.PlayerStat.GetStat(EStatType.Damage);
         return baseDamage * bonus;
     }
 
     public float GetAttackSpeed()
     {
         float baseSpeed = _weaponData.CoolTime;
-        float bonus = PlayerStatManager.Instance.GetStat(EStatType.AttackSpeed);
+        float bonus = _player.PlayerStat.GetStat(EStatType.AttackSpeed);
         return baseSpeed * bonus;
     }
 
@@ -48,7 +48,14 @@ public class KatanaStrategy : IWeaponStrategy
 
     public void StartDash(GameObject target)
     {
-        if (_isDashing || target == null) return;
+        if (_isDashing || target == null)
+        {
+            return;
+        }
+        if (!_player.PlayerStat.TryUseStamina(EStatType.TargetDashStaminaDrainRate))
+        {
+            return;
+        }
 
         _dashStartPos = _player.transform.position;
         _dashTargetPos = target.transform.position;

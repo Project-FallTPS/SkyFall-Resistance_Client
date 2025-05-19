@@ -20,3 +20,10 @@ MonoBehaviour:
     CurrentAmmo: 0
     ReloadInterval: 0
     ExplodeRange: 0
+  - WeaponType: 1
+    CoolTime: 1
+    Damage: 10
+    MaxAmmo: 0
+    CurrentAmmo: 0
+    ReloadInterval: 0
+    ExplodeRange: 0

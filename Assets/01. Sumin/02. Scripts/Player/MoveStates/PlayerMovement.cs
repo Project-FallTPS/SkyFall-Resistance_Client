@@ -1,17 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("# Stat")]
+    private PlayerStatHolder _playerStatManager;
+
     [Header("# StateMachine")]
     public PlayerMoveStateMachine StateMachine { get; private set; }
 
     [Header(" Movement Settings")]
-    public float rotateSpeed = 10f;
+    public float RotateSpeed = 10f;
     public float CurrentSpeed { get; private set; }
     public Vector3 MoveDirection { get; private set; }
+    private bool _isSprint;
 
     [Header("# Components")]
     public CharacterController _characterController { get; private set; }
@@ -19,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        _playerStatManager = GetComponent<PlayerStatHolder>();
         _characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         _mainCameraTransform = Camera.main.transform;
@@ -33,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        CurrentSpeed = PlayerStatManager.Instance.GetStat(EStatType.MoveSpeed);
+        CurrentSpeed = _playerStatManager.GetStat(EStatType.MoveSpeed);
     }
 
     private void Update()
@@ -69,13 +74,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (MoveDirection.sqrMagnitude > 0.01f)
         {
+            if(!_isSprint || _playerStatManager.TryUseStamina(EStatType.SprintStaminaDrainRate))
+            {
+                SetSprint(false);
+            }
             _characterController.Move(MoveDirection * CurrentSpeed * Time.deltaTime);
         }
     }
 
     public void SetSprint(bool isSprint)
     {
-        CurrentSpeed = isSprint ? PlayerStatManager.Instance.GetStat(EStatType.SprintSpeed) : PlayerStatManager.Instance.GetStat(EStatType.MoveSpeed);
+        CurrentSpeed = isSprint ? _playerStatManager.GetStat(EStatType.SprintSpeed) : _playerStatManager.GetStat(EStatType.MoveSpeed);
+        _isSprint = isSprint;
     }
 
     public void ChangeState(EPlayerMoveState state)
@@ -90,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         if (camForward.sqrMagnitude > 0.01f)
         {
             Quaternion targetRot = Quaternion.LookRotation(camForward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, RotateSpeed * Time.deltaTime);
         }
     }
 }

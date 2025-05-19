@@ -6,5 +6,9 @@ public enum EStatType
     Damage,
     AttackSpeed,
     SprintSpeed,
+    MaxStamina,
+    CurrentStamina,
+    SprintStaminaDrainRate,
+    TargetDashStaminaDrainRate,
     Count
 }

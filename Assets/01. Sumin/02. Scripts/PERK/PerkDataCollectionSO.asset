@@ -15,5 +15,5 @@ MonoBehaviour:
   PerkDatas:
   - Type: 0
     Bonuses:
-    - StatType: 0
-      Value: 0
+    - StatType: 6
+      Value: 1
