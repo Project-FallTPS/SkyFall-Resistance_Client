@@ -156,7 +156,10 @@ MonoBehaviour:
   _maxHealthPoint: 100
   _currentHealthPoint: 100
   _movementSpeed: 5
+  _attackableRange: 7
   _attackDamage: 1
+  _attackDelay: 5
+  _bombRange: 3
 --- !u!114 &7299337962237859815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +172,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0cd01f594154e48b04971ac8261b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyStrategyHandler: {fileID: 0}

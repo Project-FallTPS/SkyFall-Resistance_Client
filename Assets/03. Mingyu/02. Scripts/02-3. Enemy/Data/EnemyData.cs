@@ -27,17 +27,22 @@ public class EnemyData : MonoBehaviour
 
     // [Header("Trace State")]
 
-    [Header("Attack State")]
+    [Foldout("Attack State")]
+    [SerializeField]
+    private float _attackableRange;
+    public float AttackableRange { get => _attackableRange; set => _attackableRange = value; }
     [SerializeField]
     private float _attackDamage = 1f;
     public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
+    [Header("Attack Shooting")]
+    [SerializeField]
+    private float _attackDelay = 5f;
+    public float AttackDelay { get => _attackDelay; set => _attackDelay = value; }
+    [Header("Attack Bombing")]
+    [SerializeField]
+    private float _bombRange = 3f;
 
     // [Header("Damaged State")]
 
     // [Header("Die State")]
-
-
-
-
-
 }
