@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3986179179329749341}
   - component: {fileID: 4596544553357837919}
   - component: {fileID: 3005581896905022112}
+  - component: {fileID: 8378555044592671661}
   m_Layer: 0
   m_Name: P_VFX_EnemySuicideBombing
   m_TagString: Untagged
@@ -4903,6 +4904,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8378555044592671661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358637981425055526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e2794b901b45a449e5462ed0e609e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vfxType: 0
 --- !u!1 &5084589283769131857
 GameObject:
   m_ObjectHideFlags: 0

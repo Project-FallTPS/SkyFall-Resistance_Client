@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStrategyHandler : MonoBehaviour
+public class EnemyStrategyHandler : Singleton<EnemyStrategyHandler>
 {
     [Header("Trace Strategy")]
     private HashSet<ITraceStrategy> _enemyTraceStrategySet = new HashSet<ITraceStrategy>();
@@ -11,27 +11,28 @@ public class EnemyStrategyHandler : MonoBehaviour
     private Dictionary<EEnemyType, IAttackStrategy> _enemyAttackStrategyDict = new Dictionary<EEnemyType, IAttackStrategy>();
     public Dictionary<EEnemyType, IAttackStrategy> EnemyAttackStrategyDict => _enemyAttackStrategyDict;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _enemyTraceStrategySet.Add(new TraceNormal());
-        _enemyTraceStrategySet.Add(new TraceBazier());
+        _enemyTraceStrategySet.Add(new TraceBezier());
         _enemyAttackStrategyDict.Add(EEnemyType.Shooting, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Bombing, new AttackBombing());
     }
 
     public ITraceStrategy PickTraceStrategy()
     {
-        int rand = Random.Range(0, 100); // 0부터 99까지
+        int rand = Random.Range(0, 100);
         foreach (var strategy in _enemyTraceStrategySet)
         {
-            if (rand < 80 && strategy is TraceNormal)
+            if (rand < 10 && strategy is TraceNormal)
             {
-                return strategy;
+                return new TraceNormal();
 
             }
-            else if (rand >= 80 && strategy is TraceBazier)
+            else if (10 <= rand && strategy is TraceBezier)
             {
-                return strategy;
+                return new TraceBezier();
 
             }
         }
