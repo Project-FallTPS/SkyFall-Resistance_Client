@@ -183,15 +183,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 21432048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49be24a6ba4acce419faab8f3843a1f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b21113622f4a2b409c4ad985628848e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDontDestroy: 0
+  _isDontDestroy: 1
   _poolInfoList:
   - Type: 0
     InitCount: 100
     Prefab: {fileID: 1331364910304127374, guid: 39cfc81981fa60146b4da808a96f8179, type: 3}
     Container: {fileID: 1247376325}
+  - Type: 1
+    InitCount: 0
+    Prefab: {fileID: 0}
+    Container: {fileID: 0}
 --- !u!1 &198910127
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1247376325}
   m_Layer: 0
-  m_Name: ===== [ Bullets ] =====
+  m_Name: ===== [ Damageable ] =====
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
