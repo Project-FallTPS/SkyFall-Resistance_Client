@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class Debris : MonoBehaviour, ILaunchable, IDamageable
+public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 {
+    private EDebrisType _debrisType = EDebrisType.Normal;
+    public EDebrisType DebrisType => _debrisType;
+
     private Rigidbody _rigidbody;
 
     private float _currentHealth = 10f;
@@ -9,6 +12,8 @@ public class Debris : MonoBehaviour, ILaunchable, IDamageable
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+
+        _debrisType = DefineType();
     }
 
     public void Launch(Vector3 direction, float magnitude)
@@ -16,9 +21,9 @@ public class Debris : MonoBehaviour, ILaunchable, IDamageable
         _rigidbody.AddForce(direction * magnitude, ForceMode.Impulse);
     }
 
-    public void TakeDamage(Damage damage)
+    public void TakeDamage(float damage)
     {
-        _currentHealth -= damage.Value;
+        _currentHealth -= damage;
 
         if (_currentHealth <= 0)
         {
@@ -26,8 +31,10 @@ public class Debris : MonoBehaviour, ILaunchable, IDamageable
         }
     }
 
-    protected void HandleDestruction()
+    protected abstract EDebrisType DefineType();
+    protected abstract void HandleDestruction();
+    protected void Release()
     {
-
+        DebrisPoolManager.Instance.ReturnObject(this.gameObject, _debrisType);
     }
 }

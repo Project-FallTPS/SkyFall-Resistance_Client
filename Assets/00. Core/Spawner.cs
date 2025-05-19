@@ -37,6 +37,6 @@ public abstract class Spawner<TInfo, TEnum> : MonoBehaviour
     protected abstract TEnum PickRandomObject();
     protected Vector3 SetRandomSpawnPosition()
     {
-        return UnityEngine.Random.insideUnitSphere * _spawnRadius;
+        return transform.position + UnityEngine.Random.insideUnitSphere * _spawnRadius;
     }
 }
