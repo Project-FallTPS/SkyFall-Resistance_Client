@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttackHandler : MonoBehaviour
 {
@@ -8,9 +9,16 @@ public class PlayerAttackHandler : MonoBehaviour
     private EWeaponType _currentWeapon;
     private IWeaponStrategy _currentStrategy;
 
+    private IDamageable _target;
+
     private void Awake()
     {
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy());
+    }
+
+    private void Update()
+    {
+
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -26,8 +34,18 @@ public class PlayerAttackHandler : MonoBehaviour
         }
     }
 
-    public void PerformAttack(IDamageable target)
+    public void PerformAttack()
     {
-        _currentStrategy.Attack(target);
+        //if (TargetManager.Instance.Target != null)
+        //{
+        //    if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
+        //    {
+        //        _currentStrategy.Attack(t);
+        //    }
+        //}
+        //else
+        //{
+
+        //}
     }
 }

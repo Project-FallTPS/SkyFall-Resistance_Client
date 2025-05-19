@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatList:
   - Type: 0
-    Value: 0
+    Value: 10
   - Type: 1
-    Value: 0
+    Value: 100
   - Type: 2
-    Value: 0
+    Value: 100
   - Type: 3
-    Value: 0
+    Value: 10
   - Type: 4
-    Value: 0
+    Value: 1
+  - Type: 5
+    Value: 15

@@ -5,5 +5,6 @@ public enum EStatType
     MaxHealth,
     Damage,
     AttackSpeed,
+    SprintSpeed,
     Count
 }
