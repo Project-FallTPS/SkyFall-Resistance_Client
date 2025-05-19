@@ -5,23 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class VFX : MonoBehaviour
 {
+    [SerializeField]
+    private EVFXType _vfxType;
     private ParticleSystem[] _particleSystems;
 
     private void Awake()
     {
         _particleSystems = GetComponentsInChildren<ParticleSystem>(true); // 자식 포함 전체 가져오기
     }
-    public void OnGetFromPool(Vector3 position)
-    {
-        transform.position = position;
-        transform.rotation = Quaternion.identity;
-        StartCoroutine(VFXCoroutine());
-    }
 
-    public void OnGetFromPool(Vector3 position, Quaternion quaternion)
+    public void PlayVFX()
     {
-        transform.position = position;
-        transform.rotation = quaternion;
         StartCoroutine(VFXCoroutine());
     }
 
@@ -47,6 +41,6 @@ public class VFX : MonoBehaviour
             }
             yield return null;
         } while (isAlive);
-
+        VFXPoolManager.Instance.ReturnObject(gameObject, _vfxType);
     }
 }

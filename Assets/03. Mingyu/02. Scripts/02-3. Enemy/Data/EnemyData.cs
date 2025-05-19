@@ -40,7 +40,8 @@ public class EnemyData : MonoBehaviour
     public float AttackDelay { get => _attackDelay; set => _attackDelay = value; }
     [Header("Attack Bombing")]
     [SerializeField]
-    private float _bombRange = 3f;
+    private float _explosionRadius = 3f;
+    public float ExplosionRadius { get => _explosionRadius; set => _explosionRadius = value; }
 
     // [Header("Damaged State")]
 

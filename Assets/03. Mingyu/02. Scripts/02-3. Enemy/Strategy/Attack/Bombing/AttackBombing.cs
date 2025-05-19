@@ -4,7 +4,31 @@ public class AttackBombing : IAttackStrategy
 {
     public void Attack(Vector3 position, EnemyController self)
     {
-        DamageablePoolManager.Instance.GetObject(EDamageableType.EnemyBomb, position);
+        ApplyBombDamage(self);
+        PlayBombVFX(position);
         self.EnemyStateContext.ChangeState(self.EnemyStateDict[EEnemyState.Die]);
+    }
+    private void ApplyBombDamage(EnemyController enemyController)
+    {
+        Collider[] hitColiiders = 
+            Physics.OverlapSphere
+            (enemyController.transform.position, enemyController.EnemyData.ExplosionRadius);
+
+        foreach (Collider hitCollider in hitColiiders)
+        {
+            if (hitCollider.CompareTag(nameof(ETags.Player)))
+            {
+                if(hitCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
+                {
+                    // damageable.TakeDamage(enemyController.EnemyData.AttackDamage);
+                }
+            }
+        }
+
+    }
+    private void PlayBombVFX(Vector3 position)
+    {
+        GameObject vfx = VFXPoolManager.Instance.GetObject(EVFXType.EnemySuicideBombing, position, Quaternion.identity);
+        vfx.GetComponent<VFX>().PlayVFX();
     }
 }
