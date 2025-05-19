@@ -5,11 +5,13 @@ using UnityEngine;
 public class EnemyDieState : IEnemyState
 {
     private EnemyController _enemyController;
+    private EnemyData _enemyData;
     private IEnumerator _dieCoroutine;
 
     public EnemyDieState(EnemyController enemyController)
     {
         _enemyController = enemyController;
+        _enemyData = enemyController.EnemyData;
     }
 
     public void Enter()
@@ -35,5 +37,7 @@ public class EnemyDieState : IEnemyState
     private IEnumerator DieCoroutine()
     {
         yield return new WaitForSeconds(2f);
+        EnemyPoolManager.Instance.ReturnObject(_enemyController.gameObject, _enemyData.EnemyType);
+        ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
     }
 } 
