@@ -312,6 +312,7 @@ MonoBehaviour:
   _spawnRadius: 5
   _minExplosionForce: 10
   _maxExplosionForce: 30
+  PlayerAreaCollider: {fileID: 584769206}
 --- !u!4 &879978985
 Transform:
   m_ObjectHideFlags: 0
