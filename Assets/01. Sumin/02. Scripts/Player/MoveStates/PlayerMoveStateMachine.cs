@@ -21,9 +21,9 @@ public class PlayerMoveStateMachine
             if(CurrentState != null && CurrentState != state)
             {
                 CurrentState.Exit(_player);
+                CurrentState = state;
+                CurrentState.Enter(_player);
             }
-            CurrentState = state;
-            CurrentState.Enter(_player);
         }
     }
 

@@ -19,7 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
-        //GetMoveInput();
+        GetMoveInput();
         GetAttackInput();
     }
 
@@ -29,26 +29,23 @@ public class PlayerInputHandler : MonoBehaviour
         {
             //_playerAttackHandler.PerformAttack();
         }
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _playerMovement.SetSprint(true);
+            //_playerMovement.ChangeState(EPlayerMoveState.Sprint);
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _playerMovement.SetSprint(false);
+            //_playerMovement.ChangeState(EPlayerMoveState.Move);
+        }
     }
 
     private void GetMoveInput()
     {
         float h = Input.GetAxisRaw("Horizontal"); // A/D
         float v = Input.GetAxisRaw("Vertical");   // W/S
-
-        // 카메라 기준으로 방향 계산
-
-        Vector3 camForward = camTransform.forward;
-        //camForward.y = 0f; // y 제거하여 수평 이동만
-        camForward.Normalize();
-
-        Vector3 camRight = camTransform.right;
-        //camRight.y = 0f;
-        camRight.Normalize();
-
-        Vector3 moveDir = camForward * v + camRight * h;
-
-        //_playerMovement.SetMoveInput(moveDir);
+        _playerMovement.HandleMovement(h, v);
     }
 
     public void TakeDamage(float damage)

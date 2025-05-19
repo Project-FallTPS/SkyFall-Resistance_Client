@@ -1,51 +1,95 @@
 using UnityEngine;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float rotateSpeed = 10f;
+    [Header("# StateMachine")]
+    public PlayerMoveStateMachine StateMachine { get; private set; }
 
-    private CharacterController _controller;
-    private Vector3 _moveDirection;
+    [Header(" Movement Settings")]
+    public float rotateSpeed = 10f;
+    public float CurrentSpeed;
+    public Vector3 MoveDirection { get; private set; }
+
+    [Header("# Components")]
+    public CharacterController _characterController { get; private set; }
+    private Transform _mainCameraTransform;
 
     private void Awake()
     {
-        _controller = GetComponent<CharacterController>();
+        _characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        _mainCameraTransform = Camera.main.transform;
+        //StateMachine = new PlayerMoveStateMachine(this, new Dictionary<EPlayerMoveState, IPlayerState> 
+        //{
+        //    { EPlayerMoveState.Idle, new PlayerIdleState() },
+        //    { EPlayerMoveState.Move, new PlayerMoveState() },
+        //    { EPlayerMoveState.Sprint, new PlayerSprintState() },
+        //    { EPlayerMoveState.TargetDash, new PlayerTargetDashState() },
+        //});
+    }
+
+    private void Start()
+    {
+        CurrentSpeed = PlayerStatManager.Instance.GetStat(EStatType.MoveSpeed);
     }
 
     private void Update()
     {
-        HandleMovement();
+        //StateMachine.Update();
     }
 
-    private void HandleMovement()
+    private void LateUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal"); // A/D
-        float v = Input.GetAxisRaw("Vertical");   // W/S
+        HandleRotation();
+    }
 
-        Transform cam = Camera.main.transform;
-
-        // 카메라 기준으로 평면 방향 벡터 계산
-        Vector3 camForward = cam.forward;
-        //camForward.y = 0;
+    public void HandleDirection(float h, float v)
+    {
+        Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();
 
-        Vector3 camRight = cam.right;
-        //camRight.y = 0;
+        Vector3 camRight = _mainCameraTransform.right;
         camRight.Normalize();
 
-        // 실제 이동 방향 계산
-        _moveDirection = (camForward * v + camRight * h).normalized;
+        MoveDirection = (camForward * v + camRight * h).normalized;
+    }
 
-        if (_moveDirection.sqrMagnitude > 0.01f)
+    public void HandleMovement(float h, float v)
+    {
+        Vector3 camForward = _mainCameraTransform.forward;
+        camForward.Normalize();
+
+        Vector3 camRight = _mainCameraTransform.right;
+        camRight.Normalize();
+
+        MoveDirection = (camForward * v + camRight * h).normalized;
+
+        if (MoveDirection.sqrMagnitude > 0.01f)
         {
-            // 이동
-            _controller.Move(_moveDirection * moveSpeed * Time.deltaTime);
+            _characterController.Move(MoveDirection * CurrentSpeed * Time.deltaTime);
+        }
+    }
 
-            // 회전
-            Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+    public void SetSprint(bool isSprint)
+    {
+        CurrentSpeed = isSprint ? PlayerStatManager.Instance.GetStat(EStatType.SprintSpeed) : PlayerStatManager.Instance.GetStat(EStatType.MoveSpeed);
+    }
+
+    public void ChangeState(EPlayerMoveState state)
+    {
+        StateMachine.ChangeState(state);
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 camForward = _mainCameraTransform.forward;
+
+        if (camForward.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(camForward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotateSpeed * Time.deltaTime);
         }
     }
 }

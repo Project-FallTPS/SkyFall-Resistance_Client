@@ -10,6 +10,7 @@ public class PlayerStatManager : Singleton<PlayerStatManager>
     protected override void Awake()
     {
         base.Awake();
+        StatDict = _playerStatCollection.GetBaseStatDict();
         PerkManager.Instance.CalculateFinalStats(StatDict);
     }
 
