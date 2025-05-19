@@ -26,8 +26,8 @@ public class EnemyAttackState : IEnemyState
 
     public void Update()
     {
-        if (Vector3.Distance(_enemyController.transform.position, _enemyController.Player.transform.position)
-            < _enemyData.AttackableRange)
+        if (_enemyData.AttackableRange <
+            Vector3.Distance(_enemyController.transform.position, _enemyController.Player.transform.position))
         {
             _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
         }

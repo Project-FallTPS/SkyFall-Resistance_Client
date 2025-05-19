@@ -18,7 +18,7 @@ public class EnemyDieState : IEnemyState
     {
         _dieCoroutine = DieCoroutine();
         _enemyController.StartCoroutineInEnemyState(_dieCoroutine);
-        _enemyController.GetComponent<CharacterController>().enabled = false;
+        _enemyController.EnemyCollider.enabled = false;
     }
 
     public void Update()
