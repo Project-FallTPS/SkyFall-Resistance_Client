@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ParallaxManager : Singleton<ParallaxManager>
 {
+    [SerializeField]
+    private SphereCollider _playerArea;
+
     [Serializable]
     public class ParallaxLayerSet
     {
         public ParallaxLayer ParallaxLayer;
         public float MoveSpeed;
+        public float LoopOffset = 10f;
+        public bool IsLooping = true;
     }
 
     [SerializeField]
@@ -16,9 +21,10 @@ public class ParallaxManager : Singleton<ParallaxManager>
 
     private void Start()
     {
+        float playerAreaRadius = _playerArea.radius;
         foreach (ParallaxLayerSet parallaxLayerSet in _environmentLayers)
         {
-            parallaxLayerSet.ParallaxLayer.SetMoveSpeed(parallaxLayerSet.MoveSpeed);
+            parallaxLayerSet.ParallaxLayer.Initialize(parallaxLayerSet, playerAreaRadius);
         }
     }
 }

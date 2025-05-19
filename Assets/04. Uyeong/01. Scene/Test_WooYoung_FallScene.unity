@@ -810,17 +810,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDontDestroy: 1
+  _playerArea: {fileID: 584769206}
   _environmentLayers:
   - ParallaxLayer: {fileID: 129869825}
     MoveSpeed: 0.5
+    LoopOffset: 10
+    IsLooping: 0
   - ParallaxLayer: {fileID: 1327211395}
     MoveSpeed: 1
+    LoopOffset: 10
+    IsLooping: 1
   - ParallaxLayer: {fileID: 205929960}
     MoveSpeed: 3
+    LoopOffset: 10
+    IsLooping: 1
   - ParallaxLayer: {fileID: 1572737496}
     MoveSpeed: 5
+    LoopOffset: 10
+    IsLooping: 1
   - ParallaxLayer: {fileID: 1061815709}
     MoveSpeed: 0.5
+    LoopOffset: 0
+    IsLooping: 0
 --- !u!4 &1516816255
 Transform:
   m_ObjectHideFlags: 0
