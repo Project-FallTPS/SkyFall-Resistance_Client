@@ -16,6 +16,7 @@ public class AttackBombing : IAttackStrategy
 
         foreach (Collider hitCollider in hitColiiders)
         {
+            // 자폭 타입 적의 폭발은 플레이어에게만 적용 되는가?
             if (hitCollider.CompareTag(nameof(ETags.Player)))
             {
                 if(hitCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
