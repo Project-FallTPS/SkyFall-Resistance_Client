@@ -1,15 +1,14 @@
 using System;
 using UnityEngine;
 
-public class WeaponManager : Singleton<WeaponManager>
+public class WeaponManager : MonoBehaviour
 {
     [Header("# WeaponData")]
     [SerializeField] private WeaponDataSO _weaponDatas;
     public WeaponDataSO WeaponDatas => _weaponDatas;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         _weaponDatas.Init();
     }
 

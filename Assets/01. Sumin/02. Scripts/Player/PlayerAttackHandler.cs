@@ -4,21 +4,26 @@ using UnityEngine.UI;
 
 public class PlayerAttackHandler : MonoBehaviour
 {
+    [Header("# Stat")]
+    public PlayerStatHolder PlayerStat { get; private set; }
+    public WeaponManager WeaponStat { get; private set; }
+
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
     private EWeaponType _currentWeapon;
     private IWeaponStrategy _currentStrategy;
 
-    private IDamageable _target;
-
     private void Awake()
     {
-        _strategies.Add(EWeaponType.Katana, new KatanaStrategy());
+        WeaponStat = GetComponent<WeaponManager>();
+        PlayerStat = GetComponent<PlayerStatHolder>();
+        _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
+        ChangeWeapon(EWeaponType.Katana);
     }
 
     private void Update()
     {
-
+        _currentStrategy.Update();
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -36,16 +41,18 @@ public class PlayerAttackHandler : MonoBehaviour
 
     public void PerformAttack()
     {
-        //if (TargetManager.Instance.Target != null)
-        //{
-        //    if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
-        //    {
-        //        _currentStrategy.Attack(t);
-        //    }
-        //}
-        //else
-        //{
+        if (TargetManager.Instance.Target != null)
+        {
+            _currentStrategy.Attack(TargetManager.Instance.Target);
 
-        //}
+            //if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
+            //{
+            //    //_currentStrategy.Attack(t);
+            //}
+        }
+        else
+        {
+
+        }
     }
 }

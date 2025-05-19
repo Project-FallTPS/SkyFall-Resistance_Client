@@ -15,13 +15,21 @@ MonoBehaviour:
   StatList:
   - Type: 0
     Value: 10
+  - Type: 5
+    Value: 30
   - Type: 1
     Value: 100
   - Type: 2
     Value: 100
   - Type: 3
-    Value: 10
+    Value: 1
   - Type: 4
     Value: 1
-  - Type: 5
-    Value: 15
+  - Type: 6
+    Value: 100
+  - Type: 7
+    Value: 100
+  - Type: 8
+    Value: 20
+  - Type: 9
+    Value: 30
