@@ -193,10 +193,6 @@ MonoBehaviour:
     InitCount: 100
     Prefab: {fileID: 1331364910304127374, guid: 39cfc81981fa60146b4da808a96f8179, type: 3}
     Container: {fileID: 1247376325}
-  - Type: 1
-    InitCount: 0
-    Prefab: {fileID: 0}
-    Container: {fileID: 0}
 --- !u!114 &21432052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,8 +209,8 @@ MonoBehaviour:
   _poolInfoList:
   - Type: 0
     InitCount: 10
-    Prefab: {fileID: 0}
-    Container: {fileID: 0}
+    Prefab: {fileID: 358637981425055526, guid: fe67492794ebcde42a8733ac86602d42, type: 3}
+    Container: {fileID: 860929014}
 --- !u!1 &198910127
 GameObject:
   m_ObjectHideFlags: 0
