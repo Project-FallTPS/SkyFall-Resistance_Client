@@ -6,23 +6,46 @@ public class PlayerInputHandler : MonoBehaviour
     // 입력 받기
     [Header("# Component")]
     private PlayerAttackHandler _playerAttackHandler;
+    private PlayerMovement _playerMovement;
+
+    private Transform camTransform;
 
     private void Awake()
     {
+        camTransform = Camera.main.transform;
         _playerAttackHandler = GetComponent<PlayerAttackHandler>();
+        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
     {
-        GetInput();
+        GetMoveInput();
+        GetAttackInput();
     }
 
-    private void GetInput()
+    private void GetAttackInput()
     {
         if(Input.GetMouseButtonDown(0))
         {
             //_playerAttackHandler.PerformAttack();
         }
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _playerMovement.SetSprint(true);
+            //_playerMovement.ChangeState(EPlayerMoveState.Sprint);
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _playerMovement.SetSprint(false);
+            //_playerMovement.ChangeState(EPlayerMoveState.Move);
+        }
+    }
+
+    private void GetMoveInput()
+    {
+        float h = Input.GetAxisRaw("Horizontal"); // A/D
+        float v = Input.GetAxisRaw("Vertical");   // W/S
+        _playerMovement.HandleMovement(h, v);
     }
 
     public void TakeDamage(float damage)
