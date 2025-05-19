@@ -9,16 +9,15 @@ public class PlayerAttackHandler : MonoBehaviour
     private EWeaponType _currentWeapon;
     private IWeaponStrategy _currentStrategy;
 
-    private IDamageable _target;
-
     private void Awake()
     {
-        _strategies.Add(EWeaponType.Katana, new KatanaStrategy());
+        _strategies.Add(EWeaponType.Katana, new KatanaStrategy(gameObject));
+        ChangeWeapon(EWeaponType.Katana);
     }
 
     private void Update()
     {
-
+        _currentStrategy.Update();
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -36,16 +35,18 @@ public class PlayerAttackHandler : MonoBehaviour
 
     public void PerformAttack()
     {
-        //if (TargetManager.Instance.Target != null)
-        //{
-        //    if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
-        //    {
-        //        _currentStrategy.Attack(t);
-        //    }
-        //}
-        //else
-        //{
+        if (TargetManager.Instance.Target != null)
+        {
+            _currentStrategy.Attack(TargetManager.Instance.Target);
 
-        //}
+            //if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
+            //{
+            //    //_currentStrategy.Attack(t);
+            //}
+        }
+        else
+        {
+
+        }
     }
 }

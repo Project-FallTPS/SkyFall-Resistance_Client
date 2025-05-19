@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponDatas:
   - WeaponType: 0
-    CoolTime: 0
-    Damage: 0
+    CoolTime: 1
+    Damage: 10
     MaxAmmo: 0
     CurrentAmmo: 0
     ReloadInterval: 0

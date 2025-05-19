@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header(" Movement Settings")]
     public float rotateSpeed = 10f;
-    public float CurrentSpeed;
+    public float CurrentSpeed { get; private set; }
     public Vector3 MoveDirection { get; private set; }
 
     [Header("# Components")]

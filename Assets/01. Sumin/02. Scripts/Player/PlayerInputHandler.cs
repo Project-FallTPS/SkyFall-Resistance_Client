@@ -27,7 +27,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            //_playerAttackHandler.PerformAttack();
+            _playerAttackHandler.PerformAttack();
         }
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {

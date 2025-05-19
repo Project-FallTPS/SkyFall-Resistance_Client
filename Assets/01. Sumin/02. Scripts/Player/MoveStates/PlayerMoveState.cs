@@ -4,7 +4,7 @@ public class PlayerMoveState : IPlayerState
 {
     public void Enter(PlayerMovement player)
     {
-        player.CurrentSpeed = PlayerStatManager.Instance.GetStat(EStatType.MoveSpeed);
+        //player.CurrentSpeed = PlayerStatManager.Instance.GetStat(EStatType.MoveSpeed);
     }
 
     public void Execute(PlayerMovement player)
@@ -17,6 +17,6 @@ public class PlayerMoveState : IPlayerState
 
     public void Exit(PlayerMovement player)
     {
-        player.CurrentSpeed = 0;
+        //player.CurrentSpeed = 0;
     }
 }
