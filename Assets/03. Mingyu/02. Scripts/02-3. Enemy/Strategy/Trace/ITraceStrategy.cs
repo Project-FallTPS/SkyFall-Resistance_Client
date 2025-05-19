@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ITraceStrategy
 {
-    public void Trace();
+    public void Trace(EnemyController self);
 }
