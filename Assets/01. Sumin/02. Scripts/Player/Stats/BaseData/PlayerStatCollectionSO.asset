@@ -28,6 +28,8 @@ MonoBehaviour:
   - Type: 6
     Value: 100
   - Type: 7
-    Value: 20
+    Value: 100
   - Type: 8
+    Value: 20
+  - Type: 9
     Value: 30
