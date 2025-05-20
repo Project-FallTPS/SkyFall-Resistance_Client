@@ -16,7 +16,9 @@ public class WeaponDataManager : Singleton<WeaponDataManager>
         {
             weapon.Init();  // StatEntry → Dictionary 변환
             if (!WeaponDataDict.ContainsKey(weapon.WeaponType))
+            {
                 WeaponDataDict.Add(weapon.WeaponType, weapon);
+            }
         }
     }
 
@@ -28,7 +30,9 @@ public class WeaponDataManager : Singleton<WeaponDataManager>
         }
 
         if (WeaponDataDict.TryGetValue(type, out var data))
+        {
             return data;
+        }
 
         Debug.LogWarning($"WeaponDataManager: '{type}' 무기 데이터를 찾을 수 없습니다.");
         return null;

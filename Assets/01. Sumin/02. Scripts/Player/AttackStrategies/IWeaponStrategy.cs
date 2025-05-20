@@ -7,7 +7,7 @@ public interface IWeaponStrategy
     //public float GetAttackSpeed();
     public float GetDamage(EStatType type);
     public void Attack(IDamageable target);
-    public void Attack(GameObject target);
+    public void Attack(GameObject target); // 지울거
     public void Update();
 
     // 악세서리 관련 메서드

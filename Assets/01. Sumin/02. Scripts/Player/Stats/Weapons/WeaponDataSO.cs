@@ -17,7 +17,9 @@ public class WeaponDataSO : ScriptableObject
             data.Init(); // 각 무기 스탯 초기화
 
             if (!_weaponDict.ContainsKey(data.WeaponType))
+            {
                 _weaponDict.Add(data.WeaponType, data);
+            }
         }
     }
 

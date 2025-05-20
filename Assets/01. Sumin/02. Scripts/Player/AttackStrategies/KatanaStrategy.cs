@@ -53,33 +53,6 @@ public class KatanaStrategy : IWeaponStrategy
 
         return baseDamage * bonus * accBonuses;
     }
-    //public float GetDamage()
-    //{
-    //    float baseDamage = _weaponData.GetStat(EWeaponStatType.Damage);
-    //    float bonus = _player.PlayerStat.GetStat(EStatType.Damage);
-    //    float accBonuses = 1f;
-    //    foreach(var data in _equippedAccessories)
-    //    {
-    //        var accessories = AccessoryManager.Instance.GetData(data.Key);
-    //        accBonuses *= accessories.GetData(EWeaponStatType.Damage);
-    //    }
-
-    //    return baseDamage * bonus * accBonuses;
-    //}
-
-    //public float GetAttackSpeed()
-    //{
-    //    float baseSpeed = _weaponData.GetStat(EWeaponStatType.CoolTime);
-    //    float bonus = _player.PlayerStat.GetStat(EStatType.AttackSpeed);
-    //    float accBonuses = 1f;
-    //    foreach (var data in _equippedAccessories)
-    //    {
-    //        var accessories = AccessoryManager.Instance.GetData(data.Key);
-    //        accBonuses *= accessories.GetData(EWeaponStatType.CoolTime);
-    //    }
-
-    //    return baseSpeed * bonus * accBonuses;
-    //}
 
     public void Attack(IDamageable target)
     {

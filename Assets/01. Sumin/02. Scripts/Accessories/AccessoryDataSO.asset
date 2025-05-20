@@ -16,5 +16,5 @@ MonoBehaviour:
   - Type: 1
     Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
     Bonuses:
-    - Type: 1
+    - Type: 3
       Value: 1.1

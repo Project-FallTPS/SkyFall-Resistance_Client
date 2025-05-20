@@ -14,15 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponDatas:
   - WeaponType: 0
-    CurrentAmmo: 0
     Stats:
     - Type: 0
       Value: 1
-    - Type: 1
+    - Type: 3
       Value: 10
-    - Type: 2
-      Value: 0
     - Type: 4
-      Value: 0
-    - Type: 5
       Value: 0
