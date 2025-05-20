@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         _enemyCollider = GetComponent<CapsuleCollider>();
         _enemyAnimator = GetComponent<Animator>();
 
+        _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
         _player = GameObject.FindGameObjectWithTag(nameof(ETags.Player));
     }
 

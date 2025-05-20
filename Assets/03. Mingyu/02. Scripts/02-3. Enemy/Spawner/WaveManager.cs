@@ -23,14 +23,14 @@ public class WaveManager : Singleton<WaveManager>
         set
         {
             _currentWaveData = value;
-            _spawnerHandler.AdjustSpawnerIntervalOnWave();
+            _enemySpawnerHandler.AdjustSpawnerIntervalOnWave();
             // TODO : 웨이브가 바뀜을 보여주는 UI
         }
     }
 
     [Header("External References")]
     [SerializeField]
-    private EnemySpawnerHandler _spawnerHandler;
+    private EnemySpawnerHandler _enemySpawnerHandler;
 
     private int _currentWaveIndex;
     private float _currentWaveStartTime;
@@ -42,7 +42,7 @@ public class WaveManager : Singleton<WaveManager>
 
     private void Start()
     {
-        _currentWaveData = _waveDatas[_currentWaveIndex];
+        CurrentWaveData = _waveDatas[_currentWaveIndex];
     }
 
     private void Update()
@@ -58,7 +58,7 @@ public class WaveManager : Singleton<WaveManager>
         _currentWaveIndex++;
         if (_currentWaveIndex < _waveDatas.Count)
         {
-            _currentWaveData = _waveDatas[_currentWaveIndex];
+            CurrentWaveData = _waveDatas[_currentWaveIndex];
             _currentWaveStartTime = Time.time;
         }
         else
