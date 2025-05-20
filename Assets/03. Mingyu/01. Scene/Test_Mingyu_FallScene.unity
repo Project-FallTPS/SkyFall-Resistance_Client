@@ -929,6 +929,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Spawner_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7778307424478090956, guid: bae079e521e79dc42972e7ad658636de, type: 3}
+      propertyPath: _spawnedObjects.Array.data[0].Probability
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778307424478090956, guid: bae079e521e79dc42972e7ad658636de, type: 3}
+      propertyPath: _spawnedObjects.Array.data[1].Probability
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8847891133255138401, guid: bae079e521e79dc42972e7ad658636de, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
