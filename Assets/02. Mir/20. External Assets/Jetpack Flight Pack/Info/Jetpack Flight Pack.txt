@@ -1,0 +1,99 @@
+Jetpack Flight Combat Animation Pack
+
+Overview: The Jetpack sci-fi Flight Combat Animation Pack features 45 high-quality animations, including takeoff, landing, flight maneuvers, and combat sequences. Perfect for action-packed games, sci-fi adventures, or any project requiring dynamic jetpack motion.
+
+All animations are created in Autodesk Maya, with clean motion and seamless transitions. Easily modify flight directions to fit your project's needs. ( The jetpack model shown in image is only as a reference, not included in the pack)
+
+Animations Included:
+
+    Anim_Jetpack_Fall_Death
+
+    Anim_Jetpack_Flight_Backward
+
+    Anim_Jetpack_Flight_Backward_V2
+
+    Anim_Jetpack_Flight_Boost
+
+    Anim_Jetpack_Flight_Boost_Rotate
+
+    Anim_Jetpack_Flight_Down_01
+
+    Anim_Jetpack_Flight_Down_02
+
+    Anim_Jetpack_Flight_Forward
+
+    Anim_Jetpack_Flight_Forward_V2
+
+    Anim_Jetpack_Flight_Fuellow
+
+    Anim_Jetpack_Flight_idle
+
+    Anim_Jetpack_Flight_Left
+
+    Anim_Jetpack_Flight_Right
+
+    Anim_Jetpack_Flight_Up_01
+
+    Anim_Jetpack_Flight_Up_02
+
+    Anim_Jetpack_Flight_Up_to_idle_01
+
+    Anim_Jetpack_Flight_Up_to_idle_02
+
+    Anim_Jetpack_Land_01
+
+    Anim_Jetpack_Land_02
+
+    Anim_Jetpack_Land_idle
+
+    Anim_Jetpack_Takeoff_01
+
+    Anim_Jetpack_Takeoff_02
+
+    Anim_Jetpack_explode
+
+    Anim_Jetpack_Fall_Death
+
+    Anim_Jetpack_Fall_Down
+
+    Anim_Jetpack_flamethrower
+
+    Anim_Jetpack_Hurt
+
+    Anim_Jetpack_Kick
+
+    Anim_Jetpack_Missile_Throw
+
+    Anim_Jetpack_Missile_Throw_V2
+
+    Anim_Jetpack_Punch
+
+    Anim_Jetpack_Rifle_Equip
+
+    Anim_Jetpack_Rifle_Evade_Left
+
+    Anim_Jetpack_Rifle_Evade_Right
+
+    Anim_Jetpack_Rifle_Idle
+
+    Anim_Jetpack_Rifle_Shoot
+
+    Anim_Jetpack_Rifle_Shoot_Left
+
+    Anim_Jetpack_Rifle_Shoot_Right
+
+    Anim_Jetpack_Shoot
+
+    Anim_Jetpack_Shoot_Blast
+
+    Anim_Jetpack_Shoot_idle
+
+    Anim_Jetpack_Shoot_Left
+
+    Anim_Jetpack_Shoot_Right
+
+    Anim_Jetpack_Shoot_Strike
+
+    Anim_Jetpack_Throw
+
+Take your game to the next level with Jetpack Flight Combat Animation Pack – designed to provide seamless and action-packed movements!
