@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CloudMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 359cdeb7825c8644ca13565fa22cdfe0, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 64b07c4cb61043a4bb618e41af7ee253, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -66,12 +66,21 @@ Material:
     - _AdditionalPower: 118.43
     - _Alpha: 1
     - _CloudIntensity: 0.5
+    - _Color: 0.07
+    - _Color_Divide_Blur: 0.52
+    - _Color_Divide_Height: -4.24
+    - _Color_Top_Value: -0.08
     - _Cutoff: 0.63
+    - _Displacement_Intensity: 0.3
+    - _Displacement_Scale: 10
+    - _Displacement_Speed: 0.05
     - _EdgeSoftness: 0.6
+    - _Fade_Depth: 2.38
     - _FresnelPower: 2.4
     - _Metallic: 0
     - _NoiseScale: 7.08
     - _NoiseSpeed: 2.11
+    - _Power: 1
     - _PushOut: -1.8
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -82,6 +91,8 @@ Material:
     m_Colors:
     - _CloudSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_1: {r: 1, g: 1, b: 1, a: 0}
+    - _Color_2: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _PrimaryColor: {r: 1, g: 1, b: 1, a: 1}
     - _SecondaryColor: {r: 0.5613208, g: 0.54543436, b: 0.54543436, a: 1}
