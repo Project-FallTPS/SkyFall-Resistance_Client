@@ -895,8 +895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e7f198a9708344b8213cce4143be72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 10
-  CurrentSpeed: 0
 --- !u!143 &1163324279
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1529,9 +1527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aed030a4f7812248bf40a6522cb2062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDontDestroy: 0
-  _crossHair: {fileID: 1172756856}
-  Target: {fileID: 0}
 --- !u!54 &2009247613
 Rigidbody:
   m_ObjectHideFlags: 0
