@@ -42,8 +42,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         _enemyCollider = GetComponent<CapsuleCollider>();
         _enemyAnimator = GetComponent<Animator>();
 
-        _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
-
         _player = GameObject.FindGameObjectWithTag(nameof(ETags.Player));
     }
 
@@ -52,6 +50,8 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (_enemyStateDict.Count != 0)
         {
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
+            _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
+            _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
         }
     }
     private void Start()
