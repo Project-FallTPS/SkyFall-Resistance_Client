@@ -2,10 +2,10 @@ using UnityEngine;
 
 public enum EEnemyAnimationTransitionParam
 {
-    Idle,
-    Trace,
-    Attack,
-    Hit,
-    Die,
+    Idle, // Bool
+    Trace, // Bool
+    Attack, // Trigger
+    Hit, // Trigger
+    Die, // Bool
     Count
 }

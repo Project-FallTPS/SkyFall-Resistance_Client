@@ -46,6 +46,7 @@ public class EnemyAttackState : IEnemyState
     {
         while (true)
         {
+            _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.Attack));
             _attackStrategy.Attack(_enemyController.transform.position, _enemyController);
             yield return new WaitForSeconds(_enemyController.EnemyData.AttackDelay);
         }
