@@ -26,4 +26,11 @@ public class EnemyData
 
     [ShowIf("EnemyType", EEnemyType.Bombing)]
     public float ExplosionRadius;
+
+    public void AdjustEnemyDataOnWave(float multiplier)
+    {
+        MaxHealth *= multiplier;
+        CurrentHealth *= multiplier;
+        AttackDamage *= multiplier;
+    }
 }
