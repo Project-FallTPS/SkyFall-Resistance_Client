@@ -242,13 +242,13 @@ MonoBehaviour:
   _waveDatas:
   - EnemyStatMultiplier: 1
     EnemySpawnerInterval: 5
-    WaveDuration: 60
+    WaveDuration: 10
   - EnemyStatMultiplier: 1.2
     EnemySpawnerInterval: 4
-    WaveDuration: 60
+    WaveDuration: 10
   - EnemyStatMultiplier: 1.4
     EnemySpawnerInterval: 3
-    WaveDuration: 60
+    WaveDuration: 10
   _enemySpawnerHandler: {fileID: 1020366503}
 --- !u!4 &198910128 stripped
 Transform:

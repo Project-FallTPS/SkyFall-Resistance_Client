@@ -54,7 +54,7 @@ public class WaveManager : Singleton<WaveManager>
     }
 
     private void ChangeWave()       
-    {
+    { 
         _currentWaveIndex++;
         if (_currentWaveIndex < _waveDatas.Count)
         {
