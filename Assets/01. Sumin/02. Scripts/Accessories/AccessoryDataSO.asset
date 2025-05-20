@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aaa14fcf9d82b84ebcf7ce1d63ed2c9, type: 3}
-  m_Name: WeaponDataSO
+  m_Script: {fileID: 11500000, guid: 41c4c7a15c18c22419503567cf6baa12, type: 3}
+  m_Name: AccessoryDataSO
   m_EditorClassIdentifier: 
-  WeaponDatas:
-  - WeaponType: 0
-    Stats:
-    - Type: 0
-      Value: 1
+  AccessoryDatas:
+  - Type: 1
+    Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
+    Bonuses:
     - Type: 3
-      Value: 10
-    - Type: 4
-      Value: 0
+      Value: 1.1

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
-public class PlayerStatHolder : MonoBehaviour
+public class PlayerStatHolder : MonoBehaviour, IDamageable
 {
     [Header("# Project")]
     [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // ¿øº»
@@ -12,7 +10,12 @@ public class PlayerStatHolder : MonoBehaviour
     private void Awake()
     {
         StatDict = _playerStatCollection.GetBaseStatDict();
-        PerkManager.Instance.CalculateFinalStats(StatDict);
+        //PerkManager.Instance.CalculateFinalStats(StatDict);
+    }
+
+    private void Update()
+    {
+        RegenStamina();
     }
 
     public float GetStat(EStatType type)
@@ -27,7 +30,7 @@ public class PlayerStatHolder : MonoBehaviour
 
     public bool TryUseStamina(EStatType type)
     {
-        if(type == EStatType.SprintStaminaDrainRate)
+        if(type == EStatType.SprintStaminaUseRate)
         {
             if (StatDict[EStatType.CurrentStamina] < StatDict[type] * Time.deltaTime)
             {
@@ -35,7 +38,7 @@ public class PlayerStatHolder : MonoBehaviour
             }
             StatDict[EStatType.CurrentStamina] = Mathf.Max(0, StatDict[EStatType.CurrentStamina] - StatDict[type] * Time.deltaTime);
         }
-        else if(type == EStatType.TargetDashStaminaDrainRate)
+        else if(type == EStatType.TargetDashStaminaUseRate)
         {
             if (StatDict[EStatType.CurrentStamina] < StatDict[type])
             {
@@ -49,5 +52,24 @@ public class PlayerStatHolder : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        StatDict[EStatType.Health] -= damage;
+        if (StatDict[EStatType.Health] <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+
+    }
+
+    private void RegenStamina()
+    {
+        StatDict[EStatType.CurrentStamina] = Mathf.Min(StatDict[EStatType.MaxStamina], StatDict[EStatType.CurrentStamina] + StatDict[EStatType.StaminaRegenRate] * Time.deltaTime);
     }
 }
