@@ -64,7 +64,7 @@ public class KatanaStrategy : IWeaponStrategy
         _isDashing = true;
     }
 
-    public void Update()
+    private void Dash()
     {
         if (_isDashing)
         {
@@ -86,5 +86,10 @@ public class KatanaStrategy : IWeaponStrategy
                 _player.GetComponent<CharacterController>().Move(moveDelta);
             }
         }
+    }
+
+    public void Update()
+    {
+        Dash();
     }
 }

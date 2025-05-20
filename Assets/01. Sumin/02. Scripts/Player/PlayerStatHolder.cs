@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
-public class PlayerStatHolder : MonoBehaviour
+public class PlayerStatHolder : MonoBehaviour, IDamageable
 {
     [Header("# Project")]
     [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // ¿øº»
@@ -49,5 +47,19 @@ public class PlayerStatHolder : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        StatDict[EStatType.Health] -= damage;
+        if (StatDict[EStatType.Health] <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+
     }
 }
