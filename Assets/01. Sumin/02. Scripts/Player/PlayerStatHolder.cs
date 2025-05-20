@@ -10,7 +10,7 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     private void Awake()
     {
         StatDict = _playerStatCollection.GetBaseStatDict();
-        PerkManager.Instance.CalculateFinalStats(StatDict);
+        //PerkManager.Instance.CalculateFinalStats(StatDict);
     }
 
     private void Update()
@@ -70,6 +70,6 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
     private void RegenStamina()
     {
-        StatDict[EStatType.CurrentStamina] = Mathf.Max(StatDict[EStatType.MaxStamina], StatDict[EStatType.CurrentStamina] + StatDict[EStatType.StaminaRegenRate] * Time.deltaTime);
+        StatDict[EStatType.CurrentStamina] = Mathf.Min(StatDict[EStatType.MaxStamina], StatDict[EStatType.CurrentStamina] + StatDict[EStatType.StaminaRegenRate] * Time.deltaTime);
     }
 }

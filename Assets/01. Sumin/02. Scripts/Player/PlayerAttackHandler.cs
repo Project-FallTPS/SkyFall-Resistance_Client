@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
+    [Header("# Hierarchy")]
+    [Header("# Weapon")]
+    public List<GameObject> Weapons;
+
     [Header("# Stat")]
     public PlayerStatHolder PlayerStat { get; private set; }
 

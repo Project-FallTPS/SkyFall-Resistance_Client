@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 public class KatanaStrategy : IWeaponStrategy
 {
+    private const string WEAPON_NAME = "Katana";
     private WeaponData _weaponData;
     private PlayerAttackHandler _player;
     private Dictionary<EAccessoryType, AccessoryData> _equippedAccessories = new Dictionary<EAccessoryType, AccessoryData>();
     private Dictionary<EAccessoryType, Transform> _accessorySockets = new Dictionary<EAccessoryType, Transform>();
 
     [Header("# Target Dash")]
-    private float _dashDuration = 0.1f;
+    private float _dashDuration = 0.15f;
     private float _dashTimer = 0f;
     private bool _isDashing = false;
     private Vector3 _dashStartPos;
@@ -24,18 +25,22 @@ public class KatanaStrategy : IWeaponStrategy
 
     public void InitializeAccessorySockets()
     {
-        // 무기 프리팹에서 소켓 Transform들을 찾아서 초기화
-        Transform weaponTransform = _player.transform.Find("Katana");
-        if (weaponTransform != null)
+        Transform weaponTransform = null;
+        foreach(var weapon in _player.Weapons)
         {
-            foreach (EAccessoryType type in System.Enum.GetValues(typeof(EAccessoryType)))
+            if(weapon.name == WEAPON_NAME)
             {
-                if (type == EAccessoryType.Count) continue;
-                Transform socket = weaponTransform.Find($"Socket_{type}");
-                if (socket != null)
-                {
-                    _accessorySockets[type] = socket;
-                }
+                weaponTransform = weapon.transform;
+                break;
+            }
+        }
+        foreach (EAccessoryType type in System.Enum.GetValues(typeof(EAccessoryType)))
+        {
+            if (type == EAccessoryType.Count) continue;
+            Transform socket = weaponTransform.Find($"Socket_{type}");
+            if (socket != null)
+            {
+                _accessorySockets[type] = socket;
             }
         }
     }
@@ -65,7 +70,14 @@ public class KatanaStrategy : IWeaponStrategy
     //지울거
     public void Attack(GameObject target)
     {
-        StartDash(target);
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            StartDash(target);
+        }
+        else
+        {
+            //일반 공격
+        }
     }
 
     public void Update()
@@ -75,18 +87,12 @@ public class KatanaStrategy : IWeaponStrategy
 
     public void StartDash(GameObject target)
     {
-        if (_isDashing || target == null)
+        if (_isDashing || target == null || !_player.PlayerStat.TryUseStamina(EStatType.TargetDashStaminaUseRate))
         {
             return;
         }
-        if (!_player.PlayerStat.TryUseStamina(EStatType.TargetDashStaminaUseRate))
-        {
-            return;
-        }
-
         _dashStartPos = _player.transform.position;
         _dashTargetPos = target.transform.position;
-
         _dashTimer = 0f;
         _isDashing = true;
     }

@@ -43,8 +43,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void GetMoveInput()
     {
-        float h = Input.GetAxisRaw("Horizontal"); // A/D
-        float v = Input.GetAxisRaw("Vertical");   // W/S
+        float h = Input.GetAxis("Horizontal"); // A/D
+        float v = Input.GetAxis("Vertical");   // W/S
         _playerMovement.HandleMovement(h, v);
     }
 
