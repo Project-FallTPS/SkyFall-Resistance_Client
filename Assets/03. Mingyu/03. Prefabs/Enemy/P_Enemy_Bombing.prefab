@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2224752067603367976}
   - component: {fileID: 3818130802742342978}
   - component: {fileID: 4907808038820840808}
-  - component: {fileID: 7022495519537143198}
+  - component: {fileID: -8391274578993409019}
   - component: {fileID: 4846794096606600740}
   m_Layer: 0
   m_Name: P_Enemy_Bombing
@@ -105,7 +105,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -140,26 +140,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7022495519537143198
-MonoBehaviour:
+--- !u!95 &-8391274578993409019
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7284125955699249134}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f408abe2c84b01b4ea09269bd17a9adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyType: 1
-  _maxHealthPoint: 100
-  _currentHealthPoint: 100
-  _movementSpeed: 5
-  _attackableRange: 2.5
-  _attackDamage: 1
-  _attackDelay: 5
-  _bombRange: 3
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4846794096606600740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,4 +174,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0cd01f594154e48b04971ac8261b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyStrategyHandler: {fileID: 0}
+  _enemyType: 0
+  _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}

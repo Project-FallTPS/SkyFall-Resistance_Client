@@ -1,49 +1,36 @@
 using VInspector;
 using UnityEngine;
 
-public class EnemyData : MonoBehaviour
+[System.Serializable]
+public class EnemyData
 {
-    [SerializeField]
-    private EEnemyType _enemyType;
-    public EEnemyType EnemyType { get => _enemyType; set => _enemyType = value; }
+    public EEnemyType EnemyType;
 
-    [Header("Basic Stat")]
-    [SerializeField]
-    private float _maxHealthPoint = 100f;
-    public float MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
+    [Header("Basic")]
+    public float MaxHealth;
 
     [SerializeField]
     private float _currentHealthPoint;
-    public float CurrentHealthPoint 
+    public float CurrentHealth 
     { 
         get => _currentHealthPoint;
-        set => _currentHealthPoint = Mathf.Clamp(value, 0f, _maxHealthPoint); 
+        set => _currentHealthPoint = Mathf.Clamp(value, 0f, MaxHealth); 
     }
 
-    [SerializeField]
-    private float _movementSpeed = 5f;
-    public float MovementSpeed { get => _movementSpeed; set => _movementSpeed = value; }
+    public float MoveSpeed;
 
+    [Header("Attack")]
+    public float AttackableRange;
+    public float AttackDamage;
+    public float AttackDelay;
 
-    // [Header("Trace State")]
+    [ShowIf("EnemyType", EEnemyType.Bombing)]
+    public float ExplosionRadius;
 
-    [Foldout("Attack State")]
-    [SerializeField]
-    private float _attackableRange;
-    public float AttackableRange { get => _attackableRange; set => _attackableRange = value; }
-    [SerializeField]
-    private float _attackDamage = 1f;
-    public float AttackDamage { get => _attackDamage; set => _attackDamage = value; }
-    [Header("Attack Shooting")]
-    [SerializeField]
-    private float _attackDelay = 5f;
-    public float AttackDelay { get => _attackDelay; set => _attackDelay = value; }
-    [Header("Attack Bombing")]
-    [SerializeField]
-    private float _explosionRadius = 3f;
-    public float ExplosionRadius { get => _explosionRadius; set => _explosionRadius = value; }
-
-    // [Header("Damaged State")]
-
-    // [Header("Die State")]
+    public void AdjustEnemyDataOnWave(float multiplier)
+    {
+        MaxHealth *= multiplier;
+        CurrentHealth *= multiplier;
+        AttackDamage *= multiplier;
+    }
 }

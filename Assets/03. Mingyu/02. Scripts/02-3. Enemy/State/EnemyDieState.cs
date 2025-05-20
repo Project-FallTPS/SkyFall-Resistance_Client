@@ -6,7 +6,8 @@ public class EnemyDieState : IEnemyState
 {
     private EnemyController _enemyController;
     private EnemyData _enemyData;
-    private IEnumerator _dieCoroutine;
+
+    private AnimatorStateInfo _animatorStateInfo;
 
     public EnemyDieState(EnemyController enemyController)
     {
@@ -16,27 +17,27 @@ public class EnemyDieState : IEnemyState
 
     public void Enter()
     {
-        _dieCoroutine = DieCoroutine();
-        _enemyController.StartCoroutineInEnemyState(_dieCoroutine);
+        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Die), true);
         _enemyController.EnemyCollider.enabled = false;
     }
 
     public void Update()
     {
+        _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
+        if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.Die)) && 1.0f <= _animatorStateInfo.normalizedTime)
+        {
+            ReturnToPool();
+        }
     }
 
     public void Exit()
     {
-        if (!ReferenceEquals(_dieCoroutine, null))
-        {
-            _enemyController.StopCoroutineInEnemyState(_dieCoroutine);
-            _dieCoroutine = null;
-        }
+        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Die), false);
+        _enemyController.EnemyCollider.enabled = true;
     }
 
-    private IEnumerator DieCoroutine()
+    private void ReturnToPool()
     {
-        yield return new WaitForSeconds(0.1f);
         EnemyPoolManager.Instance.ReturnObject(_enemyController.gameObject, _enemyData.EnemyType);
         ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
     }
