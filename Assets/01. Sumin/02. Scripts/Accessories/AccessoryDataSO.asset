@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41c4c7a15c18c22419503567cf6baa12, type: 3}
   m_Name: AccessoryDataSO
   m_EditorClassIdentifier: 
-  AccessoryDatas: []
+  AccessoryDatas:
+  - Type: 1
+    Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerAttackHandler : MonoBehaviour
+public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
     [Header("# Stat")]
     public PlayerStatHolder PlayerStat { get; private set; }
@@ -24,6 +24,11 @@ public class PlayerAttackHandler : MonoBehaviour
     private void Update()
     {
         _currentStrategy.Update();
+    }
+
+    public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
+    {
+        _currentStrategy.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -55,4 +60,5 @@ public class PlayerAttackHandler : MonoBehaviour
 
         }
     }
+
 }

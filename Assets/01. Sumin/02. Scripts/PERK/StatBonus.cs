@@ -1,5 +1,5 @@
 [System.Serializable]
-public class PerkStatBonus
+public class StatBonus
 {
     public EStatType StatType;
     public float Value;

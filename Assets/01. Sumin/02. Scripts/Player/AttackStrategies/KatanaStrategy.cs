@@ -54,48 +54,6 @@ public class KatanaStrategy : IWeaponStrategy
         return baseSpeed * bonus;
     }
 
-    public void AddAccessory(AccessoryData accessory)
-    {
-        if (!_accessorySockets.ContainsKey(accessory.Type))
-        {
-            return;
-        }
-        if (_equippedAccessories.ContainsKey(accessory.Type))
-        {
-            RemoveAccessory(accessory.Type);
-        }
-        _equippedAccessories[accessory.Type] = accessory;
-        if (accessory.Prefab != null)
-        {
-            GameObject.Instantiate(accessory.Prefab, _accessorySockets[accessory.Type]);
-        }
-
-        if(accessory.Prefab.TryGetComponent<IAccesory>(out var acc))
-        {
-            acc.StatExecute(_weaponData);
-        }
-    }
-
-    public void RemoveAccessory(EAccessoryType type)
-    {
-        if (_equippedAccessories.ContainsKey(type))
-        {
-            _equippedAccessories.Remove(type);
-            if (_accessorySockets.TryGetValue(type, out Transform socket))
-            {
-                foreach (Transform child in socket)
-                {
-                    GameObject.Destroy(child.gameObject);
-                }
-            }
-        }
-    }
-
-    public List<AccessoryData> GetEquippedAccessories()
-    {
-        return new List<AccessoryData>(_equippedAccessories.Values);
-    }
-
     public void Attack(IDamageable target)
     {
         if (target is MonoBehaviour mb)
@@ -107,6 +65,11 @@ public class KatanaStrategy : IWeaponStrategy
     public void Attack(GameObject target)
     {
         StartDash(target);
+    }
+
+    public void Update()
+    {
+        Dash();
     }
 
     public void StartDash(GameObject target)
@@ -150,16 +113,77 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public void Update()
+
+    public void AddAccessory(AccessoryData accessory)
     {
-        Dash();
+        if (!_accessorySockets.ContainsKey(accessory.Type))
+        {
+            return;
+        }
+        if (_equippedAccessories.ContainsKey(accessory.Type))
+        {
+            RemoveAccessory(accessory.Type);
+        }
+        _equippedAccessories[accessory.Type] = accessory;
+        Debug.Log(accessory.Type);
+        if (accessory.Prefab != null)
+        {
+            GameObject.Instantiate(accessory.Prefab, _accessorySockets[accessory.Type]);
+        }
+
+        if (accessory.Prefab.TryGetComponent<IAccessory>(out var acc))
+        {
+            acc.StatExecute(_weaponData);
+        }
+    }
+
+    public void AddAccessory(EAccessoryType type, GameObject obj)
+    {
+        if (!_accessorySockets.ContainsKey(type))
+        {
+            return;
+        }
+        if (_equippedAccessories.ContainsKey(type))
+        {
+            RemoveAccessory(type);
+        }
+        _equippedAccessories[type] = AccessoryManager.Instance.GetData(type);
+        Debug.Log(type);
+        obj.transform.SetParent(_accessorySockets[type]);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.identity;
+
+        if (obj.TryGetComponent<IAccessory>(out var acc))
+        {
+            acc.StatExecute(_weaponData);
+        }
+    }
+
+    public void RemoveAccessory(EAccessoryType type)
+    {
+        if (_equippedAccessories.ContainsKey(type))
+        {
+            _equippedAccessories.Remove(type);
+            if (_accessorySockets.TryGetValue(type, out Transform socket))
+            {
+                foreach (Transform child in socket)
+                {
+                    GameObject.Destroy(child.gameObject);
+                }
+            }
+        }
+    }
+
+    public List<AccessoryData> GetEquippedAccessories()
+    {
+        return new List<AccessoryData>(_equippedAccessories.Values);
     }
 
     public void ExecuteAccesories()
     {
         foreach(var acc in _equippedAccessories)
         {
-            if(acc.Value.Prefab.TryGetComponent<IAccesory>(out var accesory))
+            if(acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
             {
                 accesory.Excecute();
             }
