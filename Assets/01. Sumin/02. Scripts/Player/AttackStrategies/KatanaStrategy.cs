@@ -17,12 +17,12 @@ public class KatanaStrategy : IWeaponStrategy
 
     public KatanaStrategy(PlayerAttackHandler player)
     {
-        _weaponData = player.WeaponStat.GetWeaponData(EWeaponType.Katana);
+        _weaponData = WeaponDataManager.Instance.GetWeaponData(EWeaponType.Katana);
         _player = player;
         InitializeAccessorySockets();
     }
 
-    private void InitializeAccessorySockets()
+    public void InitializeAccessorySockets()
     {
         // 무기 프리팹에서 소켓 Transform들을 찾아서 초기화
         Transform weaponTransform = _player.transform.Find("Katana");
@@ -40,19 +40,46 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public float GetDamage()
+    public float GetDamage(EStatType type)
     {
-        float baseDamage = _weaponData.Damage;
-        float bonus = _player.PlayerStat.GetStat(EStatType.Damage);
-        return baseDamage * bonus;
-    }
+        float baseDamage = _weaponData.GetStat(type);
+        float bonus = _player.PlayerStat.GetStat(type);
+        float accBonuses = 1f;
+        foreach (var data in _equippedAccessories)
+        {
+            var accessories = AccessoryManager.Instance.GetData(data.Key);
+            accBonuses *= accessories.GetData(type);
+        }
 
-    public float GetAttackSpeed()
-    {
-        float baseSpeed = _weaponData.CoolTime;
-        float bonus = _player.PlayerStat.GetStat(EStatType.AttackSpeed);
-        return baseSpeed * bonus;
+        return baseDamage * bonus * accBonuses;
     }
+    //public float GetDamage()
+    //{
+    //    float baseDamage = _weaponData.GetStat(EWeaponStatType.Damage);
+    //    float bonus = _player.PlayerStat.GetStat(EStatType.Damage);
+    //    float accBonuses = 1f;
+    //    foreach(var data in _equippedAccessories)
+    //    {
+    //        var accessories = AccessoryManager.Instance.GetData(data.Key);
+    //        accBonuses *= accessories.GetData(EWeaponStatType.Damage);
+    //    }
+
+    //    return baseDamage * bonus * accBonuses;
+    //}
+
+    //public float GetAttackSpeed()
+    //{
+    //    float baseSpeed = _weaponData.GetStat(EWeaponStatType.CoolTime);
+    //    float bonus = _player.PlayerStat.GetStat(EStatType.AttackSpeed);
+    //    float accBonuses = 1f;
+    //    foreach (var data in _equippedAccessories)
+    //    {
+    //        var accessories = AccessoryManager.Instance.GetData(data.Key);
+    //        accBonuses *= accessories.GetData(EWeaponStatType.CoolTime);
+    //    }
+
+    //    return baseSpeed * bonus * accBonuses;
+    //}
 
     public void Attack(IDamageable target)
     {
@@ -62,6 +89,7 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
+    //지울거
     public void Attack(GameObject target)
     {
         StartDash(target);
@@ -101,7 +129,7 @@ public class KatanaStrategy : IWeaponStrategy
             {
                 _player.GetComponent<CharacterController>().Move(_dashTargetPos - _player.transform.position);
                 _isDashing = false;
-                Debug.Log(GetDamage());
+                Debug.Log(GetDamage(EStatType.Damage));
                 ExecuteAccesories();
             }
             else
@@ -110,30 +138,6 @@ public class KatanaStrategy : IWeaponStrategy
                 Vector3 moveDelta = nextPos - _player.transform.position;
                 _player.GetComponent<CharacterController>().Move(moveDelta);
             }
-        }
-    }
-
-
-    public void AddAccessory(AccessoryData accessory)
-    {
-        if (!_accessorySockets.ContainsKey(accessory.Type))
-        {
-            return;
-        }
-        if (_equippedAccessories.ContainsKey(accessory.Type))
-        {
-            RemoveAccessory(accessory.Type);
-        }
-        _equippedAccessories[accessory.Type] = accessory;
-        Debug.Log(accessory.Type);
-        if (accessory.Prefab != null)
-        {
-            GameObject.Instantiate(accessory.Prefab, _accessorySockets[accessory.Type]);
-        }
-
-        if (accessory.Prefab.TryGetComponent<IAccessory>(out var acc))
-        {
-            acc.StatExecute(_weaponData);
         }
     }
 
@@ -152,11 +156,6 @@ public class KatanaStrategy : IWeaponStrategy
         obj.transform.SetParent(_accessorySockets[type]);
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.identity;
-
-        if (obj.TryGetComponent<IAccessory>(out var acc))
-        {
-            acc.StatExecute(_weaponData);
-        }
     }
 
     public void RemoveAccessory(EAccessoryType type)

@@ -6,7 +6,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
     [Header("# Stat")]
     public PlayerStatHolder PlayerStat { get; private set; }
-    public WeaponManager WeaponStat { get; private set; }
 
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
@@ -15,7 +14,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     private void Awake()
     {
-        WeaponStat = GetComponent<WeaponManager>();
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         ChangeWeapon(EWeaponType.Katana);

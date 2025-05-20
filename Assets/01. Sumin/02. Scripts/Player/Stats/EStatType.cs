@@ -11,5 +11,9 @@ public enum EStatType
     SprintStaminaUseRate,
     TargetDashStaminaUseRate,
     StaminaRegenRate,
+    MaxAmmo,
+    CurrentAmmo,
+    ReloadInterval,
+    ExplodeRange,
     Count
 }

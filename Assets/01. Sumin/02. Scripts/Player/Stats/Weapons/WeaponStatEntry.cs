@@ -1,6 +1,6 @@
 [System.Serializable]
 public class WeaponStatEntry
 {
-    public EWeaponStatType Type;
+    public EStatType Type;
     public float Value;
 }

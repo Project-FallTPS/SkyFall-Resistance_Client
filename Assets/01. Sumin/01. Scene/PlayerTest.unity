@@ -801,7 +801,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a513d7c96acd33e4db24845f7dd51fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponDatas: {fileID: 11400000, guid: 0db521aa64fd9f048bec53218f47925d, type: 2}
+  _isDontDestroy: 0
+  _weaponDataSO: {fileID: 11400000, guid: 0db521aa64fd9f048bec53218f47925d, type: 2}
 --- !u!114 &1163324277
 MonoBehaviour:
   m_ObjectHideFlags: 0

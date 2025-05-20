@@ -29,13 +29,14 @@ public class MeleeDamage : MonoBehaviour, IAccessory
 
     public void StatExecute(WeaponData data)
     {
-        foreach(var bonus in Data.Bonuses)
+        foreach (var bonus in Data.Bonuses)
         {
-            
+            //data.ModifyStat(bonus.StatType, bonus.Value);  // 스탯 변경 적용
         }
     }
 
     public void Excecute()
     {
+        // 타격 시 발동하는 특수 효과가 있을 경우 여기에 구현
     }
 }
