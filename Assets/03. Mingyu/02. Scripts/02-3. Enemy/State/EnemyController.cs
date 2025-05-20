@@ -4,7 +4,7 @@ using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
     [Header("State System")]
     private EnemyStateContext _enemyStateContext;
@@ -16,6 +16,9 @@ public class EnemyController : MonoBehaviour
     [Header("Components")]
     private CapsuleCollider _enemyCollider;
     public CapsuleCollider EnemyCollider => _enemyCollider;
+
+    private Animator _enemyAnimator;
+    public Animator EnemyAnimator => _enemyAnimator;
 
     [Header("Datas")]
     [SerializeField]
@@ -37,6 +40,7 @@ public class EnemyController : MonoBehaviour
         _enemyStateDict = new Dictionary<EEnemyState, IEnemyState>();
 
         _enemyCollider = GetComponent<CapsuleCollider>();
+        _enemyAnimator = GetComponent<Animator>();
 
         _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
 
@@ -62,6 +66,19 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         _enemyStateContext.CurrentState.Update();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _enemyData.CurrentHealth -= damage;
+        if (_enemyData.CurrentHealth <= 0)
+        {
+            _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Die]);
+        }
+        else
+        {
+            _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Damaged]);
+        }
     }
 
     public void StartCoroutineInEnemyState(IEnumerator coroutine)
