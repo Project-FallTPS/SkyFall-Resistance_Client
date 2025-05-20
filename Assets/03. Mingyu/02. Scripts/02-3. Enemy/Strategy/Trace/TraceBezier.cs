@@ -28,7 +28,7 @@ public class TraceBezier : ITraceStrategy
         }
 
         // 속도 보정을 위한 t 증가량 계산
-        _t += (self.EnemyData.MovementSpeed * Time.deltaTime) / _approxCurveLength;
+        _t += (self.EnemyData.MoveSpeed * Time.deltaTime) / _approxCurveLength;
 
         points[3] = self.Player.transform.position;
         DrawTrajectory(self);
