@@ -8,7 +8,8 @@ public enum EStatType
     SprintSpeed,
     MaxStamina,
     CurrentStamina,
-    SprintStaminaDrainRate,
-    TargetDashStaminaDrainRate,
+    SprintStaminaUseRate,
+    TargetDashStaminaUseRate,
+    StaminaRegenRate,
     Count
 }

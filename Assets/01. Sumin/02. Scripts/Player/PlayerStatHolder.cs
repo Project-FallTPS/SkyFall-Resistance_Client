@@ -13,6 +13,11 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
         PerkManager.Instance.CalculateFinalStats(StatDict);
     }
 
+    private void Update()
+    {
+        RegenStamina();
+    }
+
     public float GetStat(EStatType type)
     {
         return StatDict.TryGetValue(type, out var value) ? value : -1f;
@@ -25,7 +30,7 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
     public bool TryUseStamina(EStatType type)
     {
-        if(type == EStatType.SprintStaminaDrainRate)
+        if(type == EStatType.SprintStaminaUseRate)
         {
             if (StatDict[EStatType.CurrentStamina] < StatDict[type] * Time.deltaTime)
             {
@@ -33,7 +38,7 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
             }
             StatDict[EStatType.CurrentStamina] = Mathf.Max(0, StatDict[EStatType.CurrentStamina] - StatDict[type] * Time.deltaTime);
         }
-        else if(type == EStatType.TargetDashStaminaDrainRate)
+        else if(type == EStatType.TargetDashStaminaUseRate)
         {
             if (StatDict[EStatType.CurrentStamina] < StatDict[type])
             {
@@ -61,5 +66,10 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     private void Die()
     {
 
+    }
+
+    private void RegenStamina()
+    {
+        StatDict[EStatType.CurrentStamina] = Mathf.Max(StatDict[EStatType.MaxStamina], StatDict[EStatType.CurrentStamina] + StatDict[EStatType.StaminaRegenRate] * Time.deltaTime);
     }
 }

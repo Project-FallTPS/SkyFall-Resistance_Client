@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (MoveDirection.sqrMagnitude > 0.01f)
         {
-            if(!_isSprint || _playerStatManager.TryUseStamina(EStatType.SprintStaminaDrainRate))
+            if(!_isSprint || _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate))
             {
                 SetSprint(false);
             }
