@@ -11,11 +11,12 @@ public abstract class Spawner<TInfo, TEnum> : MonoBehaviour
     [SerializeField]
     protected List<TInfo> _spawnedObjects = new List<TInfo>();
     [SerializeField]
-    protected float _spawnInterval = 3f;
+    protected float _spawnInterval;
+    public float SpawnInterval { get => _spawnInterval; set => _spawnInterval = value; }
 
     [Header("Random Position Settings")]
     [SerializeField]
-    protected float _spawnRadius = 5f;
+    protected float _spawnRadius;
 
 
     private bool _isSpawning = true;

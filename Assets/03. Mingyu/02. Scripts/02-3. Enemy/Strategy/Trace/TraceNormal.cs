@@ -14,6 +14,6 @@ public class TraceNormal : ITraceStrategy
             enemyTransform.rotation = Quaternion.LookRotation(direction);
         }
 
-        enemyTransform.position += direction * self.EnemyData.MovementSpeed * Time.deltaTime;
+        enemyTransform.position += direction * self.EnemyData.MoveSpeed * Time.deltaTime;
     }
 }
