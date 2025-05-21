@@ -840,7 +840,7 @@
     "m_ObjectId": "039bbda35d8846bab5cf9ba3c9ef09ee",
     "m_Title": "Vertex Displacement",
     "m_Position": {
-        "x": -1952.0001220703125,
+        "x": -1952.0,
         "y": -412.5
     }
 }
@@ -1078,8 +1078,8 @@
     "m_ObjectId": "0a657eada1a646ab88ae557ffe791dc6",
     "m_Title": "Alpha",
     "m_Position": {
-        "x": -1952.5001220703125,
-        "y": 1012.5000610351563
+        "x": -1952.5,
+        "y": 1012.5
     }
 }
 
@@ -1815,7 +1815,7 @@
     "m_Title": "Base Color",
     "m_Position": {
         "x": -1986.0,
-        "y": 313.4999694824219
+        "y": 313.5
     }
 }
 
