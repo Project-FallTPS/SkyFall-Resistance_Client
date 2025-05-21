@@ -2,93 +2,77 @@
 
 public class TraceBezier : ITraceStrategy
 {
-    Vector3[] points = new Vector3[4];
-    private float _t = 0;
-
-    [SerializeField] public float posA = 0.55f;
-    [SerializeField] public float posB = 0.45f;
+    private Vector3[] _points = new Vector3[3];
+    private Vector3 _prevControlPoint = new Vector3(0f, 0f, 0f);
+    private float _t = 0f;
 
     private Vector3 _prevPosition;
-    private bool _isPathSet = false;
-    private float _approxCurveLength = 1f; // 보간 속도 보정용
+    private float _approxCurveLength = 1f;
 
     public void Trace(EnemyController self)
     {
-        if (!_isPathSet)
+        if (1f < _t)
         {
             SetPath(self);
-        }
-
-        if (_t > 1f)
-        {
             _t = 0f;
-            points[0] = self.transform.position;
-            points[1] = PointSetting(self.transform.position);
-            points[2] = PointSetting(self.Player.transform.position);
         }
-
-        // 속도 보정을 위한 t 증가량 계산
         _t += (self.EnemyData.MoveSpeed * Time.deltaTime) / _approxCurveLength;
-
-        points[3] = self.Player.transform.position;
         DrawTrajectory(self);
     }
 
     private void SetPath(EnemyController self)
     {
-        _isPathSet = true;
-        points[0] = self.transform.position; // P0
-        points[1] = PointSetting(self.transform.position); // P1
-        points[2] = PointSetting(self.Player.transform.position); // P2
-        points[3] = self.Player.transform.position; // P3
-        _prevPosition = self.transform.position;
+        Vector3 startPoint = self.transform.position;
+        Vector3 endPoint = self.Player.transform.position;
+        Vector3 controlPoint = SetControlPoint(startPoint, endPoint);
+        _prevControlPoint = controlPoint;
 
-        _approxCurveLength = EstimateCurveLength(points, 20); // 20개 샘플로 길이 추정
+        _points[0] = startPoint;
+        _points[1] = controlPoint;
+        _points[2] = endPoint;
+
+        _approxCurveLength = EstimateCurveLength(20);
+        _prevPosition = startPoint;
     }
-
-    Vector3 PointSetting(Vector3 origin)
+    
+    private Vector3 SetControlPoint(Vector3 startPoint, Vector3 endPoint)
     {
-        float x = posA * Mathf.Cos(Random.Range(0, 360) * Mathf.Deg2Rad) + origin.x;
-        float y = posB * Mathf.Sin(Random.Range(0, 360) * Mathf.Deg2Rad) + origin.y;
-        float z = posA * Mathf.Sin(Random.Range(0, 360) * Mathf.Deg2Rad) + origin.z;
-        return new Vector3(x, y, z);
+        if (_prevControlPoint != Vector3.zero)
+        {
+            return _prevControlPoint + (startPoint - _prevControlPoint) * 2f;
+        }
+        else
+        {
+            Vector3 controlOffset = 
+                new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f),Random.Range(-3f, 3f));
+            return (startPoint + endPoint) * 0.5f + controlOffset;
+        }
     }
 
-    void DrawTrajectory(EnemyController self)
+    private void DrawTrajectory(EnemyController self)
     {
         Vector3 currentPosition = GetBezierPoint(_t);
-
         Vector3 direction = (currentPosition - _prevPosition).normalized;
+
         if (direction != Vector3.zero)
-        {
             self.transform.rotation = Quaternion.LookRotation(direction);
-        }
 
         self.transform.position = currentPosition;
         _prevPosition = currentPosition;
     }
 
-    Vector3 GetBezierPoint(float t)
+    private Vector3 GetBezierPoint(float t)
     {
-        return new Vector3(
-            FourPointBezier(points[0].x, points[1].x, points[2].x, points[3].x, t),
-            FourPointBezier(points[0].y, points[1].y, points[2].y, points[3].y, t),
-            FourPointBezier(points[0].z, points[1].z, points[2].z, points[3].z, t)
-        );
+        return Mathf.Pow(1 - t, 2) * _points[0]
+             + 2 * (1 - t) * t * _points[1]
+             + Mathf.Pow(t, 2) * _points[2];
     }
 
-    private float FourPointBezier(float a, float b, float c, float d, float t)
-    {
-        return Mathf.Pow(1 - t, 3) * a
-             + 3 * Mathf.Pow(1 - t, 2) * t * b
-             + 3 * (1 - t) * Mathf.Pow(t, 2) * c
-             + Mathf.Pow(t, 3) * d;
-    }
-
-    private float EstimateCurveLength(Vector3[] pts, int segments)
+    private float EstimateCurveLength(int segments)
     {
         float length = 0f;
         Vector3 prev = GetBezierPoint(0f);
+
         for (int i = 1; i <= segments; i++)
         {
             float t = i / (float)segments;
