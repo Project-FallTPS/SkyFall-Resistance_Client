@@ -1,3 +1,4 @@
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public class MeleeDamage : MonoBehaviour, IAccessory

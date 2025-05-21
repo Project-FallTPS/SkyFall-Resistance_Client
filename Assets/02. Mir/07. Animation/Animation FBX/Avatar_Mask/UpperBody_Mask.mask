@@ -6,8 +6,8 @@ AvatarMask:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Melee_Mask
-  m_Mask: 01000000010000000100000000000000000000000100000001000000010000000100000001000000010000000100000001000000
+  m_Name: UpperBody_Mask
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000000000000000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -24,13 +24,13 @@ AvatarMask:
   - m_Path: pico/body/body_leg
     m_Weight: 1
   - m_Path: pico/boots
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: pico/boots/boots_left
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: pico/boots/boots_main
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: pico/boots/boots_right
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: pico/clothe
     m_Weight: 1
   - m_Path: pico/clothe/clothe_arm_belt
@@ -96,7 +96,7 @@ AvatarMask:
   - m_Path: root
     m_Weight: 1
   - m_Path: root/Hips
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/BagHead
     m_Weight: 1
   - m_Path: root/Hips/BagHead/BagFastenerHead
@@ -126,29 +126,29 @@ AvatarMask:
   - m_Path: root/Hips/BagHead/BagNeck/BagSpine/BagHip/BagRightLeg01/BagRightLeg02
     m_Weight: 1
   - m_Path: root/Hips/LeftUpLeg
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/LeftUpLeg/LeftLeg
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/LeftUpLeg/LeftLeg/BootsLeft01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/LeftUpLeg/LeftLeg/BootsLeft01/BootsLeft02
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/LeftUpLeg/LeftLeg/LeftFoot
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToe
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/RightUpLeg
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/RightUpLeg/RightLeg
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/RightUpLeg/RightLeg/BootsRight01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/RightUpLeg/RightLeg/BootsRight01/BootsRight02
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/RightUpLeg/RightLeg/RightFoot
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/RightUpLeg/RightLeg/RightFoot/RightToe
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine
     m_Weight: 1
   - m_Path: root/Hips/Spine/Spine01
