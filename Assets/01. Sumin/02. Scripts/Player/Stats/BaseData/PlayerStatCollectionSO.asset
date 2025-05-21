@@ -33,3 +33,5 @@ MonoBehaviour:
     Value: 20
   - Type: 9
     Value: 30
+  - Type: 10
+    Value: 10

@@ -24,10 +24,11 @@ public class EnemyDieState : IEnemyState
     public void Update()
     {
         _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
-        if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.Die)) && 1.0f <= _animatorStateInfo.normalizedTime)
-        {
-            ReturnToPool();
-        }
+        ReturnToPool();
+        //if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.Die)) && 1.0f <= _animatorStateInfo.normalizedTime)
+        //{
+        //    ReturnToPool();
+        //}
     }
 
     public void Exit()

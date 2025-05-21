@@ -2,11 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerAttackHandler : MonoBehaviour
+public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
+    [Header("# Hierarchy")]
+    [Header("# Weapon")]
+    public List<GameObject> Weapons;
+
     [Header("# Stat")]
     public PlayerStatHolder PlayerStat { get; private set; }
-    public WeaponManager WeaponStat { get; private set; }
+
+    [Header("# Component")]
+    private Animator _animator;
 
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
@@ -15,7 +21,7 @@ public class PlayerAttackHandler : MonoBehaviour
 
     private void Awake()
     {
-        WeaponStat = GetComponent<WeaponManager>();
+        _animator = GetComponentInChildren<Animator>();
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         ChangeWeapon(EWeaponType.Katana);
@@ -24,6 +30,11 @@ public class PlayerAttackHandler : MonoBehaviour
     private void Update()
     {
         _currentStrategy.Update();
+    }
+
+    public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
+    {
+        _currentStrategy.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -36,6 +47,18 @@ public class PlayerAttackHandler : MonoBehaviour
             _currentWeapon = type;
 
             Debug.Log($"무기 변경: {type}");
+
+            switch(type)
+            {
+                case EWeaponType.Katana:
+                    _animator.SetLayerWeight(1, 0f);
+                    _animator.SetLayerWeight(2, 1f);
+                    break;
+                case EWeaponType.AR:
+                    _animator.SetLayerWeight(1, 1f);
+                    _animator.SetLayerWeight(2, 0f);
+                    break;
+            }    
         }
     }
 
@@ -55,4 +78,5 @@ public class PlayerAttackHandler : MonoBehaviour
 
         }
     }
+
 }
