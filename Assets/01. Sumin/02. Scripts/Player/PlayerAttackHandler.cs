@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerAttackHandler : MonoBehaviour
+public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
+    [Header("# Hierarchy")]
+    [Header("# Weapon")]
+    public List<GameObject> Weapons;
+
     [Header("# Stat")]
     public PlayerStatHolder PlayerStat { get; private set; }
-    public WeaponManager WeaponStat { get; private set; }
 
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
@@ -15,7 +18,6 @@ public class PlayerAttackHandler : MonoBehaviour
 
     private void Awake()
     {
-        WeaponStat = GetComponent<WeaponManager>();
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         ChangeWeapon(EWeaponType.Katana);
@@ -24,6 +26,11 @@ public class PlayerAttackHandler : MonoBehaviour
     private void Update()
     {
         _currentStrategy.Update();
+    }
+
+    public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
+    {
+        _currentStrategy.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -55,4 +62,5 @@ public class PlayerAttackHandler : MonoBehaviour
 
         }
     }
+
 }

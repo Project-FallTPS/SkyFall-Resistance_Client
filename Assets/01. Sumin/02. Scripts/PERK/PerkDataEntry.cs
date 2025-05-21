@@ -4,5 +4,5 @@ using System.Collections.Generic;
 public class PerkDataEntry // 개별 퍽의 보너스 능력치
 {
     public EPerkType Type;
-    public List<PerkStatBonus> Bonuses;
+    public List<StatBonus> Bonuses;
 }
