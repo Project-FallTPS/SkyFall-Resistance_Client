@@ -371,6 +371,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: 'managedReferences[1343159488559448786]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.Transform,
+        UnityEngine.CoreModule]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: managedReferences[1343159488559448786].Name
+      value: PlayerTransform
+      objectReference: {fileID: 0}
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: managedReferences[1343159488559448786].m_Value
+      value: 
+      objectReference: {fileID: 1599786412}
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
+      value: 1343159488559448786
+      objectReference: {fileID: 0}
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: managedReferences[1343159488559448786].GUID.m_Value0
+      value: 5271712223212472644
+      objectReference: {fileID: 0}
+    - target: {fileID: 841746531274401233, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: managedReferences[1343159488559448786].GUID.m_Value1
+      value: 16376681508396871289
+      objectReference: {fileID: 0}
     - target: {fileID: 4865756857718749494, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
       propertyPath: m_Name
       value: P_Boss

@@ -8,9 +8,12 @@ using Unity.Properties;
 [NodeDescription(name: "BossShoot", story: "사격 공격(페이즈1)", category: "Action", id: "ca6df048f0a2e61bd685e0c865fc7e9a")]
 public partial class BossShootAction : Action
 {
+    public BlackboardVariable<Transform> _playerTransform;
+    public float _test;
     // Ray를 쐈을 때 장애물이 감지되면 곡사, 아니면 직사
     protected override Status OnStart()
     {
+
         return Status.Running;
     }
 
