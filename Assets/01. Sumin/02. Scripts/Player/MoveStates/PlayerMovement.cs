@@ -92,9 +92,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleMovement(float h, float v)
     {
-        _animator.SetBool("anim_Player_IsMoving", (h != 0 || v != 0));
-        _animator.SetFloat("anim_Player_MovingZ", v);
         _animator.SetFloat("anim_Player_MovingX", h);
+        _animator.SetFloat("anim_Player_MovingZ", v);
+        _animator.SetBool("anim_Player_IsMoving", Mathf.Sign(v) != 0 || Mathf.Sign(h) != 0);
 
         Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();

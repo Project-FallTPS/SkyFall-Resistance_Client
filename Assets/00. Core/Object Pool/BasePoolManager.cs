@@ -101,6 +101,23 @@ public abstract class BasePoolManager<TEnum, TPoolInfo> : Singleton<BasePoolMana
         return obj;
     }
 
+    public GameObject GetObject(TEnum type, Vector3 position, Quaternion rotation, System.Action<GameObject> beforeActivate = null)
+    {
+        TPoolInfo info = GetPoolByType(type);
+        if (info == null) return null;
+
+        GameObject obj = (info.PoolQueue.Count > 0) ? info.PoolQueue.Dequeue() : CreateNewObject(info);
+
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+
+        // 이 타이밍에 초기화
+        beforeActivate?.Invoke(obj);
+
+        obj.SetActive(true);
+        return obj;
+    }
+
     public void ReturnObject(GameObject obj, TEnum type)
     {
         TPoolInfo info = GetPoolByType(type);
