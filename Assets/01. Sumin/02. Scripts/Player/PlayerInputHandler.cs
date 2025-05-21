@@ -8,14 +8,11 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerAttackHandler _playerAttackHandler;
     private PlayerMovement _playerMovement;
 
-    private Transform camTransform;
-
     private float _h;
     private float _v;
 
     private void Awake()
     {
-        camTransform = Camera.main.transform;
         _playerAttackHandler = GetComponent<PlayerAttackHandler>();
         _playerMovement = GetComponent<PlayerMovement>();
     }

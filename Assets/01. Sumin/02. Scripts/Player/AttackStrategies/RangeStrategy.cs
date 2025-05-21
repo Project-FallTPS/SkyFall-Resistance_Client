@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class RangeStrategy : IWeaponStrategy
@@ -70,7 +69,7 @@ public class RangeStrategy : IWeaponStrategy
                 rot,
                 (obj) =>
                 {  
-                    obj.GetComponent<IBullet>().SetStats(GetStat(EStatType.Damage), GetStat(EStatType.MoveSpeed), dir);
+                    obj.GetComponent<IBullet>().SetStats(GetStat(EStatType.Damage), dir);
                 });
             _timer = 0f;
             _player.Anim.SetTrigger("anim_Player_Trigger_RangeAttack");
@@ -144,5 +143,4 @@ public class RangeStrategy : IWeaponStrategy
         Vector3 fallbackPoint = ray.origin + ray.direction * 50f;
         return (fallbackPoint - _muzzle.position).normalized;
     }
-
 }

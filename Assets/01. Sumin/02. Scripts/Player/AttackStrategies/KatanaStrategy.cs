@@ -74,6 +74,7 @@ public class KatanaStrategy : IWeaponStrategy
             else
             {
                 //일반 공격
+                _player.Anim.SetTrigger("anim_Player_Trigger_MeleeAttack");
             }
         }
     }
@@ -107,24 +108,27 @@ public class KatanaStrategy : IWeaponStrategy
 
             if (t >= 1f)
             {
-                _player.GetComponent<CharacterController>().Move(_dashTargetPos - _player.transform.position);
+                _player.Rigid.MovePosition(_dashTargetPos);
                 _isDashing = false;
+
                 Debug.Log(GetStat(EStatType.Damage));
-                if(_target.TryGetComponent<IDamageable>(out var damageable))
+
+                if (_target != null && _target.TryGetComponent<IDamageable>(out var damageable))
                 {
                     damageable.TakeDamage(GetStat(EStatType.Damage));
                 }
+
                 _target = null;
                 ExecuteAccesories();
             }
             else
             {
                 Vector3 nextPos = Vector3.Lerp(_dashStartPos, _dashTargetPos, t);
-                Vector3 moveDelta = nextPos - _player.transform.position;
-                _player.GetComponent<CharacterController>().Move(moveDelta);
+                _player.Rigid.MovePosition(nextPos);
             }
         }
     }
+
 
     public void AddAccessory(EAccessoryType type, GameObject obj)
     {
