@@ -4,48 +4,95 @@ using UnityEngine.UI;
 
 public class TargetManager : Singleton<TargetManager>
 {
+    [Header("UI & Camera Reference")]
     [SerializeField] private Image _crossHair;
-    public GameObject Target;
+    [SerializeField] private GameObject _targetLockedUIPrefab;
+    [SerializeField] private GameObject _originalCrossHairUIPrefab;
+    [SerializeField] private RectTransform _uiLockArea;
 
-    private HashSet<GameObject> _enemies = new HashSet<GameObject>();
+    [Header("Target Detection")]
+    [SerializeField] private Camera _camera;
+    [SerializeField] private float _maxDistance = 30f;
 
-    private void OnTriggerEnter(Collider other)
+    private GameObject _targetLockedUIInstance;
+    private Vector3 _targetScreenPos;
+
+    private HashSet<GameObject> _enemiesInFrustum = new HashSet<GameObject>();
+    public GameObject Target { get; private set; }
+
+    protected override void Awake()
     {
-        if(other.CompareTag("Enemy"))
-        {
-            _enemies.Add(other.gameObject);
-        }
-    }
+        base.Awake();
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Enemy"))
-        {
-            _enemies.Remove(other.gameObject);
-        }
+        if (_camera == null) _camera = Camera.main;
+
+        _targetLockedUIInstance = Instantiate(_targetLockedUIPrefab, _uiLockArea.parent);
+        _targetLockedUIInstance.SetActive(false);
     }
 
     private void Update()
     {
         SetTarget();
+        UpdateLockedUI();
     }
 
     private void SetTarget()
     {
-        GameObject target = null;
+        GameObject closest = null;
         float minDistance = float.MaxValue;
 
-        foreach (GameObject enemy in _enemies)
+        foreach (var enemy in _enemiesInFrustum)
         {
-            float dist = Vector3.Distance(gameObject.transform.position, enemy.transform.position);
+            // 화면 안에 있는지 체크
+            Vector3 screenPos = _camera.WorldToScreenPoint(enemy.transform.position);
+            if (screenPos.z <= 0f) continue;
+
+            // UI 안에 포함되는지 체크
+            if (!RectTransformUtility.RectangleContainsScreenPoint(_uiLockArea, screenPos)) continue;
+
+            float dist = Vector3.Distance(_camera.transform.position, enemy.transform.position);
             if (dist < minDistance)
             {
                 minDistance = dist;
-                target = enemy;
+                closest = enemy;
+                _targetScreenPos = screenPos;
             }
         }
 
-        Target = target;
-        _crossHair.color = Target == null ? Color.white : Color.red;
+        Target = closest;
+        _crossHair.color = Target != null ? Color.red : Color.white;
+    }
+
+    private void UpdateLockedUI()
+    {
+        if (_targetLockedUIInstance == null) return;
+
+        if (Target != null)
+        {
+            _targetLockedUIInstance.transform.position = _targetScreenPos;
+            _targetLockedUIInstance.SetActive(true);
+            _originalCrossHairUIPrefab.SetActive(false);
+        }
+        else
+        {
+            _targetLockedUIInstance.SetActive(false);
+            _originalCrossHairUIPrefab.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            _enemiesInFrustum.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            _enemiesInFrustum.Remove(other.gameObject);
+        }
     }
 }
