@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 3a03654146ddb6646b1d6ea34ff2f71d
+guid: a2cb4829504ee85488e59a71c00a0070
 AssetOrigin:
   serializedVersion: 1
   productId: 308738
   packageName: Jetpack Flight Combat Animation Pack
   packageVersion: 1.0
-  assetPath: Assets/Raise Creation/Jetpack Flight Pack/Animations/Flight/Anim_Jetpack_Flight_Boost.fbx
+  assetPath: Assets/02. Mir/20. External Assets/Raise Creation/Jetpack Flight Pack/Animations/Flight/Anim_Jetpack_Flight_Forward_V2.fbx
   uploadId: 726428
 ModelImporter:
   serializedVersion: 22200
@@ -44,7 +44,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Anim_Jetpack_Flight_Boost
+      name: Anim_Jetpack_Flight_Forward_V2
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 1
