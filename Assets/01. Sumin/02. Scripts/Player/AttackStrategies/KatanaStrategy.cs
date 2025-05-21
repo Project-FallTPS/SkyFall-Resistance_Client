@@ -82,6 +82,7 @@ public class KatanaStrategy : IWeaponStrategy
     public void Update()
     {
         _timer += Time.deltaTime;
+        //_player.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
 
         Dash();
     }

@@ -10,6 +10,7 @@ public class Katana : MonoBehaviour
         if(other.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TakeDamage(_player.CurrentStrategy.GetStat(EStatType.Damage));
+            Debug.Log(_player.CurrentStrategy.GetStat(EStatType.Damage));
         }
     }
 }
