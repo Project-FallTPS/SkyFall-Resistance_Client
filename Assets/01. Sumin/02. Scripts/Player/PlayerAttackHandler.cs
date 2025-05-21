@@ -11,6 +11,9 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     [Header("# Stat")]
     public PlayerStatHolder PlayerStat { get; private set; }
 
+    [Header("# Component")]
+    private Animator _animator;
+
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
     private EWeaponType _currentWeapon;
@@ -18,6 +21,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     private void Awake()
     {
+        _animator = GetComponentInChildren<Animator>();
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         ChangeWeapon(EWeaponType.Katana);
@@ -43,6 +47,18 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
             _currentWeapon = type;
 
             Debug.Log($"무기 변경: {type}");
+
+            switch(type)
+            {
+                case EWeaponType.Katana:
+                    _animator.SetLayerWeight(1, 0f);
+                    _animator.SetLayerWeight(2, 1f);
+                    break;
+                case EWeaponType.AR:
+                    _animator.SetLayerWeight(1, 1f);
+                    _animator.SetLayerWeight(2, 0f);
+                    break;
+            }    
         }
     }
 

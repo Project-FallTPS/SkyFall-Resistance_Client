@@ -1,8 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("# Stat")]
@@ -21,9 +18,11 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController _characterController { get; private set; }
     private Transform _mainCameraTransform;
     private Animator _animator;
+    private Rigidbody _rigid;
 
     private void Awake()
     {
+        _rigid = GetComponent<Rigidbody>();
         _playerStatManager = GetComponent<PlayerStatHolder>();
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
@@ -65,13 +64,38 @@ public class PlayerMovement : MonoBehaviour
         MoveDirection = (camForward * v + camRight * h).normalized;
     }
 
+    //public void HandleMovement(float h, float v)
+    //{
+    //    _animator.SetBool("anim_Player_IsMoving", (h != 0 || v != 0));
+    //    _animator.SetFloat("anim_Player_MovingZ", v);
+    //    _animator.SetFloat("anim_Player_MovingX", h);
+    //    //h = Mathf.Sign(h);
+    //    //v = Mathf.Sign(v);
+    //    Vector3 camForward = _mainCameraTransform.forward;
+    //    camForward.Normalize();
+
+    //    Vector3 camRight = _mainCameraTransform.right;
+    //    camRight.Normalize();
+
+    //    MoveDirection = (camForward * v + camRight * h).normalized;
+
+    //    if (MoveDirection.sqrMagnitude > 0.01f)
+    //    {
+    //        if(!_isSprint /*|| _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate)*/)
+    //        {
+    //            SetSprint(false);
+    //        }
+    //        _characterController.Move(MoveDirection * CurrentSpeed * Time.deltaTime);
+    //        // TODO : 월드 Y각 특정 이상이면 다른 애니메이션 
+    //    }
+    //}
+
     public void HandleMovement(float h, float v)
     {
         _animator.SetBool("anim_Player_IsMoving", (h != 0 || v != 0));
         _animator.SetFloat("anim_Player_MovingZ", v);
         _animator.SetFloat("anim_Player_MovingX", h);
-        //h = Mathf.Sign(h);
-        //v = Mathf.Sign(v);
+
         Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();
 
@@ -82,14 +106,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (MoveDirection.sqrMagnitude > 0.01f)
         {
-            if(!_isSprint /*|| _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate)*/)
+            if (!_isSprint /*|| _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate)*/)
             {
                 SetSprint(false);
             }
-            _characterController.Move(MoveDirection * CurrentSpeed * Time.deltaTime);
-            // TODO : 월드 Y각 특정 이상이면 다른 애니메이션 
+
+            Vector3 targetPosition = transform.position + MoveDirection * CurrentSpeed * Time.deltaTime;
+            _rigid.MovePosition(targetPosition);
         }
     }
+
 
     public void SetSprint(bool isSprint)
     {

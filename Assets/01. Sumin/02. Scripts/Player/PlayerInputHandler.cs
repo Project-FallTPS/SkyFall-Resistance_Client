@@ -10,6 +10,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Transform camTransform;
 
+    private float _h;
+    private float _v;
+
     private void Awake()
     {
         camTransform = Camera.main.transform;
@@ -21,6 +24,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         GetMoveInput();
         GetAttackInput();
+    }
+
+    private void FixedUpdate()
+    {
+        _playerMovement.HandleMovement(_h, _v);
     }
 
     private void GetAttackInput()
@@ -43,9 +51,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void GetMoveInput()
     {
-        float h = Input.GetAxis("Horizontal"); // A/D
-        float v = Input.GetAxis("Vertical");   // W/S
-        _playerMovement.HandleMovement(h, v);
+        _h = Input.GetAxis("Horizontal"); // A/D
+        _v = Input.GetAxis("Vertical");   // W/S
     }
 
     public void TakeDamage(float damage)
