@@ -69,7 +69,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree
+  m_Name: Shot Tree
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -169,7 +169,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Anim_Jetpack_Fall_Down
+  m_Name: Empty
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -184,7 +184,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 76a205b64eab94a4e8aaf589da388c37, type: 3}
+  m_Motion: {fileID: 0}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -200,9 +200,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: anim_Player_IsMoving
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: anim_Player_IsShooting
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6728443078344466354}
@@ -413,7 +410,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 1.2656391
+  m_TransitionDuration: 0
   m_TransitionOffset: 0.005008312
   m_ExitTime: 0.011134814
   m_HasExitTime: 0
@@ -533,7 +530,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: anim_Player_IsShooting
+    m_ConditionEvent: anim_Player_Trigger_RangeAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8660574028402562019}
@@ -643,6 +640,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: anim_Player_Trigger_RangeAttack
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Main Layer (Moving)
@@ -688,7 +691,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: anim_Player_IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -948,7 +951,7 @@ AnimatorStateMachine:
     m_Position: {x: 500, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8477679486348919277}
-    m_Position: {x: 240, y: 180, z: 0}
+    m_Position: {x: 250, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1092525020347782279}
     m_Position: {x: 240, y: 90, z: 0}
@@ -1089,7 +1092,7 @@ AnimatorStateMachine:
     m_Position: {x: 530, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6338801294729475288}
-    m_Position: {x: 50, y: -40, z: 0}
+    m_Position: {x: 120, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3550327588581155131}
     m_Position: {x: 420, y: 230, z: 0}
@@ -1104,7 +1107,7 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1639753869047488326}
-    m_Position: {x: 270, y: -40, z: 0}
+    m_Position: {x: 380, y: -110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 470838849268544530}
@@ -1113,7 +1116,7 @@ AnimatorStateMachine:
   - {fileID: -5894035820912389168}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_AnyStatePosition: {x: 40, y: 50, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 780, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

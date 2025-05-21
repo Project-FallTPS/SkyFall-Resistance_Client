@@ -33,7 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void GetAttackInput()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(0))
         {
             _playerAttackHandler.PerformAttack();
         }

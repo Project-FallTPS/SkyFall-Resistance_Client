@@ -1,27 +1,21 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
+using UnityEngine;
 
-public class KatanaStrategy : IWeaponStrategy
+public class RangeStrategy : IWeaponStrategy
 {
-    private const string WEAPON_NAME = "Katana";
+    private const string WEAPON_NAME = "Range";
     private WeaponData _weaponData;
     private PlayerAttackHandler _player;
+    private Transform _muzzle;
     private Dictionary<EAccessoryType, AccessoryData> _equippedAccessories = new Dictionary<EAccessoryType, AccessoryData>();
     private Dictionary<EAccessoryType, Transform> _accessorySockets = new Dictionary<EAccessoryType, Transform>();
 
-    [Header("# Target Dash")]
-    private float _dashDuration = 0.15f;
-    private float _dashTimer = 0f;
-    private bool _isDashing = false;
-    private Vector3 _dashStartPos;
-    private Vector3 _dashTargetPos;
-    private GameObject _target;
-
     private float _timer = 0f;
 
-    public KatanaStrategy(PlayerAttackHandler player)
+    public RangeStrategy(PlayerAttackHandler player)
     {
-        _weaponData = WeaponDataManager.Instance.GetWeaponData(EWeaponType.Katana);
+        _weaponData = WeaponDataManager.Instance.GetWeaponData(EWeaponType.Range);
         _player = player;
         InitializeAccessorySockets();
     }
@@ -29,11 +23,12 @@ public class KatanaStrategy : IWeaponStrategy
     public void InitializeAccessorySockets()
     {
         Transform weaponTransform = null;
-        foreach(var weapon in _player.Weapons)
+        foreach (var weapon in _player.Weapons)
         {
-            if(weapon.name == WEAPON_NAME)
+            if (weapon.name == WEAPON_NAME)
             {
                 weaponTransform = weapon.transform;
+                _muzzle = weaponTransform.Find("Muzzle");
                 break;
             }
         }
@@ -62,68 +57,29 @@ public class KatanaStrategy : IWeaponStrategy
         return baseDamage * perkBonus * accBonuses;
     }
 
-    //ì§€ìš¸ê±°
     public void Attack(GameObject target)
     {
         if (_timer >= GetStat(EStatType.CoolTime))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                StartDash(target);
-            }
-            else
-            {
-                //ì¼ë°˜ ê³µê²©
-            }
+            Vector3 dir = SetDirection();
+            Quaternion rot = Quaternion.LookRotation(dir);
+
+            GameObject bullet = BulletPoolManager.Instance.GetObject(
+                EBulletType.PlayerBullet,
+                _muzzle.position,
+                rot,
+                (obj) =>
+                {  
+                    obj.GetComponent<IBullet>().SetStats(GetStat(EStatType.Damage), GetStat(EStatType.MoveSpeed), dir);
+                });
+            _timer = 0f;
+            _player.Anim.SetTrigger("anim_Player_Trigger_RangeAttack");
         }
     }
 
     public void Update()
     {
         _timer += Time.deltaTime;
-
-        Dash();
-    }
-
-    public void StartDash(GameObject target)
-    {
-        if (_isDashing || target == null || !_player.PlayerStat.TryUseStamina(EStatType.TargetDashStaminaUseRate))
-        {
-            return;
-        }
-        _dashStartPos = _player.transform.position;
-        _dashTargetPos = target.transform.position;
-        _target = target;
-        _dashTimer = 0f;
-        _isDashing = true;
-    }
-
-    private void Dash()
-    {
-        if (_isDashing)
-        {
-            _dashTimer += Time.deltaTime;
-            float t = _dashTimer / _dashDuration;
-
-            if (t >= 1f)
-            {
-                _player.GetComponent<CharacterController>().Move(_dashTargetPos - _player.transform.position);
-                _isDashing = false;
-                Debug.Log(GetStat(EStatType.Damage));
-                if(_target.TryGetComponent<IDamageable>(out var damageable))
-                {
-                    damageable.TakeDamage(GetStat(EStatType.Damage));
-                }
-                _target = null;
-                ExecuteAccesories();
-            }
-            else
-            {
-                Vector3 nextPos = Vector3.Lerp(_dashStartPos, _dashTargetPos, t);
-                Vector3 moveDelta = nextPos - _player.transform.position;
-                _player.GetComponent<CharacterController>().Move(moveDelta);
-            }
-        }
     }
 
     public void AddAccessory(EAccessoryType type, GameObject obj)
@@ -165,12 +121,28 @@ public class KatanaStrategy : IWeaponStrategy
 
     public void ExecuteAccesories()
     {
-        foreach(var acc in _equippedAccessories)
+        foreach (var acc in _equippedAccessories)
         {
-            if(acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
+            if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
             {
                 accesory.Excecute();
             }
         }
     }
+
+    private Vector3 SetDirection()
+    {
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, ~((1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("AimCube")))))
+        {
+            return (hitInfo.point - _muzzle.position).normalized;
+        }
+
+        // Ray°¡ ¾Æ¹«°Íµµ ¸ÂÁö ¾Ê¾ÒÀ» °æ¿ì: Ä«¸Þ¶ó ±âÁØ 50f ¾Õ ¹æÇâ
+        Vector3 fallbackPoint = ray.origin + ray.direction * 50f;
+        return (fallbackPoint - _muzzle.position).normalized;
+    }
+
 }

@@ -12,7 +12,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     public PlayerStatHolder PlayerStat { get; private set; }
 
     [Header("# Component")]
-    private Animator _animator;
+    public Animator Anim { get; private set; }
 
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
@@ -21,10 +21,11 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     private void Awake()
     {
-        _animator = GetComponentInChildren<Animator>();
+        Anim = GetComponentInChildren<Animator>();
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
-        ChangeWeapon(EWeaponType.Katana);
+        _strategies.Add(EWeaponType.Range, new RangeStrategy(this));
+        ChangeWeapon(EWeaponType.Range);
     }
 
     private void Update()
@@ -51,12 +52,12 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
             switch(type)
             {
                 case EWeaponType.Katana:
-                    _animator.SetLayerWeight(1, 0f);
-                    _animator.SetLayerWeight(2, 1f);
+                    Anim.SetLayerWeight(1, 0f);
+                    Anim.SetLayerWeight(2, 1f);
                     break;
-                case EWeaponType.AR:
-                    _animator.SetLayerWeight(1, 1f);
-                    _animator.SetLayerWeight(2, 0f);
+                case EWeaponType.Range:
+                    Anim.SetLayerWeight(1, 1f);
+                    Anim.SetLayerWeight(2, 0f);
                     break;
             }    
         }
@@ -64,9 +65,10 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void PerformAttack()
     {
+        _currentStrategy.Attack(TargetManager.Instance.Target);
+
         if (TargetManager.Instance.Target != null)
         {
-            _currentStrategy.Attack(TargetManager.Instance.Target);
 
             //if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
             //{
