@@ -9,7 +9,7 @@ public class EnemyAttackState : IEnemyState
     private EnemyController _enemyController;
     private EnemyData _enemyData;
     private IAttackStrategy _attackStrategy;
-    private IEnumerator _attackCoroutine;
+    private float _nextAttackTime;
 
     public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy)
     {
@@ -21,8 +21,6 @@ public class EnemyAttackState : IEnemyState
     public void Enter()
     {
         _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Idle), true);
-        _attackCoroutine = AttackCoroutine();
-        _enemyController.StartCoroutineInEnemyState(_attackCoroutine);
     }
 
     public void Update()
@@ -32,25 +30,22 @@ public class EnemyAttackState : IEnemyState
         {
             _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
         }
+        TryAttack();
     }
 
     public void Exit()
     {
         _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Idle), false);
-        if (!ReferenceEquals(_attackCoroutine, null))
-        {
-            _enemyController.StopCoroutineInEnemyState(_attackCoroutine);
-            _attackCoroutine = null;
-        }
-    }
 
-    private IEnumerator AttackCoroutine()
+    }
+    private void TryAttack()
     {
-        while (true)
+        if (Time.time < _nextAttackTime)
         {
-            _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.Attack));
-            _attackStrategy.Attack(_enemyController.transform.position, _enemyController);
-            yield return new WaitForSeconds(_enemyController.EnemyData.AttackDelay);
+            return;
         }
+        _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.Attack));
+        _attackStrategy.Attack(_enemyController.transform.position, _enemyController);
+        _nextAttackTime = Time.time + _enemyData.AttackDelay;
     }
 } 
