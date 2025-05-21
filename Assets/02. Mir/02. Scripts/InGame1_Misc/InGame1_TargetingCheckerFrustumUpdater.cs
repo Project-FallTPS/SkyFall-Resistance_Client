@@ -51,7 +51,7 @@ public class InGame1_TargetingCheckerFrustumUpdater : MonoBehaviour
         verts[7] = new Vector3(-farWidth, farHeight, far);
 
         for (int i = 0; i < verts.Length; i++)
-            verts[i] = _camera.transform.TransformPoint(verts[i] - _camera.transform.position); // local to world
+            verts[i] = _camera.transform.TransformPoint(verts[i]);
 
         _frustumMesh.vertices = verts;
 
