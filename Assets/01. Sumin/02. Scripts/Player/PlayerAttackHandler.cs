@@ -12,29 +12,32 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     public PlayerStatHolder PlayerStat { get; private set; }
 
     [Header("# Component")]
-    private Animator _animator;
+    public Animator Anim { get; private set; }
+    public Rigidbody Rigid { get; private set; }
 
     private Dictionary<EWeaponType, IWeaponStrategy> _strategies = new Dictionary<EWeaponType, IWeaponStrategy>();
 
     private EWeaponType _currentWeapon;
-    private IWeaponStrategy _currentStrategy;
+    public IWeaponStrategy CurrentStrategy { get; private set; }
 
     private void Awake()
     {
-        _animator = GetComponentInChildren<Animator>();
+        Rigid = GetComponentInChildren<Rigidbody>();
+        Anim = GetComponentInChildren<Animator>();
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
+        _strategies.Add(EWeaponType.Range, new RangeStrategy(this));
         ChangeWeapon(EWeaponType.Katana);
     }
 
     private void Update()
     {
-        _currentStrategy.Update();
+        CurrentStrategy.Update();
     }
 
     public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
     {
-        _currentStrategy.AddAccessory(type, accessory);
+        CurrentStrategy.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -43,7 +46,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         {
             // TODO : Weapon 오브젝트 활성화
 
-            _currentStrategy = strategy;
+            CurrentStrategy = strategy;
             _currentWeapon = type;
 
             Debug.Log($"무기 변경: {type}");
@@ -51,12 +54,12 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
             switch(type)
             {
                 case EWeaponType.Katana:
-                    _animator.SetLayerWeight(1, 0f);
-                    _animator.SetLayerWeight(2, 1f);
+                    Anim.SetLayerWeight(1, 0f);
+                    Anim.SetLayerWeight(2, 1f);
                     break;
-                case EWeaponType.AR:
-                    _animator.SetLayerWeight(1, 1f);
-                    _animator.SetLayerWeight(2, 0f);
+                case EWeaponType.Range:
+                    Anim.SetLayerWeight(1, 1f);
+                    Anim.SetLayerWeight(2, 0f);
                     break;
             }    
         }
@@ -64,9 +67,10 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void PerformAttack()
     {
+        CurrentStrategy.Attack(TargetManager.Instance.Target);
+
         if (TargetManager.Instance.Target != null)
         {
-            _currentStrategy.Attack(TargetManager.Instance.Target);
 
             //if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
             //{
