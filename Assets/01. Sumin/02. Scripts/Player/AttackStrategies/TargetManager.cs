@@ -12,7 +12,7 @@ public class TargetManager : Singleton<TargetManager>
 
     [Header("Target Detection")]
     [SerializeField] private Camera _camera;
-    [SerializeField] private float _maxDistance = 30f;
+    [SerializeField] private float _maxDistance;
 
     private GameObject _targetLockedUIInstance;
     private Vector3 _targetScreenPos;
@@ -51,6 +51,9 @@ public class TargetManager : Singleton<TargetManager>
             if (!RectTransformUtility.RectangleContainsScreenPoint(_uiLockArea, screenPos)) continue;
 
             float dist = Vector3.Distance(_camera.transform.position, enemy.transform.position);
+            
+            if (dist > _maxDistance) continue;
+
             if (dist < minDistance)
             {
                 minDistance = dist;
@@ -84,7 +87,12 @@ public class TargetManager : Singleton<TargetManager>
     {
         if (other.CompareTag("Enemy"))
         {
-            _enemiesInFrustum.Add(other.gameObject);
+            float dist = Vector3.Distance(_camera.transform.position, other.transform.position);
+            if (dist <= _maxDistance)
+            {
+                _enemiesInFrustum.Add(other.gameObject);
+                Debug.Log("Å¸°Ù °¨ÁöµÊ: " + other.name);
+            }
         }
     }
 

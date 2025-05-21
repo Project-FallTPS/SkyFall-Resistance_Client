@@ -15,6 +15,9 @@ public class KatanaStrategy : IWeaponStrategy
     private bool _isDashing = false;
     private Vector3 _dashStartPos;
     private Vector3 _dashTargetPos;
+    private GameObject _target;
+
+    private float _timer = 0f;
 
     public KatanaStrategy(PlayerAttackHandler player)
     {
@@ -45,10 +48,10 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public float GetDamage(EStatType type)
+    public float GetStat(EStatType type)
     {
         float baseDamage = _weaponData.GetStat(type);
-        float bonus = _player.PlayerStat.GetStat(type);
+        float perkBonus = PerkManager.Instance.EquippedPerkBonuses[type];
         float accBonuses = 1f;
         foreach (var data in _equippedAccessories)
         {
@@ -56,32 +59,31 @@ public class KatanaStrategy : IWeaponStrategy
             accBonuses *= accessories.GetData(type);
         }
 
-        return baseDamage * bonus * accBonuses;
-    }
-
-    public void Attack(IDamageable target)
-    {
-        if (target is MonoBehaviour mb)
-        {
-            StartDash(mb.gameObject);
-        }
+        return baseDamage * perkBonus * accBonuses;
     }
 
     //지울거
     public void Attack(GameObject target)
     {
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (_timer >= GetStat(EStatType.CoolTime))
         {
-            StartDash(target);
-        }
-        else
-        {
-            //일반 공격
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                StartDash(target);
+            }
+            else
+            {
+                //일반 공격
+                _player.Anim.SetTrigger("anim_Player_Trigger_MeleeAttack");
+            }
         }
     }
 
     public void Update()
     {
+        _timer += Time.deltaTime;
+        //_player.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
+
         Dash();
     }
 
@@ -93,6 +95,7 @@ public class KatanaStrategy : IWeaponStrategy
         }
         _dashStartPos = _player.transform.position;
         _dashTargetPos = target.transform.position;
+        _target = target;
         _dashTimer = 0f;
         _isDashing = true;
     }
@@ -106,19 +109,27 @@ public class KatanaStrategy : IWeaponStrategy
 
             if (t >= 1f)
             {
-                _player.GetComponent<CharacterController>().Move(_dashTargetPos - _player.transform.position);
+                _player.Rigid.MovePosition(_dashTargetPos);
                 _isDashing = false;
-                Debug.Log(GetDamage(EStatType.Damage));
+
+                Debug.Log(GetStat(EStatType.Damage));
+
+                if (_target != null && _target.TryGetComponent<IDamageable>(out var damageable))
+                {
+                    damageable.TakeDamage(GetStat(EStatType.Damage));
+                }
+
+                _target = null;
                 ExecuteAccesories();
             }
             else
             {
                 Vector3 nextPos = Vector3.Lerp(_dashStartPos, _dashTargetPos, t);
-                Vector3 moveDelta = nextPos - _player.transform.position;
-                _player.GetComponent<CharacterController>().Move(moveDelta);
+                _player.Rigid.MovePosition(nextPos);
             }
         }
     }
+
 
     public void AddAccessory(EAccessoryType type, GameObject obj)
     {

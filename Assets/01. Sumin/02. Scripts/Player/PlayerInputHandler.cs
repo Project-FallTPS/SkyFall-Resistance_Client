@@ -8,14 +8,11 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerAttackHandler _playerAttackHandler;
     private PlayerMovement _playerMovement;
 
-    private Transform camTransform;
-
     private float _h;
     private float _v;
 
     private void Awake()
     {
-        camTransform = Camera.main.transform;
         _playerAttackHandler = GetComponent<PlayerAttackHandler>();
         _playerMovement = GetComponent<PlayerMovement>();
     }
@@ -23,6 +20,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         GetMoveInput();
+        _playerAttackHandler.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
         GetAttackInput();
     }
 
@@ -33,7 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void GetAttackInput()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(0))
         {
             _playerAttackHandler.PerformAttack();
         }
