@@ -170,7 +170,7 @@ MonoBehaviour:
         GUID:
           m_Value0: 17829669665098826072
           m_Value1: 8760108324556965978
-        Name: New Boss Controller
+        Name: BossController
         m_Value: {fileID: 2089149400775240186}
 --- !u!114 &2089149400775240186
 MonoBehaviour:
@@ -184,3 +184,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1fb783479238428c5a248b36fd51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bossType: 0
+  _bossDataSO: {fileID: 11400000, guid: 727a57f56d592264f944df9675b200ca, type: 2}

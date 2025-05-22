@@ -23,4 +23,11 @@ public class BossData
     [Header("Attack")]
     public float AttackDamage;
     public float AttackCooltime;
+    private float _lastAttackTime;
+    public float LastAttackTime
+    {
+        get => _lastAttackTime;
+        set => _lastAttackTime = value;
+    }
+
 }
