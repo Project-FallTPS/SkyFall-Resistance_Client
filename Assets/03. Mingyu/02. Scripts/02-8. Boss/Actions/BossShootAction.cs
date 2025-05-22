@@ -41,6 +41,7 @@ public partial class BossShootAction : Action, IBossAttack
     {
         Debug.Log("총알 발사(페이즈1)");
         _bossData.LastAttackTime = Time.time;
+        Attack();
         return Status.Success;
     }
 
@@ -82,11 +83,18 @@ public partial class BossShootAction : Action, IBossAttack
 
     private void FireProjectile()
     {
-        // 직선 발사체 (예: 기본 발사체)
-        Vector3 start = _bossTransform.position;
-        Vector3 end = _playerTransform.position;
+        Vector3 bossPosition = _bossTransform.position;
+        Vector3 playerPosition = _playerTransform.position;
+        Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
+        // 디버그 라인
+        Debug.DrawLine(bossPosition, playerPosition, Color.red, 2f);
+        
+        DamageablePoolManager.Instance.GetObject(
+            EDamageableType.BossBullet,
+            _bossController.ShootPositionTransform.position,
+            Quaternion.LookRotation(directionToPlayer)
+        );
 
-        Debug.DrawLine(start, end, Color.red, 2f);
         Debug.Log("직선 발사체 발사");
     }
 

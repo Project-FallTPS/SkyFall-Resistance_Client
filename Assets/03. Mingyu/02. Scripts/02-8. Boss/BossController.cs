@@ -2,6 +2,7 @@ using System;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class BossController : MonoBehaviour, IDamageable
 {
@@ -24,7 +25,13 @@ public class BossController : MonoBehaviour, IDamageable
     [Header("External References")] 
     private Transform _playerTransform;
     public Transform PlayerTransform => _playerTransform;
-    
+
+    [FormerlySerializedAs("_attackPositionTransform")] [SerializeField] 
+    private Transform _shootPositionTransform;
+
+    public Transform ShootPositionTransform { get => _shootPositionTransform; }
+
+
     private void Awake()
     {
         _bossData = _bossDataSO.GetBossData(_bossType);
