@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -19,7 +20,6 @@ public class BossData
 
     public float MoveSpeed;
 
-
     [Header("Attack")]
     public float AttackDamage;
     public float AttackCooltime;
@@ -29,6 +29,23 @@ public class BossData
         get => _lastAttackTime;
         set => _lastAttackTime = value;
     }
+
+    [Header("Phase")] 
+    public float MaxPhase;
+
+    private float _currentPhase;
+    public float CurrentPhase
+    {
+        get => _currentPhase;
+        set => _currentPhase = Mathf.Clamp(value, 0f, MaxPhase);
+    }
+
+    public List<float> PhaseChangeHealth;
+
+    [Header("Attack Logic")] 
+    public float MaxRushDistance;
+    public float MinRushDistance;
+    public float ProjectileSpeed;
     
     public BossData(BossData original)
     {

@@ -18,3 +18,7 @@ MonoBehaviour:
     MoveSpeed: 5
     AttackDamage: 10
     AttackCooltime: 5
+    MaxPhase: 3
+    PhaseChangeHealth:
+    - 70
+    - 30
