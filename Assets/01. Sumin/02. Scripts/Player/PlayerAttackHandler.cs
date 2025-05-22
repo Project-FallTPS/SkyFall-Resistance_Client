@@ -27,7 +27,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         _strategies.Add(EWeaponType.Range, new RangeStrategy(this));
-        ChangeWeapon(EWeaponType.Katana);
+        ChangeWeapon(EWeaponType.Range);
     }
 
     private void Update()
