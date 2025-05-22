@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 7429167967064901563}
   - component: {fileID: 5346049568662780391}
   - component: {fileID: 4166473920914743786}
+  - component: {fileID: 6373082510433935229}
   - component: {fileID: 841746531274401233}
+  - component: {fileID: 2089149400775240186}
   m_Layer: 0
   m_Name: P_Boss
   m_TagString: Untagged
@@ -111,6 +113,28 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!195 &6373082510433935229
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4865756857718749494}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5000001
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &841746531274401233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +150,7 @@ MonoBehaviour:
   m_Graph: {fileID: -5232961872529049083, guid: 8e246126590d8f443ad53963fc5edbd0, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 1343159488559448130
+  - rid: 1343159505553195120
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -139,3 +164,23 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 4865756857718749494}
+    - rid: 1343159505553195120
+      type: {class: 'BlackboardVariable`1[[BossController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17829669665098826072
+          m_Value1: 8760108324556965978
+        Name: New Boss Controller
+        m_Value: {fileID: 2089149400775240186}
+--- !u!114 &2089149400775240186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4865756857718749494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d1fb783479238428c5a248b36fd51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
