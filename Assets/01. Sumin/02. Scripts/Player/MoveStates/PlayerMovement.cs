@@ -90,11 +90,11 @@ public class PlayerMovement : MonoBehaviour
     //    }
     //}
 
-    public void HandleMovement(float h, float v)
+    public void HandleMovement(float h, float v, bool isKeyDown)
     {
         _animator.SetFloat("anim_Player_MovingX", h);
         _animator.SetFloat("anim_Player_MovingZ", v);
-        _animator.SetBool("anim_Player_IsMoving", Mathf.Sign(v) != 0 || Mathf.Sign(h) != 0);
+        _animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
 
         Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();

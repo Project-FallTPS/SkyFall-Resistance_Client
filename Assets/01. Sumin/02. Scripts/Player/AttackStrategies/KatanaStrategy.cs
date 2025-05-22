@@ -67,7 +67,7 @@ public class KatanaStrategy : IWeaponStrategy
     {
         if (_timer >= GetStat(EStatType.CoolTime))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && target != null)
             {
                 StartDash(target);
             }
