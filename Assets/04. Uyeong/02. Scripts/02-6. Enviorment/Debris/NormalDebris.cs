@@ -6,6 +6,6 @@ public class NormalDebris : Debris
 
     protected override void HandleDestruction()
     {
-        Release();
+        StartCoroutine(ReleaseAfterEffect());
     }
 }
