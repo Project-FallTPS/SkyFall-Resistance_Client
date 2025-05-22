@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 5346049568662780391}
   - component: {fileID: 4166473920914743786}
   - component: {fileID: 6373082510433935229}
-  - component: {fileID: 841746531274401233}
+  - component: {fileID: 5978076060996926907}
   - component: {fileID: 2089149400775240186}
   m_Layer: 0
   m_Name: P_Boss
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 4865756857718749494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -135,7 +135,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &841746531274401233
+--- !u!114 &5978076060996926907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,31 +147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: -5232961872529049083, guid: 8e246126590d8f443ad53963fc5edbd0, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 1343159488559448130
-  - rid: 1343159505553195120
+  m_Graph: {fileID: 0}
+  m_BlackboardVariableOverridesList: []
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds:
-    - rid: 1343159488559448130
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 4865756857718749494}
-    - rid: 1343159505553195120
-      type: {class: 'BlackboardVariable`1[[BossController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 17829669665098826072
-          m_Value1: 8760108324556965978
-        Name: BossController
-        m_Value: {fileID: 2089149400775240186}
+    RefIds: []
 --- !u!114 &2089149400775240186
 MonoBehaviour:
   m_ObjectHideFlags: 0

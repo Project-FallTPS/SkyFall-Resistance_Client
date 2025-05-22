@@ -8,11 +8,12 @@ using Unity.Properties;
 [NodeDescription(name: "BossRush", story: "돌진 공격(페이즈2)", category: "Action", id: "e22fa8e1d643ec7c27a970890fa80d0b")]
 public partial class BossRushAction : Action
 {
-    public BlackboardVariable<GameObject> _bossGO;
+    [SerializeReference]
+    public BlackboardVariable<GameObject> _boss;
     private BossData _bossData;
     protected override Status OnStart()
     {
-        _bossData = _bossGO.Value.GetComponent<BossData>();
+        _bossData = _boss.Value.GetComponent<BossController>().BossData;
         return Status.Running;
     }
 
@@ -24,7 +25,6 @@ public partial class BossRushAction : Action
 
     protected override void OnEnd()
     {
-        Debug.Log("Shoot Action Ends");
 
     }
 }
