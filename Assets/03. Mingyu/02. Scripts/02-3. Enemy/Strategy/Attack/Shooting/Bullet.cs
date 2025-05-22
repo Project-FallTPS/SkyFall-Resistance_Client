@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
     }
 
     private IEnumerator LifeCycle()
