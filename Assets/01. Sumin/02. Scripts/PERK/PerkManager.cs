@@ -7,6 +7,8 @@ public class PerkManager : Singleton<PerkManager>
     [SerializeField]
     private PerkDataCollectionSO _perkDataCollection;
 
+    public Dictionary<EPerkType, PerkDataEntry> PerkDatas { get; private set; }
+    public Dictionary<EPerkType, bool> HavingPerks { get; private set; }
     public Dictionary<EPerkType, PerkDataEntry> EquippedPerks { get; private set; }
     public Dictionary<EStatType, float> EquippedPerkBonuses { get; private set; }
 
@@ -16,16 +18,30 @@ public class PerkManager : Singleton<PerkManager>
         EquippedPerks = new Dictionary<EPerkType, PerkDataEntry>();
         EquippedPerkBonuses = new Dictionary<EStatType, float>();
         InitPerkBonuses();
+        PerkDatas = _perkDataCollection.MakeDictionary();
     }
+
 
     public void EquipPerk(EPerkType type)
     {
         EquippedPerks.Add(type, _perkDataCollection.GetPerkData(type));
+
+        foreach (var perk in EquippedPerks)
+        {
+            Debug.Log(EquippedPerks.Count);
+            Debug.Log(perk.Key);
+        }
     }
 
     public void UnEquipPerk(EPerkType type)
     {
         EquippedPerks.Remove(type);
+
+        foreach (var perk in EquippedPerks)
+        {
+            Debug.Log(EquippedPerks.Count);
+            Debug.Log(perk.Key);
+        }
     }
 
     public void InitPerkBonuses()
