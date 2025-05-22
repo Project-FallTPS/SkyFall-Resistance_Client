@@ -8,7 +8,10 @@ using Unity.Properties;
 [NodeDescription(name: "BossLaser", story: "레이저 공격(페이즈3)", category: "Action", id: "e38d239bc756bf42f463044556b5c9fd")]
 public partial class BossLaserAction : Action
 {
-    public BlackboardVariable<Transform> _playerTransform;
+    public BlackboardVariable<GameObject> _bossGO;
+    private BossData _bossData;
+    
+    
     protected override Status OnStart()
     {
         return Status.Running;
@@ -21,6 +24,7 @@ public partial class BossLaserAction : Action
 
     protected override void OnEnd()
     {
+        Debug.Log("Shoot Action Ends");
     }
 }
 

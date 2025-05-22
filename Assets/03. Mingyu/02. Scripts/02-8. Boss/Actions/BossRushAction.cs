@@ -8,19 +8,24 @@ using Unity.Properties;
 [NodeDescription(name: "BossRush", story: "돌진 공격(페이즈2)", category: "Action", id: "e22fa8e1d643ec7c27a970890fa80d0b")]
 public partial class BossRushAction : Action
 {
-    public BlackboardVariable<Transform> _playerTransform;
+    public BlackboardVariable<GameObject> _bossGO;
+    private BossData _bossData;
     protected override Status OnStart()
     {
+        _bossData = _bossGO.Value.GetComponent<BossData>();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
+        _bossData.LastAttackTime = Time.time;
         return Status.Success;
     }
 
     protected override void OnEnd()
     {
+        Debug.Log("Shoot Action Ends");
+
     }
 }
 
