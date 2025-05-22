@@ -23,11 +23,21 @@ public class BossData
     [Header("Attack")]
     public float AttackDamage;
     public float AttackCooltime;
-    private float _lastAttackTime;
+    private float _lastAttackTime = 0f;
     public float LastAttackTime
     {
         get => _lastAttackTime;
         set => _lastAttackTime = value;
     }
-
+    
+    public BossData(BossData original)
+    {
+        BossType = original.BossType;
+        MaxHealth = original.MaxHealth;
+        CurrentHealth = original.CurrentHealth;
+        MoveSpeed = original.MoveSpeed;
+        AttackDamage = original.AttackDamage;
+        AttackCooltime = original.AttackCooltime;
+        LastAttackTime = original.LastAttackTime;
+    }
 }

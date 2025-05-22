@@ -30,8 +30,9 @@ public class BossDataSO : ScriptableObject
 
         if (_bossDataDict.TryGetValue(bossType, out var bossData))
         {
-            return bossData;
+            return new BossData(bossData); // 복사본 반환
         }
+        
         Debug.LogWarning($"Boss ID '{bossType}' not found!");
         return null;
     }
