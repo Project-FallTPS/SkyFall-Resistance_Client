@@ -17,7 +17,11 @@ public class KatanaStrategy : IWeaponStrategy
     private Vector3 _dashTargetPos;
     private GameObject _target;
 
-    private float _timer = 0f;
+    private float _attackTimer = 100f;
+    private float _targetDashTimer = 100f;
+    private float _comboWindow = 1f;
+    private float _lastAttackTime = 0f;
+    private bool _isInComboWindow => Time.time - _lastAttackTime <= _comboWindow;
 
     public KatanaStrategy(PlayerAttackHandler player)
     {
@@ -62,28 +66,35 @@ public class KatanaStrategy : IWeaponStrategy
         return baseDamage * perkBonus * accBonuses;
     }
 
-    //지울거
     public void Attack(GameObject target)
     {
-        if (_timer >= GetStat(EStatType.CoolTime))
+        //if (_attackTimer >= GetStat(EStatType.CoolTime))
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift) && target != null)
+        //    {
+        //        StartDash(target);
+        //    }
+        //    else
+        //    {
+        //        //일반 공격
+        //    }
+        //}
+        if (Input.GetKey(KeyCode.LeftShift) && target != null && _targetDashTimer >= GetStat(EStatType.CoolTime))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                StartDash(target);
-            }
-            else
-            {
-                //일반 공격
-                _player.Anim.SetTrigger("anim_Player_Trigger_MeleeAttack");
-            }
+            StartDash(target);
+        }
+        else if(_attackTimer >= GetStat(EStatType.CoolTime) || _isInComboWindow)
+        {
+            _lastAttackTime = Time.time;
+            _player.Anim.SetTrigger("anim_Player_Trigger_MeleeAttack");
+            _attackTimer = 0f;
         }
     }
 
     public void Update()
     {
-        _timer += Time.deltaTime;
-        //_player.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
-
+        _attackTimer += Time.deltaTime;
+        _targetDashTimer += Time.deltaTime;
         Dash();
     }
 
@@ -98,6 +109,7 @@ public class KatanaStrategy : IWeaponStrategy
         _target = target;
         _dashTimer = 0f;
         _isDashing = true;
+        PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.Prick1, _player.transform.position, _player.transform.rotation);
     }
 
     private void Dash()
@@ -118,7 +130,7 @@ public class KatanaStrategy : IWeaponStrategy
                 {
                     damageable.TakeDamage(GetStat(EStatType.Damage));
                 }
-
+                _targetDashTimer = 0f;
                 _target = null;
                 ExecuteAccesories();
             }
@@ -142,7 +154,6 @@ public class KatanaStrategy : IWeaponStrategy
             RemoveAccessory(type);
         }
         _equippedAccessories[type] = AccessoryManager.Instance.GetData(type);
-        Debug.Log(type);
         obj.transform.SetParent(_accessorySockets[type]);
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.identity;

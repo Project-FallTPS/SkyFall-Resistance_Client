@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bd6af5d577c618947b73aa60db554e51
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 157764
+  packageName: Support package for Hovl Studio assets
+  packageVersion: 3.17
+  assetPath: Assets/03. Mingyu/20. External Assets/Hovl Studio/HSFiles/Shaders/Add_CenterGlow.shader
+  uploadId: 730589
