@@ -20,6 +20,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     private EWeaponType _currentWeapon;
     public IWeaponStrategy CurrentStrategy { get; private set; }
 
+
     private void Awake()
     {
         Rigid = GetComponentInChildren<Rigidbody>();
