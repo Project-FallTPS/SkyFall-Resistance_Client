@@ -17,14 +17,7 @@ public class KatanaStrategy : IWeaponStrategy
     private Vector3 _dashTargetPos;
     private GameObject _target;
 
-    private float _attackTimer = 100f;
-    private float _dashCooldownTimer = 100f;
-    private int _currentCombo = 0;
-    private float _comboWindow = 1.0f;
-    private float _lastAttackTime = 0f;
-
-    public bool IsDashing => _isDashing;
-    public bool IsInComboWindow => Time.time - _lastAttackTime <= _comboWindow;
+    private float _timer = 0f;
 
     public KatanaStrategy(PlayerAttackHandler player)
     {
@@ -69,12 +62,10 @@ public class KatanaStrategy : IWeaponStrategy
         return baseDamage * perkBonus * accBonuses;
     }
 
+    //지울거
     public void Attack(GameObject target)
     {
-        float timeSinceLastAttack = Time.time - _lastAttackTime;
-        
-        // 콤보 윈도우 내에 있거나 공격 쿨타임이 지났을 때만 공격 가능
-        if (IsInComboWindow || _attackTimer >= GetStat(EStatType.CoolTime))
+        if (_timer >= GetStat(EStatType.CoolTime))
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -82,34 +73,23 @@ public class KatanaStrategy : IWeaponStrategy
             }
             else
             {
-                // 콤보 공격
-                if (IsInComboWindow)
-                {
-                    _currentCombo = (_currentCombo + 1) % 3; // 3단 콤보
-                }
-                else
-                {
-                    _currentCombo = 0;
-                }
-                
-                _player.Anim.SetInteger("anim_Player_Combo", _currentCombo);
+                //일반 공격
                 _player.Anim.SetTrigger("anim_Player_Trigger_MeleeAttack");
-                _lastAttackTime = Time.time;
-                _attackTimer = 0f;
             }
         }
     }
 
     public void Update()
     {
-        _attackTimer += Time.deltaTime;
-        _dashCooldownTimer += Time.deltaTime;
+        _timer += Time.deltaTime;
+        //_player.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
+
         Dash();
     }
 
     public void StartDash(GameObject target)
     {
-        if (_isDashing || target == null || !_player.PlayerStat.TryUseStamina(EStatType.TargetDashStaminaUseRate) || _dashCooldownTimer <= GetStat(EStatType.CoolTime))
+        if (_isDashing || target == null || !_player.PlayerStat.TryUseStamina(EStatType.TargetDashStaminaUseRate))
         {
             return;
         }
@@ -118,7 +98,6 @@ public class KatanaStrategy : IWeaponStrategy
         _target = target;
         _dashTimer = 0f;
         _isDashing = true;
-        _dashCooldownTimer = 0f;
     }
 
     private void Dash()

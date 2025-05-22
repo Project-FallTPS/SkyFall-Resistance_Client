@@ -86,16 +86,15 @@ public class PlayerMovement : MonoBehaviour
     //            SetSprint(false);
     //        }
     //        _characterController.Move(MoveDirection * CurrentSpeed * Time.deltaTime);
-    //        // TODO : ï¿½ï¿½ï¿½ï¿½ Yï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½Ì¸ï¿½ ï¿½Ù¸ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ 
+    //        // TODO : ¿ùµå Y°¢ Æ¯Á¤ ÀÌ»óÀÌ¸é ´Ù¸¥ ¾Ö´Ï¸ÞÀÌ¼Ç 
     //    }
     //}
 
-    public void HandleMovement(float h, float v, bool isKeyDown)
+    public void HandleMovement(float h, float v)
     {
         _animator.SetFloat("anim_Player_MovingX", h);
         _animator.SetFloat("anim_Player_MovingZ", v);
-        _animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
-        //Debug.Log($"v : {v}, {Mathf.Sign(v)}, h : {h}, {Mathf.Sign(h)}");
+        _animator.SetBool("anim_Player_IsMoving", Mathf.Sign(v) != 0 || Mathf.Sign(h) != 0);
 
         Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();

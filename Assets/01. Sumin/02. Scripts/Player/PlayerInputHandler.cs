@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    // 스탯 정보
+    // 입력 받기
     [Header("# Component")]
     private PlayerAttackHandler _playerAttackHandler;
     private PlayerMovement _playerMovement;
 
     private float _h;
     private float _v;
-    private bool _isKeyDown = false;
 
     private void Awake()
     {
@@ -25,14 +26,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _playerMovement.HandleMovement(_h, _v, _isKeyDown);
+        _playerMovement.HandleMovement(_h, _v);
     }
 
     private void GetAttackInput()
     {
-        _isKeyDown = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
-
-        if (Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0))
         {
             _playerAttackHandler.PerformAttack();
         }
@@ -50,15 +49,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void GetMoveInput()
     {
-        var katanaStrategy = _playerAttackHandler.CurrentStrategy as KatanaStrategy;
-        if (katanaStrategy != null && katanaStrategy.IsDashing)
-        {
-            _h = 0f;
-            _v = 0f;
-            return;
-        }
-
         _h = Input.GetAxis("Horizontal"); // A/D
         _v = Input.GetAxis("Vertical");   // W/S
+    }
+
+    public void TakeDamage(float damage)
+    {
     }
 }
