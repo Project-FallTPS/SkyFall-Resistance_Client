@@ -109,6 +109,7 @@ public class KatanaStrategy : IWeaponStrategy
         _target = target;
         _dashTimer = 0f;
         _isDashing = true;
+        PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.Prick1, _player.transform.position, _player.transform.rotation);
     }
 
     private void Dash()

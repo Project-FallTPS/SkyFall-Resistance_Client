@@ -5,7 +5,7 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField]
-    private bool _isDontDestroy = true;
+    private bool _isDontDestroy = false;
 
     private static bool _isQuitting = false;
     private static T _instance;
