@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class InGame1_UI_PlayerStamina : MonoBehaviour
 {
+    //test
     [SerializeField] private Slider _staminaSlider;
 
     private void Awake()
