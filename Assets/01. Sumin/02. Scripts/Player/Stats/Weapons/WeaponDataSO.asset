@@ -21,9 +21,9 @@ MonoBehaviour:
       Value: 10
   - WeaponType: 1
     Stats:
-    - Type: 0
-      Value: 30
+    - Type: 4
+      Value: 1
     - Type: 3
       Value: 10
-    - Type: 4
-      Value: 0.2
+    - Type: 0
+      Value: 10
