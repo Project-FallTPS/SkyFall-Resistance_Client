@@ -31,7 +31,11 @@ public class DebrisSpawner : Spawner<SpawnedObjectInfo<EDebrisType>, EDebrisType
             return;
         }
 
-        debris.Launch(Random.insideUnitSphere, Random.Range(_minExplosionForce, _maxExplosionForce));
+        debris.Initialize();
+
+        Vector3 launchDirection = Random.insideUnitSphere;
+        launchDirection.y = Mathf.Abs(launchDirection.y);
+        debris.Launch(launchDirection, Random.Range(_minExplosionForce, _maxExplosionForce));
         debris.PlayerAreaRadius = _playerAreaRadius;
     }
 

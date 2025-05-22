@@ -841,7 +841,7 @@
     "m_Title": "Vertex Displacement",
     "m_Position": {
         "x": -1952.0,
-        "y": -413.0
+        "y": -412.5
     }
 }
 
@@ -1078,8 +1078,8 @@
     "m_ObjectId": "0a657eada1a646ab88ae557ffe791dc6",
     "m_Title": "Alpha",
     "m_Position": {
-        "x": -1952.0,
-        "y": 1012.0
+        "x": -1952.5,
+        "y": 1012.5
     }
 }
 
@@ -1815,7 +1815,7 @@
     "m_Title": "Base Color",
     "m_Position": {
         "x": -1986.0,
-        "y": 313.0
+        "y": 313.5
     }
 }
 

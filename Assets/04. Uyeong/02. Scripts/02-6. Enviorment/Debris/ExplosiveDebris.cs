@@ -25,6 +25,6 @@ public class ExplosiveDebris : Debris
             damagedObject.TakeDamage(_damage);
         }
 
-        Release();
+        StartCoroutine(ReleaseAfterEffect());
     }
 }
