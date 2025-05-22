@@ -1,6 +1,7 @@
 using System;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossController : MonoBehaviour, IDamageable
 {
@@ -12,6 +13,13 @@ public class BossController : MonoBehaviour, IDamageable
     
     private BossData _bossData;
     public BossData BossData { get => _bossData; }
+    
+    [Header("Component")]
+    private NavMeshAgent _navMeshAgent;
+    public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
+    
+    private Animator _animator;
+    public Animator Animator { get => _animator; }
 
     [Header("External References")] 
     private Transform _playerTransform;
@@ -20,11 +28,11 @@ public class BossController : MonoBehaviour, IDamageable
     private void Awake()
     {
         _bossData = _bossDataSO.GetBossData(_bossType);
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.speed = _bossData.MoveSpeed;
+        _animator = GetComponent<Animator>();
         _playerTransform = GameObject.FindGameObjectWithTag(nameof(ETags.Player)).transform;
-        Debug.Log($"마지막 공격 시간 in BossController : {_bossData.LastAttackTime}");
-        Debug.Log($"공격 쿨타임 in OnStart : {_bossData.AttackCooltime}");
     }
-
 
     public void TakeDamage(float damage)
     {
