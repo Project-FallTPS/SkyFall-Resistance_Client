@@ -3,7 +3,6 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
-using UnityEngine.Serialization;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "CheckAttackCoolDown", story: "공격 쿨다운 체크", category: "Action", id: "d9093c8758ecda16cd0ab6ff852a29d4")]
@@ -23,7 +22,6 @@ public partial class CheckAttackCoolDownAction : Action
     {
         if (_bossData.LastAttackTime == 0f || _bossData.LastAttackTime + _bossData.AttackCooltime <= Time.time)
         {
-            Debug.Log("현재 공격 가능 상태");
             return Status.Success;
         }
         else

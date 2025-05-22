@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -10,80 +11,111 @@ public partial class BossShootAction : Action, IBossAttack
 {
     [SerializeReference]
     public BlackboardVariable<GameObject> _boss;
+
     private BossController _bossController;
     private BossData _bossData;
-    
-    
-    private LayerMask _obstacleMask;
     private Transform _bossTransform;
     private Transform _playerTransform;
+    private LayerMask _obstacleMask;
 
-    private float _distanceToPlayer;
     protected override Status OnStart()
     {
-        if (ReferenceEquals(_bossController, null) || ReferenceEquals(_bossData, null))
+        if (_bossController == null || _bossData == null)
         {
             _bossController = _boss.Value.GetComponent<BossController>();
             _bossData = _bossController.BossData;
+            _bossTransform = _bossController.transform;
+            _playerTransform = _bossController.PlayerTransform;
+            _obstacleMask = LayerMask.GetMask(nameof(ELayers.Obstacle));
         }
-        
+
         if (CanAttack())
         {
             return Status.Running;
         }
+
         return Status.Failure;
     }
 
     protected override Status OnUpdate()
     {
+        Debug.Log("총알 발사(페이즈1)");
         _bossData.LastAttackTime = Time.time;
         return Status.Success;
     }
 
-    protected override void OnEnd()
-    {
-    }
-    
-    private void TryShootAtPlayer()
-    {
-        Vector3 bossPosition = _bossController.transform.position;
-        Vector3 playerPosition = _playerTransform.position;
-        _distanceToPlayer = Vector3.Distance(bossPosition, playerPosition);
-        Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
-
-        float distance = Vector3.Distance(bossPosition, playerPosition);
-        bool isObstructed = Physics.Raycast(bossPosition, directionToPlayer, distance, _obstacleMask);
-
-        if (!isObstructed)
-        {
-            FireProjectile(bossPosition, directionToPlayer);
-        }
-        else
-        {
-            Vector3 controlPoint = (bossPosition + playerPosition) * 0.5f + Vector3.up * 5f;
-            FireBezierProjectile(bossPosition, controlPoint, playerPosition);
-        }
-    }
-
-    private void FireProjectile(Vector3 position, Vector3 direction)
-    {
-
-    }
-
-    private void FireBezierProjectile(Vector3 start, Vector3 control, Vector3 end)
-    {
-
-    }
-
+    protected override void OnEnd() { }
 
     public bool CanAttack()
     {
         return true;
     }
 
-    public bool Attack()
+    public void Attack()
     {
-        
+        if (IsPlayerObscured(out Vector3 hitPoint))
+        {
+            FireBezierProjectile(hitPoint);
+        }
+        else
+        {
+            FireProjectile();
+        }
+    }
+
+    private bool IsPlayerObscured(out Vector3 hitPoint)
+    {
+        Vector3 bossPosition = _bossTransform.position;
+        Vector3 playerPosition = _playerTransform.position;
+        Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
+        float distanceToPlayer = Vector3.Distance(bossPosition, playerPosition);
+
+        if (Physics.Raycast(bossPosition, directionToPlayer, out RaycastHit hit, distanceToPlayer, _obstacleMask))
+        {
+            hitPoint = hit.point;
+            return true;
+        }
+
+        hitPoint = Vector3.zero;
+        return false;
+    }
+
+    private void FireProjectile()
+    {
+        // 직선 발사체 (예: 기본 발사체)
+        Vector3 start = _bossTransform.position;
+        Vector3 end = _playerTransform.position;
+
+        Debug.DrawLine(start, end, Color.red, 2f);
+        Debug.Log("직선 발사체 발사");
+    }
+
+    private void FireBezierProjectile(Vector3 obstacleHitPoint)
+    {
+        Vector3 start = _bossTransform.position;
+        Vector3 end = _playerTransform.position;
+
+        // 장애물 피해서 위쪽으로 휘는 곡선 만들기
+        Vector3 control = obstacleHitPoint + Vector3.up * 2f;
+
+        // 디버그용 베지어 경로 시각화
+        const int segmentCount = 20;
+        Vector3 prevPoint = start;
+
+        for (int i = 1; i <= segmentCount; i++)
+        {
+            float t = i / (float)segmentCount;
+            Vector3 point = CalculateQuadraticBezierPoint(t, start, control, end);
+            Debug.DrawLine(prevPoint, point, Color.yellow, 2f);
+            prevPoint = point;
+        }
+
+        Debug.Log("베지어 곡선 발사체 발사 (장애물 있음)");
+    }
+
+    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+    {
+        float u = 1 - t;
+        return u * u * p0 + 2 * u * t * p1 + t * t * p2;
     }
 }
-

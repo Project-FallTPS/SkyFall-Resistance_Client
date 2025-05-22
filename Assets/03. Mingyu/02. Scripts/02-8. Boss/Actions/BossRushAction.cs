@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -35,6 +36,7 @@ public partial class BossRushAction : Action, IBossAttack
 
     protected override Status OnUpdate()
     {
+        Debug.Log("돌진 공격(페이즈2)");
         _bossData.LastAttackTime = Time.time;
         return Status.Success;
     }
@@ -50,7 +52,7 @@ public partial class BossRushAction : Action, IBossAttack
         return !(_bossData.CurrentPhase < 2) && !(distanceToPlayer < _bossData.MinRushDistance);
     }
 
-    public bool Attack()
+    public void Attack()
     {
         throw new NotImplementedException();
     }

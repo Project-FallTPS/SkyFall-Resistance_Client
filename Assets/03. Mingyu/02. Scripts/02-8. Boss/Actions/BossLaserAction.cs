@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -35,6 +36,7 @@ public partial class BossLaserAction : Action, IBossAttack
 
     protected override Status OnUpdate()
     {
+        Debug.Log("레이저 공격(페이즈3)");
         _bossData.LastAttackTime = Time.time;
         return Status.Success;
     }
@@ -49,7 +51,7 @@ public partial class BossLaserAction : Action, IBossAttack
         return !(_bossData.CurrentPhase < 3) && !(_bossData.MaxRushDistance < distanceToPlayer);
     }
 
-    public bool Attack()
+    public void Attack()
     {
         throw new NotImplementedException();
     }
