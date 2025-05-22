@@ -1,8 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatHolder : MonoBehaviour, IDamageable
 {
+    [Header("# UI Event")]
+    public static Action<float, float> OnStaminaChange;
+
     [Header("# Project")]
     [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // ¿øº»
     public Dictionary<EStatType, float> StatDict { get; private set; } // Ä³½Ì
@@ -70,6 +74,11 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
     private void RegenStamina()
     {
+        if (Mathf.Approximately(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]))
+        {
+            return;
+        }
         StatDict[EStatType.CurrentStamina] = Mathf.Min(StatDict[EStatType.MaxStamina], StatDict[EStatType.CurrentStamina] + StatDict[EStatType.StaminaRegenRate] * Time.deltaTime);
+        OnStaminaChange?.Invoke(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]);
     }
 }

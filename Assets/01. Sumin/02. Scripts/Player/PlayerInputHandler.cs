@@ -11,6 +11,8 @@ public class PlayerInputHandler : MonoBehaviour
     private float _h;
     private float _v;
 
+    private bool _isKeyDown = false;
+
     private void Awake()
     {
         _playerAttackHandler = GetComponent<PlayerAttackHandler>();
@@ -26,11 +28,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _playerMovement.HandleMovement(_h, _v);
+        _playerMovement.HandleMovement(_h, _v, _isKeyDown);
     }
 
     private void GetAttackInput()
     {
+        _isKeyDown = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         if(Input.GetMouseButton(0))
         {
             _playerAttackHandler.PerformAttack();
@@ -51,9 +54,5 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _h = Input.GetAxis("Horizontal"); // A/D
         _v = Input.GetAxis("Vertical");   // W/S
-    }
-
-    public void TakeDamage(float damage)
-    {
     }
 }

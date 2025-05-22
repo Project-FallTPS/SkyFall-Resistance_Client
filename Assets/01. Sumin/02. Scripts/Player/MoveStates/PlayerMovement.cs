@@ -64,37 +64,11 @@ public class PlayerMovement : MonoBehaviour
         MoveDirection = (camForward * v + camRight * h).normalized;
     }
 
-    //public void HandleMovement(float h, float v)
-    //{
-    //    _animator.SetBool("anim_Player_IsMoving", (h != 0 || v != 0));
-    //    _animator.SetFloat("anim_Player_MovingZ", v);
-    //    _animator.SetFloat("anim_Player_MovingX", h);
-    //    //h = Mathf.Sign(h);
-    //    //v = Mathf.Sign(v);
-    //    Vector3 camForward = _mainCameraTransform.forward;
-    //    camForward.Normalize();
-
-    //    Vector3 camRight = _mainCameraTransform.right;
-    //    camRight.Normalize();
-
-    //    MoveDirection = (camForward * v + camRight * h).normalized;
-
-    //    if (MoveDirection.sqrMagnitude > 0.01f)
-    //    {
-    //        if(!_isSprint /*|| _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate)*/)
-    //        {
-    //            SetSprint(false);
-    //        }
-    //        _characterController.Move(MoveDirection * CurrentSpeed * Time.deltaTime);
-    //        // TODO : 월드 Y각 특정 이상이면 다른 애니메이션 
-    //    }
-    //}
-
-    public void HandleMovement(float h, float v)
+    public void HandleMovement(float h, float v, bool isKeyDown)
     {
         _animator.SetFloat("anim_Player_MovingX", h);
         _animator.SetFloat("anim_Player_MovingZ", v);
-        _animator.SetBool("anim_Player_IsMoving", Mathf.Sign(v) != 0 || Mathf.Sign(h) != 0);
+        _animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
 
         Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();
@@ -115,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
             _rigid.MovePosition(targetPosition);
         }
     }
-
 
     public void SetSprint(bool isSprint)
     {
