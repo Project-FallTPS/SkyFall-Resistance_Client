@@ -55,8 +55,4 @@ public class PlayerInputHandler : MonoBehaviour
         _h = Input.GetAxis("Horizontal"); // A/D
         _v = Input.GetAxis("Vertical");   // W/S
     }
-
-    public void TakeDamage(float damage)
-    {
-    }
 }
