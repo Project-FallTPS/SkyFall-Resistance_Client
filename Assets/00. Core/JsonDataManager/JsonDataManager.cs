@@ -60,23 +60,26 @@ public static class JsonDataManager // 문의 : 수민
     public static T LoadFromFile<T>(string fileName, T defaultData = default)
     {
         string path = Application.persistentDataPath + $"/{fileName}.json";
-        string jsonData;
+
         if (!File.Exists(path))
         {
             Debug.LogWarning($"File not found at {path}. Creating new file with default data.");
             CreateFile(fileName, defaultData);
-            return defaultData;
-        }
-        using (FileStream fileStream = new FileStream(path, FileMode.Open))
-        {
-            byte[] bData = new byte[fileStream.Length];
-            fileStream.Read(bData, 0, bData.Length);
-            fileStream.Close();
-            jsonData = Encoding.UTF8.GetString(bData);
         }
 
-        return FromJson<T>(jsonData);
+        // 이제 파일이 있으므로 다시 불러옴
+        try
+        {
+            string jsonData = File.ReadAllText(path, Encoding.UTF8);
+            return FromJson<T>(jsonData);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"LoadFromFile Error: {ex.Message}");
+            return defaultData;
+        }
     }
+
 
     public static string ToJson<T>(T data)
     {
@@ -126,5 +129,11 @@ public static class JsonDataManager // 문의 : 수민
             Debug.LogError($"FromJson Error: {ex.Message}");
             return default;
         }
+    }
+
+    public static bool FileExists(string fileName)
+    {
+        string path = Application.persistentDataPath + $"/{fileName}.json";
+        return File.Exists(path);
     }
 }
