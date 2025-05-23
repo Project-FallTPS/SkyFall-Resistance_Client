@@ -93,7 +93,7 @@ MonoBehaviour:
   _bonusText: {fileID: 7604581406549193189}
   _background: {fileID: 8409294743079875273}
   _mainCanvas: {fileID: 0}
-  _perkType: 0
+  _perkType: 4
   _dragPreviewPrefab: {fileID: -1576437130297674793, guid: 80d58c0fc48df304e8f5eaa01ce981bd, type: 3}
   IsEquipInventory: 0
 --- !u!1 &3439916193135263554

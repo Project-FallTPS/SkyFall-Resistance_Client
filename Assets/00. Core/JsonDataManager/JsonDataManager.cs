@@ -7,13 +7,15 @@ public static class JsonDataManager // 문의 : 수민
 {
     public static void CreateFile<T>(string fileName, T data)
     {
-        string path = Application.dataPath + $"/Resources/Json/{fileName}.json";
+        string path = Application.persistentDataPath + $"/{fileName}.json";
         string json = ToJson(data);
 
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-        byte[] bData = Encoding.UTF8.GetBytes(json);
-        fileStream.Write(bData, 0, bData.Length);
-        fileStream.Close();
+        using (FileStream fileStream = new FileStream(path, FileMode.Create))
+        {
+            byte[] bData = Encoding.UTF8.GetBytes(json);
+            fileStream.Write(bData, 0, bData.Length);
+            fileStream.Close();
+        }
     }
 
     // Json -> <T>
@@ -32,14 +34,22 @@ public static class JsonDataManager // 문의 : 수민
     /// </param>
     public static void SaveToFile<T>(string fileName, T data)
     {
-        string path = Application.dataPath + $"/Resources/Json/{fileName}.json";
+        string path = Application.persistentDataPath + $"/{fileName}.json";
         string json = ToJson(data);
 
-        FileStream fileStream = new FileStream(path, FileMode.Open);
-        byte[] bData = Encoding.UTF8.GetBytes(json);
-        fileStream.Write(bData, 0, bData.Length);
-        fileStream.Close();
+        if (string.IsNullOrEmpty(json))
+        {
+            Debug.LogError("SaveToFile failed: Json is null or empty.");
+            return;
+        }
+
+        using (FileStream fileStream = new FileStream(path, FileMode.Create))
+        {
+            byte[] bData = Encoding.UTF8.GetBytes(json);
+            fileStream.Write(bData, 0, bData.Length);
+        }
     }
+
 
     public static T LoadFromPrefs<T>(string key) //파일로 오버로드 가능
     {
@@ -47,17 +57,29 @@ public static class JsonDataManager // 문의 : 수민
         return FromJson<T>(json);
     }
 
-    public static T LoadFromFile<T>(string fileName)
+    public static T LoadFromFile<T>(string fileName, T defaultData = default)
     {
-        string path = Application.dataPath + $"/Resources/Json/{fileName}.json";
-        FileStream fileStream = new FileStream(path, FileMode.Open);
-        byte[] bData = new byte[fileStream.Length];
-        fileStream.Read(bData, 0, bData.Length);
-        fileStream.Close();
+        string path = Application.persistentDataPath + $"/{fileName}.json";
 
-        string jsonData = Encoding.UTF8.GetString(bData);
-        return FromJson<T>(jsonData);
+        if (!File.Exists(path))
+        {
+            Debug.LogWarning($"File not found at {path}. Creating new file with default data.");
+            CreateFile(fileName, defaultData);
+        }
+
+        // 이제 파일이 있으므로 다시 불러옴
+        try
+        {
+            string jsonData = File.ReadAllText(path, Encoding.UTF8);
+            return FromJson<T>(jsonData);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"LoadFromFile Error: {ex.Message}");
+            return defaultData;
+        }
     }
+
 
     public static string ToJson<T>(T data)
     {
@@ -107,5 +129,11 @@ public static class JsonDataManager // 문의 : 수민
             Debug.LogError($"FromJson Error: {ex.Message}");
             return default;
         }
+    }
+
+    public static bool FileExists(string fileName)
+    {
+        string path = Application.persistentDataPath + $"/{fileName}.json";
+        return File.Exists(path);
     }
 }

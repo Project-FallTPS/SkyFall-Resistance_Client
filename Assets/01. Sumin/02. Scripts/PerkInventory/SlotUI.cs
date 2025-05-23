@@ -3,42 +3,28 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+// Canvas -> Overlay로 하기
 public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    public static SlotUI DraggingSlot; // 드래그 중인 슬롯 (정적)
+
+    [Header("# Hierarchy")]
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _bonusText;
     [SerializeField] private Image _background;
     [SerializeField] private Canvas _mainCanvas;
-    [SerializeField] private EPerkType _perkType;
-    [SerializeField] private SlotUI _dragPreviewPrefab;
-    private SlotUI _dragPreview;
 
+    [Header("# Project")]
     public bool IsEquipInventory = false;
-    private bool _isEquipped;
-    private bool _isFilled = false;
-    private PerkDataEntry _data;
-
     private Transform _originalParent;
+    private Vector3 _originalPosition;
 
-    //테스트용 메소드
-    public void Init()
-    {
-        PerkDataEntry data = PerkManager.Instance.PerkDatas[_perkType];
-        _data = data;
-        _perkType = data.Type;
-        //_icon.sprite = data.Icon;
-        _bonusText.text = GetBonusText(data);
-        _isFilled = true;
-        RefreshUI();
-    }
+    private PerkDataEntry _data = null;
 
-    public void Init(PerkDataEntry data)
+    public void Init(PerkDataEntry data, Canvas canvas)
     {
+        _mainCanvas = canvas;
         _data = data;
-        _perkType = data.Type;
-        //_icon.sprite = data.Icon;
-        _bonusText.text = GetBonusText(data);
-        _isFilled = true;
         RefreshUI();
     }
 
@@ -54,96 +40,117 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.pointerPressRaycast.gameObject != _icon.gameObject || !_isFilled)
+        if (eventData.pointerPress == _icon.gameObject || _data == null)
             return;
 
-        // 드래그 프리뷰 생성
-        _dragPreview = Instantiate(_dragPreviewPrefab, _mainCanvas.transform);
-        _dragPreview.Init(_data); // 데이터 복사
-        //_dragPreview.GetComponent<CanvasGroup>().blocksRaycasts = false; // 드래그 중 Raycast 막기
+        DraggingSlot = this;
+
+        // 원래 위치 저장
+        _originalParent = _icon.transform.parent;
+        _originalPosition = _icon.transform.position;
+
+        // Canvas로 이동
+        _icon.transform.SetParent(_mainCanvas.transform);
+        _icon.raycastTarget = false; // 드래그 중에는 Raycast 막기
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_dragPreview != null)
+        if (DraggingSlot == this)
         {
-            _dragPreview.transform.position = eventData.position;
+            _icon.transform.position = eventData.position;
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_dragPreview != null)
-            Destroy(_dragPreview.gameObject);
+        if (DraggingSlot == this)
+        {
+            _icon.transform.SetParent(_originalParent);
+            _icon.transform.position = _originalPosition;
+            _icon.raycastTarget = true;
+
+            RefreshUI();
+            DraggingSlot = null;
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        var fromSlot = eventData.pointerDrag?.GetComponent<SlotUI>();
+        var fromSlot = DraggingSlot;
         if (fromSlot != null && fromSlot != this)
         {
-            // 그냥 데이터만 스왑
             SwapPerks(fromSlot);
         }
     }
 
     private void SwapPerks(SlotUI other)
     {
-        Debug.Log($"{gameObject.name} <-> {other.gameObject.name}");
+        if (_data == null && other._data == null) return;
 
-        // 둘 다 비어 있으면 아무것도 안 함
-        if (!_isFilled && !other._isFilled)
-            return;
+        bool thisWasEquipped = IsEquipInventory && _data != null;
+        bool otherWasEquipped = other.IsEquipInventory && other._data != null;
 
-        // this가 비어 있고 other는 filled → other의 데이터를 this로 이동
-        if (!_isFilled && other._isFilled)
-        {
-            _data = other._data;
-            _isFilled = true;
+        var oldThisData = _data;
+        var oldOtherData = other._data;
 
-            other.Clear();
-        }
-        // this는 filled, other는 비어 있음 → this의 데이터를 other로 이동
-        else if (_isFilled && !other._isFilled)
-        {
-            other._data = _data;
-            other._isFilled = true;
-
-            Clear();
-        }
-        // 둘 다 filled → 스왑
-        else
-        {
-            var tempData = _data;
-            var tempFilled = _isFilled;
-
-            _data = other._data;
-            _isFilled = other._isFilled;
-
-            other._data = tempData;
-            other._isFilled = tempFilled;
-        }
+        // 데이터 교환
+        (_data, other._data) = (other._data, _data);
 
         // UI 갱신
-        _bonusText.text = _isFilled ? GetBonusText(_data) : "Empty";
-        other._bonusText.text = other._isFilled ? GetBonusText(other._data) : "Empty";
-
         RefreshUI();
         other.RefreshUI();
+
+        // 장착 상태 갱신
+        UpdateEquipStatus(thisWasEquipped, oldThisData, _data, IsEquipInventory);
+        UpdateEquipStatus(otherWasEquipped, oldOtherData, other._data, other.IsEquipInventory);
+    }
+
+    private void UpdateEquipStatus(bool wasEquipped, PerkDataEntry oldData, PerkDataEntry newData, bool isEquipSlot)
+    {
+        if (!isEquipSlot) return;
+
+        bool nowEquipped = newData != null;
+
+        if (wasEquipped && !nowEquipped && oldData != null)
+        {
+            // 기존에 장착되어 있었지만, 이제 장착이 해제된 경우
+            PerkManager.Instance.UnEquipPerk(oldData.Type);
+        }
+        else if (!wasEquipped && nowEquipped && newData != null)
+        {
+            // 기존에 장착 안 되어 있었는데, 새로 장착된 경우
+            PerkManager.Instance.EquipPerk(newData.Type);
+        }
+        else if (wasEquipped && nowEquipped && oldData != null && newData != null && oldData.Type != newData.Type)
+        {
+            // 기존에 장착된 것과 다른 것으로 교체된 경우
+            PerkManager.Instance.UnEquipPerk(oldData.Type);
+            PerkManager.Instance.EquipPerk(newData.Type);
+        }
     }
 
     private void RefreshUI()
     {
-        //_isEquipped = _isFilled && PerkManager.Instance.EquippedPerks.ContainsKey(_perkType);
-        _background.color = _isFilled ? Color.green : Color.white;
+        if (_data != null)
+        {
+            _bonusText.text = GetBonusText(_data);
+            _icon.sprite = _data.Icon;
+            _icon.color = Color.white;
+            _background.color = Color.green;
+        }
+        else
+        {
+            _bonusText.text = "Empty";
+            _icon.sprite = null;
+            _icon.color = new Color(0, 0, 0, 0); // 투명하게 처리
+            _background.color = Color.white;
+        }
     }
 
     public void Clear()
     {
         _data = null;
-        _perkType = default;
-        _bonusText.text = "Empty";
-        _isFilled = false;
         RefreshUI();
     }
 }

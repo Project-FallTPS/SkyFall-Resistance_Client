@@ -3,72 +3,98 @@ using UnityEngine;
 
 public class PerkManager : Singleton<PerkManager>
 {
-    [Header("# Project")]
-    [SerializeField]
-    private PerkDataCollectionSO _perkDataCollection;
+    private const string PERK_SAVE_DATA = "PerkSaveData";
 
-    public Dictionary<EPerkType, PerkDataEntry> PerkDatas { get; private set; }
-    public Dictionary<EPerkType, bool> HavingPerks { get; private set; }
-    public Dictionary<EPerkType, PerkDataEntry> EquippedPerks { get; private set; }
-    public Dictionary<EStatType, float> EquippedPerkBonuses { get; private set; }
+    [Header("# Project")]
+    [SerializeField] private PerkDataCollectionSO _perkDataCollection; // 베이스 데이터
+
+    public Dictionary<EPerkType, PerkDataEntry> PerkDatas { get; private set; } //모든 퍽 데이터
+    public Dictionary<EPerkType, int> HavingPerks { get; private set; } //보유한 퍽
+    public Dictionary<EPerkType, List<PerkDataEntry>> EquippedPerks { get; private set; } // 장착한 퍽
+    public Dictionary<EStatType, float> EquippedPerkBonuses { get; private set; } //장착한 퍽 스탯 보너스 합산
 
     protected override void Awake()
     {
         base.Awake();
-        EquippedPerks = new Dictionary<EPerkType, PerkDataEntry>();
+        EquippedPerks = new Dictionary<EPerkType, List<PerkDataEntry>>();
         EquippedPerkBonuses = new Dictionary<EStatType, float>();
         InitPerkBonuses();
         PerkDatas = _perkDataCollection.MakeDictionary();
+        InitHavingPerks();
     }
 
+    private void InitHavingPerks()
+    {
+        PerkSaveData data = null;
+        HavingPerks = new Dictionary<EPerkType, int>();
+        if(JsonDataManager.FileExists(PERK_SAVE_DATA))
+        {
+            data = JsonDataManager.LoadFromFile<PerkSaveData>(PERK_SAVE_DATA);
+        }
+        else //없으면 새로 만들기 -> default로 만들면 null참조가 일어나기 때문에 인스턴스를 직접 만들어서 할당
+        {
+            data = new PerkSaveData();
+            foreach (EPerkType perkType in (EPerkType[])System.Enum.GetValues(typeof(EPerkType)))
+            {
+                data.OwnedPerks.Add(new PerkSaveEntry(perkType, 0));
+            }
+            JsonDataManager.CreateFile<PerkSaveData>(PERK_SAVE_DATA, data);
+        }
+        foreach (var entry in data.OwnedPerks)
+        {
+            HavingPerks.Add(entry.PerkType, entry.Count);
+        }
+    }
 
     public void EquipPerk(EPerkType type)
     {
-        EquippedPerks.Add(type, _perkDataCollection.GetPerkData(type));
-
-        foreach (var perk in EquippedPerks)
+        var perkData = _perkDataCollection.GetPerkData(type);
+        Debug.Log($"Equip {type}");
+        if (!EquippedPerks.ContainsKey(type))
         {
-            Debug.Log(EquippedPerks.Count);
-            Debug.Log(perk.Key);
+            EquippedPerks[type] = new List<PerkDataEntry>();
         }
+
+        EquippedPerks[type].Add(perkData);
+
+        InitPerkBonuses();
     }
 
     public void UnEquipPerk(EPerkType type)
     {
-        EquippedPerks.Remove(type);
-
-        foreach (var perk in EquippedPerks)
+        if (EquippedPerks.ContainsKey(type) && EquippedPerks[type].Count > 0)
         {
-            Debug.Log(EquippedPerks.Count);
-            Debug.Log(perk.Key);
-        }
-    }
+            Debug.Log($"UnEquip {type}");
+            EquippedPerks[type].RemoveAt(0);
 
-    public void InitPerkBonuses()
-    {
-        foreach (EStatType type in System.Enum.GetValues(typeof(EAccessoryType)))
-        {
-            if (type == EStatType.Count) continue; // 제외하고 싶을 때
-            EquippedPerkBonuses.Add(type, 1f);
-        }
-
-        foreach (var perk in EquippedPerks)
-        {
-            foreach(var bonus in perk.Value.Bonuses)
+            // 리스트가 비면 아예 제거
+            if (EquippedPerks[type].Count == 0)
             {
-                EquippedPerkBonuses[bonus.StatType] *= bonus.Value;
+                EquippedPerks.Remove(type);
             }
+
+            InitPerkBonuses();
         }
     }
 
-    public void CalculateFinalStats(Dictionary<EStatType, float> stats)
+    public void InitPerkBonuses() // 장착된 퍽 기반 스탯보너스 계산
     {
-        foreach (var perk in EquippedPerks)
+        EquippedPerkBonuses.Clear();
+
+        foreach (EStatType statType in (EPerkType[])System.Enum.GetValues(typeof(EStatType)))
         {
-            foreach (var bonus in perk.Value.Bonuses)
+            if (statType == EStatType.Count) continue;
+            EquippedPerkBonuses[statType] = 1f;
+        }
+
+        foreach (var perkList in EquippedPerks.Values)
+        {
+            foreach (var perk in perkList)
             {
-                EStatType statType = bonus.StatType;
-                stats[statType] *= bonus.Value;
+                foreach (var bonus in perk.Bonuses)
+                {
+                    EquippedPerkBonuses[bonus.StatType] *= bonus.Value;
+                }
             }
         }
     }
