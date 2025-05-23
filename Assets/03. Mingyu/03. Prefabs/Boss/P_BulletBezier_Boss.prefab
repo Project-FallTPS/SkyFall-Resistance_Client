@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1654000175361673184}
   - component: {fileID: 4800837089614650704}
   m_Layer: 0
-  m_Name: P_Bullet_Enemy
+  m_Name: P_BulletBezier_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,5 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _lifeTime: 5
-  _damage: 1
-  _damageableType: 0
+  _damage: 10
+  _damageableType: 3
