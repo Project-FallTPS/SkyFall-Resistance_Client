@@ -4,34 +4,31 @@ using UnityEngine;
 public class OutlineHighlighter : MonoBehaviour
 {
     [Header("ÀüÈ¯ÇÒ Ä«¸Þ¶ó ¼±ÅÃ")]
-    public LobbyCameraType cameraType = LobbyCameraType.MainSpot;
+    public LobbyCameraType cameraType;
 
-    private Outline outline;
+    private Outline _outline;
     private bool isHighlighted = false;
 
     void Start()
     {
-        outline = GetComponent<Outline>();
-        outline.enabled = false; // ±âº»Àº ²¨µÒ
+        _outline = GetComponent<Outline>();
+        _outline.enabled = false; // ±âº»Àº ²¨µÒ
     }
 
     void OnMouseEnter()
     {
-        outline.enabled = true;
+        _outline.enabled = true;
         isHighlighted = true;
     }
 
     void OnMouseExit()
     {
-        outline.enabled = false;
+        _outline.enabled = false;
         isHighlighted = false;
     }
     
     void OnMouseDown()
     {
-        if (isHighlighted && cameraType != LobbyCameraType.MainSpot)
-        {
-            Lobby_CinemachineCameraSwitcher.Instance.SwitchToCamera(cameraType);
-        }
+        if (isHighlighted && cameraType != LobbyCameraType.MainSpot) Lobby_CinemachineCameraSwitcher.Instance.SwitchToCamera(cameraType);
     }
 }

@@ -18,6 +18,18 @@ public class PerkDataCollectionSO : ScriptableObject
         }
     }
 
+    public Dictionary<EPerkType, PerkDataEntry> MakeDictionary()
+    {
+        Dictionary<EPerkType, PerkDataEntry> dict = new Dictionary<EPerkType, PerkDataEntry>();
+
+        foreach (var p in PerkDatas)
+        {
+            dict.Add(p.Type, p);
+        }
+
+        return dict;
+    }
+
     public PerkDataEntry GetPerkData(EPerkType type)
     {
         if(_perkDataDictionary == null)
