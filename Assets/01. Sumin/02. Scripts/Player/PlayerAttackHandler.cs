@@ -44,12 +44,12 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     {
         if (_strategies.TryGetValue(type, out var strategy))
         {
-            // TODO : Weapon ¿ÀºêÁ§Æ® È°¼ºÈ­
+            // TODO : Weapon ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È°ï¿½ï¿½È­
 
             CurrentStrategy = strategy;
             _currentWeapon = type;
 
-            Debug.Log($"¹«±â º¯°æ: {type}");
+            Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: {type}");
 
             switch(type)
             {
