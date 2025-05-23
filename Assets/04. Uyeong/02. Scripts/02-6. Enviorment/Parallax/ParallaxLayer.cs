@@ -12,7 +12,7 @@ public class ParallaxLayer : MonoBehaviour
     private void Update()
     {
         transform.position += Vector3.up * _moveSpeed * Time.deltaTime;
-        if (_isLooping && transform.position.y >= _playerAreaRadius + _loopOffset)
+        if (_isLooping && transform.position.y >= _loopOffset)
         {
             Vector3 position = transform.localPosition;
             position.y = _startPositionY;
