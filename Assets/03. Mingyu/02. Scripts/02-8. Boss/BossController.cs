@@ -37,6 +37,7 @@ public class BossController : MonoBehaviour, IDamageable
         _bossData = _bossDataSO.GetBossData(_bossType);
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _bossData.MoveSpeed;
+        _navMeshAgent.updateRotation = true;
         _animator = GetComponent<Animator>();
         _playerTransform = GameObject.FindGameObjectWithTag(nameof(ETags.Player)).transform;
     }
