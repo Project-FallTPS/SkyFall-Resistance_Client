@@ -1277,10 +1277,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 387828283652576691, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 387828283652576691, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2650729202873364762, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1802923651}
+    - target: {fileID: 2650729202873364762, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3017904612341245663, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
       propertyPath: m_Name
       value: Main Camera (1)
@@ -1301,6 +1313,10 @@ PrefabInstance:
       propertyPath: _originalCrossHairUIPrefab
       value: 
       objectReference: {fileID: 1929078596}
+    - target: {fileID: 7029791667621010505, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7822619764111882862, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.0474195
@@ -1341,7 +1357,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7865097628886527081, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865097628886527081, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7865097628886527081, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2650729202873364762, guid: bbd0b5d8ab16aca4ca866f9576049b07, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
