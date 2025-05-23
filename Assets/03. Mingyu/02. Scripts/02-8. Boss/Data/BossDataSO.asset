@@ -15,7 +15,7 @@ MonoBehaviour:
   BossDatas:
   - MaxHealth: 100
     _currentHealth: 100
-    MoveSpeed: 10
+    MoveSpeed: 1
     AttackDamage: 10
     AttackCooltime: 5
     MaxPhase: 3
