@@ -1,31 +1,35 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxManager : Singleton<ParallaxManager>
 {
+    [Header("Near Layer")]
     [SerializeField]
-    private SphereCollider _playerArea;
+    private ParallaxLayerSet _nearParallaxLayerSet;
+    [SerializeField]
+    private List<ParallaxLayer> _nearLayers;
 
-    [Serializable]
-    public class ParallaxLayerSet
-    {
-        public ParallaxLayer ParallaxLayer;
-        public float MoveSpeed;
-        public float StartPositionY = -30f;
-        public float LoopOffset = 10f;
-        public bool IsLooping = true;
-    }
+    [Header("Middle Layer")]
+    [SerializeField]
+    private ParallaxLayerSet _middleParallaxLayerSet;
+    [SerializeField]
+    private List<ParallaxLayer> _middleLayers;
+
+    [Header("Far Layer")]
+    [SerializeField]
+    private ParallaxLayerSet _farParallaxLayerSet;
+    [SerializeField]
+    private List<ParallaxLayer> _farLayers;
 
     [SerializeField]
     private List<ParallaxLayerSet> _environmentLayers = new List<ParallaxLayerSet>();
 
     private void Start()
     {
-        float playerAreaRadius = _playerArea.radius;
-        foreach (ParallaxLayerSet parallaxLayerSet in _environmentLayers)
+        foreach (ParallaxLayer nearLayer in _nearLayers)
         {
-            parallaxLayerSet.ParallaxLayer.Initialize(parallaxLayerSet, playerAreaRadius);
+            nearLayer.Initialize(_nearParallaxLayerSet);
         }
+        
     }
 }

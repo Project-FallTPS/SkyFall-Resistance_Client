@@ -5,7 +5,6 @@ public class ParallaxLayer : MonoBehaviour
 {
     private float _startPositionY;
     private float _moveSpeed = 5f;
-    private float _playerAreaRadius;
     private float _loopOffset;
     private bool _isLooping = true;
 
@@ -20,10 +19,9 @@ public class ParallaxLayer : MonoBehaviour
         }
     }
 
-    public void Initialize(ParallaxLayerSet parallaxLayerSet, float playerAreaRadius)
+    public void Initialize(ParallaxLayerSet parallaxLayerSet)
     {
         _moveSpeed = parallaxLayerSet.MoveSpeed;
-        _playerAreaRadius = playerAreaRadius;
         _startPositionY = parallaxLayerSet.StartPositionY;
         _loopOffset = parallaxLayerSet.LoopOffset;
         _isLooping = parallaxLayerSet.IsLooping;
