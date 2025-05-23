@@ -39,6 +39,7 @@ public partial class BossShootAction : Action, IBossAttack
     protected override Status OnUpdate()
     {
         _bossData.LastAttackTime = Time.time;
+        Debug.Log(_bossData.LastAttackTime);
         Attack();
         return Status.Success;
     }
@@ -157,17 +158,6 @@ public partial class BossShootAction : Action, IBossAttack
             // 왼쪽으로 꺾기 (낮은 y값)
             return obstacleCenter - rightDir * horizontalMarginX + Vector3.up * verticalMarginLow;
         }
-    }
-    
-    private float GetOffsetDistance(Vector3 dir, Vector3 extents)
-    {
-        dir = dir.normalized;
-
-        float x = Mathf.Abs(Vector3.Dot(dir, Vector3.right)) * extents.x;
-        float y = Mathf.Abs(Vector3.Dot(dir, Vector3.up)) * extents.y;
-        float z = Mathf.Abs(Vector3.Dot(dir, Vector3.forward)) * extents.z;
-
-        return Mathf.Max(x, y, z);
     }
     
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)

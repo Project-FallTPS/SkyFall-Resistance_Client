@@ -72,6 +72,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         _enemyData.CurrentHealth -= damage;
+        Debug.Log($"Enemy Took Damage : {damage}");
         if (_enemyData.CurrentHealth <= 0)
         {
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Die]);
