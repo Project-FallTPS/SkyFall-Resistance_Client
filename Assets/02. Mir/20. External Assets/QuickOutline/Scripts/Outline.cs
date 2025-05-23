@@ -85,7 +85,7 @@ public class Outline : MonoBehaviour {
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
-    // Instantiate outline materials
+    // Instantiate _outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
@@ -102,7 +102,7 @@ public class Outline : MonoBehaviour {
   void OnEnable() {
     foreach (var renderer in renderers) {
 
-      // Append outline shaders
+      // Append _outline shaders
       var materials = renderer.sharedMaterials.ToList();
 
       materials.Add(outlineMaskMaterial);
@@ -140,7 +140,7 @@ public class Outline : MonoBehaviour {
   void OnDisable() {
     foreach (var renderer in renderers) {
 
-      // Remove outline shaders
+      // Remove _outline shaders
       var materials = renderer.sharedMaterials.ToList();
 
       materials.Remove(outlineMaskMaterial);
