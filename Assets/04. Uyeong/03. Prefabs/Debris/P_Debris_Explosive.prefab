@@ -101,7 +101,7 @@ MonoBehaviour:
   _meshObject: {fileID: 6585203867882269084}
   _damagedLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   _explosionRange: 5
   _damage: 5
 --- !u!1 &6585203867882269084
