@@ -8,4 +8,7 @@ EditorOnly,
 MainCamera,
 Player,
 GameController,
+CinemachineTarget,
+Enemy,
+Accessory,
 }
