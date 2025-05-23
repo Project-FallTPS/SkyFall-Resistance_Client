@@ -24,7 +24,7 @@ public class WaveManager : Singleton<WaveManager>
         {
             _currentWaveData = value;
             _enemySpawnerHandler.AdjustSpawnerIntervalOnWave();
-            // TODO : ¿þÀÌºê°¡ ¹Ù²ñÀ» º¸¿©ÁÖ´Â UI
+            // TODO : ï¿½ï¿½ï¿½Ìºê°¡ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ UI
         }
     }
 
@@ -64,7 +64,7 @@ public class WaveManager : Singleton<WaveManager>
         else
         {
             _currentWaveIndex = 0;
-            // TODO : Ãß¶ô ¾À¿¡¼­ º¸½º ¾ÀÀ¸·Î ÀÌµ¿
+            // TODO : ì”¬ ì „í™˜
         }
     }
 }
