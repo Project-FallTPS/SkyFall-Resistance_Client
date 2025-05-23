@@ -36,6 +36,14 @@ public partial class BossTraceAction : Action
     private void TracePlayer()
     {
         _bossController.NavMeshAgent.SetDestination(_bossController.PlayerTransform.position);
+        Vector3 direction = (_bossController.PlayerTransform.position - _bossController.transform.position).normalized;
+        direction.y = 0; // 수직 회전 제거
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            _bossController.transform.rotation = Quaternion.Slerp(_bossController.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 }
 

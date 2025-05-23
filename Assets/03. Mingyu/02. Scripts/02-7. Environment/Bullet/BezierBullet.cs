@@ -28,6 +28,7 @@ public class BezierBullet : BulletBase
     }
     protected override void Update()
     {
+        base.Update();
         _t += (_speed * Time.deltaTime) / EstimateCurveLength(20);
     }
 
