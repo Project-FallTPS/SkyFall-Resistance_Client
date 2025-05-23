@@ -5,29 +5,32 @@ using TMPro;
 
 public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    [Header("# Hierarchy")]
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _bonusText;
     [SerializeField] private Image _background;
     [SerializeField] private Canvas _mainCanvas;
     [SerializeField] private EPerkType _perkType;
+
+    [Header("# Project")]
     [SerializeField] private SlotUI _dragPreviewPrefab;
     private SlotUI _dragPreview;
 
     public bool IsEquipInventory = false;
-    private bool _isEquipped;
     private bool _isFilled = false;
-    private PerkDataEntry _data;
-
-    private Transform _originalParent;
+    private PerkDataEntry _data = null;
 
     //테스트용 메소드
     public void Init()
     {
+        if(_perkType == EPerkType.Count)
+        {
+            RefreshUI();
+            return;
+        }
         PerkDataEntry data = PerkManager.Instance.PerkDatas[_perkType];
         _data = data;
         _perkType = data.Type;
-        //_icon.sprite = data.Icon;
-        _bonusText.text = GetBonusText(data);
         _isFilled = true;
         RefreshUI();
     }
@@ -36,8 +39,6 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     {
         _data = data;
         _perkType = data.Type;
-        //_icon.sprite = data.Icon;
-        _bonusText.text = GetBonusText(data);
         _isFilled = true;
         RefreshUI();
     }
@@ -60,7 +61,6 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         // 드래그 프리뷰 생성
         _dragPreview = Instantiate(_dragPreviewPrefab, _mainCanvas.transform);
         _dragPreview.Init(_data); // 데이터 복사
-        //_dragPreview.GetComponent<CanvasGroup>().blocksRaycasts = false; // 드래그 중 Raycast 막기
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -87,9 +87,9 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         }
     }
 
-    private void SwapPerks(SlotUI other)
+    private void SwapPerks(SlotUI other) // other가 받는 부분
     {
-        Debug.Log($"{gameObject.name} <-> {other.gameObject.name}");
+        Debug.Log($"{_perkType} <-> {other._perkType}");
 
         // 둘 다 비어 있으면 아무것도 안 함
         if (!_isFilled && !other._isFilled)
@@ -134,8 +134,20 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     private void RefreshUI()
     {
-        //_isEquipped = _isFilled && PerkManager.Instance.EquippedPerks.ContainsKey(_perkType);
-        _background.color = _isFilled ? Color.green : Color.white;
+        if (_isFilled && _data != null)
+        {
+            _bonusText.text = GetBonusText(_data);
+            _icon.sprite = _data.Icon; // Sprite가 없으면 여기서 null로 보일 수도 있음
+            _icon.color = Color.white; // 안 보이는 문제 방지
+            _background.color = Color.green;
+        }
+        else
+        {
+            _bonusText.text = "Empty";
+            _icon.sprite = null;
+            _icon.color = new Color(0, 0, 0, 0); // 투명하게 처리
+            _background.color = Color.white;
+        }
     }
 
     public void Clear()

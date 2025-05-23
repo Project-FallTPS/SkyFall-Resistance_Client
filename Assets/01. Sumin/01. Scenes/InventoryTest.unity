@@ -465,7 +465,7 @@ MonoBehaviour:
   _bonusText: {fileID: 1072044544}
   _background: {fileID: 432327621}
   _mainCanvas: {fileID: 1563700193}
-  _perkType: 0
+  _perkType: 4
   _dragPreviewPrefab: {fileID: 9066929792306460546, guid: 05aab28bcb50d594685c957efb5f2923, type: 3}
   IsEquipInventory: 1
 --- !u!114 &432327621
@@ -752,7 +752,7 @@ MonoBehaviour:
   _bonusText: {fileID: 1756545321}
   _background: {fileID: 503917125}
   _mainCanvas: {fileID: 1563700193}
-  _perkType: 0
+  _perkType: 4
   _dragPreviewPrefab: {fileID: 9066929792306460546, guid: 05aab28bcb50d594685c957efb5f2923, type: 3}
   IsEquipInventory: 1
 --- !u!114 &503917125
@@ -2424,7 +2424,7 @@ MonoBehaviour:
   _bonusText: {fileID: 116050616}
   _background: {fileID: 1852127617}
   _mainCanvas: {fileID: 1563700193}
-  _perkType: 0
+  _perkType: 4
   _dragPreviewPrefab: {fileID: 9066929792306460546, guid: 05aab28bcb50d594685c957efb5f2923, type: 3}
   IsEquipInventory: 1
 --- !u!1 &1918379655
