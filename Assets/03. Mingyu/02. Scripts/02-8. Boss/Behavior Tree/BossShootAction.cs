@@ -54,17 +54,17 @@ public partial class BossShootAction : Action, IBossAttack
 
     public void Attack()
     {
-        if (IsPlayerObscured(out Vector3 hitPoint))
+        if (IsPlayerObscured(out RaycastHit obstacleHit))
         {
-            FireBezierProjectile(hitPoint);
+            ShootBezier(obstacleHit);
         }
         else
         {
-            FireProjectile();
+            Shoot();
         }
     }
 
-    private bool IsPlayerObscured(out Vector3 hitPoint)
+    private bool IsPlayerObscured(out RaycastHit obstacleHit)
     {
         Vector3 bossPosition = _bossTransform.position;
         Vector3 playerPosition = _playerTransform.position;
@@ -73,15 +73,15 @@ public partial class BossShootAction : Action, IBossAttack
 
         if (Physics.Raycast(bossPosition, directionToPlayer, out RaycastHit hit, distanceToPlayer, _obstacleMask))
         {
-            hitPoint = hit.point;
+            obstacleHit = hit;
             return true;
         }
 
-        hitPoint = Vector3.zero;
+        obstacleHit = default;
         return false;
     }
 
-    private void FireProjectile()
+    private void Shoot()
     {
         Vector3 bossPosition = _bossTransform.position;
         Vector3 playerPosition = _playerTransform.position;
@@ -90,7 +90,7 @@ public partial class BossShootAction : Action, IBossAttack
         Debug.DrawLine(bossPosition, playerPosition, Color.red, 2f);
         
         DamageablePoolManager.Instance.GetObject(
-            EDamageableType.BossBullet,
+            EDamageableType.BossBulletStraight,
             _bossController.ShootPositionTransform.position,
             Quaternion.LookRotation(directionToPlayer)
         );
@@ -98,32 +98,43 @@ public partial class BossShootAction : Action, IBossAttack
         Debug.Log("직선 발사체 발사");
     }
 
-    private void FireBezierProjectile(Vector3 obstacleHitPoint)
+    private void ShootBezier(RaycastHit obstacleHit)
     {
-        Vector3 start = _bossTransform.position;
-        Vector3 end = _playerTransform.position;
+        Vector3 shootStart = _bossController.ShootPositionTransform.position;
+        Vector3 shootEnd = _playerTransform.position;
 
-        // 장애물 피해서 위쪽으로 휘는 곡선 만들기
-        Vector3 control = obstacleHitPoint + Vector3.up * 2f;
+        Bounds obstacleBounds = obstacleHit.collider.bounds;
+        Vector3 controlPoint = obstacleBounds.center + Vector3.up * (obstacleBounds.extents.y + 1.5f); 
 
-        // 디버그용 베지어 경로 시각화
+        
         const int segmentCount = 20;
-        Vector3 prevPoint = start;
-
+        Vector3 previousPoint = shootStart;
         for (int i = 1; i <= segmentCount; i++)
         {
             float t = i / (float)segmentCount;
-            Vector3 point = CalculateQuadraticBezierPoint(t, start, control, end);
-            Debug.DrawLine(prevPoint, point, Color.yellow, 2f);
-            prevPoint = point;
+            Vector3 point = CalculateQuadraticBezierPoint(t, shootStart, controlPoint, shootEnd);
+            Debug.DrawLine(previousPoint, point, Color.green, 2f);
+            previousPoint = point;
         }
 
-        Debug.Log("베지어 곡선 발사체 발사 (장애물 있음)");
+        // 발사체 생성
+        GameObject bullet = DamageablePoolManager.Instance.GetObject(
+            EDamageableType.BossBulletBezier,
+            shootStart,
+            Quaternion.identity
+        );
+
+        if (bullet.TryGetComponent(out BezierBullet bezierBullet))
+        {
+            bezierBullet.InitializePoints(shootStart, controlPoint, shootEnd);
+        }
+        Debug.Log("곡사 발사체 발사 (장애물 회피)");
     }
 
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
-        float u = 1 - t;
-        return u * u * p0 + 2 * u * t * p1 + t * t * p2;
+        return Mathf.Pow(1 - t, 2) * p0
+               + 2 * (1 - t) * t * p1
+               + Mathf.Pow(t, 2) * p2;
     }
 }
