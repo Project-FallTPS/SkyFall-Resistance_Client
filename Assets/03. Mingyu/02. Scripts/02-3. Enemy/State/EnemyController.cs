@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private Animator _enemyAnimator;
     public Animator EnemyAnimator => _enemyAnimator;
 
-    [Header("Datas")]
+    [Header("Data")]
     [SerializeField]
     private EEnemyType _enemyType;
     [SerializeField]

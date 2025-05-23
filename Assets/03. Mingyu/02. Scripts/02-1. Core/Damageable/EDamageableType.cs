@@ -2,5 +2,6 @@ public enum EDamageableType
 {
     EnemyBullet,
     EnemyBomb,
-    Count,
+    BossBullet,
+    Count
 }
