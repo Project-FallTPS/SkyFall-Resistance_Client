@@ -12,7 +12,7 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
     [SerializeField] private GameObject _monitorUI;
     [SerializeField] private GameObject _characterUI;
 
-    public Stack<PopupUI> OpenUIStack = new Stack<PopupUI>();
+    public Stack<UI_Popup> OpenUIStack = new Stack<UI_Popup>();
 
     protected override void Awake()
     {
@@ -37,19 +37,19 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
         {
             if(OpenUIStack.Count <= 0)
             {
-                SwitchToCamera(LobbyCameraType.MainSpot);
+                SwitchToCamera(ELobbyCameraType.MainSpot);
             }
             else
             {
-                PopupUI ui = OpenUIStack.Pop();
+                UI_Popup ui = OpenUIStack.Pop();
                 ui.Close();
             }
         }
     }
 
-    public void SwitchToCamera(LobbyCameraType type)
+    public void SwitchToCamera(ELobbyCameraType type)
     {
-        if (type == LobbyCameraType.MainSpot)
+        if (type == ELobbyCameraType.MainSpot)
         {
             MainCamera.Priority = 10;
             PlayerCam.Priority = 1;
@@ -58,7 +58,7 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
             _monitorUI.SetActive(false);
             _characterUI.SetActive(false);
         }
-        else if (type == LobbyCameraType.PlayerSpot)
+        else if (type == ELobbyCameraType.PlayerSpot)
         {
             MainCamera.Priority = 1;
             PlayerCam.Priority = 10;
@@ -67,7 +67,7 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
             _monitorUI.SetActive(false);
             _characterUI.SetActive(true);
         }
-        else if (type == LobbyCameraType.MonitorSpot)
+        else if (type == ELobbyCameraType.MonitorSpot)
         {
             MainCamera.Priority = 1;
             PlayerCam.Priority = 1;
@@ -78,7 +78,7 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
         }
     }
 
-    public void OpenUI(PopupUI ui)
+    public void OpenUI(UI_Popup ui)
     {
         ui.Open();
         OpenUIStack.Push(ui);

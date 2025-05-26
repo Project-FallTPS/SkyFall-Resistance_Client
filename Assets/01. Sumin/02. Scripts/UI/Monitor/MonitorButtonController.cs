@@ -3,7 +3,7 @@ using UnityEngine;
 public class MonitorButtonController : MonoBehaviour
 {
     [Header("Hierarchy")]
-    [SerializeField] private PopupUI _perkPanel;
+    [SerializeField] private UI_Popup _perkPanel;
 
     public void OnClickPerkButton()
     {

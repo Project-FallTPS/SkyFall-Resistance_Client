@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum LobbyCameraType
+public enum ELobbyCameraType
 {
     MainSpot,
     PlayerSpot,

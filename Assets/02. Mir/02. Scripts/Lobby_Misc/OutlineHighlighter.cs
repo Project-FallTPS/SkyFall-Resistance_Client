@@ -4,7 +4,7 @@ using UnityEngine;
 public class OutlineHighlighter : MonoBehaviour
 {
     [Header("전환할 카메라 선택")]
-    public LobbyCameraType cameraType;
+    public ELobbyCameraType cameraType;
 
     private Outline _outline;
     private bool isHighlighted = false;
@@ -29,6 +29,6 @@ public class OutlineHighlighter : MonoBehaviour
     
     void OnMouseDown()
     {
-        if (isHighlighted && cameraType != LobbyCameraType.MainSpot) LobbySceneManager.Instance.SwitchToCamera(cameraType);
+        if (isHighlighted && cameraType != ELobbyCameraType.MainSpot) LobbySceneManager.Instance.SwitchToCamera(cameraType);
     }
 }

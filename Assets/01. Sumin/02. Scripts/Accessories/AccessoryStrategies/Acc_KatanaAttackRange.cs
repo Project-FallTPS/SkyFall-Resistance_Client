@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class Acc_KatanaDamage : MonoBehaviour, IAccessory
-{   
+public class Acc_KatanaAttackRange : MonoBehaviour, IAccessory
+{
     [SerializeField] private EAccessoryType _type;
     public EAccessoryType Type => _type;
 
@@ -35,7 +35,7 @@ public class Acc_KatanaDamage : MonoBehaviour, IAccessory
 
     public void Excecute()
     {
-        // 타격 시 발동하는 특수 효과가 있을 경우 여기에 구현
+        //사거리 증가를 어떻게 박아 볼까요?
     }
 
     public void SetEquipped(bool flag)

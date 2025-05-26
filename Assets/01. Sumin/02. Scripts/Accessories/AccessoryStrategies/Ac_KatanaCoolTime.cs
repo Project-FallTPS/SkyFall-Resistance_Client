@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Acc_KatanaDamage : MonoBehaviour, IAccessory
-{   
+public class Ac_KatanaCoolTime : MonoBehaviour, IAccessory
+{
     [SerializeField] private EAccessoryType _type;
     public EAccessoryType Type => _type;
-
     public AccessoryData Data { get; private set; }
+
     private Collider _collider;
     private bool _isEqiupped = false;
 
