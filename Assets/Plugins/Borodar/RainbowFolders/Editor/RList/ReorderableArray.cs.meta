@@ -10,3 +10,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183370
+  packageName: Feel
+  packageVersion: 5.5
+  assetPath: Assets/Plugins/Borodar/RainbowFolders/Editor/RList/ReorderableArray.cs
+  uploadId: 759320
