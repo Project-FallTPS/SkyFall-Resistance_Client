@@ -35,7 +35,6 @@ public partial class BossRushAction : Action, IBossAttack
         if (CanAttack())
         {
             Attack();
-            Debug.Log("돌진 가능");
             return Status.Running;
         }
         return Status.Failure;
@@ -46,14 +45,13 @@ public partial class BossRushAction : Action, IBossAttack
         if (CheckRushComplete())
         {
             return Status.Success;
-            Debug.Log("돌진 종료");
         }
         return Status.Running;
     }
 
     protected override void OnEnd()
     {
-        _bossController.NavMeshAgent.ResetPath();
+        
     }
 
     public bool CanAttack()
@@ -69,24 +67,23 @@ public partial class BossRushAction : Action, IBossAttack
     
     private IEnumerator RushCoroutine()
     {
-        Debug.Log("와인드업");
         Windup();
         // 3. Windup 지점에 도달했거나, Windup 시간이 다 되었는지 체크
         float elapsed = 0f;
-        while (elapsed < _bossData.WindupTime || 
+        while (elapsed < _bossData.WindupTime && 
                !_bossController.NavMeshAgent.pathPending 
                && 0.1f < _bossController.NavMeshAgent.remainingDistance)
         {
             elapsed += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("돌진");
         Rush();
     }
 
     private void Windup()
     {
         // 1. 플레이어 반대 방향 계산
+        _bossController.NavMeshAgent.ResetPath();
         Vector3 directionToPlayer = (_playerTransform.position - _bossTransform.position).normalized;
         Vector3 preparationDestination = _bossTransform.position - directionToPlayer * _bossData.WindupDistance;
 

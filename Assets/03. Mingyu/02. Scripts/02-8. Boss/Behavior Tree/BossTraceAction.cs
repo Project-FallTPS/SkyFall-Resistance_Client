@@ -31,7 +31,6 @@ public partial class BossTraceAction : Action
 
     protected override void OnEnd()
     {
-        _bossController.NavMeshAgent.ResetPath();
     }
 
     private void TracePlayer()
