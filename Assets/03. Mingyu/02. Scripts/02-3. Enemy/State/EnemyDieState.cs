@@ -19,12 +19,12 @@ public class EnemyDieState : IEnemyState
     {
         _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Die), true);
         _enemyController.EnemyCollider.enabled = false;
+        _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
+        ReturnToPool();
     }
 
     public void Update()
     {
-        _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
-        ReturnToPool();
         //if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.Die)) && 1.0f <= _animatorStateInfo.normalizedTime)
         //{
         //    ReturnToPool();
@@ -39,6 +39,7 @@ public class EnemyDieState : IEnemyState
 
     private void ReturnToPool()
     {
+        TargetManager.Instance.RemoveEnemyFromHashSet(_enemyController.gameObject);
         ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
         EnemyPoolManager.Instance.ReturnObject(_enemyController.gameObject, _enemyData.EnemyType);
     }
