@@ -15,13 +15,17 @@ MonoBehaviour:
   BossDatas:
   - MaxHealth: 100
     _currentHealth: 100
-    MoveSpeed: 1
+    MoveSpeed: 5
     AttackDamage: 10
     AttackCooltime: 5
+    MaxRushDistance: 10
+    MinRushDistance: 5
+    RushSpeedMultiplier: 50
+    RushSpeedDivisorForWindup: 5
+    WindupDistance: 5
+    WindupTime: 1
+    MinRazerDistance: 12
     MaxPhase: 3
     PhaseChangeHealth:
     - 70
     - 30
-    MaxRushDistance: 0
-    MinRushDistance: 0
-    ProjectileSpeed: 0
