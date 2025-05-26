@@ -11,4 +11,5 @@ GameController,
 CinemachineTarget,
 Enemy,
 Accessory,
+Boss,
 }
