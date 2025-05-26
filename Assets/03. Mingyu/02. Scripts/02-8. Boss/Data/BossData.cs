@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VInspector;
 
 [System.Serializable]
@@ -45,24 +46,30 @@ public class BossData
     public float RushSpeedMultiplier;
     [Tooltip("돌진 전 준비 속도(뒤로 이동하며 기 모으기) - 기본 이동 속도에 나눠지는 값")]
     public float RushSpeedDivisorForWindup;
-    [Tooltip("와인드업 최대 거리")]
+    [Tooltip("돌진 공격의 전조 최대 이동 거리")]
     public float WindupDistance;
-    [Tooltip("와인드업 최대 시간")]
-    public float WindupTime;
+    [FormerlySerializedAs("WindupTime")] [Tooltip("돌진 공격의 전조 시간")]
+    public float BeforeRushDelay;
     
-    [Header("Attack Logic - Razer")] 
+    [Header("Attack Logic - Razer")]
     [Tooltip("레이저 공격이 가능한 보스 - 플레이어간 최소 거리")]
-    public float MinRazerDistance;
+    public float MinLaserDistance;
+    [Tooltip("레이저 공격의 전조 시간")]
+    public float WindupTimeForLaser;
+    [Tooltip("레이저의 사거리")]
+    public float LaserRange;
+    [Tooltip("레이저의 지속 시간")]
+    public float LaserDuration;
 
     [Header("Phase")] 
     [Tooltip("보스의 최대 페이즈")]
-    public float MaxPhase;
+    public int MaxPhase;
 
-    private float _currentPhase;
-    public float CurrentPhase
+    private int _currentPhase;
+    public int CurrentPhase
     {
         get => _currentPhase;
-        set => _currentPhase = Mathf.Clamp(value, 0f, MaxPhase);
+        set => _currentPhase = Mathf.Clamp(value, 0, MaxPhase);
     }
 
     [Tooltip("페이즈가 전환되는 보스 체력 비율, 항상 리스트 사이즈는 (페이즈 수 - 1) 이어야 한다.")]
@@ -77,14 +84,20 @@ public class BossData
         AttackDamage = original.AttackDamage;
         AttackCooltime = original.AttackCooltime;
         LastAttackTime = original.LastAttackTime;
+        
         MaxRushDistance = original.MaxRushDistance;
         MinRushDistance = original.MinRushDistance;
         RushSpeedMultiplier = original.RushSpeedMultiplier;
         RushSpeedDivisorForWindup = original.RushSpeedDivisorForWindup;
         WindupDistance = original.WindupDistance;
-        WindupTime = original.WindupTime;
-        MinRazerDistance = original.MinRazerDistance;
+        BeforeRushDelay = original.BeforeRushDelay;
+        MinLaserDistance = original.MinLaserDistance;
         MaxPhase = original.MaxPhase;
         PhaseChangeHealth = original.PhaseChangeHealth;
+        
+        MinLaserDistance = original.MinLaserDistance;
+        WindupTimeForLaser = original.WindupTimeForLaser;
+        LaserRange = original.LaserRange;
+        LaserDuration = original.LaserDuration;
     }
 }

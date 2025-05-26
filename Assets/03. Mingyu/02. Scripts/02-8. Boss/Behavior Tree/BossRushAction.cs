@@ -62,19 +62,19 @@ public partial class BossRushAction : Action, IBossAttack
 
     public void Attack()
     {
-        _bossController.StartCoroutine(RushCoroutine());
+        _bossController.StartCoroutine(WindupCoroutine());
     }
     
-    private IEnumerator RushCoroutine()
+    private IEnumerator WindupCoroutine()
     {
         Windup();
         // 3. Windup 지점에 도달했거나, Windup 시간이 다 되었는지 체크
-        float elapsed = 0f;
-        while (elapsed < _bossData.WindupTime && 
+        float timer = 0f;
+        while (timer < _bossData.BeforeRushDelay && 
                !_bossController.NavMeshAgent.pathPending 
                && 0.1f < _bossController.NavMeshAgent.remainingDistance)
         {
-            elapsed += Time.deltaTime;
+            timer += Time.deltaTime;
             yield return null;
         }
         Rush();
@@ -105,6 +105,7 @@ public partial class BossRushAction : Action, IBossAttack
         {
             _bossData.LastAttackTime = Time.time;
             _bossController.NavMeshAgent.speed = _originalSpeed;
+            _bossController.StopAllCoroutines();
             return true;
         }
         return false;

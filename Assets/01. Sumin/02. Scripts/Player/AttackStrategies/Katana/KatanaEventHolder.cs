@@ -11,7 +11,7 @@ public class KatanaEventHolder : MonoBehaviour
         _katanaCollider = _katana.GetComponent<Collider>();
     }
 
-    public void SetCollider(int flag)
+    public void SetCollider(int flag) // 애니메이션 이벤트로 호출
     {
         _katanaCollider.enabled = flag == 1 ? true : false;
         if (flag == 1)

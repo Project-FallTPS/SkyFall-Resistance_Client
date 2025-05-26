@@ -45,11 +45,9 @@ public class TargetManager : Singleton<TargetManager>
         foreach (var enemy in _enemiesInFrustum)
         {
             if (!enemy.activeSelf) continue;
-            // ȭ�� �ȿ� �ִ��� üũ
             Vector3 screenPos = _camera.WorldToScreenPoint(enemy.transform.position);
             if (screenPos.z <= 0f) continue;
 
-            // UI �ȿ� ���ԵǴ��� üũ
             if (!RectTransformUtility.RectangleContainsScreenPoint(_uiLockArea, screenPos)) continue;
 
             float dist = Vector3.Distance(_camera.transform.position, enemy.transform.position);
