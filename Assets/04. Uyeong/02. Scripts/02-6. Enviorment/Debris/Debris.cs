@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.VFX;
 
 public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
@@ -13,15 +14,18 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     private float _playerAreaRadius;
     public float PlayerAreaRadius { set => _playerAreaRadius = value; }
 
-    [Header("��ȯ �Ÿ�")]
+    [Header("반환 거리")]
     [SerializeField]
     private float _releaseOffset = 10f;
 
-    [Header("��ȯ �ð�")]
+    [Header("반환 시간")]
     [SerializeField]
-    private float _releaseTime = 3f;
+    private float _releaseTime = 3f;        // Fire Trail이 꺼질 때까지의 시간
+    private float _releaseTimer = 0f;       // Fire Trail이 꺼질 때까지의 타이머
 
-    [Header("�ڽ� Mesh ������Ʈ")]
+    private bool _isBeingReleased = false;
+
+    [Header("자식 Mesh 오브젝트")]
     [SerializeField]
     private GameObject _meshObject;
 
@@ -40,13 +44,24 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
         _fireSpeed = _fireTrail.GetVector3(_smokeVelocityName).magnitude;
 
         _debrisType = DefineType();
+        
     }
 
     private void Update()
     {
+        if (_isBeingReleased)
+        {
+            _releaseTimer += Time.deltaTime;
+            if (_releaseTimer >= _releaseTime)
+            {
+                Release();
+            }
+            return;
+        }
+
         if (transform.position.y <= -(_playerAreaRadius + _releaseOffset))
         {
-            StartCoroutine(ReleaseAfterEffect());
+            ReleaseAfterEffect();
         }
 
         _fireTrail.SetVector3(_spawnPositionName, transform.position);
@@ -57,7 +72,10 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     public void Initialize()
     {
         _meshObject.SetActive(true);
+
         _fireTrail.SetBool(_canSpawnName, true);
+
+        _releaseTimer = 0f;
     }
 
     public void Launch(Vector3 direction, float magnitude)
@@ -80,11 +98,14 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     protected abstract void HandleDestruction();
     protected void Release()
     {
+        _isBeingReleased = false;
         DebrisPoolManager.Instance.ReturnObject(this.gameObject, _debrisType);
     }
 
-    protected IEnumerator ReleaseAfterEffect()
+    protected void ReleaseAfterEffect()
     {
+        _isBeingReleased = true;
+
         if (_meshObject != null)
         {
             _meshObject.SetActive(false);
@@ -92,8 +113,8 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 
         _fireTrail.SetBool(_canSpawnName, false);
 
-        yield return new WaitForSeconds(_releaseTime);
-
-        DebrisPoolManager.Instance.ReturnObject(this.gameObject, _debrisType);
+        EVFXType vfxType = (EVFXType)((int)EVFXType.NormalDebrisExplosion + (int)DebrisType);
+        GameObject vfx = VFXPoolManager.Instance.GetObjectByRandom(vfxType, transform.position, Quaternion.identity);
+        vfx.GetComponent<VFX>().PlayVFX();
     }
 }
