@@ -1,7 +1,7 @@
 public enum EAccessoryType
 {
-    Melee_AttackSpeed,
-    Melee_Damage,
+    Katana_AttackSpeed,
+    Katana_Damage,
     Range_ExtraAttack,
     Range_Fridger,
     Common_EngineOil,

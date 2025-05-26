@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class MeleeDamage : MonoBehaviour, IAccessory
-{
+public class Acc_KatanaDamage : MonoBehaviour, IAccessory
+{   
     [SerializeField] private EAccessoryType _type;
     public EAccessoryType Type => _type;
+
     public AccessoryData Data { get; private set; }
     private Collider _collider;
+    private bool _isEqiupped = false;
 
     private void Awake()
     {
@@ -17,12 +19,17 @@ public class MeleeDamage : MonoBehaviour, IAccessory
         Data = AccessoryManager.Instance.GetData(_type);
     }
 
+    private void OnEnable()
+    {
+        SetEquipped(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
             receiver.ReceiveAccessory(_type, gameObject);
-            _collider.enabled = false;
+            SetEquipped(true);
         }
     }
 
@@ -30,12 +37,17 @@ public class MeleeDamage : MonoBehaviour, IAccessory
     {
         foreach (var bonus in Data.Bonuses)
         {
-            //data.ModifyStat(bonus.StatType, bonus.Value);  // ½ºÅÈ º¯°æ Àû¿ë
+            //data.ModifyStat(bonus.StatType, bonus.Value);  // ìŠ¤íƒ¯ ë³€ê²½ ì ìš©
         }
     }
 
     public void Excecute()
     {
-        // Å¸°İ ½Ã ¹ßµ¿ÇÏ´Â Æ¯¼ö È¿°ú°¡ ÀÖÀ» °æ¿ì ¿©±â¿¡ ±¸Çö
+        // íƒ€ê²© ì‹œ ë°œë™í•˜ëŠ” íŠ¹ìˆ˜ íš¨ê³¼ê°€ ìˆì„ ê²½ìš° ì—¬ê¸°ì— êµ¬í˜„
+    }
+
+    public void SetEquipped(bool flag)
+    {
+        _collider.enabled = !flag;
     }
 }

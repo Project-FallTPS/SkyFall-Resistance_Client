@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
 // Canvas -> Overlay로 하기
-public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
 {
     public static SlotUI DraggingSlot; // 드래그 중인 슬롯 (정적)
 
@@ -13,6 +13,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     [SerializeField] private TextMeshProUGUI _bonusText;
     [SerializeField] private Image _background;
     [SerializeField] private Canvas _mainCanvas;
+    [SerializeField] private PerkEquipPanelUI _panel;
 
     [Header("# Project")]
     public bool IsEquipInventory = false;
@@ -21,9 +22,10 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     private PerkDataEntry _data = null;
 
-    public void Init(PerkDataEntry data, Canvas canvas)
+    public void Init(PerkDataEntry data, Canvas canvas, PerkEquipPanelUI panel)
     {
         _mainCanvas = canvas;
+        _panel = panel;
         _data = data;
         RefreshUI();
     }
@@ -36,6 +38,35 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             result += $"{bonus.StatType}: x{bonus.Value}\n";
         }
         return result.TrimEnd();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            if(IsEquipInventory)
+            {
+                foreach(var slot in _panel.HavingSlots)
+                {
+                    if(slot._data == null)
+                    {
+                        SwapPerks(slot);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach(var slot in _panel.ItemSlot)
+                {
+                    if(slot._data == null)
+                    {
+                        SwapPerks(slot);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -141,7 +172,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         }
         else
         {
-            _bonusText.text = "Empty";
+            _bonusText.text = "";
             _icon.sprite = null;
             _icon.color = new Color(0, 0, 0, 0); // 투명하게 처리
             _background.color = Color.white;

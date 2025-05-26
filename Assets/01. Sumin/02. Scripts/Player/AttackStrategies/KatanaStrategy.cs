@@ -6,7 +6,6 @@ public class KatanaStrategy : IWeaponStrategy
     private const string WEAPON_NAME = "Katana";
     private WeaponData _weaponData;
     private PlayerAttackHandler _player;
-    private Dictionary<EAccessoryType, AccessoryData> _equippedAccessories = new Dictionary<EAccessoryType, AccessoryData>();
     private Dictionary<EAccessoryType, Transform> _accessorySockets = new Dictionary<EAccessoryType, Transform>();
 
     [Header("# Target Dash")]
@@ -43,7 +42,6 @@ public class KatanaStrategy : IWeaponStrategy
         }
         foreach (EAccessoryType type in System.Enum.GetValues(typeof(EAccessoryType)))
         {
-            if (type == EAccessoryType.Count) continue;
             Transform socket = weaponTransform.Find($"Socket_{type}");
             if (socket != null)
             {
@@ -57,10 +55,9 @@ public class KatanaStrategy : IWeaponStrategy
         float baseDamage = _weaponData.GetStat(type);
         float perkBonus = PerkManager.Instance.EquippedPerkBonuses[type];
         float accBonuses = 1f;
-        foreach (var data in _equippedAccessories)
+        foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            var accessories = AccessoryManager.Instance.GetData(data.Key);
-            accBonuses *= accessories.GetData(type);
+            accBonuses *= data.GetData(type);
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -68,17 +65,6 @@ public class KatanaStrategy : IWeaponStrategy
 
     public void Attack(GameObject target)
     {
-        //if (_attackTimer >= GetStat(EStatType.CoolTime))
-        //{
-        //    if (Input.GetKey(KeyCode.LeftShift) && target != null)
-        //    {
-        //        StartDash(target);
-        //    }
-        //    else
-        //    {
-        //        //일반 공격
-        //    }
-        //}
         if (Input.GetKey(KeyCode.LeftShift) && target != null && _targetDashTimer >= GetStat(EStatType.CoolTime))
         {
             StartDash(target);
@@ -142,28 +128,27 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-
     public void AddAccessory(EAccessoryType type, GameObject obj)
     {
         if (!_accessorySockets.ContainsKey(type))
         {
             return;
         }
-        if (_equippedAccessories.ContainsKey(type))
+        AccessoryManager.Instance.Equip(type);
+        if (type.ToString().StartsWith(WEAPON_NAME))
         {
-            RemoveAccessory(type);
+            obj.transform.SetParent(_accessorySockets[type]);
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localRotation = Quaternion.identity;
+            obj.GetComponent<IAccessory>().SetEquipped(true);
         }
-        _equippedAccessories[type] = AccessoryManager.Instance.GetData(type);
-        obj.transform.SetParent(_accessorySockets[type]);
-        obj.transform.localPosition = Vector3.zero;
-        obj.transform.localRotation = Quaternion.identity;
     }
 
     public void RemoveAccessory(EAccessoryType type)
     {
-        if (_equippedAccessories.ContainsKey(type))
+        if (AccessoryManager.Instance.EquippedAccessories.ContainsKey(type))
         {
-            _equippedAccessories.Remove(type);
+            AccessoryManager.Instance.UnEquip(type);
             if (_accessorySockets.TryGetValue(type, out Transform socket))
             {
                 foreach (Transform child in socket)
@@ -174,14 +159,9 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public List<AccessoryData> GetEquippedAccessories()
-    {
-        return new List<AccessoryData>(_equippedAccessories.Values);
-    }
-
     public void ExecuteAccesories()
     {
-        foreach(var acc in _equippedAccessories)
+        foreach(var acc in AccessoryManager.Instance.EquippedAccessories)
         {
             if(acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
             {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 877408145238125051}
   - component: {fileID: 6504552271080319797}
   m_Layer: 0
-  m_Name: Acc_Melee_Damage
+  m_Name: Acc_Katana_Damage
   m_TagString: Accessory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
