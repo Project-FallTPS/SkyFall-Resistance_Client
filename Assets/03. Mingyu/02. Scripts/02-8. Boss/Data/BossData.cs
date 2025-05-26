@@ -77,5 +77,14 @@ public class BossData
         AttackDamage = original.AttackDamage;
         AttackCooltime = original.AttackCooltime;
         LastAttackTime = original.LastAttackTime;
+        MaxRushDistance = original.MaxRushDistance;
+        MinRushDistance = original.MinRushDistance;
+        RushSpeedMultiplier = original.RushSpeedMultiplier;
+        RushSpeedDivisorForWindup = original.RushSpeedDivisorForWindup;
+        WindupDistance = original.WindupDistance;
+        WindupTime = original.WindupTime;
+        MinRazerDistance = original.MinRazerDistance;
+        MaxPhase = original.MaxPhase;
+        PhaseChangeHealth = original.PhaseChangeHealth;
     }
 }
