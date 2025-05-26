@@ -3,19 +3,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Borodar.RainbowFolders.RList {
-
+namespace MoreMountains.Tools
+{
 	[Serializable]
-	public abstract class ReorderableArray<T> : ICloneable, IList<T>, ICollection<T>, IEnumerable<T> {
+	public abstract class MMReorderableArray<T> : ICloneable, IList<T>, ICollection<T>, IEnumerable<T> {
 
 		[SerializeField]
 		private List<T> array = new List<T>();
 
-		public ReorderableArray()
+		public MMReorderableArray()
 			: this(0) {
 		}
 
-		public ReorderableArray(int length) {
+		public MMReorderableArray(int length) {
 
 			array = new List<T>(length);
 		}
@@ -25,9 +25,9 @@ namespace Borodar.RainbowFolders.RList {
 			get { return array[index]; }
 			set { array[index] = value; }
 		}
-
+		
 		public int Length {
-
+			
 			get { return array.Count; }
 		}
 
