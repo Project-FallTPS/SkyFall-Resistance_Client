@@ -1,11 +1,10 @@
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
+public class LobbySceneManager : Singleton<LobbySceneManager>
 {
-    public static Lobby_CinemachineCameraSwitcher Instance;
-
     public CinemachineCamera MainCamera;
     public CinemachineCamera PlayerCam;
     public CinemachineCamera MonitorCam;
@@ -13,11 +12,10 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
     [SerializeField] private GameObject _monitorUI;
     [SerializeField] private GameObject _characterUI;
 
-    protected private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(this);
+    public Stack<GameObject> OpenUIStack = new Stack<GameObject>();
 
+    protected override void Awake()
+    {
         MainCamera.Priority = 10;
         PlayerCam.Priority = 1;
         MonitorCam.Priority = 1;
@@ -35,7 +33,18 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) SwitchToCamera(LobbyCameraType.MainSpot);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(OpenUIStack.Count == 0)
+            {
+                SwitchToCamera(LobbyCameraType.MainSpot);
+            }
+            else
+            {
+                GameObject ui = OpenUIStack.Pop();
+                ui.SetActive(false);
+            }
+        }
     }
 
     public void SwitchToCamera(LobbyCameraType type)
@@ -67,5 +76,11 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
             _monitorUI.SetActive(true);
             _characterUI.SetActive(false);
         }
+    }
+
+    public void OpenUI(GameObject ui)
+    {
+        ui.SetActive(true);
+        OpenUIStack.Push(ui);
     }
 }

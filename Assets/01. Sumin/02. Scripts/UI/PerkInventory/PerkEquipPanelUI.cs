@@ -5,6 +5,8 @@ public class PerkEquipPanelUI : MonoBehaviour
 {
     [Header("# Hierarchy")]
     [SerializeField] private Canvas _mainCanvas;
+
+    [Header("# Prefab")]
     [SerializeField] private SlotUI[] _itemSlot;
     public SlotUI[] ItemSlot => _itemSlot;
     [SerializeField] private GameObject _havingPanel;
