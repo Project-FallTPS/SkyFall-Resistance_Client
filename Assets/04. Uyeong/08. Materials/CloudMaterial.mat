@@ -69,7 +69,7 @@ Material:
     - _Color: 0.07
     - _Color_Divide_Blur: 0.52
     - _Color_Divide_Height: -4.24
-    - _Color_Top_Value: -0.08
+    - _Color_Top_Value: -5
     - _Cutoff: 0.63
     - _Displacement_Intensity: 0.3
     - _Displacement_Scale: 10
