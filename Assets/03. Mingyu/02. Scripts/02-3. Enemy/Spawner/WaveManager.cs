@@ -7,15 +7,22 @@ public struct WaveData
 {
     public float EnemyStatMultiplier;
     public float EnemySpawnerInterval;
-    public float WaveDuration; 
+    public float WaveDuration;
 }
 
 public class WaveManager : Singleton<WaveManager>
 {
+    private float _fallSceneDuration;
+    public float FallSceneDuration
+    {
+        get => _fallSceneDuration;
+        set => _fallSceneDuration = value;
+    }
+
     [Header("Wave Data")]
     [SerializeField]
     private List<WaveData> _waveDatas = new List<WaveData>();
-
+    
     private WaveData _currentWaveData;
     public WaveData CurrentWaveData 
     { 
@@ -24,10 +31,10 @@ public class WaveManager : Singleton<WaveManager>
         {
             _currentWaveData = value;
             _enemySpawnerHandler.AdjustSpawnerIntervalOnWave();
-            // TODO : ���̺갡 �ٲ��� �����ִ� UI
+            // TODO : 웨이브가 바뀌었음을 알리는 UI 정도?
         }
     }
-
+    
     [Header("External References")]
     [SerializeField]
     private EnemySpawnerHandler _enemySpawnerHandler;
@@ -36,10 +43,11 @@ public class WaveManager : Singleton<WaveManager>
     private float _currentWaveStartTime;
 
     protected override void Awake()
-    {
+    {   
         base.Awake();
+        CalculateFallSceneDuration();
     }
-
+    
     private void Start()
     {
         CurrentWaveData = _waveDatas[_currentWaveIndex];
@@ -53,6 +61,14 @@ public class WaveManager : Singleton<WaveManager>
         }
     }
 
+    private void CalculateFallSceneDuration()
+    {
+        foreach (WaveData wave in _waveDatas)
+        {
+            _fallSceneDuration += wave.WaveDuration;
+        }
+    }
+    
     private void ChangeWave()       
     { 
         _currentWaveIndex++;
