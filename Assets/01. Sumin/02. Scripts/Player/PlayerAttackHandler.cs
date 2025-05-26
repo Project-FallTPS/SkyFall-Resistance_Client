@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
+    private const int MELEE_LAYER = 2;
+    private const int RANGE_LAYER = 1;
     [Header("# Hierarchy")]
     [Header("# Weapon")]
     public List<GameObject> Weapons;
@@ -44,22 +45,18 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     {
         if (_strategies.TryGetValue(type, out var strategy))
         {
-            // TODO : Weapon ������Ʈ Ȱ��ȭ
-
             CurrentStrategy = strategy;
             _currentWeapon = type;
-
-            Debug.Log($"���� ����: {type}");
-
+            
             switch(type)
             {
                 case EWeaponType.Katana:
-                    Anim.SetLayerWeight(1, 0f);
-                    Anim.SetLayerWeight(2, 1f);
+                    Anim.SetLayerWeight(RANGE_LAYER, 0f); // Range
+                    Anim.SetLayerWeight(MELEE_LAYER, 1f); // Melee
                     break;
                 case EWeaponType.Range:
-                    Anim.SetLayerWeight(1, 1f);
-                    Anim.SetLayerWeight(2, 0f);
+                    Anim.SetLayerWeight(RANGE_LAYER, 1f);
+                    Anim.SetLayerWeight(MELEE_LAYER, 0f);
                     break;
             }    
         }
@@ -68,19 +65,5 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     public void PerformAttack()
     {
         CurrentStrategy.Attack(TargetManager.Instance.Target);
-
-        if (TargetManager.Instance.Target != null)
-        {
-
-            //if (TargetManager.Instance.Target.TryGetComponent<IDamageable>(out var t))
-            //{
-            //    //_currentStrategy.Attack(t);
-            //}
-        }
-        else
-        {
-
-        }
     }
-
 }

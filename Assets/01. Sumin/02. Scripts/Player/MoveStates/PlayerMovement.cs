@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform _mainCameraTransform;
     private Animator _animator;
     private Rigidbody _rigid;
+    
 
     private void Awake()
     {
@@ -35,6 +37,11 @@ public class PlayerMovement : MonoBehaviour
         //    { EPlayerMoveState.Sprint, new PlayerSprintState() },
         //    { EPlayerMoveState.TargetDash, new PlayerTargetDashState() },
         //});
+
+        //if (SceneManager.GetActiveScene().name == "PlayerTest")
+        //{
+        //    _rigid.useGravity = true;
+        //}
     }
 
     private void Start()
@@ -54,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleDirection(float h, float v)
     {
-
         Vector3 camForward = _mainCameraTransform.forward;
         camForward.Normalize();
 
@@ -71,22 +77,34 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
 
         Vector3 camForward = _mainCameraTransform.forward;
+        //if (SceneManager.GetActiveScene().name == "PlayerTest") // 보스씬이라면 이라고 바꿔야댐
+        //{
+        //    camForward.y = 0;
+        //}
         camForward.Normalize();
 
         Vector3 camRight = _mainCameraTransform.right;
+        //if (SceneManager.GetActiveScene().name == "PlayerTest") // 보스씬이라면 이라고 바꿔야댐
+        //{
+        //    camRight.y = 0;
+        //}
         camRight.Normalize();
 
         MoveDirection = (camForward * v + camRight * h).normalized;
 
         if (MoveDirection.sqrMagnitude > 0.01f)
         {
-            if (!_isSprint /*|| _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate)*/)
+            if (!_isSprint || _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate))
             {
                 SetSprint(false);
             }
 
             Vector3 targetPosition = transform.position + MoveDirection * CurrentSpeed * Time.deltaTime;
             _rigid.MovePosition(targetPosition);
+        }
+        else
+        {
+            _rigid.linearVelocity = Vector3.zero;
         }
     }
 

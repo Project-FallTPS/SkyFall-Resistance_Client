@@ -7,7 +7,6 @@ public class RangeStrategy : IWeaponStrategy
     private WeaponData _weaponData;
     private PlayerAttackHandler _player;
     private Transform _muzzle;
-    private Dictionary<EAccessoryType, AccessoryData> _equippedAccessories = new Dictionary<EAccessoryType, AccessoryData>();
     private Dictionary<EAccessoryType, Transform> _accessorySockets = new Dictionary<EAccessoryType, Transform>();
 
     private float _timer = 0f;
@@ -47,10 +46,9 @@ public class RangeStrategy : IWeaponStrategy
         float baseDamage = _weaponData.GetStat(type);
         float perkBonus = PerkManager.Instance.EquippedPerkBonuses[type];
         float accBonuses = 1f;
-        foreach (var data in _equippedAccessories)
+        foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            var accessories = AccessoryManager.Instance.GetData(data.Key);
-            accBonuses *= accessories.GetData(type);
+            accBonuses *= data.GetData(type);
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -87,22 +85,21 @@ public class RangeStrategy : IWeaponStrategy
         {
             return;
         }
-        if (_equippedAccessories.ContainsKey(type))
+        AccessoryManager.Instance.Equip(type);
+        if (type.ToString().StartsWith(WEAPON_NAME))
         {
-            RemoveAccessory(type);
+            obj.transform.SetParent(_accessorySockets[type]);
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localRotation = Quaternion.identity;
+            obj.GetComponent<IAccessory>().SetEquipped(true);
         }
-        _equippedAccessories[type] = AccessoryManager.Instance.GetData(type);
-        Debug.Log(type);
-        obj.transform.SetParent(_accessorySockets[type]);
-        obj.transform.localPosition = Vector3.zero;
-        obj.transform.localRotation = Quaternion.identity;
     }
 
     public void RemoveAccessory(EAccessoryType type)
     {
-        if (_equippedAccessories.ContainsKey(type))
+        if (AccessoryManager.Instance.EquippedAccessories.ContainsKey(type))
         {
-            _equippedAccessories.Remove(type);
+            AccessoryManager.Instance.UnEquip(type);
             if (_accessorySockets.TryGetValue(type, out Transform socket))
             {
                 foreach (Transform child in socket)
@@ -113,14 +110,9 @@ public class RangeStrategy : IWeaponStrategy
         }
     }
 
-    public List<AccessoryData> GetEquippedAccessories()
-    {
-        return new List<AccessoryData>(_equippedAccessories.Values);
-    }
-
     public void ExecuteAccesories()
     {
-        foreach (var acc in _equippedAccessories)
+        foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
             if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
             {
@@ -139,7 +131,7 @@ public class RangeStrategy : IWeaponStrategy
             return (hitInfo.point - _muzzle.position).normalized;
         }
 
-        // Ray∞° æ∆π´∞Õµµ ∏¬¡ˆ æ æ“¿ª ∞ÊøÏ: ƒ´∏ﬁ∂Û ±‚¡ÿ 50f æ’ πÊ«‚
+        // RayÍ∞Ä ÏïÑÎ¨¥Í≤ÉÎèÑ ÎßûÏßÄ ÏïäÏïòÏùÑ Í≤ΩÏö∞: Ïπ¥Î©îÎùº Í∏∞Ï§Ä 50f Ïïû Î∞©Ìñ•
         Vector3 fallbackPoint = ray.origin + ray.direction * 50f;
         return (fallbackPoint - _muzzle.position).normalized;
     }
