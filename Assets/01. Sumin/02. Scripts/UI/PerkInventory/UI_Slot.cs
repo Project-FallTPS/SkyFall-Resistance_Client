@@ -4,29 +4,29 @@ using UnityEngine.UI;
 using TMPro;
 
 // Canvas -> Overlay로 하기
-public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
+public class UI_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
 {
-    public static SlotUI DraggingSlot; // 드래그 중인 슬롯 (정적)
+    public static UI_Slot DraggingSlot; // 드래그 중인 슬롯 (정적)
 
     [Header("# Hierarchy")]
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _bonusText;
     [SerializeField] private Image _background;
     [SerializeField] private Canvas _mainCanvas;
-    [SerializeField] private PerkEquipPanelUI _panel;
+    [SerializeField] private UI_PerkEquipPanel _panel;
 
     [Header("# Project")]
     public bool IsEquipInventory = false;
     private Transform _originalParent;
     private Vector3 _originalPosition;
 
-    private PerkDataEntry _data = null;
+    public PerkDataEntry Data { get; private set; }
 
-    public void Init(PerkDataEntry data, Canvas canvas, PerkEquipPanelUI panel)
+    public void Init(PerkDataEntry data, Canvas canvas, UI_PerkEquipPanel panel)
     {
         _mainCanvas = canvas;
         _panel = panel;
-        _data = data;
+        Data = data;
         RefreshUI();
     }
 
@@ -48,7 +48,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             {
                 foreach(var slot in _panel.HavingSlots)
                 {
-                    if(slot._data == null)
+                    if(slot.Data == null)
                     {
                         SwapPerks(slot);
                         break;
@@ -59,7 +59,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             {
                 foreach(var slot in _panel.ItemSlot)
                 {
-                    if(slot._data == null)
+                    if(slot.Data == null)
                     {
                         SwapPerks(slot);
                         break;
@@ -71,7 +71,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.pointerPress == _icon.gameObject || _data == null)
+        if (eventData.pointerPress == _icon.gameObject || Data == null)
             return;
 
         DraggingSlot = this;
@@ -115,26 +115,26 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         }
     }
 
-    private void SwapPerks(SlotUI other)
+    private void SwapPerks(UI_Slot other)
     {
-        if (_data == null && other._data == null) return;
+        if (Data == null && other.Data == null) return;
 
-        bool thisWasEquipped = IsEquipInventory && _data != null;
-        bool otherWasEquipped = other.IsEquipInventory && other._data != null;
+        bool thisWasEquipped = IsEquipInventory && Data != null;
+        bool otherWasEquipped = other.IsEquipInventory && other.Data != null;
 
-        var oldThisData = _data;
-        var oldOtherData = other._data;
+        var oldThisData = Data;
+        var oldOtherData = other.Data;
 
         // 데이터 교환
-        (_data, other._data) = (other._data, _data);
+        (Data, other.Data) = (other.Data, Data);
 
         // UI 갱신
         RefreshUI();
         other.RefreshUI();
 
         // 장착 상태 갱신
-        UpdateEquipStatus(thisWasEquipped, oldThisData, _data, IsEquipInventory);
-        UpdateEquipStatus(otherWasEquipped, oldOtherData, other._data, other.IsEquipInventory);
+        UpdateEquipStatus(thisWasEquipped, oldThisData, Data, IsEquipInventory);
+        UpdateEquipStatus(otherWasEquipped, oldOtherData, other.Data, other.IsEquipInventory);
     }
 
     private void UpdateEquipStatus(bool wasEquipped, PerkDataEntry oldData, PerkDataEntry newData, bool isEquipSlot)
@@ -163,10 +163,10 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     private void RefreshUI()
     {
-        if (_data != null)
+        if (Data != null)
         {
-            _bonusText.text = GetBonusText(_data);
-            _icon.sprite = _data.Icon;
+            _bonusText.text = GetBonusText(Data);
+            _icon.sprite = Data.Icon;
             _icon.color = Color.white;
             _background.color = Color.green;
         }
@@ -181,7 +181,7 @@ public class SlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void Clear()
     {
-        _data = null;
+        Data = null;
         RefreshUI();
     }
 }

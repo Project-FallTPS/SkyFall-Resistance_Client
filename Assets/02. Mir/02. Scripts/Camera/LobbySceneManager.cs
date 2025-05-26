@@ -1,11 +1,10 @@
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
+public class LobbySceneManager : Singleton<LobbySceneManager>
 {
-    public static Lobby_CinemachineCameraSwitcher Instance;
-
     public CinemachineCamera MainCamera;
     public CinemachineCamera PlayerCam;
     public CinemachineCamera MonitorCam;
@@ -13,11 +12,10 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
     [SerializeField] private GameObject _monitorUI;
     [SerializeField] private GameObject _characterUI;
 
-    protected private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(this);
+    public Stack<UI_Popup> OpenUIStack = new Stack<UI_Popup>();
 
+    protected override void Awake()
+    {
         MainCamera.Priority = 10;
         PlayerCam.Priority = 1;
         MonitorCam.Priority = 1;
@@ -35,12 +33,23 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) SwitchToCamera(LobbyCameraType.MainSpot);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(OpenUIStack.Count <= 0)
+            {
+                SwitchToCamera(ELobbyCameraType.MainSpot);
+            }
+            else
+            {
+                UI_Popup ui = OpenUIStack.Pop();
+                ui.Close();
+            }
+        }
     }
 
-    public void SwitchToCamera(LobbyCameraType type)
+    public void SwitchToCamera(ELobbyCameraType type)
     {
-        if (type == LobbyCameraType.MainSpot)
+        if (type == ELobbyCameraType.MainSpot)
         {
             MainCamera.Priority = 10;
             PlayerCam.Priority = 1;
@@ -49,7 +58,7 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
             _monitorUI.SetActive(false);
             _characterUI.SetActive(false);
         }
-        else if (type == LobbyCameraType.PlayerSpot)
+        else if (type == ELobbyCameraType.PlayerSpot)
         {
             MainCamera.Priority = 1;
             PlayerCam.Priority = 10;
@@ -58,7 +67,7 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
             _monitorUI.SetActive(false);
             _characterUI.SetActive(true);
         }
-        else if (type == LobbyCameraType.MonitorSpot)
+        else if (type == ELobbyCameraType.MonitorSpot)
         {
             MainCamera.Priority = 1;
             PlayerCam.Priority = 1;
@@ -67,5 +76,11 @@ public class Lobby_CinemachineCameraSwitcher : MonoBehaviour
             _monitorUI.SetActive(true);
             _characterUI.SetActive(false);
         }
+    }
+
+    public void OpenUI(UI_Popup ui)
+    {
+        ui.Open();
+        OpenUIStack.Push(ui);
     }
 }
