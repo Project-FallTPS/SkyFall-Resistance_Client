@@ -1,34 +1,25 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Borodar.RainbowFolders.RList {
-
-	[CustomPropertyDrawer(typeof(ReorderableAttribute))]
+namespace MoreMountains.Tools
+{
+	[CustomPropertyDrawer(typeof(MMReorderableAttributeAttribute))]
 	public class ReorderableDrawer : PropertyDrawer {
 
-		public const string ARRAY_PROPERTY_NAME = "array";
-
-		private static Dictionary<int, ReorderableList> lists = new Dictionary<int, ReorderableList>();
-
-		[Obsolete("CanCacheInspectorGUI has been deprecated and is no longer used.", false)]
-		public override bool CanCacheInspectorGUI(SerializedProperty property) {
-
-			return false;
-		}
+		private static Dictionary<int, MMReorderableList> lists = new Dictionary<int, MMReorderableList>();
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 
-			ReorderableList list = GetList(property, attribute as ReorderableAttribute, ARRAY_PROPERTY_NAME);
+			MMReorderableList list = GetList(property, attribute as MMReorderableAttributeAttribute);
 
 			return list != null ? list.GetHeight() : EditorGUIUtility.singleLineHeight;
-		}
-
+		}		
+		
+		#if  UNITY_EDITOR
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 
-			ReorderableList list = GetList(property, attribute as ReorderableAttribute, ARRAY_PROPERTY_NAME);
+			MMReorderableList list = GetList(property, attribute as MMReorderableAttributeAttribute);
 
 			if (list != null) {
 
@@ -39,6 +30,7 @@ namespace Borodar.RainbowFolders.RList {
 				GUI.Label(position, "Array must extend from ReorderableArray", EditorStyles.label);
 			}
 		}
+		#endif
 
 		public static int GetListId(SerializedProperty property) {
 
@@ -53,30 +45,30 @@ namespace Borodar.RainbowFolders.RList {
 			return 0;
 		}
 
-		public static ReorderableList GetList(SerializedProperty property, string arrayPropertyName) {
+		public static MMReorderableList GetList(SerializedProperty property) {
 
-			return GetList(property, null, GetListId(property), arrayPropertyName);
+			return GetList(property, null, GetListId(property));
 		}
 
-		public static ReorderableList GetList(SerializedProperty property, ReorderableAttribute attrib, string arrayPropertyName) {
+		public static MMReorderableList GetList(SerializedProperty property, MMReorderableAttributeAttribute attrib) {
 
-			return GetList(property, attrib, GetListId(property), arrayPropertyName);
+			return GetList(property, attrib, GetListId(property));
 		}
 
-		public static ReorderableList GetList(SerializedProperty property, int id, string arrayPropertyName) {
+		public static MMReorderableList GetList(SerializedProperty property, int id) {
 
-			return GetList(property, null, id, arrayPropertyName);
+			return GetList(property, null, id);
 		}
 
-		public static ReorderableList GetList(SerializedProperty property, ReorderableAttribute attrib, int id, string arrayPropertyName) {
+		public static MMReorderableList GetList(SerializedProperty property, MMReorderableAttributeAttribute attrib, int id) {
 
 			if (property == null) {
 
 				return null;
 			}
 
-			ReorderableList list = null;
-			SerializedProperty array = property.FindPropertyRelative(arrayPropertyName);
+			MMReorderableList list = null;
+			SerializedProperty array = property.FindPropertyRelative("array");
 
 			if (array != null && array.isArray) {
 
@@ -86,25 +78,13 @@ namespace Borodar.RainbowFolders.RList {
 
 						Texture icon = !string.IsNullOrEmpty(attrib.elementIconPath) ? AssetDatabase.GetCachedIcon(attrib.elementIconPath) : null;
 
-						ReorderableList.ElementDisplayType displayType = attrib.singleLine ? ReorderableList.ElementDisplayType.SingleLine : ReorderableList.ElementDisplayType.Auto;
+						MMReorderableList.ElementDisplayType displayType = attrib.singleLine ? MMReorderableList.ElementDisplayType.SingleLine : MMReorderableList.ElementDisplayType.Auto;
 
-						list = new ReorderableList(array, attrib.add, attrib.remove, attrib.draggable, displayType, attrib.elementNameProperty, attrib.elementNameOverride, icon);
-						list.paginate = attrib.paginate;
-						list.pageSize = attrib.pageSize;
-						list.sortable = attrib.sortable;
-
-						//handle surrogate if any
-
-						if (attrib.surrogateType != null) {
-
-							SurrogateCallback callback = new SurrogateCallback(attrib.surrogateProperty);
-
-							list.surrogate = new ReorderableList.Surrogate(attrib.surrogateType, callback.SetReference);
-						}
+						list = new MMReorderableList(array, attrib.add, attrib.remove, attrib.draggable, displayType, attrib.elementNameProperty, attrib.elementNameOverride, icon);
 					}
 					else {
 
-						list = new ReorderableList(array, true, true, true);
+						list = new MMReorderableList(array, true, true, true);
 					}
 
 					lists.Add(id, list);
@@ -116,26 +96,6 @@ namespace Borodar.RainbowFolders.RList {
 			}
 
 			return list;
-		}
-
-		private struct SurrogateCallback {
-
-			private string property;
-
-			internal SurrogateCallback(string property) {
-
-				this.property = property;
-			}
-
-			internal void SetReference(SerializedProperty element, Object objectReference, ReorderableList list) {
-
-				SerializedProperty prop = !string.IsNullOrEmpty(property) ? element.FindPropertyRelative(property) : null;
-
-				if (prop != null && prop.propertyType == SerializedPropertyType.ObjectReference) {
-
-					prop.objectReferenceValue = objectReference;
-				}
-			}
 		}
 	}
 }
