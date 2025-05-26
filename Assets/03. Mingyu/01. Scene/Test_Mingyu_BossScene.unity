@@ -261,6 +261,10 @@ PrefabInstance:
       propertyPath: m_Acceleration
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7333708014320033164, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7536471157877837015, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.5
