@@ -3,33 +3,69 @@ using UnityEngine;
 
 public class ParallaxManager : Singleton<ParallaxManager>
 {
-    [Header("Near Layer")]
+    [Header("Layer 세팅")]
     [SerializeField]
-    private ParallaxLayerSet _nearParallaxLayerSet;
-    [SerializeField]
-    private List<ParallaxLayer> _nearLayers;
+    private List<ParallaxLayerSet> _parallaxLayerSets;
+    private Dictionary<EParallaxLayerType, ParallaxLayerSet> _parallaxLayerSetDictionary = new Dictionary<EParallaxLayerType, ParallaxLayerSet>();
 
-    [Header("Middle Layer")]
-    [SerializeField]
-    private ParallaxLayerSet _middleParallaxLayerSet;
-    [SerializeField]
-    private List<ParallaxLayer> _middleLayers;
-
-    [Header("Far Layer")]
-    [SerializeField]
-    private ParallaxLayerSet _farParallaxLayerSet;
-    [SerializeField]
-    private List<ParallaxLayer> _farLayers;
-
-    [SerializeField]
-    private List<ParallaxLayerSet> _environmentLayers = new List<ParallaxLayerSet>();
-
-    private void Start()
+    protected override void Awake()
     {
-        foreach (ParallaxLayer nearLayer in _nearLayers)
+        base.Awake();
+        InitializeLayerSetDictionary();
+    }
+
+    private void OnValidate()
+    {
+        EnsureListInitialized();
+        EnsureListCountMatchesEnum();
+        SyncLayerTypesWithEnumOrder();
+    }
+
+    public ParallaxLayerSet GetParallaxLayerSet(EParallaxLayerType layerType)
+    {
+        return _parallaxLayerSetDictionary[layerType];
+    }
+
+    private void InitializeLayerSetDictionary()
+    {
+        for (int i = 0; i < (int)EParallaxLayerType.Count; i++)
         {
-            nearLayer.Initialize(_nearParallaxLayerSet);
+            _parallaxLayerSetDictionary[(EParallaxLayerType)i] = _parallaxLayerSets[i];
         }
-        
+    }
+
+    private void EnsureListInitialized()
+    {
+        if (_parallaxLayerSets == null)
+        {
+            _parallaxLayerSets = new List<ParallaxLayerSet>();
+        }
+    }
+
+    private void EnsureListCountMatchesEnum()
+    {
+        int enumCount = (int)EParallaxLayerType.Count;
+        int enumIndex = 0;
+        // 부족한 항목 추가
+        while (_parallaxLayerSets.Count < enumCount)
+        {
+            _parallaxLayerSets.Add(new ParallaxLayerSet((EParallaxLayerType)enumIndex));
+            enumIndex++;
+        }
+
+        // 불필요한 항목 제거
+        if (_parallaxLayerSets.Count > enumCount)
+        {
+            _parallaxLayerSets.RemoveRange(enumCount, _parallaxLayerSets.Count - enumCount);
+        }
+    }
+
+    private void SyncLayerTypesWithEnumOrder()
+    {
+        // LayerType 중복 방지 및 순서 고정
+        for (int i = 0; i < _parallaxLayerSets.Count; i++)
+        {
+            _parallaxLayerSets[i].LayerType = (EParallaxLayerType)i;
+        }
     }
 }

@@ -3,9 +3,25 @@ using System;
 [Serializable]
 public class ParallaxLayerSet
 {
-    public ParallaxLayer ParallaxLayer;
+    public ParallaxLayerSet
+        (
+        EParallaxLayerType layerType,
+        float moveSpeed = 0f,
+        float startPositionY = 0f,
+        float loopOffset = 1000f,
+        bool isLooping = false
+        )
+    {
+        LayerType = layerType;
+        MoveSpeed = moveSpeed;
+        StartPositionY = startPositionY;
+        LoopOffset = loopOffset;
+        IsLooping = isLooping;
+    }
+
+    public EParallaxLayerType LayerType;
     public float MoveSpeed;
-    public float StartPositionY = -30f;
-    public float LoopOffset = 10f;
-    public bool IsLooping = true;
+    public float StartPositionY;
+    public float LoopOffset;
+    public bool IsLooping;
 }
