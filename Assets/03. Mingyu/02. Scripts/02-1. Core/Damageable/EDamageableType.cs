@@ -4,5 +4,6 @@ public enum EDamageableType
     EnemyBomb,
     BossBulletStraight,
     BossBulletBezier,
+    BossLaser,
     Count
 }

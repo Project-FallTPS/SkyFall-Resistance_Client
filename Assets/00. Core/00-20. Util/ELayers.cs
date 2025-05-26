@@ -10,4 +10,5 @@ UI = 5,
 AimCube = 6,
 Bullet = 7,
 Obstacle = 8,
+Boss = 9,
 }

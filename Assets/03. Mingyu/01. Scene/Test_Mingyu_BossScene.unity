@@ -257,9 +257,13 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6373082510433935229, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
+      propertyPath: m_Acceleration
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7536471157877837015, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -23.5
       objectReference: {fileID: 0}
     - target: {fileID: 7536471157877837015, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -267,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7536471157877837015, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -39.6
       objectReference: {fileID: 0}
     - target: {fileID: 7536471157877837015, guid: 71172bf5418bf194090c5e44d8c00fe4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -605,6 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1465649600}
   - component: {fileID: 1465649598}
+  - component: {fileID: 1465649601}
   m_Layer: 0
   m_Name: ======= [ Singleton ] =======
   m_TagString: Untagged
@@ -638,6 +643,10 @@ MonoBehaviour:
     InitCount: 20
     Prefab: {fileID: 1331364910304127374, guid: ec7d5d86672ae5749ab16bde84af1741, type: 3}
     Container: {fileID: 1946357162}
+  - Type: 4
+    InitCount: 5
+    Prefab: {fileID: 4495356607337096260, guid: 5d1dda986c1e5974c854d93a54eb9676, type: 3}
+    Container: {fileID: 1946357162}
 --- !u!4 &1465649600
 Transform:
   m_ObjectHideFlags: 0
@@ -653,6 +662,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1465649601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465649594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1f7dffafed33844a6f75f3e40da77c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 0
+  _bossPrefab: {fileID: 1875926273}
 --- !u!1 &1543345149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,7 +1052,7 @@ GameObject:
   - component: {fileID: 2076992549}
   - component: {fileID: 2076992548}
   - component: {fileID: 2076992547}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TestPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1119,7 +1142,7 @@ Transform:
   m_GameObject: {fileID: 2076992546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 13.18, z: 25.23}
+  m_LocalPosition: {x: 46.8, y: 13.18, z: 31.4}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
