@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1840310133502210498}
   - component: {fileID: 8409294743079875273}
   - component: {fileID: 9066929792306460546}
+  - component: {fileID: 1381852074900718044}
   m_Layer: 5
   m_Name: TempSlot
   m_TagString: Untagged
@@ -93,9 +94,27 @@ MonoBehaviour:
   _bonusText: {fileID: 7604581406549193189}
   _background: {fileID: 8409294743079875273}
   _mainCanvas: {fileID: 0}
-  _perkType: 4
-  _dragPreviewPrefab: {fileID: -1576437130297674793, guid: 80d58c0fc48df304e8f5eaa01ce981bd, type: 3}
   IsEquipInventory: 0
+--- !u!114 &1381852074900718044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956637863799004494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 100
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: 0
+  m_LayoutPriority: 1
 --- !u!1 &3439916193135263554
 GameObject:
   m_ObjectHideFlags: 0
