@@ -56,13 +56,13 @@ public class BossData
 
     [Header("Phase")] 
     [Tooltip("보스의 최대 페이즈")]
-    public float MaxPhase;
+    public int MaxPhase;
 
-    private float _currentPhase;
-    public float CurrentPhase
+    private int _currentPhase;
+    public int CurrentPhase
     {
         get => _currentPhase;
-        set => _currentPhase = Mathf.Clamp(value, 0f, MaxPhase);
+        set => _currentPhase = Mathf.Clamp(value, 0, MaxPhase);
     }
 
     [Tooltip("페이즈가 전환되는 보스 체력 비율, 항상 리스트 사이즈는 (페이즈 수 - 1) 이어야 한다.")]
