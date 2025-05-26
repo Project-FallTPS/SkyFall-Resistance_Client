@@ -860,6 +860,7 @@ GameObject:
   - component: {fileID: 437781506}
   - component: {fileID: 437781505}
   - component: {fileID: 437781504}
+  - component: {fileID: 437781508}
   m_Layer: 5
   m_Name: UI_Monitor
   m_TagString: Untagged
@@ -951,6 +952,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &437781508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437781503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b9d00da4f8aa245ae767d91ae29ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _perkPanel: {fileID: 442461299}
+--- !u!1 &442461299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 349214792391857568, guid: 8c26dbf48eea07f409003853eeee4b9f, type: 3}
+  m_PrefabInstance: {fileID: 430377428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &513536863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1052,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 513536866}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437781508}
+        m_TargetAssemblyTypeName: MonitorButtonController, Assembly-CSharp
+        m_MethodName: OnClickPerkButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &513536866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,7 +1129,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 544907009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72a3af7f140eb804f8256a6eace6e5e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 644557c488d6e61478735c23c01e2408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isDontDestroy: 0
@@ -1520,7 +1551,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 810788160}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437781503}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &810788160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1582,6 +1625,52 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839437601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &895750790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895750792}
+  - component: {fileID: 895750791}
+  m_Layer: 0
+  m_Name: PerkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &895750791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895750790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30795186a00d364395be67889e66bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 1
+  _perkDataCollection: {fileID: 11400000, guid: cd0bbfa18afdd224888ad69610e69697, type: 2}
+--- !u!4 &895750792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895750790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2692,7 +2781,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1447513342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437781503}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1447513342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2813,7 +2914,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1514270196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437781503}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1514270196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3469,8 +3582,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980997964}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1, y: 1, z: -3}
+  m_LocalRotation: {x: 0, y: -0.08715578, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: -1.68, y: 1.08, z: -1.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3877,3 +3990,4 @@ SceneRoots:
   - {fileID: 1069796811}
   - {fileID: 1420526723}
   - {fileID: 2069700984}
+  - {fileID: 895750792}

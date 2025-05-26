@@ -12,7 +12,7 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
     [SerializeField] private GameObject _monitorUI;
     [SerializeField] private GameObject _characterUI;
 
-    public Stack<GameObject> OpenUIStack = new Stack<GameObject>();
+    public Stack<PopupUI> OpenUIStack = new Stack<PopupUI>();
 
     protected override void Awake()
     {
@@ -35,14 +35,14 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(OpenUIStack.Count == 0)
+            if(OpenUIStack.Count <= 0)
             {
                 SwitchToCamera(LobbyCameraType.MainSpot);
             }
             else
             {
-                GameObject ui = OpenUIStack.Pop();
-                ui.SetActive(false);
+                PopupUI ui = OpenUIStack.Pop();
+                ui.Close();
             }
         }
     }
@@ -78,9 +78,9 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
         }
     }
 
-    public void OpenUI(GameObject ui)
+    public void OpenUI(PopupUI ui)
     {
-        ui.SetActive(true);
+        ui.Open();
         OpenUIStack.Push(ui);
     }
 }

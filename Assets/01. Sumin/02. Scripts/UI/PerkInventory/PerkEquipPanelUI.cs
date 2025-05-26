@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerkEquipPanelUI : MonoBehaviour
+public class PerkEquipPanelUI : PopupUI
 {
     [Header("# Hierarchy")]
     [SerializeField] private Canvas _mainCanvas;
