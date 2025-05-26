@@ -24,7 +24,10 @@ MonoBehaviour:
     RushSpeedDivisorForWindup: 5
     WindupDistance: 5
     WindupTime: 1
+    MaxLaserDistance: 100
     MinRazerDistance: 12
+    WindupTimeForLaser: 1
+    LaserDuration: 2
     MaxPhase: 3
     PhaseChangeHealth:
     - 70
