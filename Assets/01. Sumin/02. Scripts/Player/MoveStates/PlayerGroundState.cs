@@ -1,4 +1,4 @@
-public class PlayerTargetDashState : IPlayerState
+public class PlayerGroundState : IPlayerState
 {
     public void Enter(PlayerMovement player)
     {
@@ -11,6 +11,16 @@ public class PlayerTargetDashState : IPlayerState
     }
 
     public void Exit(PlayerMovement player)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void HandleMovement()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Update()
     {
         throw new System.NotImplementedException();
     }

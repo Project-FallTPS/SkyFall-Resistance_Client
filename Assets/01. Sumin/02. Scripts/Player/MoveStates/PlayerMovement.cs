@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,27 +17,26 @@ public class PlayerMovement : MonoBehaviour
     private bool _isSprint;
 
     [Header("# Components")]
-    public CharacterController _characterController { get; private set; }
-    private Transform _mainCameraTransform;
-    private Animator _animator;
-    private Rigidbody _rigid;
+    public CharacterController CharacterController { get; private set; }
+    public Transform MainCameraTransform { get; private set; }
+    public Animator Animator { get; private set; }
+    public Rigidbody Rigid { get; private set; }
     
 
     private void Awake()
     {
-        _rigid = GetComponent<Rigidbody>();
+        Rigid = GetComponent<Rigidbody>();
         _playerStatManager = GetComponent<PlayerStatHolder>();
-        _characterController = GetComponent<CharacterController>();
-        _animator = GetComponentInChildren<Animator>();
+        CharacterController = GetComponent<CharacterController>();
+        Animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
-        _mainCameraTransform = Camera.main.transform;
-        //StateMachine = new PlayerMoveStateMachine(this, new Dictionary<EPlayerMoveState, IPlayerState> 
-        //{
-        //    { EPlayerMoveState.Idle, new PlayerIdleState() },
-        //    { EPlayerMoveState.Move, new PlayerMoveState() },
-        //    { EPlayerMoveState.Sprint, new PlayerSprintState() },
-        //    { EPlayerMoveState.TargetDash, new PlayerTargetDashState() },
-        //});
+        MainCameraTransform = Camera.main.transform;
+        StateMachine = new PlayerMoveStateMachine(this, new Dictionary<EPlayerMoveState, IPlayerState>
+        {
+            { EPlayerMoveState.Ground, new PlayerGroundState() },
+            { EPlayerMoveState.Airborne, new PlayerAirborneState() },
+        });
+        ChangeState(EPlayerMoveState.Airborne);
 
         //if (SceneManager.GetActiveScene().name == "PlayerTest")
         //{
@@ -61,10 +61,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleDirection(float h, float v)
     {
-        Vector3 camForward = _mainCameraTransform.forward;
+        Vector3 camForward = MainCameraTransform.forward;
         camForward.Normalize();
 
-        Vector3 camRight = _mainCameraTransform.right;
+        Vector3 camRight = MainCameraTransform.right;
         camRight.Normalize();
 
         MoveDirection = (camForward * v + camRight * h).normalized;
@@ -72,18 +72,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleMovement(float h, float v, bool isKeyDown)
     {
-        _animator.SetFloat("anim_Player_MovingX", h);
-        _animator.SetFloat("anim_Player_MovingZ", v);
-        _animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
+        Animator.SetFloat("anim_Player_MovingX", h);
+        Animator.SetFloat("anim_Player_MovingZ", v);
+        Animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
 
-        Vector3 camForward = _mainCameraTransform.forward;
+        Vector3 camForward = MainCameraTransform.forward;
         //if (SceneManager.GetActiveScene().name == "PlayerTest") // 보스씬이라면 이라고 바꿔야댐
         //{
         //    camForward.y = 0;
         //}
         camForward.Normalize();
 
-        Vector3 camRight = _mainCameraTransform.right;
+        Vector3 camRight = MainCameraTransform.right;
         //if (SceneManager.GetActiveScene().name == "PlayerTest") // 보스씬이라면 이라고 바꿔야댐
         //{
         //    camRight.y = 0;
@@ -100,11 +100,11 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Vector3 targetPosition = transform.position + MoveDirection * CurrentSpeed * Time.deltaTime;
-            _rigid.MovePosition(targetPosition);
+            Rigid.MovePosition(targetPosition);
         }
         else
         {
-            _rigid.linearVelocity = Vector3.zero;
+            Rigid.linearVelocity = Vector3.zero;
         }
     }
 
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CurrentSpeed = isSprint ? _playerStatManager.GetStat(EStatType.SprintSpeed) : _playerStatManager.GetStat(EStatType.MoveSpeed);
         _isSprint = isSprint;
-        _animator.SetBool("anim_Player_IsBoosting", isSprint);
+        Animator.SetBool("anim_Player_IsBoosting", isSprint);
     }
 
     public void ChangeState(EPlayerMoveState state)
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector3 camForward = _mainCameraTransform.forward;
+        Vector3 camForward = MainCameraTransform.forward;
 
         if (camForward.sqrMagnitude > 0.01f)
         {
