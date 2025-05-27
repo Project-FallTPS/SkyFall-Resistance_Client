@@ -86,7 +86,7 @@ public partial class BossShootAction : Action, IBossAttack
         Vector3 bossPosition = _bossTransform.position;
         Vector3 playerPosition = _playerTransform.position;
         Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
-        // 디버그 라인
+        
         Debug.DrawLine(bossPosition, playerPosition, Color.red, 2f);
         
         DamageablePoolManager.Instance.GetObject(
@@ -103,8 +103,7 @@ public partial class BossShootAction : Action, IBossAttack
         Vector3 shootEnd = _playerTransform.position;
 
         Vector3 controlPoint = CalculateControlPoint(obstacleHit, shootStart, shootEnd);
-
-        // 시각화
+        
         const int segmentCount = 20;
         Vector3 previousPoint = shootStart;
         for (int i = 1; i <= segmentCount; i++)
@@ -131,33 +130,33 @@ public partial class BossShootAction : Action, IBossAttack
     {
         Bounds obstacleBounds = obstacleHit.collider.bounds;
 
-        // 장애물의 바깥쪽 방향 벡터 계산
+        // 바깥쪽 방향 벡터 
         Vector3 toPlayer = (shootEnd - shootStart).normalized;
         Vector3 upDir = Vector3.up;
         Vector3 rightDir = Vector3.Cross(upDir, toPlayer).normalized;
 
-        // 장애물의 외곽 기준으로 충분히 멀리 떨어진 위치 확보
-        float verticalOffset = Mathf.Max(obstacleBounds.size.y * 1.5f, 2f); // 장애물보다 위로 충분히 띄움
-        float sideOffset = Mathf.Max(obstacleBounds.size.x * 1.5f, 2f);     // 옆으로도 충분히 띄움
+        // 장애물 Collider 외곽 지점의 오프셋 생성
+        float verticalOffset = Mathf.Max(obstacleBounds.size.y * 1.5f, 2f);
+        float sideOffset = Mathf.Max(obstacleBounds.size.x * 1.5f, 2f);
 
         float choice = UnityEngine.Random.value;
         Vector3 controlPoint;
 
         if (choice < 0.33f)
         {
-            // 위로 꺾는 곡선
+            // Top
             Vector3 mid = (shootStart + shootEnd) * 0.5f;
             controlPoint = mid + upDir * verticalOffset;
         }
         else if (choice < 0.66f)
         {
-            // 오른쪽으로 꺾기
+            // Right
             Vector3 mid = (shootStart + shootEnd) * 0.5f;
             controlPoint = mid + rightDir * sideOffset + upDir * (verticalOffset * 0.5f);
         }
         else
         {
-            // 왼쪽으로 꺾기
+            // Left
             Vector3 mid = (shootStart + shootEnd) * 0.5f;
             controlPoint = mid - rightDir * sideOffset + upDir * (verticalOffset * 0.5f);
         }
