@@ -12,4 +12,5 @@ CinemachineTarget,
 Enemy,
 Accessory,
 Boss,
+BossWeakness,
 }

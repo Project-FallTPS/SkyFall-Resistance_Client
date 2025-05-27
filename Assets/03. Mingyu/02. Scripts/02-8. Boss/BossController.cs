@@ -1,8 +1,7 @@
 using System;
-using Unity.Behavior;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class BossController : MonoBehaviour, IDamageable
 {
@@ -25,21 +24,23 @@ public class BossController : MonoBehaviour, IDamageable
     [Header("External References")] 
     private Transform _playerTransform;
     public Transform PlayerTransform => _playerTransform;
-
-    [FormerlySerializedAs("_attackPositionTransform")] [SerializeField] 
+    
+    [SerializeField] 
     private Transform _shootPositionTransform;
 
     public Transform ShootPositionTransform { get => _shootPositionTransform; }
+    
+    [Header("Weakness Points")]
+    private List<Collider> _weaknessPoints = new List<Collider>();
 
+    public List<Collider> WeaknessPoints => _weaknessPoints;
 
+    public Action<float> OnHit;
+    
+    
     private void Awake()
     {
-        _bossData = _bossDataSO.GetBossData(_bossType);
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = _bossData.MoveSpeed;
-        _navMeshAgent.updateRotation = true;
-        _animator = GetComponent<Animator>();
-        _playerTransform = GameObject.FindGameObjectWithTag(nameof(ETags.Player)).transform;
+        Init();
     }
 
     public void TakeDamage(float damage)
@@ -47,11 +48,69 @@ public class BossController : MonoBehaviour, IDamageable
         _bossData.CurrentHealth -= damage;
         if (_bossData.CurrentHealth <= 0)
         {
-            
+            Debug.Log("Boss Dead");
         }
         else
         {
-            
+            Debug.Log("Boss Damaged");
+        }
+        OnHit?.Invoke(damage);
+    }
+
+    private void Init()
+    {
+        _animator = GetComponent<Animator>();
+        _playerTransform = GameObject.FindGameObjectWithTag(nameof(ETags.Player)).transform;
+        InitBossData();
+        InitNavMesh();
+        InitWeaknessColliders();
+        AddOnPhaseChangedEvents();
+    }
+
+    private void InitBossData()
+    {
+        _bossData = _bossDataSO.GetBossData(_bossType);
+        _bossData.CurrentHealth = _bossData.MaxHealth;
+    }
+    private void InitNavMesh()
+    {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.speed = _bossData.MoveSpeed;
+        _navMeshAgent.updateRotation = true;
+    }
+
+    private void InitWeaknessColliders()
+    {
+        Collider[] weaknessColliders = GetComponentsInChildren<Collider>();
+        foreach (Collider collider in weaknessColliders)
+        {
+            _weaknessPoints.Add(collider);
+        }
+    }
+
+    private void AddOnPhaseChangedEvents()
+    {
+        _bossData.OnPhaseChanged += ActivateWeaknessColliders;
+    }
+
+    public void ActivateWeaknessColliders()
+    {
+        if (_bossData.CurrentPhase != 3)
+        {
+            return;
+        }
+
+        foreach (var weaknessCollider in _weaknessPoints)
+        {
+            weaknessCollider.enabled = true;
+        }
+    }
+
+    public void DeactivateWeaknessColliders()
+    {
+        foreach (var weaknessCollider in _weaknessPoints)
+        {
+            weaknessCollider.enabled = false;
         }
     }
 }
