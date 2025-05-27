@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -33,6 +34,9 @@ public class BossController : MonoBehaviour, IDamageable
     private List<Collider> _weaknessPoints = new List<Collider>();
 
     public List<Collider> WeaknessPoints => _weaknessPoints;
+
+    public Action<float> OnHit;
+    
     
     private void Awake()
     {
@@ -50,6 +54,7 @@ public class BossController : MonoBehaviour, IDamageable
         {
             Debug.Log("Boss Damaged");
         }
+        OnHit?.Invoke(damage);
     }
 
     private void Init()
