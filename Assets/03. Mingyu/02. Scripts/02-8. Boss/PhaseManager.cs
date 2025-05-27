@@ -4,7 +4,7 @@ using UnityEngine;
 public class PhaseManager : Singleton<PhaseManager>
 {
     [SerializeField]
-    private GameObject _bossPrefab;
+    private BossController _bossController;
 
     private int _maxPhase;
     public int MaxPhase
@@ -20,6 +20,8 @@ public class PhaseManager : Singleton<PhaseManager>
         set => _currentPhase = value;
     }
 
+    public Action<int> OnChangePhase;
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,8 +30,16 @@ public class PhaseManager : Singleton<PhaseManager>
     private void Start()
     {
         _maxPhase = 
-            _bossPrefab.GetComponent<BossController>().BossData.MaxPhase;
+            _bossController.BossData.MaxPhase;
         _currentPhase = 
-            _bossPrefab.GetComponent<BossController>().BossData.CurrentPhase = 1;
+            _bossController.BossData.CurrentPhase = 1;
+
+        _bossController.BossData.OnPhaseChanged += ChangePhase;
+    }
+
+    private void ChangePhase()
+    {
+        _currentPhase = _bossController.BossData.CurrentPhase;
+        OnChangePhase?.Invoke(_currentPhase);
     }
 }
