@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private const int MAX_JUMP_COUNT = 2;
+
     [Header("# Stat")]
     public PlayerStatHolder PlayerStatManager { get; private set; }
 
@@ -16,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float CurrentSpeed { get; private set; }
     public Vector3 MoveDirection { get; private set; }
     public bool IsSprint { get; private set; }
+
+    [Header("# Jump")]
+    private int _jumpCount = 0;   // 현재 점프 횟수
 
     [Header("# Components")]
     public Rigidbody Rigid { get; private set; }
@@ -59,13 +64,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            Animator.SetBool("anim_Player_IsGrounded", true);
+            _jumpCount = 0; // 점프 횟수 초기화
+
             if (CurrentState is not PlayerGroundState)
             {
                 ChangeState(EPlayerMoveState.Ground);
-                Animator.SetBool("anim_Player_IsGrounded", true);
+                PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.LandingEffect, transform.position);
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Animator.SetBool("anim_Player_IsGrounded", false);
         }
     }
 
@@ -112,6 +128,33 @@ public class PlayerMovement : MonoBehaviour
             CurrentState = state;
             CurrentState.Enter(this);        
         }
+    }
+
+    public void Jump()
+    {
+        if (_jumpCount >= MAX_JUMP_COUNT || CurrentState is not PlayerGroundState)
+        {
+            return;
+        }
+
+        Rigid.AddForce(Vector3.up * PlayerStatManager.GetStat(EStatType.JumpPower), ForceMode.Impulse);
+        _jumpCount++;
+
+        if(_jumpCount == 1)
+        {
+            Animator.SetTrigger("anim_Player_GroundJump");
+        }
+        else
+        {
+            Animator.SetTrigger("anim_Player_GroundDoubleJump");
+            ChangeState(EPlayerMoveState.Airborne);
+        }
+    }
+
+
+    public void Dodge(float h, float v)
+    {
+
     }
 
     private void HandleRotation()

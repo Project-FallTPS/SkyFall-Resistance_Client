@@ -12,6 +12,8 @@ public class PlayerAirborneState : IPlayerState
             _player = player;
         }
         //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.useGravity = false;
+        _player.Rigid.constraints = RigidbodyConstraints.None;
     }
 
     public void Exit(PlayerMovement player)

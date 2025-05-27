@@ -16,7 +16,7 @@ public class KatanaEventHolder : MonoBehaviour
         _katanaCollider.enabled = flag == 1 ? true : false;
         if (flag == 1)
         {
-            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.SwrodSlash1, _katana.transform.position, _katana.transform.rotation);
+            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MeleeAttackEffect, _katana.transform.position, _katana.transform.rotation);
         }
     }
 }

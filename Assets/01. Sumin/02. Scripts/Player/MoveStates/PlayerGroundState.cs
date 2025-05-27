@@ -25,6 +25,11 @@ public class PlayerGroundState : IPlayerState
 
     public void HandleMovement(float h, float v, bool isKeyDown)
     {
+        float threshold = 0.1f;
+
+        float rawH = Mathf.Abs(h) < threshold ? 0 : Mathf.Sign(h);
+        float rawV = Mathf.Abs(v) < threshold ? 0 : Mathf.Sign(v);
+
         Vector3 camForward = _player.MainCameraTransform.forward;
         camForward.y = 0;
         camForward.Normalize();
@@ -33,7 +38,7 @@ public class PlayerGroundState : IPlayerState
         camRight.y = 0;
         camRight.Normalize();
 
-        _moveDirection = (camForward * v + camRight * h).normalized;
+        _moveDirection = (camForward * rawV + camRight * rawH).normalized;
 
         Vector3 currentVelocity = _player.Rigid.linearVelocity;
 
