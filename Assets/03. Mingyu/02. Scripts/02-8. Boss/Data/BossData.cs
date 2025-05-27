@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,13 +14,20 @@ public class BossData
     [Tooltip("보스의 최대 체력")]
     public float MaxHealth;
 
-    [SerializeField]
+    
     [Tooltip("보스의 현재 체력")]
     private float _currentHealth;
     public float CurrentHealth
     {
         get => _currentHealth;
-        set => _currentHealth = Mathf.Clamp(value, 0f, MaxHealth);
+        set
+        {
+            _currentHealth = Mathf.Clamp(value, 0f, MaxHealth);
+            if ((_currentHealth / MaxHealth * 100f) <= PhaseChangeHealthPercentage[_currentPhase - 1])
+            {
+                CurrentPhase++;
+            }
+        }
     }
 
     [Tooltip("보스의 기본 이동 속도")]
@@ -65,21 +73,26 @@ public class BossData
     [Tooltip("보스의 최대 페이즈")]
     public int MaxPhase;
 
-    private int _currentPhase;
+    private int _currentPhase = 1;
     public int CurrentPhase
     {
         get => _currentPhase;
-        set => _currentPhase = Mathf.Clamp(value, 0, MaxPhase);
+        set
+        {
+            _currentPhase = Mathf.Clamp(value, 0, MaxPhase);
+            PhaseManager.Instance.CurrentPhase = _currentPhase;
+            OnPhaseChanged?.Invoke();
+        }
     }
+    public Action OnPhaseChanged;
 
     [Tooltip("페이즈가 전환되는 보스 체력 비율, 항상 리스트 사이즈는 (페이즈 수 - 1) 이어야 한다.")]
-    public List<float> PhaseChangeHealth;
+    public List<float> PhaseChangeHealthPercentage;
     
     public BossData(BossData original)
     {
         BossType = original.BossType;
         MaxHealth = original.MaxHealth;
-        CurrentHealth = original.CurrentHealth;
         MoveSpeed = original.MoveSpeed;
         AttackDamage = original.AttackDamage;
         AttackCooltime = original.AttackCooltime;
@@ -93,7 +106,7 @@ public class BossData
         BeforeRushDelay = original.BeforeRushDelay;
         MinLaserDistance = original.MinLaserDistance;
         MaxPhase = original.MaxPhase;
-        PhaseChangeHealth = original.PhaseChangeHealth;
+        PhaseChangeHealthPercentage = original.PhaseChangeHealthPercentage;
         
         MinLaserDistance = original.MinLaserDistance;
         WindupTimeForLaser = original.WindupTimeForLaser;
