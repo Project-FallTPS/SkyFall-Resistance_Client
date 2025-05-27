@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayerAirborneState : IPlayerState
 {
     private PlayerMovement _player = null;
     private Vector3 _moveDirection = new Vector3();
-    private bool _isSprint = false;
 
     public void Enter(PlayerMovement player)
     {

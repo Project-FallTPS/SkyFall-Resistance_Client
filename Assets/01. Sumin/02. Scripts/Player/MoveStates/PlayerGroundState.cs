@@ -4,7 +4,6 @@ public class PlayerGroundState : IPlayerState
 {
     private PlayerMovement _player = null;
     private Vector3 _moveDirection = new Vector3();
-    private bool _isSprint = false;
 
     public void Enter(PlayerMovement player)
     {
@@ -12,13 +11,12 @@ public class PlayerGroundState : IPlayerState
         {
             _player = player;
         }
-        _player.CurrentSpeed = _player.PlayerStatManager.GetStat(EStatType.MoveSpeed);
-        _player.Rigid.linearVelocity = Vector3.zero;
+        //_player.Rigid.linearVelocity = Vector3.zero;
     }
 
     public void Exit(PlayerMovement player)
     {
-        _player.Rigid.linearVelocity = Vector3.zero;
+        //_player.Rigid.linearVelocity = Vector3.zero;
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -39,12 +37,13 @@ public class PlayerGroundState : IPlayerState
             {
                 _player.SetSprint(false);
             }
-            Vector3 movement = _moveDirection * _player.CurrentSpeed;
-            _player.Rigid.linearVelocity = new Vector3(movement.x, _player.Rigid.linearVelocity.y, movement.z);
+
+            Vector3 targetPosition = _player.transform.position + _moveDirection * _player.CurrentSpeed * Time.deltaTime;
+            _player.Rigid.MovePosition(targetPosition);
         }
         else
         {
-            _player.Rigid.linearVelocity = new Vector3(0, _player.Rigid.linearVelocity.y, 0);
+            _player.Rigid.linearVelocity = Vector3.zero;
         }
     }
 

@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header(" Movement Settings")]
     public float RotateSpeed = 10f;
-    public float CurrentSpeed { get; set; }
+    public float CurrentSpeed { get; private set; }
     public Vector3 MoveDirection { get; private set; }
     public bool IsSprint { get; private set; }
 
@@ -44,14 +44,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //CheckStateTransition();
+        CheckStateTransition();
         CurrentState?.Update();
         if(IsSprint)
         {
             PlayerStatManager.RegenStamina();
         }
-        Debug.Log(CurrentSpeed);
-
     }
 
     private void LateUpdate()
