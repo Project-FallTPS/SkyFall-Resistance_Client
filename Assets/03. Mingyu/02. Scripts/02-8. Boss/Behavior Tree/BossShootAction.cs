@@ -39,7 +39,6 @@ public partial class BossShootAction : Action, IBossAttack
     protected override Status OnUpdate()
     {
         _bossData.LastAttackTime = Time.time;
-        Debug.Log(_bossData.LastAttackTime);
         Attack();
         return Status.Success;
     }
