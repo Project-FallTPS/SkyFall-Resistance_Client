@@ -1,7 +1,5 @@
 public enum EPlayerMoveState
 {
-    Idle,
-    Move,
-    Sprint,
-    TargetDash,
+    Ground,
+    Airborne,
 }
