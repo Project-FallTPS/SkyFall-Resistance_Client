@@ -9,7 +9,6 @@ public class WeaknessCollider : MonoBehaviour, IDamageable
     private void Awake()
     {
         _bossController = GetComponentInParent<BossController>();
-        Debug.Log(_bossController.gameObject.name);
     }
 
     public void TakeDamage(float damage)
