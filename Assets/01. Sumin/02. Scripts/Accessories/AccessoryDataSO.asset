@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c4c7a15c18c22419503567cf6baa12, type: 3}
+  m_Script: {fileID: 11500000, guid: 90bc33d909719184d849cf6017f39b32, type: 3}
   m_Name: AccessoryDataSO
   m_EditorClassIdentifier: 
   AccessoryDatas:
-  - Type: 1
+  - Type: 0
     Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
     Bonuses:
     - Type: 3

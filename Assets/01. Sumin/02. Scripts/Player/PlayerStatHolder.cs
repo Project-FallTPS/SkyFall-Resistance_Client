@@ -8,8 +8,8 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     public static Action<float, float> OnStaminaChange;
 
     [Header("# Project")]
-    [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // ����
-    public Dictionary<EStatType, float> StatDict { get; private set; } // ĳ��
+    [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // 원본
+    public Dictionary<EStatType, float> StatDict { get; private set; } // 캐싱
 
     private void Awake()
     {
@@ -17,30 +17,21 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
         //PerkManager.Instance.CalculateFinalStats(StatDict);
     }
 
-    private void Update()
-    {
-        RegenStamina();
-    }
-
     public float GetStat(EStatType type)
     {
         return StatDict.TryGetValue(type, out var value) ? value : -1f;
-    }
-
-    public void UseStamina(float value)
-    {
-        StatDict[EStatType.CurrentStamina] = Mathf.Max(0, StatDict[EStatType.CurrentStamina] - value);
     }
 
     public bool TryUseStamina(EStatType type)
     {
         if(type == EStatType.SprintStaminaUseRate)
         {
-            if (StatDict[EStatType.CurrentStamina] < StatDict[type] * Time.deltaTime)
+            if (StatDict[EStatType.CurrentStamina] < StatDict[type] * Time.fixedDeltaTime)
             {
                 return false;
             }
             StatDict[EStatType.CurrentStamina] = Mathf.Max(0, StatDict[EStatType.CurrentStamina] - StatDict[type] * Time.deltaTime);
+            Debug.Log($"스프린트 스태미너 사용{StatDict[EStatType.CurrentStamina]}");
         }
         else if(type == EStatType.TargetDashStaminaUseRate)
         {
@@ -55,6 +46,7 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
             return false;
         }
 
+        OnStaminaChange?.Invoke(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]);
         return true;
     }
 
@@ -72,7 +64,7 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
     }
 
-    private void RegenStamina()
+    public void RegenStamina()
     {
         if (Mathf.Approximately(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]))
         {

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    // ½ºÅÈ Á¤º¸
-    // ÀÔ·Â ¹Þ±â
     [Header("# Component")]
     private PlayerAttackHandler _playerAttackHandler;
     private PlayerMovement _playerMovement;
@@ -23,7 +21,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         GetMoveInput();
         _playerAttackHandler.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
-        GetAttackInput();
+        GetInput();
     }
 
     private void FixedUpdate()
@@ -31,7 +29,7 @@ public class PlayerInputHandler : MonoBehaviour
         _playerMovement.HandleMovement(_h, _v, _isKeyDown);
     }
 
-    private void GetAttackInput()
+    private void GetInput()
     {
         _isKeyDown = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
         if(Input.GetMouseButton(0))
@@ -41,12 +39,11 @@ public class PlayerInputHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
             _playerMovement.SetSprint(true);
-            //_playerMovement.ChangeState(EPlayerMoveState.Sprint);
         }
         else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
             _playerMovement.SetSprint(false);
-            //_playerMovement.ChangeState(EPlayerMoveState.Move);
+            Debug.Log("ìŠ¤í”„ë¦°íŠ¸ í•´ì œ");
         }
     }
 
