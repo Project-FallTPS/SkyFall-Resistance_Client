@@ -36,8 +36,8 @@ public class PlayerAirborneState : IPlayerState
                 _player.SetSprint(false);
             }
 
-            Vector3 targetPosition = _player.transform.position + _moveDirection * _player.CurrentSpeed * Time.deltaTime;
-            _player.Rigid.MovePosition(targetPosition);
+            Vector3 moveVelocity = _moveDirection * _player.CurrentSpeed;
+            _player.Rigid.linearVelocity = moveVelocity;
         }
         else
         {

@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        CheckStateTransition();
+        //CheckStateTransition();
         CurrentState?.Update();
         if(IsSprint)
         {
@@ -57,6 +57,18 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            if (CurrentState is not PlayerGroundState)
+            {
+                ChangeState(EPlayerMoveState.Ground);
+                Animator.SetBool("anim_Player_IsGrounded", true);
+            }
+        }
+    }
+
     private void CheckStateTransition()
     {
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.NameToLayer("Ground"));
@@ -66,11 +78,11 @@ public class PlayerMovement : MonoBehaviour
             ChangeState(EPlayerMoveState.Ground);
             Animator.SetBool("anim_Player_IsGrounded", true);
         }
-        else if (!isGrounded && CurrentState is PlayerGroundState)
-        {
-            ChangeState(EPlayerMoveState.Airborne);
-            Animator.SetBool("anim_Player_IsGrounded", false);
-        }
+        //else if (!isGrounded && CurrentState is PlayerGroundState)
+        //{
+        //    ChangeState(EPlayerMoveState.Airborne);
+        //    Animator.SetBool("anim_Player_IsGrounded", false);
+        //}
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -105,6 +117,14 @@ public class PlayerMovement : MonoBehaviour
     private void HandleRotation()
     {
         Vector3 camForward = MainCameraTransform.forward;
+
+        if (CurrentState is PlayerGroundState)
+        {
+            // y축 제거해서 수평 방향만 사용
+            camForward.y = 0f;
+        }
+
+        camForward.Normalize();
 
         if (camForward.sqrMagnitude > 0.01f)
         {
