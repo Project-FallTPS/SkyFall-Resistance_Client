@@ -831,7 +831,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1621,7 +1621,7 @@ Transform:
   m_GameObject: {fileID: 1574720123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 30, z: 0}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1646,8 +1646,8 @@ MonoBehaviour:
     Probability: 20
   _spawnInterval: 1
   _spawnRadius: 10
-  _minExplosionForce: 5
-  _maxExplosionForce: 15
+  _minExplosionForce: 100
+  _maxExplosionForce: 150
   PlayerAreaCollider: {fileID: 779467822}
 --- !u!1 &1615793310
 GameObject:
