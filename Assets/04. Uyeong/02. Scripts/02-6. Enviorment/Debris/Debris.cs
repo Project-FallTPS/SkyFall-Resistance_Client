@@ -31,7 +31,6 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 
     private VisualEffect _fireTrail;
     private string _smokeVelocityName = "SmokeVelocity";
-    private string _spawnPositionName = "SpawnPosition";
     private string _canSpawnName = "CanSpawn";
     private float _fireSpeed;
 
@@ -40,7 +39,6 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
         _rigidbody = GetComponent<Rigidbody>();
         _fireTrail = GetComponentInChildren<VisualEffect>();
 
-        _fireTrail.SetVector3(_spawnPositionName, transform.position);
         _fireSpeed = _fireTrail.GetVector3(_smokeVelocityName).magnitude;
 
         _debrisType = DefineType();
@@ -64,7 +62,6 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
             ReleaseAfterEffect();
         }
 
-        _fireTrail.SetVector3(_spawnPositionName, transform.position);
         Vector3 fireVelocity = -_rigidbody.linearVelocity.normalized * _fireSpeed;
         _fireTrail.SetVector3(_smokeVelocityName, fireVelocity);
     }
