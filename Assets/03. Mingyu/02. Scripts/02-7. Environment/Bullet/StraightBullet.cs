@@ -15,19 +15,6 @@ public class StraightBullet : BulletBase
         base.Update();
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(nameof(ETags.Player)))
-        {
-            IDamageable damageable = other.GetComponent<IDamageable>();
-            if (damageable != null)
-            {
-                damageable.TakeDamage(_damage);
-            }
-            DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
-        }
-    }
-
     private void OnDisable()
     {
         StopAllCoroutines();
