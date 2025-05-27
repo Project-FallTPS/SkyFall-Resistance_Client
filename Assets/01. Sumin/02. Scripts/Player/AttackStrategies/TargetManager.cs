@@ -85,7 +85,7 @@ public class TargetManager : Singleton<TargetManager>
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(nameof(ETags.Enemy)))
+        if (other.CompareTag(nameof(ETags.Enemy)) || other.CompareTag(nameof(ETags.Boss)))
         {
             float dist = Vector3.Distance(_camera.transform.position, other.transform.position);
             if (dist <= _maxDistance)
@@ -101,7 +101,7 @@ public class TargetManager : Singleton<TargetManager>
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(nameof(ETags.Enemy)))
+        if (other.CompareTag(nameof(ETags.Enemy)) || other.CompareTag(nameof(ETags.Boss)))
         {
             _enemiesInFrustum.Remove(other.gameObject);
         }

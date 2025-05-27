@@ -4,7 +4,6 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
-using Unity.VisualScripting;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "BossRush", story: "돌진 공격(페이즈2)", category: "Action", id: "e22fa8e1d643ec7c27a970890fa80d0b")]
@@ -57,7 +56,8 @@ public partial class BossRushAction : Action, IBossAttack
     public bool CanAttack()
     {
         float distanceToPlayer = Vector3.Distance(_bossTransform.position, _playerTransform.position);
-        return !(_bossData.CurrentPhase < 2) && !(distanceToPlayer < _bossData.MinRushDistance);
+        return (2 <= _bossData.CurrentPhase) && (_bossData.MinRushDistance < distanceToPlayer) &&
+            (distanceToPlayer <= _bossData.MaxRushDistance);
     }
 
     public void Attack()

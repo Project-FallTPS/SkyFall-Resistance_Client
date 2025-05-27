@@ -30,6 +30,6 @@ public class PhaseManager : Singleton<PhaseManager>
         _maxPhase = 
             _bossPrefab.GetComponent<BossController>().BossData.MaxPhase;
         _currentPhase = 
-            _bossPrefab.GetComponent<BossController>().BossData.CurrentPhase = 3;
+            _bossPrefab.GetComponent<BossController>().BossData.CurrentPhase = 1;
     }
 }
