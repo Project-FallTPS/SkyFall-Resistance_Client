@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 779274666658026342}
   m_Layer: 0
   m_Name: WeaknessPoints
-  m_TagString: BossWeakness
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bossType: 0
   _bossDataSO: {fileID: 11400000, guid: 727a57f56d592264f944df9675b200ca, type: 2}
+  _weaknessPoints: []
   _shootPositionTransform: {fileID: 6317386439357906789}
 --- !u!1 &8750473511153552226
 GameObject:
