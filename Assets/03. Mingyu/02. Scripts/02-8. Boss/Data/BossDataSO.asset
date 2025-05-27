@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossDatas:
   - MaxHealth: 100
-    _currentHealth: 100
     MoveSpeed: 5
     AttackDamage: 10
     AttackCooltime: 5
@@ -29,6 +28,8 @@ MonoBehaviour:
     LaserRange: 50
     LaserDuration: 2
     MaxPhase: 3
+    WeaknessAttackDamageMultiplier: 1.5
+    NormalAttackDamageDivisor: 0.5
     PhaseChangeHealthPercentage:
     - 70
     - 30

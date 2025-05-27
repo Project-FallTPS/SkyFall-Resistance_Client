@@ -13,7 +13,6 @@ public class BossData
     [Header("Basic")]
     [Tooltip("보스의 최대 체력")]
     public float MaxHealth;
-
     
     [Tooltip("보스의 현재 체력")]
     private float _currentHealth;
@@ -59,7 +58,7 @@ public class BossData
     [FormerlySerializedAs("WindupTime")] [Tooltip("돌진 공격의 전조 시간")]
     public float BeforeRushDelay;
     
-    [Header("Attack Logic - Razer")]
+    [Header("Attack Logic - Laser")]
     [Tooltip("레이저 공격이 가능한 보스 - 플레이어간 최소 거리")]
     public float MinLaserDistance;
     [Tooltip("레이저 공격의 전조 시간")]
@@ -72,6 +71,11 @@ public class BossData
     [Header("Phase")] 
     [Tooltip("보스의 최대 페이즈")]
     public int MaxPhase;
+
+    [Header("System - Weakness Attack")] 
+    public float WeaknessAttackDamageMultiplier;
+
+    public float NormalAttackDamageDivisor;
 
     private int _currentPhase = 1;
     public int CurrentPhase
@@ -112,5 +116,8 @@ public class BossData
         WindupTimeForLaser = original.WindupTimeForLaser;
         LaserRange = original.LaserRange;
         LaserDuration = original.LaserDuration;
+
+        WeaknessAttackDamageMultiplier = original.WeaknessAttackDamageMultiplier;
+        NormalAttackDamageDivisor = original.NormalAttackDamageDivisor;
     }
 }
