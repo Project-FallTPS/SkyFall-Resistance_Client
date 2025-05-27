@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1654000175361673184}
   - component: {fileID: -1669536924553513486}
   m_Layer: 0
-  m_Name: P_BulletBezier_Boss
+  m_Name: P_BulletCurve_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
