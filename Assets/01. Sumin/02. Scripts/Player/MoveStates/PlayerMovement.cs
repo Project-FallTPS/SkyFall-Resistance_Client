@@ -5,53 +5,53 @@ using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("# Stat")]
-    private PlayerStatHolder _playerStatManager;
+    public PlayerStatHolder PlayerStatManager { get; private set; }
 
     [Header("# StateMachine")]
-    public PlayerMoveStateMachine StateMachine { get; private set; }
+    public Dictionary<EPlayerMoveState, IPlayerState> StateDictionary { get; private set; }
+    public IPlayerState CurrentState;
 
     [Header(" Movement Settings")]
     public float RotateSpeed = 10f;
-    public float CurrentSpeed { get; private set; }
+    public float CurrentSpeed { get; set; }
     public Vector3 MoveDirection { get; private set; }
-    private bool _isSprint;
+    public bool IsSprint { get; private set; }
 
     [Header("# Components")]
-    public CharacterController CharacterController { get; private set; }
+    public Rigidbody Rigid { get; private set; }
     public Transform MainCameraTransform { get; private set; }
     public Animator Animator { get; private set; }
-    public Rigidbody Rigid { get; private set; }
-    
 
     private void Awake()
     {
         Rigid = GetComponent<Rigidbody>();
-        _playerStatManager = GetComponent<PlayerStatHolder>();
-        CharacterController = GetComponent<CharacterController>();
+        PlayerStatManager = GetComponent<PlayerStatHolder>();
         Animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         MainCameraTransform = Camera.main.transform;
-        StateMachine = new PlayerMoveStateMachine(this, new Dictionary<EPlayerMoveState, IPlayerState>
+        StateDictionary = new Dictionary<EPlayerMoveState, IPlayerState>
         {
             { EPlayerMoveState.Ground, new PlayerGroundState() },
             { EPlayerMoveState.Airborne, new PlayerAirborneState() },
-        });
+        };
         ChangeState(EPlayerMoveState.Airborne);
-
-        //if (SceneManager.GetActiveScene().name == "PlayerTest")
-        //{
-        //    _rigid.useGravity = true;
-        //}
     }
 
     private void Start()
     {
-        CurrentSpeed = _playerStatManager.GetStat(EStatType.MoveSpeed);
+        CurrentSpeed = PlayerStatManager.GetStat(EStatType.MoveSpeed);
     }
 
     private void Update()
     {
-        //StateMachine.Update();
+        //CheckStateTransition();
+        CurrentState?.Update();
+        if(IsSprint)
+        {
+            PlayerStatManager.RegenStamina();
+        }
+        Debug.Log(CurrentSpeed);
+
     }
 
     private void LateUpdate()
@@ -59,15 +59,20 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
     }
 
-    public void HandleDirection(float h, float v)
+    private void CheckStateTransition()
     {
-        Vector3 camForward = MainCameraTransform.forward;
-        camForward.Normalize();
-
-        Vector3 camRight = MainCameraTransform.right;
-        camRight.Normalize();
-
-        MoveDirection = (camForward * v + camRight * h).normalized;
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.NameToLayer("Ground"));
+        
+        if (isGrounded && CurrentState is PlayerAirborneState)
+        {
+            ChangeState(EPlayerMoveState.Ground);
+            Animator.SetBool("anim_Player_IsGrounded", true);
+        }
+        else if (!isGrounded && CurrentState is PlayerGroundState)
+        {
+            ChangeState(EPlayerMoveState.Airborne);
+            Animator.SetBool("anim_Player_IsGrounded", false);
+        }
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -75,49 +80,28 @@ public class PlayerMovement : MonoBehaviour
         Animator.SetFloat("anim_Player_MovingX", h);
         Animator.SetFloat("anim_Player_MovingZ", v);
         Animator.SetBool("anim_Player_IsMoving", isKeyDown || (!Mathf.Approximately(v, 0f) || !Mathf.Approximately(h, 0f)));
-
-        Vector3 camForward = MainCameraTransform.forward;
-        //if (SceneManager.GetActiveScene().name == "PlayerTest") // 보스씬이라면 이라고 바꿔야댐
-        //{
-        //    camForward.y = 0;
-        //}
-        camForward.Normalize();
-
-        Vector3 camRight = MainCameraTransform.right;
-        //if (SceneManager.GetActiveScene().name == "PlayerTest") // 보스씬이라면 이라고 바꿔야댐
-        //{
-        //    camRight.y = 0;
-        //}
-        camRight.Normalize();
-
-        MoveDirection = (camForward * v + camRight * h).normalized;
-
-        if (MoveDirection.sqrMagnitude > 0.01f)
-        {
-            if (!_isSprint || _playerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate))
-            {
-                SetSprint(false);
-            }
-
-            Vector3 targetPosition = transform.position + MoveDirection * CurrentSpeed * Time.deltaTime;
-            Rigid.MovePosition(targetPosition);
-        }
-        else
-        {
-            Rigid.linearVelocity = Vector3.zero;
-        }
+        CurrentState?.HandleMovement(h, v, isKeyDown);
     }
 
     public void SetSprint(bool isSprint)
     {
-        CurrentSpeed = isSprint ? _playerStatManager.GetStat(EStatType.SprintSpeed) : _playerStatManager.GetStat(EStatType.MoveSpeed);
-        _isSprint = isSprint;
+        CurrentSpeed = isSprint ? PlayerStatManager.GetStat(EStatType.SprintSpeed) : PlayerStatManager.GetStat(EStatType.MoveSpeed);
+        IsSprint = isSprint;
         Animator.SetBool("anim_Player_IsBoosting", isSprint);
     }
 
-    public void ChangeState(EPlayerMoveState state)
+    public void ChangeState(EPlayerMoveState newState)
     {
-        StateMachine.ChangeState(state);
+        if (StateDictionary.TryGetValue(newState, out IPlayerState state))
+        {
+            Debug.Log($"{CurrentState} => {state}");
+            if (CurrentState != null && CurrentState != state)
+            {
+                CurrentState.Exit(this);
+            }
+            CurrentState = state;
+            CurrentState.Enter(this);        
+        }
     }
 
     private void HandleRotation()
