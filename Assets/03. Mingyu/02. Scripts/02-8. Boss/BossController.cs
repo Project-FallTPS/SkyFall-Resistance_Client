@@ -31,6 +31,7 @@ public class BossController : MonoBehaviour, IDamageable
     
     [Header("Weakness Points")]
     private List<Collider> _weaknessPoints = new List<Collider>();
+
     public List<Collider> WeaknessPoints => _weaknessPoints;
     
     private void Awake()
@@ -43,11 +44,11 @@ public class BossController : MonoBehaviour, IDamageable
         _bossData.CurrentHealth -= damage;
         if (_bossData.CurrentHealth <= 0)
         {
-            
+            Debug.Log("Boss Dead");
         }
         else
         {
-            
+            Debug.Log("Boss Damaged");
         }
     }
 
