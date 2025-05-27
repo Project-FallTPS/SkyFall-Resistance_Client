@@ -18,9 +18,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: 382
-    y: -502
-    width: 1353
-    height: 2047
+    y: -300
+    width: 984
+    height: 1844
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5121,7 +5121,8 @@ MonoBehaviour:
     - outputSlot: {fileID: 8926484042661614790}
       inputSlot: {fileID: 8926484042661614837}
     position: {x: 706.5, y: 525}
-    expandedSlots: []
+    expandedSlots:
+    - {fileID: 8926484042661614790}
     expanded: 1
     supecollapsed: 0
 --- !u!114 &8926484042661614790

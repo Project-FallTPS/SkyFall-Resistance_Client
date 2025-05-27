@@ -282,7 +282,7 @@ MonoBehaviour:
   _isDontDestroy: 1
   _parallaxLayerSets:
   - LayerType: 0
-    MoveSpeed: 10
+    MoveSpeed: 100
     StartPositionY: 0
     LoopOffset: 1000
     IsLooping: 0
