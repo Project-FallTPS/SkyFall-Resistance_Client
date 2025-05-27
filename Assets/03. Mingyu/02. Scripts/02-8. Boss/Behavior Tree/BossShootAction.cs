@@ -130,34 +130,41 @@ public partial class BossShootAction : Action, IBossAttack
     private Vector3 CalculateControlPoint(RaycastHit obstacleHit, Vector3 shootStart, Vector3 shootEnd)
     {
         Bounds obstacleBounds = obstacleHit.collider.bounds;
-        Vector3 obstacleCenter = obstacleBounds.center;
-        Transform obstacleTransform = obstacleHit.collider.transform;
 
-        float verticalMarginHigh = UnityEngine.Random.Range(obstacleBounds.size.y * 0.8f, obstacleBounds.size.y * 1.5f);
-        float verticalMarginLow = UnityEngine.Random.Range(obstacleBounds.size.y * 0.1f, obstacleBounds.size.y * 0.3f);  // 낮은 높이
-        float horizontalMarginX = UnityEngine.Random.Range(obstacleBounds.size.x * 0.8f, obstacleBounds.size.x * 1.5f);
+        // 장애물의 바깥쪽 방향 벡터 계산
+        Vector3 toPlayer = (shootEnd - shootStart).normalized;
+        Vector3 upDir = Vector3.up;
+        Vector3 rightDir = Vector3.Cross(upDir, toPlayer).normalized;
 
-        Vector3 rightDir = obstacleTransform.right;
+        // 장애물의 외곽 기준으로 충분히 멀리 떨어진 위치 확보
+        float verticalOffset = Mathf.Max(obstacleBounds.size.y * 1.5f, 2f); // 장애물보다 위로 충분히 띄움
+        float sideOffset = Mathf.Max(obstacleBounds.size.x * 1.5f, 2f);     // 옆으로도 충분히 띄움
 
         float choice = UnityEngine.Random.value;
+        Vector3 controlPoint;
 
         if (choice < 0.33f)
         {
-            // 위로 꺾기 (높은 y값)
-            Vector3 midPoint = (shootStart + shootEnd) * 0.5f;
-            return new Vector3(midPoint.x, obstacleBounds.max.y + verticalMarginHigh, midPoint.z);
+            // 위로 꺾는 곡선
+            Vector3 mid = (shootStart + shootEnd) * 0.5f;
+            controlPoint = mid + upDir * verticalOffset;
         }
         else if (choice < 0.66f)
         {
-            // 오른쪽으로 꺾기 (낮은 y값)
-            return obstacleCenter + rightDir * horizontalMarginX + Vector3.up * verticalMarginLow;
+            // 오른쪽으로 꺾기
+            Vector3 mid = (shootStart + shootEnd) * 0.5f;
+            controlPoint = mid + rightDir * sideOffset + upDir * (verticalOffset * 0.5f);
         }
         else
         {
-            // 왼쪽으로 꺾기 (낮은 y값)
-            return obstacleCenter - rightDir * horizontalMarginX + Vector3.up * verticalMarginLow;
+            // 왼쪽으로 꺾기
+            Vector3 mid = (shootStart + shootEnd) * 0.5f;
+            controlPoint = mid - rightDir * sideOffset + upDir * (verticalOffset * 0.5f);
         }
+
+        return controlPoint;
     }
+
     
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
