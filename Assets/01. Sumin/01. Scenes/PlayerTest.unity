@@ -271,11 +271,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!4 &225382897 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2547457532785253196, guid: 8738671971b5dcd4d8a14795406d0681, type: 3}
-  m_PrefabInstance: {fileID: 5450549324265270537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &382586931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,6 +1227,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1782564589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2347042458044069033, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
+  m_PrefabInstance: {fileID: 7484179700350321012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1902663248 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4188954284027895874, guid: 498a6b646c236b34e9868ad8f68753eb, type: 3}
@@ -1637,7 +1637,7 @@ PrefabInstance:
     - target: {fileID: 2336547205302752867, guid: 8738671971b5dcd4d8a14795406d0681, type: 3}
       propertyPath: _poolInfoList.Array.data[2].Container
       value: 
-      objectReference: {fileID: 225382897}
+      objectReference: {fileID: 1782564589}
     - target: {fileID: 2336547205302752867, guid: 8738671971b5dcd4d8a14795406d0681, type: 3}
       propertyPath: _poolInfoList.Array.data[2].InitCount
       value: 1
