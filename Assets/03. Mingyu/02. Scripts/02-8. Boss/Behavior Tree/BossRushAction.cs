@@ -57,7 +57,8 @@ public partial class BossRushAction : Action, IBossAttack
     public bool CanAttack()
     {
         float distanceToPlayer = Vector3.Distance(_bossTransform.position, _playerTransform.position);
-        return !(_bossData.CurrentPhase < 2) && !(distanceToPlayer < _bossData.MinRushDistance);
+        return (2 <= _bossData.CurrentPhase) && (_bossData.MinRushDistance < distanceToPlayer) &&
+            (distanceToPlayer <= _bossData.MaxRushDistance);
     }
 
     public void Attack()
