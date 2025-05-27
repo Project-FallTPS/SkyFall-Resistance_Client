@@ -43,6 +43,8 @@ Material:
     m_Floats:
     - _FresnelPower: 4.25
     - _Metallic: 0
+    - _NoiseDissolve: 3
+    - _NoiseScale: 25
     - _NormalStrength: 0.94
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -51,7 +53,8 @@ Material:
     - _VoronoiScale: 5
     m_Colors:
     - _FresnelColor: {r: 32.04134, g: 6.1946597, b: 3.844961, a: 0}
-    - _MainColor: {r: 0.509434, g: 0.2965834, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
+    - _NoiseSpeed: {r: -0.1, g: 0.1, b: 0, a: 0}
     - _VoronoiColor: {r: 8, g: 3.408, b: 1.2800002, a: 0}
     - _VoronoiSpeed: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
