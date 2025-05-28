@@ -28,19 +28,6 @@ public class CurveBullet : BulletBase
         }
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(nameof(ETags.Player)))
-        {
-            IDamageable damageable = other.GetComponent<IDamageable>();
-            if (damageable != null)
-            {
-                damageable.TakeDamage(_damage);
-            }
-            DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
-        }
-    }
-
     public void InitializePoints(Vector3 p0, Vector3 p1, Vector3 p2)
     {
         _startPosition = p0;
