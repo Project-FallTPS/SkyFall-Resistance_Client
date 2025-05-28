@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
-using UnityEngine.AI;
+using VInspector;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
@@ -25,6 +24,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     private EEnemyType _enemyType;
     [SerializeField]
     private EnemyDataSO _enemyDataSO;
+    [SerializeField]
+    private List<Transform> _bulletShootPositions;
+    public List<Transform> BulletShootPositions { get => _bulletShootPositions; }
 
     private EnemyData _enemyData;
     public EnemyData EnemyData { get => _enemyData; set => _enemyData = value; }
@@ -32,7 +34,6 @@ public class EnemyController : MonoBehaviour, IDamageable
     [Header("External References")]
     private GameObject _player;
     public GameObject Player => _player;
-
 
     private void Awake()
     {

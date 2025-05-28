@@ -1,10 +1,12 @@
 using VInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class EnemyData
 {
     public EEnemyType EnemyType;
+    public EDamageableType DamageableType;
 
     [Header("Basic")]
     public float MaxHealth;
@@ -23,9 +25,10 @@ public class EnemyData
     public float AttackableRange;
     public float AttackDamage;
     public float AttackDelay;
-
+    
     [ShowIf("EnemyType", EEnemyType.Bombing)]
     public float ExplosionRadius;
+    
 
     public void AdjustEnemyDataOnWave(float multiplier)
     {

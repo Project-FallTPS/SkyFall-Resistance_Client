@@ -42,7 +42,7 @@ public class EnemyAttackState : IEnemyState
             return;
         }
         _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
-        _attackStrategy.Attack(_enemyController.transform.position, _enemyController);
+        _attackStrategy.Attack(_enemyController);
         _nextAttackTime = Time.time + _enemyData.AttackDelay;
     }
 } 

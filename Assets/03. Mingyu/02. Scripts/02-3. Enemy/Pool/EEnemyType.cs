@@ -1,6 +1,8 @@
 public enum EEnemyType
 {
-    Shooting,
+    Shooting1,
+    Shooting2,
+    Shooting3,
     Bombing,
     Supporting,
     Count,

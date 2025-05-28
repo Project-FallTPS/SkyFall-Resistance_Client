@@ -526,7 +526,6 @@ GameObject:
   - component: {fileID: 1585704483958803619}
   - component: {fileID: 5547716335051021922}
   - component: {fileID: 8406007420431148068}
-  - component: {fileID: 1464166647418092339}
   - component: {fileID: 3925502928509805439}
   m_Layer: 0
   m_Name: P_Enemy_Shooting3
@@ -624,28 +623,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1464166647418092339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322968521756326490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41b24b4c5a20dc24ab9a4d65203aca04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  bulletSpawnPoint:
-  - {fileID: 2692008242168819803}
-  - {fileID: 875731755067785647}
-  - {fileID: 2557625918417605961}
-  - {fileID: 2281368441578445182}
-  bulletPrefab: {fileID: 5356239073171952968, guid: 789b5b26f8add70468b7ad74e0731753, type: 3}
-  bulletSpeed: 6
-  particleDalay: 0.5
-  closed: 0
 --- !u!114 &3925502928509805439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +637,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyType: 0
   _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
+  _bulletShootPositions:
+  - {fileID: 2281368441578445182}
+  - {fileID: 2557625918417605961}
+  - {fileID: 875731755067785647}
+  - {fileID: 2692008242168819803}
 --- !u!1 &4575935740764599340
 GameObject:
   m_ObjectHideFlags: 0

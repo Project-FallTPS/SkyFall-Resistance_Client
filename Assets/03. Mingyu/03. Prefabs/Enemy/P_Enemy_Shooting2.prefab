@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 211607981105092865}
   - component: {fileID: 57981606319231044}
   - component: {fileID: -425645416136276860}
-  - component: {fileID: 5351048207966340518}
   - component: {fileID: 7444587849887711598}
   m_Layer: 0
   m_Name: P_Enemy_Shooting2
@@ -142,23 +141,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5351048207966340518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102338309920214463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd2cfb5e681ebf34bae707e0c863ac80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  bulletSpawnPoint: {fileID: 5735783161297084156}
-  bulletPrefab: {fileID: 5356239073171952968, guid: e1c75adc0db4ae644a84caffb04254b8, type: 3}
-  bulletSpeed: 5
-  particleDalay: 0.5
 --- !u!114 &7444587849887711598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyType: 0
   _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
+  _bulletShootPositions:
+  - {fileID: 5735783161297084156}
 --- !u!1 &1126874526479189297
 GameObject:
   m_ObjectHideFlags: 0
