@@ -131,9 +131,6 @@ public partial class BossShootAction : Action, IBossAttack
 
         int index = UnityEngine.Random.Range(0, candidates.Length);
         Vector3 midPoint = candidates[index];
-        Debug.DrawRay(midPoint, Vector3.up * 0.5f, Color.yellow, 2f);
-        Debug.DrawRay(midPoint, Vector3.right * 0.5f, Color.yellow, 2f);
-        Debug.DrawRay(midPoint, Vector3.forward * 0.5f, Color.yellow, 2f);
         return midPoint;
     }
 }
