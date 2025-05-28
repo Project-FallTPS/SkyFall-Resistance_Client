@@ -49,14 +49,6 @@ public class PlayerInputHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             _playerMovement.Jump();
-            //if(_isKeyDown)
-            //{
-            //    _playerMovement.Jump();
-            //}
-            //else
-            //{
-            //    _playerMovement.Dodge(_h, _v);
-            //}
         }
     }
 

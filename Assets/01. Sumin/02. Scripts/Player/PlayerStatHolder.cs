@@ -14,7 +14,6 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     private void Awake()
     {
         StatDict = _playerStatCollection.GetBaseStatDict();
-        //PerkManager.Instance.CalculateFinalStats(StatDict);
     }
 
     public float GetStat(EStatType type)

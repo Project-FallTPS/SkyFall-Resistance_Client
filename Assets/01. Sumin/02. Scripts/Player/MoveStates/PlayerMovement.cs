@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const int MAX_JUMP_COUNT = 2;
+    private readonly int MAX_JUMP_COUNT = 2;
 
     [Header("# Stat")]
     public PlayerStatHolder PlayerStatManager { get; private set; }
@@ -49,9 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //CheckStateTransition();
         CurrentState?.Update();
-        if(IsSprint)
+        if(!IsSprint)
         {
             PlayerStatManager.RegenStamina();
         }
@@ -83,22 +82,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Animator.SetBool("anim_Player_IsGrounded", false);
         }
-    }
-
-    private void CheckStateTransition()
-    {
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.NameToLayer("Ground"));
-        
-        if (isGrounded && CurrentState is PlayerAirborneState)
-        {
-            ChangeState(EPlayerMoveState.Ground);
-            Animator.SetBool("anim_Player_IsGrounded", true);
-        }
-        //else if (!isGrounded && CurrentState is PlayerGroundState)
-        //{
-        //    ChangeState(EPlayerMoveState.Airborne);
-        //    Animator.SetBool("anim_Player_IsGrounded", false);
-        //}
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -149,12 +132,6 @@ public class PlayerMovement : MonoBehaviour
             Animator.SetTrigger("anim_Player_GroundDoubleJump");
             ChangeState(EPlayerMoveState.Airborne);
         }
-    }
-
-
-    public void Dodge(float h, float v)
-    {
-
     }
 
     private void HandleRotation()
