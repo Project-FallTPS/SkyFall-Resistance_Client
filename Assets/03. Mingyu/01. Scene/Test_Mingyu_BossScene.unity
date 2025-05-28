@@ -1225,9 +1225,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDontDestroy: 0
   _poolInfoList:
+  - Type: 0
+    InitCount: 100
+    Prefab: {fileID: 5356239073171952968, guid: cf3bdaf8d9f1cb543b4ee5fd4ca5167b, type: 3}
+    Container: {fileID: 1946357162}
+  - Type: 1
+    InitCount: 100
+    Prefab: {fileID: 5356239073171952968, guid: b7992a228e8d9294b8832bc5cb895ada, type: 3}
+    Container: {fileID: 1946357162}
   - Type: 2
-    InitCount: 20
-    Prefab: {fileID: 1331364910304127374, guid: cf9ea3f9c3840b948ab7218b6d14d185, type: 3}
+    InitCount: 100
+    Prefab: {fileID: 5356239073171952968, guid: be1360722e376c944b6971183ac40e0d, type: 3}
     Container: {fileID: 1946357162}
   - Type: 3
     InitCount: 20
@@ -1235,19 +1243,15 @@ MonoBehaviour:
     Container: {fileID: 1946357162}
   - Type: 4
     InitCount: 5
+    Prefab: {fileID: 1331364910304127374, guid: cf9ea3f9c3840b948ab7218b6d14d185, type: 3}
+    Container: {fileID: 1946357162}
+  - Type: 5
+    InitCount: 5
+    Prefab: {fileID: 1331364910304127374, guid: ec7d5d86672ae5749ab16bde84af1741, type: 3}
+    Container: {fileID: 1946357162}
+  - Type: 6
+    InitCount: 5
     Prefab: {fileID: 4495356607337096260, guid: 5d1dda986c1e5974c854d93a54eb9676, type: 3}
-    Container: {fileID: 1946357162}
-  - Type: 0
-    InitCount: 100
-    Prefab: {fileID: 5356239073171952968, guid: 8fd4b8ada4168784c9a28e695343f067, type: 3}
-    Container: {fileID: 1946357162}
-  - Type: 1
-    InitCount: 100
-    Prefab: {fileID: 5356239073171952968, guid: e1c75adc0db4ae644a84caffb04254b8, type: 3}
-    Container: {fileID: 1946357162}
-  - Type: 2
-    InitCount: 100
-    Prefab: {fileID: 5356239073171952968, guid: 789b5b26f8add70468b7ad74e0731753, type: 3}
     Container: {fileID: 1946357162}
 --- !u!4 &1465649600
 Transform:

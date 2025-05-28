@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0cd01f594154e48b04971ac8261b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 0
+  _enemyType: 2
   _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
   _bulletShootPositions:
   - {fileID: 2281368441578445182}
