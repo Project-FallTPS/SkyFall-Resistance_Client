@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 5362605087562829251}
   - component: {fileID: 6430326748563972043}
   m_Layer: 0
-  m_Name: Rob01
+  m_Name: Rob01_Bombing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

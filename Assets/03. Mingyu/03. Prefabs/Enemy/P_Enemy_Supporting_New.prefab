@@ -49,6 +49,9 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -276,11 +279,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7097359658200363876}
   - component: {fileID: 3325367678858617055}
-  - component: {fileID: 1773693162536804268}
-  - component: {fileID: 3679812568232473773}
+  - component: {fileID: 543328989514320122}
+  - component: {fileID: -9203882911292905256}
+  - component: {fileID: -4783397622314922415}
   m_Layer: 0
-  m_Name: Rob04
-  m_TagString: Player
+  m_Name: P_Enemy_Supporting_New
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,7 +308,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3325367678858617055
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -318,13 +322,14 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!143 &1773693162536804268
-CharacterController:
+--- !u!136 &543328989514320122
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -341,15 +346,39 @@ CharacterController:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
+  serializedVersion: 2
   m_Radius: 1.28
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 1.19, z: 0}
---- !u!114 &3679812568232473773
+--- !u!54 &-9203882911292905256
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763167800718350920}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-4783397622314922415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,25 +387,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763167800718350920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab98e1ac3f798fb409722e4477824d9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b0cd01f594154e48b04971ac8261b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
-  BattleSpeed: 2
-  RocketSpawnPoints:
-  - {fileID: 6738813519654665479}
-  - {fileID: 5623944634463595162}
-  - {fileID: 6863393385483941100}
-  - {fileID: 7072766588601492801}
-  - {fileID: 8114079647356231373}
-  RocketPrefab: {fileID: 8172983923096341488, guid: b8bf644e7d222e549975bae7a95f6817, type: 3}
-  RocketSpeed: 4
-  RocketRotationSpeed: 2
-  StartRocketSpeed: 3
-  RocketStartRotationSpeed: 0.5
-  TargetingDalay: 1.5
-  Target: {fileID: 0}
-  spawnedMissiles: []
+  _enemyType: 2
+  _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
 --- !u!1 &2187229751164075555
 GameObject:
   m_ObjectHideFlags: 0

@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 5494408635068197215}
   - component: {fileID: 7557364614362673093}
   m_Layer: 0
-  m_Name: Rob05
+  m_Name: Rob05_Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
