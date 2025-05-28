@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7ed7e1cb425e8374ba3e0cbe6ba5c636
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 268984
+  packageName: Droll Robots Pack1
+  packageVersion: 1.0
+  assetPath: Assets/GrigoriyArx/DrollRobots/Scripts/Bullet.cs
+  uploadId: 623943

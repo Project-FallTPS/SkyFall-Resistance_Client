@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e419ac8e99c819944b4d6e0898c0a80d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 13400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 268984
+  packageName: Droll Robots Pack1
+  packageVersion: 1.0
+  assetPath: Assets/GrigoriyArx/DrollRobots/Prefabs/Projectiles/New Physic Material.physicMaterial
+  uploadId: 623943

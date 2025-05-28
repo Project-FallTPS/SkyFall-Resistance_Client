@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rob04CustomPattern
+  m_Shader: {fileID: 4800000, guid: ff3ed732e4f0d1a47b5e02848406075c, type: 3}
+  m_Parent: {fileID: 2100000, guid: 29677cb54135b1f4fad929f71e876500, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Decals1:
+        m_Texture: {fileID: 2800000, guid: 2eb38bdbdc7be5d4b922d5a246d19cdb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats: []
+    m_Colors:
+    - _Decals1Color: {r: 0.45434102, g: 0.4811321, b: 0.2980598, a: 0}
+    - _EmissionColor: {r: 0, g: 0.45856094, b: 1, a: 0}
+    - _PaintedPartsColor: {r: 0.9245283, g: 0.7765732, b: 0.44191283, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

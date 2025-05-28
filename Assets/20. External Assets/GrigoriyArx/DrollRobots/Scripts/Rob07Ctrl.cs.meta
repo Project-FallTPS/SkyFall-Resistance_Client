@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 504674d151d26834a841dc92236fa6e2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 268984
+  packageName: Droll Robots Pack1
+  packageVersion: 1.0
+  assetPath: Assets/GrigoriyArx/DrollRobots/Scripts/Rob07Ctrl.cs
+  uploadId: 623943

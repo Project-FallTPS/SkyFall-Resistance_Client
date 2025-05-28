@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rob01_attackMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Rob1
+    m_Weight: 0
+  - m_Path: Rob01_arma
+    m_Weight: 0
+  - m_Path: Rob01_arma/root
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/body
+    m_Weight: 1
+  - m_Path: Rob01_arma/root/base/body/side_L
+    m_Weight: 1
+  - m_Path: Rob01_arma/root/base/body/side_R
+    m_Weight: 1
+  - m_Path: Rob01_arma/root/base/body/sideB_L
+    m_Weight: 1
+  - m_Path: Rob01_arma/root/base/body/sideB_R
+    m_Weight: 1
+  - m_Path: Rob01_arma/root/base/legFron1_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_L/legFron2_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_L/legFron2_L/legFron3_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_L/legFron2_L/legFron3_L/legFron4_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_L/legFron2_L/legFron3_L/legFron4_L/legFronToe_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_R/legFron2_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_R/legFron2_R/legFron3_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_R/legFron2_R/legFron3_R/legFron4_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legFron1_R/legFron2_R/legFron3_R/legFron4_R/legFronToe_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_L/legRear2_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_L/legRear2_L/legRear3_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_L/legRear2_L/legRear3_L/legRear4_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_L/legRear2_L/legRear3_L/legRear4_L/legRearToe_L
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_R/legRear2_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_R/legRear2_R/legRear3_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_R/legRear2_R/legRear3_R/legRear4_R
+    m_Weight: 0
+  - m_Path: Rob01_arma/root/base/legRear1_R/legRear2_R/legRear3_R/legRear4_R/legRearToe_R
+    m_Weight: 0
