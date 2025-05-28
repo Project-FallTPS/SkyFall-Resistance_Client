@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class AttackShooting : IAttackStrategy
 {
-    public void Attack(Vector3 position, EnemyController self)
+    public void Attack(EnemyController self)
     {
-        GameObject bullet = DamageablePoolManager.Instance.GetObject(EDamageableType.EnemyBullet, position, self.transform.rotation);
-        bullet.GetComponent<StraightBullet>().Damage = self.EnemyData.AttackDamage;
+        foreach (Transform shootTransform in self.BulletShootPositions)
+        {
+            GameObject bullet = DamageablePoolManager.Instance.GetObject
+            (self.EnemyData.DamageableType, shootTransform.position, shootTransform.rotation);
+            bullet.GetComponent<StraightBullet>().Damage = self.EnemyData.AttackDamage;
+        }
     }
 }

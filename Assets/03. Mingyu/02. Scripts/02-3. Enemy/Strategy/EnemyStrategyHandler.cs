@@ -16,7 +16,9 @@ public class EnemyStrategyHandler : Singleton<EnemyStrategyHandler>
         base.Awake();
         _enemyTraceStrategySet.Add(new TraceNormal());
         _enemyTraceStrategySet.Add(new TraceBezier());
-        _enemyAttackStrategyDict.Add(EEnemyType.Shooting, new AttackShooting());
+        _enemyAttackStrategyDict.Add(EEnemyType.Shooting1, new AttackShooting());
+        _enemyAttackStrategyDict.Add(EEnemyType.Shooting2, new AttackShooting());
+        _enemyAttackStrategyDict.Add(EEnemyType.Shooting3, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Bombing, new AttackBombing());
     }
 

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class AttackBombing : IAttackStrategy
 {
-    public void Attack(Vector3 position, EnemyController self)
+    public void Attack(EnemyController self)
     {
         ApplyBombDamage(self);
-        PlayBombVFX(position);
+        PlayBombVFX(self.transform.position);
         self.EnemyStateContext.ChangeState(self.EnemyStateDict[EEnemyState.Die]);
     }
     private void ApplyBombDamage(EnemyController enemyController)
@@ -16,7 +16,7 @@ public class AttackBombing : IAttackStrategy
 
         foreach (Collider hitCollider in hitColiiders)
         {
-            // ÀÚÆø Å¸ÀÔ ÀûÀÇ Æø¹ßÀº ÇÃ·¹ÀÌ¾î¿¡°Ô¸¸ Àû¿ë µÇ´Â°¡?
+            // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½Ô¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´Â°ï¿½?
             if (hitCollider.CompareTag(nameof(ETags.Player)))
             {
                 if(hitCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
