@@ -14,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header(" Movement Settings")]
     public float RotateSpeed = 10f;
-    public float CurrentSpeed { get; private set; }
+    public float CurrentSpeed { get; set; }
     public Vector3 MoveDirection { get; private set; }
-    public bool IsSprint { get; private set; }
+    public bool IsSprint { get; set; }
 
     [Header("# Jump")]
     private int _jumpCount = 0;   // 현재 점프 횟수
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         CurrentState?.Update();
-        if(!IsSprint)
+        if (!IsSprint)
         {
             PlayerStatManager.RegenStamina();
         }
@@ -88,9 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetSprint(bool isSprint)
     {
-        CurrentSpeed = isSprint ? PlayerStatManager.GetStat(EStatType.SprintSpeed) : PlayerStatManager.GetStat(EStatType.MoveSpeed);
-        IsSprint = isSprint;
-        Animator.SetBool("anim_Player_IsBoosting", isSprint);
+        CurrentState?.SetSprint(isSprint);
     }
 
     public void ChangeState(EPlayerMoveState newState)

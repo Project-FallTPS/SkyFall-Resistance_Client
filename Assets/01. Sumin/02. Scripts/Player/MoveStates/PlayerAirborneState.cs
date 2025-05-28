@@ -15,6 +15,7 @@ public class PlayerAirborneState : IPlayerState
         _player.Rigid.useGravity = false;
         _player.Rigid.constraints = RigidbodyConstraints.None;
         _player.Rigid.linearVelocity = Vector3.zero;
+        SetSprint(false);
     }
 
     public void Exit(PlayerMovement player)
@@ -48,6 +49,12 @@ public class PlayerAirborneState : IPlayerState
         }
     }
 
+    public void SetSprint(bool isSprint)
+    {
+        _player.CurrentSpeed = isSprint ? _player.PlayerStatManager.GetStat(EStatType.SprintSpeed) : _player.PlayerStatManager.GetStat(EStatType.MoveSpeed);
+        _player.IsSprint = isSprint;
+        _player.Animator.SetBool("anim_Player_IsBoosting", isSprint);
+    }
 
     public void Update()
     {

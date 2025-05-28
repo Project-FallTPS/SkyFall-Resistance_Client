@@ -14,6 +14,7 @@ public class PlayerGroundState : IPlayerState
         _player.Rigid.linearVelocity = Vector3.zero;
         _player.Rigid.useGravity = true;
         _player.Rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        SetSprint(false);
     }
 
     public void Exit(PlayerMovement player)
@@ -58,6 +59,12 @@ public class PlayerGroundState : IPlayerState
         }
     }
 
+    public void SetSprint(bool isSprint)
+    {
+        _player.CurrentSpeed = isSprint ? _player.PlayerStatManager.GetStat(EStatType.GroundSprintSpeed) : _player.PlayerStatManager.GetStat(EStatType.GroundMoveSpeed);
+        _player.IsSprint = isSprint;
+        _player.Animator.SetBool("anim_Player_IsBoosting", isSprint);
+    }
 
     public void Update()
     {
