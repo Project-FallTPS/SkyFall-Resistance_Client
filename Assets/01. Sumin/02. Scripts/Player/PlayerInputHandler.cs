@@ -45,6 +45,19 @@ public class PlayerInputHandler : MonoBehaviour
             _playerMovement.SetSprint(false);
             Debug.Log("스프린트 해제");
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _playerMovement.Jump();
+            //if(_isKeyDown)
+            //{
+            //    _playerMovement.Jump();
+            //}
+            //else
+            //{
+            //    _playerMovement.Dodge(_h, _v);
+            //}
+        }
     }
 
     private void GetMoveInput()
