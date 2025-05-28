@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     [Header("Components")]
     private CapsuleCollider _enemyCollider;
     public CapsuleCollider EnemyCollider => _enemyCollider;
+    private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody => _rigidbody;
 
     private Animator _enemyAnimator;
     public Animator EnemyAnimator => _enemyAnimator;
@@ -41,6 +43,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         _enemyStateDict = new Dictionary<EEnemyState, IEnemyState>();
 
         _enemyCollider = GetComponent<CapsuleCollider>();
+        _rigidbody = GetComponent<Rigidbody>();
         _enemyAnimator = GetComponent<Animator>();
 
         _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
