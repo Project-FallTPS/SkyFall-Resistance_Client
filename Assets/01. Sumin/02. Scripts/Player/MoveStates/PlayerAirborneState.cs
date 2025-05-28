@@ -49,7 +49,18 @@ public class PlayerAirborneState : IPlayerState
 
     public void Update()
     {
-        // 공중 상태에서의 지속적인 업데이트가 필요한 경우 여기에 구현
-        // 예: 공중에서의 회전, 특수 동작 등
+        HandleRotation();
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 camForward = _player.MainCameraTransform.forward;
+        camForward.Normalize();
+
+        if (camForward.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(camForward);
+            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRot, _player.RotateSpeed * Time.deltaTime);
+        }
     }
 }

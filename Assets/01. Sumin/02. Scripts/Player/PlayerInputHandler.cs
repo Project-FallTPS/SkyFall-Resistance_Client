@@ -50,6 +50,15 @@ public class PlayerInputHandler : MonoBehaviour
         {
             _playerMovement.Jump();
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _playerAttackHandler.ChangeWeapon(EWeaponType.Katana);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _playerAttackHandler.ChangeWeapon(EWeaponType.Range);
+        }
     }
 
     private void GetMoveInput()

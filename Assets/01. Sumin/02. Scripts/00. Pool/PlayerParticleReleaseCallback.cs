@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerParticleReleaseCallback : MonoBehaviour
 {
-    public EPlayerEffectType Type;
+    [SerializeField] private EPlayerEffectType _type;
 
     private void OnParticleSystemStopped()
     {
-        PlayerEffectPoolManager.Instance.ReturnObject(gameObject, Type);
+        PlayerEffectPoolManager.Instance.ReturnObject(gameObject, _type);
     }
 }

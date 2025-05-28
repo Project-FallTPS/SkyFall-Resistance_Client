@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
@@ -54,11 +53,6 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerStatManager.RegenStamina();
         }
-    }
-
-    private void LateUpdate()
-    {
-        HandleRotation();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -131,25 +125,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Animator.SetTrigger("anim_Player_GroundDoubleJump");
             ChangeState(EPlayerMoveState.Airborne);
-        }
-    }
-
-    private void HandleRotation()
-    {
-        Vector3 camForward = MainCameraTransform.forward;
-
-        if (CurrentState is PlayerGroundState)
-        {
-            // y축 제거해서 수평 방향만 사용
-            camForward.y = 0f;
-        }
-
-        camForward.Normalize();
-
-        if (camForward.sqrMagnitude > 0.01f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(camForward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, RotateSpeed * Time.deltaTime);
         }
     }
 }
