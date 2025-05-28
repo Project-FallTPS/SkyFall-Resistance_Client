@@ -21,6 +21,6 @@ public class EnemySpawner : Spawner<SpawnedObjectInfo<EEnemyType>, EEnemyType>
                 return info.ObjectType;
             }
         }
-        return EEnemyType.Shooting;
+        return EEnemyType.Shooting1;
     }
 }

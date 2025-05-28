@@ -17,7 +17,7 @@ public class EnemyDieState : IEnemyState
 
     public void Enter()
     {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Die), true);
+        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), true);
         _enemyController.EnemyCollider.enabled = false;
         _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
         ReturnToPool();
@@ -33,7 +33,7 @@ public class EnemyDieState : IEnemyState
 
     public void Exit()
     {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Die), false);
+        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), false);
         _enemyController.EnemyCollider.enabled = true;
     }
 

@@ -42,10 +42,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7516608299359815157}
   - component: {fileID: 211607981105092865}
-  - component: {fileID: 1984301260610960914}
-  - component: {fileID: 5351048207966340518}
+  - component: {fileID: 57981606319231044}
+  - component: {fileID: -426547721759459526}
+  - component: {fileID: 7444587849887711598}
   m_Layer: 0
-  m_Name: Rob03
+  m_Name: P_Enemy_Shooting2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +71,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &211607981105092865
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -84,13 +85,14 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!143 &1984301260610960914
-CharacterController:
+--- !u!136 &57981606319231044
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,15 +109,39 @@ CharacterController:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1
+  serializedVersion: 2
   m_Radius: 0.35
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &5351048207966340518
+--- !u!54 &-426547721759459526
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102338309920214463}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 64
+  m_CollisionDetection: 0
+--- !u!114 &7444587849887711598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,14 +150,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1102338309920214463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd2cfb5e681ebf34bae707e0c863ac80, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b0cd01f594154e48b04971ac8261b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  bulletSpawnPoint: {fileID: 5735783161297084156}
-  bulletPrefab: {fileID: 5356239073171952968, guid: e1c75adc0db4ae644a84caffb04254b8, type: 3}
-  bulletSpeed: 5
-  particleDalay: 0.5
+  _enemyType: 1
+  _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
+  _bulletShootPositions:
+  - {fileID: 5735783161297084156}
 --- !u!1 &1126874526479189297
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +364,9 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
