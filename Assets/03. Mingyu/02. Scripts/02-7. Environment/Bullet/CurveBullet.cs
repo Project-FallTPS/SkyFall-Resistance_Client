@@ -2,54 +2,110 @@ using UnityEngine;
 
 public class CurveBullet : BulletBase
 {
-    private Vector3 _p0, _p1; // 시작점, 끝점
-    private Vector3 _m0, _m1; // 탄젠트 벡터 (Hermite)
-    private float _t;
+    private Vector3 _startPosition;
+    private Vector3 _midPosition;
+    private Vector3 _endPosition;
 
-    public void InitializeHermite(Vector3 p0, Vector3 m0, Vector3 p1, Vector3 m1)
-    {
-        _p0 = p0;
-        _m0 = m0;
-        _p1 = p1;
-        _m1 = m1;
-        _t = 0f;
-    }
+    private Vector3 _startTangent;
+    private Vector3 _midTangent;
+    private Vector3 _endTangent;
 
+    private float _t = 0f;
+    private int _phase = 0;     // 0 : start -> control, 1 : control -> end
+    private float _startToMidLength;
+    private float _midToEndLength;
+    
     protected override void Update()
     {
         base.Update();
-        _t += (_speed * Time.deltaTime) / EstimateCurveLength(20);
+        if (_phase == 0)
+        {
+            _t += (_speed * Time.deltaTime) / _startToMidLength;
+        }
+        else if (_phase == 1)
+        {
+            _t += (_speed * Time.deltaTime) / _midToEndLength;
+        }
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(nameof(ETags.Player)))
+        {
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(_damage);
+            }
+            DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
+        }
+    }
+
+    public void InitializePoints(Vector3 p0, Vector3 p1, Vector3 p2)
+    {
+        _startPosition = p0;
+        _midPosition = p1;
+        _endPosition = p2;
+        _t = 0f;
+
+        Vector3 startToEnd = (_endPosition - _startPosition).normalized;
+        _midTangent = startToEnd * 2 *_speed;
+        _startTangent = (_midPosition - _startPosition) - startToEnd * _speed;
+        _endTangent = (_endPosition - _midPosition) - startToEnd * _speed;
+
+        _startToMidLength = EstimateCurveLength(20, _startPosition, _midPosition, _startTangent, _midTangent);
+        _midToEndLength = EstimateCurveLength(20, _midPosition, _endPosition, _midTangent, _endTangent);
+    }
+    
     protected override void Move()
     {
-        transform.position = CalculateHermitePoint(_t, _p0, _m0, _p1, _m1);
+        if (_phase == 0)
+        {
+            Vector3 position = Hermite(_t, _startPosition, _midPosition, _startTangent, _midTangent);
+            transform.position = position;
+            if (_t >= 1f)
+            {
+                _phase = 1;
+                _t = 0f;
+            }
+        }
+        else if (_phase == 1)
+        {
+            Vector3 position = Hermite(_t, _midPosition, _endPosition, _midTangent, _endTangent);
+            transform.position = position;
+            if (_t >= 1f)
+            {
+                _phase = 2;
+                _t = 0f;
+            }
+        }
     }
 
-    private Vector3 CalculateHermitePoint(float t, Vector3 p0, Vector3 m0, Vector3 p1, Vector3 m1)
+    private Vector3 Hermite(float t, Vector3 p0, Vector3 p1, Vector3 m0, Vector3 m1)
     {
         float t2 = t * t;
         float t3 = t2 * t;
 
-        return (2 * t3 - 3 * t2 + 1) * p0 +
-               (t3 - 2 * t2 + t) * m0 +
-               (-2 * t3 + 3 * t2) * p1 +
-               (t3 - t2) * m1;
+        float h00 = 2 * t3 - 3 * t2 + 1;
+        float h10 = t3 - 2 * t2 + t;
+        float h01 = -2 * t3 + 3 * t2;
+        float h11 = t3 - t2;
+
+        return h00 * p0 + h10 * m0 + h01 * p1 + h11 * m1;
     }
 
-    private float EstimateCurveLength(int segments)
+    private float EstimateCurveLength(int segments, Vector3 p0, Vector3 p1, Vector3 m0, Vector3 m1)
     {
         float length = 0f;
-        Vector3 prev = _p0;
+        Vector3 prev = p0;
 
         for (int i = 1; i <= segments; i++)
         {
             float t = i / (float)segments;
-            Vector3 curr = CalculateHermitePoint(t, _p0, _m0, _p1, _m1);
+            Vector3 curr = Hermite(t, p0, p1, m0, m1);
             length += Vector3.Distance(prev, curr);
             prev = curr;
         }
-
         return length;
     }
 }

@@ -55,12 +55,12 @@ public partial class BossShootAction : Action, IBossAttack
         if (IsPlayerObscured(out RaycastHit obstacleHit))
         {
             Debug.Log("곡사");
-            ShootCurve(obstacleHit);
+            ShootHemiteCurveBullet(obstacleHit);
         }
         else
         {
             Debug.Log("직사");
-            Shoot();
+            ShootStraightBullet();
         }
     }
     
@@ -81,7 +81,7 @@ public partial class BossShootAction : Action, IBossAttack
         return false;
     }
 
-    private void Shoot()
+    private void ShootStraightBullet()
     {
         Vector3 bossPosition = _bossTransform.position;
         Vector3 playerPosition = _playerTransform.position;
@@ -97,47 +97,34 @@ public partial class BossShootAction : Action, IBossAttack
 
     }
     
-    private void ShootCurve(RaycastHit obstacleHit)
+    private void ShootHemiteCurveBullet(RaycastHit obstacleHit)
     {
         Vector3 shootStart = _bossController.ShootPositionTransform.position;
         Vector3 shootEnd = _playerTransform.position;
-
-        // 탄젠트는 단순히 방향 * 강도로 설정 (이건 이후 조정 가능)
-        Vector3 toPlayer = (shootEnd - shootStart).normalized;
-        Vector3 m0 = toPlayer * 5f; // 시작 속도
-        Vector3 m1 = Vector3.up * 5f; // 끝 속도 (위로 살짝 튀는 식)
-
         
-        const int segmentCount = 20;
-        Vector3 previousPoint = shootStart;
-        for (int i = 1; i <= segmentCount; i++)
-        {
-            float t = i / (float)segmentCount;
-            Vector3 point = CalculateHermitePoint(t, shootStart, m0, shootEnd, m1);
-            Debug.DrawLine(previousPoint, point, Color.yellow, 2f);
-            previousPoint = point;
-        }
-
+        Vector3 shootMid = GetRandomMidPoint(obstacleHit);
+        
         GameObject bullet = DamageablePoolManager.Instance.GetObject(
             EDamageableType.BossBulletCurve,
             shootStart,
             Quaternion.identity
         );
 
-        if (bullet.TryGetComponent(out CurveBullet curveBullet))
+        if (bullet.TryGetComponent(out CurveBullet hermiteBullet))
         {
-            curveBullet.InitializeHermite(shootStart, m0, shootEnd, m1);
+            hermiteBullet.InitializePoints(shootStart, shootMid, shootEnd);
         }
     }
 
-    private Vector3 CalculateHermitePoint(float t, Vector3 p0, Vector3 m0, Vector3 p1, Vector3 m1)
+    private Vector3 GetRandomMidPoint(RaycastHit obstacleHit)
     {
-        float t2 = t * t;
-        float t3 = t2 * t;
-
-        return (2 * t3 - 3 * t2 + 1) * p0 +
-               (t3 - 2 * t2 + t) * m0 +
-               (-2 * t3 + 3 * t2) * p1 +
-               (t3 - t2) * m1;
+        Vector3 obstacleTop = obstacleHit.collider.bounds.max;
+        float safetyMargin = 3f;
+        Vector3 midPoint = obstacleTop + Vector3.up * safetyMargin;
+        
+        Debug.DrawRay(midPoint, Vector3.up * 0.5f, Color.yellow, 2f);
+        Debug.DrawRay(midPoint, Vector3.right * 0.5f, Color.yellow, 2f);
+        Debug.DrawRay(midPoint, Vector3.forward * 0.5f, Color.yellow, 2f);
+        return midPoint;
     }
 }

@@ -51,6 +51,7 @@ public abstract class BulletBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        Debug.Log("OnTriggerEnter");
         if (other.CompareTag(nameof(ETags.Player)))
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
@@ -64,6 +65,7 @@ public abstract class BulletBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter");
         DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
     }
     protected virtual void OnDisable()
