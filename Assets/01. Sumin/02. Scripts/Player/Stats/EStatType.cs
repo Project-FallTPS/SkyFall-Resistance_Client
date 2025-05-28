@@ -13,5 +13,7 @@ public enum EStatType
     StaminaRegenRate,
     ExplodeRange,
     JumpPower,
+    GroundMoveSpeed,
+    GroundSprintSpeed,
     Count
 }

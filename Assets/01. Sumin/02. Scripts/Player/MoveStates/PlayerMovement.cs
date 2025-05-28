@@ -1,10 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+
+[System.Serializable]
+public struct Jetpack
+{
+    public ParticleSystem BigSmoke;
+}
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const int MAX_JUMP_COUNT = 2;
+    private readonly int MAX_JUMP_COUNT = 2;
 
     [Header("# Stat")]
     public PlayerStatHolder PlayerStatManager { get; private set; }
@@ -15,9 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header(" Movement Settings")]
     public float RotateSpeed = 10f;
-    public float CurrentSpeed { get; private set; }
+    public float CurrentSpeed { get; set; }
     public Vector3 MoveDirection { get; private set; }
-    public bool IsSprint { get; private set; }
+    public bool IsSprint { get; set; }
 
     [Header("# Jump")]
     private int _jumpCount = 0;   // 현재 점프 횟수
@@ -26,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody Rigid { get; private set; }
     public Transform MainCameraTransform { get; private set; }
     public Animator Animator { get; private set; }
+
+    [Header("# Jetpack")]
+    [SerializeField] private List<Jetpack> Jetpacks;
 
     private void Awake()
     {
@@ -40,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
             { EPlayerMoveState.Airborne, new PlayerAirborneState() },
         };
         ChangeState(EPlayerMoveState.Airborne);
+        SetSprint(false);
     }
 
     private void Start()
@@ -49,17 +58,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //CheckStateTransition();
         CurrentState?.Update();
-        if(IsSprint)
+        if (!IsSprint)
         {
             PlayerStatManager.RegenStamina();
         }
-    }
-
-    private void LateUpdate()
-    {
-        HandleRotation();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,22 +88,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void CheckStateTransition()
-    {
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.NameToLayer("Ground"));
-        
-        if (isGrounded && CurrentState is PlayerAirborneState)
-        {
-            ChangeState(EPlayerMoveState.Ground);
-            Animator.SetBool("anim_Player_IsGrounded", true);
-        }
-        //else if (!isGrounded && CurrentState is PlayerGroundState)
-        //{
-        //    ChangeState(EPlayerMoveState.Airborne);
-        //    Animator.SetBool("anim_Player_IsGrounded", false);
-        //}
-    }
-
     public void HandleMovement(float h, float v, bool isKeyDown)
     {
         Animator.SetFloat("anim_Player_MovingX", h);
@@ -111,9 +98,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetSprint(bool isSprint)
     {
-        CurrentSpeed = isSprint ? PlayerStatManager.GetStat(EStatType.SprintSpeed) : PlayerStatManager.GetStat(EStatType.MoveSpeed);
-        IsSprint = isSprint;
-        Animator.SetBool("anim_Player_IsBoosting", isSprint);
+        CurrentState?.SetSprint(isSprint);
+        foreach (var smoke in Jetpacks)
+        {
+            if(isSprint)
+            {
+                smoke.BigSmoke.Play();
+            }
+            else
+            {
+                smoke.BigSmoke.Stop();
+            }
+        }
     }
 
     public void ChangeState(EPlayerMoveState newState)
@@ -148,31 +144,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Animator.SetTrigger("anim_Player_GroundDoubleJump");
             ChangeState(EPlayerMoveState.Airborne);
-        }
-    }
-
-
-    public void Dodge(float h, float v)
-    {
-
-    }
-
-    private void HandleRotation()
-    {
-        Vector3 camForward = MainCameraTransform.forward;
-
-        if (CurrentState is PlayerGroundState)
-        {
-            // y축 제거해서 수평 방향만 사용
-            camForward.y = 0f;
-        }
-
-        camForward.Normalize();
-
-        if (camForward.sqrMagnitude > 0.01f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(camForward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, RotateSpeed * Time.deltaTime);
         }
     }
 }

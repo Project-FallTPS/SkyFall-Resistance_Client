@@ -52,14 +52,14 @@ public class TraceBezier : ITraceStrategy
     private void DrawTrajectory(EnemyController self)
     {
         Vector3 currentPosition = GetBezierPoint(_t);
-        Vector3 direction = (currentPosition - _prevPosition).normalized;
 
-        if (direction != Vector3.zero)
-            self.transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 direction = (currentPosition - _prevPosition).normalized;
+        self.transform.rotation = Quaternion.LookRotation(direction);
 
         self.transform.position = currentPosition;
         _prevPosition = currentPosition;
     }
+
 
     private Vector3 GetBezierPoint(float t)
     {

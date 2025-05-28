@@ -13,7 +13,6 @@ public class EnemyTraceState : IEnemyState
     }
     public void Enter()
     {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Trace), true);
     }
 
     public void Update()
@@ -28,6 +27,5 @@ public class EnemyTraceState : IEnemyState
 
     public void Exit()
     {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Trace), false);
     }
 } 

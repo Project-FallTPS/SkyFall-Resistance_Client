@@ -14,11 +14,13 @@ public class PlayerAirborneState : IPlayerState
         //_player.Rigid.linearVelocity = Vector3.zero;
         _player.Rigid.useGravity = false;
         _player.Rigid.constraints = RigidbodyConstraints.None;
+        _player.Rigid.linearVelocity = Vector3.zero;
+        SetSprint(false);
     }
 
     public void Exit(PlayerMovement player)
     {
-        //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.linearVelocity = Vector3.zero;
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -38,8 +40,8 @@ public class PlayerAirborneState : IPlayerState
                 _player.SetSprint(false);
             }
 
-            Vector3 moveVelocity = _moveDirection * _player.CurrentSpeed;
-            _player.Rigid.linearVelocity = moveVelocity;
+            Vector3 moveOffset = _moveDirection * _player.CurrentSpeed * Time.fixedDeltaTime;
+            _player.Rigid.MovePosition(_player.Rigid.position + moveOffset);
         }
         else
         {
@@ -47,9 +49,27 @@ public class PlayerAirborneState : IPlayerState
         }
     }
 
+    public void SetSprint(bool isSprint)
+    {
+        _player.CurrentSpeed = isSprint ? _player.PlayerStatManager.GetStat(EStatType.SprintSpeed) : _player.PlayerStatManager.GetStat(EStatType.MoveSpeed);
+        _player.IsSprint = isSprint;
+        _player.Animator.SetBool("anim_Player_IsBoosting", isSprint);
+    }
+
     public void Update()
     {
-        // 공중 상태에서의 지속적인 업데이트가 필요한 경우 여기에 구현
-        // 예: 공중에서의 회전, 특수 동작 등
+        HandleRotation();
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 camForward = _player.MainCameraTransform.forward;
+        camForward.Normalize();
+
+        if (camForward.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(camForward);
+            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRot, _player.RotateSpeed * Time.deltaTime);
+        }
     }
 }

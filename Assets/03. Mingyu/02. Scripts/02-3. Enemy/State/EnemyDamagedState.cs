@@ -14,13 +14,13 @@ public class EnemyDamagedState : IEnemyState
 
     public void Enter()
     {
-        _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.Hit));
+        _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.hitLeft));
     }
 
     public void Update()
     {
         _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
-        if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.Hit)) && 1.0f <= _animatorStateInfo.normalizedTime)
+        if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.hitLeft)) && 1.0f <= _animatorStateInfo.normalizedTime)
         {
             ChangeStateOnDistanceFromPlayer();
         }

@@ -1,6 +1,8 @@
 public enum EDamageableType
 {
-    EnemyBullet,
+    EnemyBullet1,
+    EnemyBullet2,
+    EnemyBullet3,
     EnemyBomb,
     BossBulletStraight,
     BossBulletCurve,

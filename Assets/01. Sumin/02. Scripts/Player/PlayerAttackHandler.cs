@@ -33,12 +33,12 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     private void Update()
     {
-        CurrentStrategy.Update();
+        CurrentStrategy?.Update();
     }
 
     public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
     {
-        CurrentStrategy.AddAccessory(type, accessory);
+        CurrentStrategy?.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -58,7 +58,19 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
                     Anim.SetLayerWeight(RANGE_LAYER, 1f);
                     Anim.SetLayerWeight(MELEE_LAYER, 0f);
                     break;
-            }    
+            }
+
+            foreach(var weapon in Weapons)
+            {
+                if(weapon.name == type.ToString())
+                {
+                    weapon.SetActive(true);
+                }
+                else
+                {
+                    weapon.SetActive(false);
+                }
+            }
         }
     }
 

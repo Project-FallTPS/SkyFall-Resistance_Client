@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
-using UnityEngine.AI;
+using VInspector;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
@@ -16,6 +15,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     [Header("Components")]
     private CapsuleCollider _enemyCollider;
     public CapsuleCollider EnemyCollider => _enemyCollider;
+    private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody => _rigidbody;
 
     private Animator _enemyAnimator;
     public Animator EnemyAnimator => _enemyAnimator;
@@ -25,6 +26,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     private EEnemyType _enemyType;
     [SerializeField]
     private EnemyDataSO _enemyDataSO;
+    [SerializeField]
+    private List<Transform> _bulletShootPositions;
+    public List<Transform> BulletShootPositions { get => _bulletShootPositions; }
 
     private EnemyData _enemyData;
     public EnemyData EnemyData { get => _enemyData; set => _enemyData = value; }
@@ -33,13 +37,13 @@ public class EnemyController : MonoBehaviour, IDamageable
     private GameObject _player;
     public GameObject Player => _player;
 
-
     private void Awake()
     {
         _enemyStateContext = new EnemyStateContext(this);
         _enemyStateDict = new Dictionary<EEnemyState, IEnemyState>();
 
         _enemyCollider = GetComponent<CapsuleCollider>();
+        _rigidbody = GetComponent<Rigidbody>();
         _enemyAnimator = GetComponent<Animator>();
 
         _enemyData = _enemyDataSO.GetEnemyData(_enemyType);

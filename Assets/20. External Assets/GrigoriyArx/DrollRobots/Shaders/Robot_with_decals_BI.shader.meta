@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 4c0a5423a612fb843ba7ff2c32dca54b
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 268984
+  packageName: Droll Robots Pack1
+  packageVersion: 1.0
+  assetPath: Assets/GrigoriyArx/DrollRobots/Shaders/Robot_with_decals_BI.shader
+  uploadId: 623943
