@@ -116,7 +116,7 @@ public class RangeStrategy : IWeaponStrategy
         {
             if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
             {
-                accesory.Excecute();
+                accesory.Execute();
             }
         }
     }
