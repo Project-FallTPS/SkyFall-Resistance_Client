@@ -16,7 +16,7 @@ MonoBehaviour:
   - Type: 0
     Value: 10
   - Type: 5
-    Value: 30
+    Value: 20
   - Type: 1
     Value: 100
   - Type: 2
@@ -38,6 +38,6 @@ MonoBehaviour:
   - Type: 12
     Value: 10
   - Type: 13
-    Value: 5
+    Value: 3
   - Type: 14
     Value: 10

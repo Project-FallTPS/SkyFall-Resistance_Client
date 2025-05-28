@@ -1,6 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
+public struct Jetpack
+{
+    public ParticleSystem BigSmoke;
+    public ParticleSystem SmallSmoke;
+}
+
 public class PlayerMovement : MonoBehaviour
 {
     private readonly int MAX_JUMP_COUNT = 2;
@@ -26,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform MainCameraTransform { get; private set; }
     public Animator Animator { get; private set; }
 
+    [Header("# Jetpack")]
+    [SerializeField] private List<Jetpack> Jetpacks;
+
     private void Awake()
     {
         Rigid = GetComponent<Rigidbody>();
@@ -39,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
             { EPlayerMoveState.Airborne, new PlayerAirborneState() },
         };
         ChangeState(EPlayerMoveState.Airborne);
+        SetSprint(false);
     }
 
     private void Start()
@@ -89,6 +100,17 @@ public class PlayerMovement : MonoBehaviour
     public void SetSprint(bool isSprint)
     {
         CurrentState?.SetSprint(isSprint);
+        foreach (var smoke in Jetpacks)
+        {
+            if(isSprint)
+            {
+                smoke.BigSmoke.Play();
+            }
+            else
+            {
+                smoke.BigSmoke.Stop();
+            }
+        }
     }
 
     public void ChangeState(EPlayerMoveState newState)

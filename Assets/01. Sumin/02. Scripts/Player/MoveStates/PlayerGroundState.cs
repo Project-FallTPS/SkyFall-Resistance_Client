@@ -53,10 +53,6 @@ public class PlayerGroundState : IPlayerState
 
             _player.Rigid.MovePosition(newPosition);
         }
-        else
-        {
-            _player.Rigid.linearVelocity = Vector3.zero;
-        }
     }
 
     public void SetSprint(bool isSprint)
