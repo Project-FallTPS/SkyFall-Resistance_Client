@@ -20,7 +20,6 @@ public class EnemyAttackState : IEnemyState
 
     public void Enter()
     {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Idle), true);
     }
 
     public void Update()
@@ -35,8 +34,6 @@ public class EnemyAttackState : IEnemyState
 
     public void Exit()
     {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.Idle), false);
-
     }
     private void TryAttack()
     {
@@ -44,7 +41,7 @@ public class EnemyAttackState : IEnemyState
         {
             return;
         }
-        _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.Attack));
+        _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
         _attackStrategy.Attack(_enemyController.transform.position, _enemyController);
         _nextAttackTime = Time.time + _enemyData.AttackDelay;
     }
