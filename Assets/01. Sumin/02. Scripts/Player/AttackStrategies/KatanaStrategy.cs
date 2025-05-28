@@ -59,7 +59,7 @@ public class KatanaStrategy : IWeaponStrategy
         {
             if (data != null)
             {
-                accBonuses *= data.GetData(type);
+                accBonuses *= (1 + (data.GetData(type) - 1) * data.Count);
             }
         }
 
@@ -143,7 +143,7 @@ public class KatanaStrategy : IWeaponStrategy
             obj.transform.SetParent(_accessorySockets[type]);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
-            obj.GetComponent<IAccessory>().SetEquipped(true);
+            obj.GetComponent<AccessoryBase>().SetEquipped(true);
             obj.GetComponent<IAccessory>().Execute();
         }
     }

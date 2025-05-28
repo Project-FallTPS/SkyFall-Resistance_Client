@@ -48,7 +48,10 @@ public class RangeStrategy : IWeaponStrategy
         float accBonuses = 1f;
         foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            accBonuses *= data.GetData(type);
+            if (data != null)
+            {
+                accBonuses *= (1 + (data.GetData(type) - 1) * data.Count);
+            }
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -91,7 +94,8 @@ public class RangeStrategy : IWeaponStrategy
             obj.transform.SetParent(_accessorySockets[type]);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
-            obj.GetComponent<IAccessory>().SetEquipped(true);
+            obj.GetComponent<AccessoryBase>().SetEquipped(true);
+            obj.GetComponent<IAccessory>().Execute();
         }
     }
 

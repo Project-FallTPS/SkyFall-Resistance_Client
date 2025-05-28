@@ -14,11 +14,12 @@ public class PlayerAirborneState : IPlayerState
         //_player.Rigid.linearVelocity = Vector3.zero;
         _player.Rigid.useGravity = false;
         _player.Rigid.constraints = RigidbodyConstraints.None;
+        _player.Rigid.linearVelocity = Vector3.zero;
     }
 
     public void Exit(PlayerMovement player)
     {
-        //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.linearVelocity = Vector3.zero;
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -38,14 +39,15 @@ public class PlayerAirborneState : IPlayerState
                 _player.SetSprint(false);
             }
 
-            Vector3 moveVelocity = _moveDirection * _player.CurrentSpeed;
-            _player.Rigid.linearVelocity = moveVelocity;
+            Vector3 moveOffset = _moveDirection * _player.CurrentSpeed * Time.fixedDeltaTime;
+            _player.Rigid.MovePosition(_player.Rigid.position + moveOffset);
         }
         else
         {
             _player.Rigid.linearVelocity = Vector3.zero;
         }
     }
+
 
     public void Update()
     {
