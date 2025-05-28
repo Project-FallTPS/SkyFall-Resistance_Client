@@ -101,7 +101,6 @@ public partial class BossShootAction : Action, IBossAttack
     {
         Vector3 shootStart = _bossController.ShootPositionTransform.position;
         Vector3 shootEnd = _playerTransform.position;
-        
         Vector3 shootMid = GetRandomMidPoint(obstacleHit);
         
         GameObject bullet = DamageablePoolManager.Instance.GetObject(
@@ -115,13 +114,23 @@ public partial class BossShootAction : Action, IBossAttack
             hermiteBullet.InitializePoints(shootStart, shootMid, shootEnd);
         }
     }
-
+    
     private Vector3 GetRandomMidPoint(RaycastHit obstacleHit)
     {
-        Vector3 obstacleTop = obstacleHit.collider.bounds.max;
-        float safetyMargin = 3f;
-        Vector3 midPoint = obstacleTop + Vector3.up * safetyMargin;
-        
+        Bounds bound = obstacleHit.collider.bounds;
+        Vector3 center = bound.center;
+        Vector3 extents = bound.extents;
+        float safetyMargin = 5f;
+
+        Vector3[] candidates = new Vector3[]
+        {
+            center + new Vector3(extents.x + safetyMargin, 0, 0),     // Right
+            center + new Vector3(-(extents.x + safetyMargin), 0, 0),  // Left
+            center + new Vector3(0, extents.y + safetyMargin, 0),     // Up
+        };
+
+        int index = UnityEngine.Random.Range(0, candidates.Length);
+        Vector3 midPoint = candidates[index];
         Debug.DrawRay(midPoint, Vector3.up * 0.5f, Color.yellow, 2f);
         Debug.DrawRay(midPoint, Vector3.right * 0.5f, Color.yellow, 2f);
         Debug.DrawRay(midPoint, Vector3.forward * 0.5f, Color.yellow, 2f);
