@@ -12,15 +12,24 @@ public class PlayerGroundState : IPlayerState
             _player = player;
         }
         //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.useGravity = true;
+        _player.Rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     public void Exit(PlayerMovement player)
     {
         //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.useGravity = false;
+        _player.Rigid.constraints = RigidbodyConstraints.None;
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
     {
+        float threshold = 0.1f;
+
+        float rawH = Mathf.Abs(h) < threshold ? 0 : Mathf.Sign(h);
+        float rawV = Mathf.Abs(v) < threshold ? 0 : Mathf.Sign(v);
+
         Vector3 camForward = _player.MainCameraTransform.forward;
         camForward.y = 0;
         camForward.Normalize();
@@ -29,7 +38,9 @@ public class PlayerGroundState : IPlayerState
         camRight.y = 0;
         camRight.Normalize();
 
-        _moveDirection = (camForward * v + camRight * h).normalized;
+        _moveDirection = (camForward * rawV + camRight * rawH).normalized;
+
+        Vector3 currentVelocity = _player.Rigid.linearVelocity;
 
         if (_moveDirection.sqrMagnitude > 0.01f)
         {
@@ -38,12 +49,14 @@ public class PlayerGroundState : IPlayerState
                 _player.SetSprint(false);
             }
 
-            Vector3 targetPosition = _player.transform.position + _moveDirection * _player.CurrentSpeed * Time.deltaTime;
-            _player.Rigid.MovePosition(targetPosition);
+            Vector3 moveVelocity = _moveDirection * _player.CurrentSpeed;
+            moveVelocity.y = currentVelocity.y; // 중력 영향 유지
+            _player.Rigid.linearVelocity = moveVelocity;
         }
         else
         {
-            _player.Rigid.linearVelocity = Vector3.zero;
+            // 이동 입력이 없을 때도 중력은 유지
+            _player.Rigid.linearVelocity = new Vector3(0, currentVelocity.y, 0);
         }
     }
 
