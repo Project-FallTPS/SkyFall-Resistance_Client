@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private const int MAX_JUMP_COUNT = 2;
+
     [Header("# Stat")]
     public PlayerStatHolder PlayerStatManager { get; private set; }
 
@@ -16,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float CurrentSpeed { get; private set; }
     public Vector3 MoveDirection { get; private set; }
     public bool IsSprint { get; private set; }
+
+    [Header("# Jump")]
+    private int _jumpCount = 0;   // 현재 점프 횟수
 
     [Header("# Components")]
     public Rigidbody Rigid { get; private set; }
@@ -44,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        CheckStateTransition();
+        //CheckStateTransition();
         CurrentState?.Update();
         if(IsSprint)
         {
@@ -57,6 +62,29 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Animator.SetBool("anim_Player_IsGrounded", true);
+            _jumpCount = 0; // 점프 횟수 초기화
+
+            if (CurrentState is not PlayerGroundState)
+            {
+                ChangeState(EPlayerMoveState.Ground);
+                PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.LandingEffect, transform.position);
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            Animator.SetBool("anim_Player_IsGrounded", false);
+        }
+    }
+
     private void CheckStateTransition()
     {
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.NameToLayer("Ground"));
@@ -66,11 +94,11 @@ public class PlayerMovement : MonoBehaviour
             ChangeState(EPlayerMoveState.Ground);
             Animator.SetBool("anim_Player_IsGrounded", true);
         }
-        else if (!isGrounded && CurrentState is PlayerGroundState)
-        {
-            ChangeState(EPlayerMoveState.Airborne);
-            Animator.SetBool("anim_Player_IsGrounded", false);
-        }
+        //else if (!isGrounded && CurrentState is PlayerGroundState)
+        //{
+        //    ChangeState(EPlayerMoveState.Airborne);
+        //    Animator.SetBool("anim_Player_IsGrounded", false);
+        //}
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -102,9 +130,44 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Jump()
+    {
+        if (_jumpCount >= MAX_JUMP_COUNT || CurrentState is not PlayerGroundState)
+        {
+            return;
+        }
+
+        Rigid.AddForce(Vector3.up * PlayerStatManager.GetStat(EStatType.JumpPower), ForceMode.Impulse);
+        _jumpCount++;
+
+        if(_jumpCount == 1)
+        {
+            Animator.SetTrigger("anim_Player_GroundJump");
+        }
+        else
+        {
+            Animator.SetTrigger("anim_Player_GroundDoubleJump");
+            ChangeState(EPlayerMoveState.Airborne);
+        }
+    }
+
+
+    public void Dodge(float h, float v)
+    {
+
+    }
+
     private void HandleRotation()
     {
         Vector3 camForward = MainCameraTransform.forward;
+
+        if (CurrentState is PlayerGroundState)
+        {
+            // y축 제거해서 수평 방향만 사용
+            camForward.y = 0f;
+        }
+
+        camForward.Normalize();
 
         if (camForward.sqrMagnitude > 0.01f)
         {
