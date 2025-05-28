@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Ac_KatanaCoolTime : MonoBehaviour, IAccessory
+public abstract class AccessoryBase : MonoBehaviour
 {
     [SerializeField] private EAccessoryType _type;
     public EAccessoryType Type => _type;
-    public AccessoryData Data { get; private set; }
 
+    public AccessoryData Data { get; private set; }
     private Collider _collider;
-    private bool _isEqiupped = false;
+    public bool IsEqiupped { get; protected set; }
 
     private void Awake()
     {
@@ -24,22 +24,23 @@ public class Ac_KatanaCoolTime : MonoBehaviour, IAccessory
         SetEquipped(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
+        if(IsEqiupped)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
-            receiver.ReceiveAccessory(_type, gameObject);
             SetEquipped(true);
+            receiver.ReceiveAccessory(_type, gameObject);
         }
     }
 
-    public void Execute()
-    {
-        // 타격 시 발동하는 특수 효과가 있을 경우 여기에 구현
-    }
-
-    public void SetEquipped(bool flag)
+    public virtual void SetEquipped(bool flag)
     {
         _collider.enabled = !flag;
+        IsEqiupped = flag;
     }
 }

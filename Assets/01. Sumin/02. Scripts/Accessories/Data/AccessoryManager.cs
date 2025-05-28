@@ -16,9 +16,16 @@ public class AccessoryManager : Singleton<AccessoryManager>
 
     public void Equip(EAccessoryType type)
     {
+        AccessoryData data = GetData(type);
         if (!EquippedAccessories.ContainsKey(type))
         {
-            EquippedAccessories.Add(type, GetData(type));
+            data.Count = 1;
+            EquippedAccessories.Add(type, data);
+        }
+        else
+        {
+            data.Count++;
+            EquippedAccessories[type] = data;
         }
     }
 
@@ -26,7 +33,12 @@ public class AccessoryManager : Singleton<AccessoryManager>
     {
         if (EquippedAccessories.ContainsKey(type))
         {
-            EquippedAccessories.Remove(type);
+            AccessoryData data = GetData(type);
+            data.Count--;
+            if(data.Count <= 0)
+            {
+                EquippedAccessories.Remove(type);
+            }
         }
     }
 

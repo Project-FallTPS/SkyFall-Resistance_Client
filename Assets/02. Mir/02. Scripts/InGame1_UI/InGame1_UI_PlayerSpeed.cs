@@ -20,18 +20,18 @@ public class InGame1_UI_PlayerSpeed : MonoBehaviour
 
         float y = Mathf.Clamp(_playerMovement.MoveDirection.y, -1f, 1f);
 
-        // ¼±Çü º¸°£: -1ÀÏ ¶§ min, 0ÀÏ ¶§ mid, 1ÀÏ ¶§ max
+        // ì„ í˜• ë³´ê°„: -1ì¼ ë•Œ min, 0ì¼ ë•Œ mid, 1ì¼ ë•Œ max
         float speed;
         if (y >= 0)
-            speed = Mathf.Lerp(midSpeed, minSpeed, y); // y: -1~0 ¡æ t: 0~1
+            speed = Mathf.Lerp(midSpeed, minSpeed, y); // y: -1~0 â†’ t: 0~1
         else
-            speed = Mathf.Lerp(midSpeed, maxSpeed, -y);     // y: 0~1 ¡æ t: 0~1
+            speed = Mathf.Lerp(midSpeed, maxSpeed, -y);     // y: 0~1 â†’ t: 0~1
 
-        // ½½¶óÀÌ´õ °ª °»½Å (0~1 Á¤±ÔÈ­)
+        // ìŠ¬ë¼ì´ë” ê°’ ê°±ì‹  (0~1 ì •ê·œí™”)
         float normalized = Mathf.InverseLerp(minSpeed, maxSpeed, speed);
         _speedSlider.value = normalized;
 
-        // ÅØ½ºÆ® Ç¥½Ã (¼±ÅÃ)
+        // í…ìŠ¤íŠ¸ í‘œì‹œ (ì„ íƒ)
         if (_speedText != null)
             _speedText.text = $"{Mathf.RoundToInt(speed)} km/h";
     }

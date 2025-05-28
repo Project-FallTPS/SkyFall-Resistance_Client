@@ -11,14 +11,15 @@ public class PlayerGroundState : IPlayerState
         {
             _player = player;
         }
-        //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.linearVelocity = Vector3.zero;
         _player.Rigid.useGravity = true;
         _player.Rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        SetSprint(false);
     }
 
     public void Exit(PlayerMovement player)
     {
-        //_player.Rigid.linearVelocity = Vector3.zero;
+        _player.Rigid.linearVelocity = Vector3.zero;
         _player.Rigid.useGravity = false;
         _player.Rigid.constraints = RigidbodyConstraints.None;
     }
@@ -40,8 +41,6 @@ public class PlayerGroundState : IPlayerState
 
         _moveDirection = (camForward * rawV + camRight * rawH).normalized;
 
-        Vector3 currentVelocity = _player.Rigid.linearVelocity;
-
         if (_moveDirection.sqrMagnitude > 0.01f)
         {
             if (!_player.IsSprint || !_player.PlayerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate))
@@ -49,20 +48,35 @@ public class PlayerGroundState : IPlayerState
                 _player.SetSprint(false);
             }
 
-            Vector3 moveVelocity = _moveDirection * _player.CurrentSpeed;
-            moveVelocity.y = currentVelocity.y; // 중력 영향 유지
-            _player.Rigid.linearVelocity = moveVelocity;
+            Vector3 horizontalMove = _moveDirection * _player.CurrentSpeed * Time.fixedDeltaTime;
+            Vector3 newPosition = _player.Rigid.position + horizontalMove;
+
+            _player.Rigid.MovePosition(newPosition);
         }
-        else
-        {
-            // 이동 입력이 없을 때도 중력은 유지
-            _player.Rigid.linearVelocity = new Vector3(0, currentVelocity.y, 0);
-        }
+    }
+
+    public void SetSprint(bool isSprint)
+    {
+        _player.CurrentSpeed = isSprint ? _player.PlayerStatManager.GetStat(EStatType.GroundSprintSpeed) : _player.PlayerStatManager.GetStat(EStatType.GroundMoveSpeed);
+        _player.IsSprint = isSprint;
+        _player.Animator.SetBool("anim_Player_IsBoosting", isSprint);
     }
 
     public void Update()
     {
-        // 공중 상태에서의 지속적인 업데이트가 필요한 경우 여기에 구현
-        // 예: 공중에서의 회전, 특수 동작 등
+        HandleRotation();
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 camForward = _player.MainCameraTransform.forward;
+        camForward.y = 0f;
+        camForward.Normalize();
+
+        if (camForward.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(camForward);
+            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRot, _player.RotateSpeed * Time.deltaTime);
+        }
     }
 }
