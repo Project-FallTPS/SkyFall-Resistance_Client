@@ -3,8 +3,8 @@ public enum EStatType
     MoveSpeed,
     Health,
     MaxHealth,
-    Damage, // ºñÀ² = Default 1
-    CoolTime, // ºñÀ² = Default 1
+    Damage, // ë¹„ìœ¨ = Default 1
+    CoolTime, // ë¹„ìœ¨ = Default 1
     SprintSpeed,
     MaxStamina,
     CurrentStamina,
@@ -12,5 +12,6 @@ public enum EStatType
     TargetDashStaminaUseRate,
     StaminaRegenRate,
     ExplodeRange,
+    JumpPower,
     Count
 }

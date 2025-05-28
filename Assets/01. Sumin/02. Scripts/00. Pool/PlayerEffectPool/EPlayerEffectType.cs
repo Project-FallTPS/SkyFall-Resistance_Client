@@ -1,6 +1,7 @@
 public enum EPlayerEffectType
 {
-    SwrodSlash1,
-    Prick1,
+    MeleeAttackEffect,
+    TargetDashEffect,
+    LandingEffect,
     Count,
 }

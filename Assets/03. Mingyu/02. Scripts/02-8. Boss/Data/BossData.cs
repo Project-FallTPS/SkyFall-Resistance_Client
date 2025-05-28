@@ -22,6 +22,11 @@ public class BossData
         set
         {
             _currentHealth = Mathf.Clamp(value, 0f, MaxHealth);
+            if (_currentPhase == MaxPhase)
+            {
+                return;
+            }
+
             if ((_currentHealth / MaxHealth * 100f) <= PhaseChangeHealthPercentage[_currentPhase - 1])
             {
                 CurrentPhase++;
