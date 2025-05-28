@@ -48,7 +48,7 @@ public abstract class BulletBase : MonoBehaviour
     {
         Move();
     }
-
+    
     protected virtual void OnTriggerEnter(Collider other)
     {
         Debug.Log("OnTriggerEnter");

@@ -4,20 +4,9 @@ using UnityEngine;
 
 public class StraightBullet : BulletBase
 {
-
-    private void OnEnable()
-    {
-        StartCoroutine(LifeCycle());
-    }
-
     protected override void Update()
     {
         base.Update();
-    }
-
-    private void OnDisable()
-    {
-        StopAllCoroutines();
     }
 
     protected override void Move()

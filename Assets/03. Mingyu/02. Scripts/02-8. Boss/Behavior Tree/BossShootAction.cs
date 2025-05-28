@@ -120,7 +120,7 @@ public partial class BossShootAction : Action, IBossAttack
         Bounds bound = obstacleHit.collider.bounds;
         Vector3 center = bound.center;
         Vector3 extents = bound.extents;
-        float safetyMargin = 5f;
+        float safetyMargin = _bossController.BossData.SafetyMargin;
 
         Vector3[] candidates = new Vector3[]
         {
