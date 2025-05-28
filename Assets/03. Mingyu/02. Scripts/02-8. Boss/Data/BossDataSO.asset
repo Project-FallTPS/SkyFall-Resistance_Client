@@ -17,6 +17,7 @@ MonoBehaviour:
     MoveSpeed: 5
     AttackDamage: 10
     AttackCooltime: 5
+    SafetyMargin: 5
     MaxRushDistance: 20
     MinRushDistance: 10
     RushSpeedMultiplier: 50

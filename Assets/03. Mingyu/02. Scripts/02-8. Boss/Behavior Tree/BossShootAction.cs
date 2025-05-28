@@ -39,7 +39,6 @@ public partial class BossShootAction : Action, IBossAttack
     protected override Status OnUpdate()
     {
         _bossData.LastAttackTime = Time.time;
-        Debug.Log(_bossData.LastAttackTime);
         Attack();
         return Status.Success;
     }
@@ -56,12 +55,12 @@ public partial class BossShootAction : Action, IBossAttack
         if (IsPlayerObscured(out RaycastHit obstacleHit))
         {
             Debug.Log("곡사");
-            ShootBezier(obstacleHit);
+            ShootHemiteCurveBullet(obstacleHit);
         }
         else
         {
             Debug.Log("직사");
-            Shoot();
+            ShootStraightBullet();
         }
     }
     
@@ -82,12 +81,12 @@ public partial class BossShootAction : Action, IBossAttack
         return false;
     }
 
-    private void Shoot()
+    private void ShootStraightBullet()
     {
         Vector3 bossPosition = _bossTransform.position;
         Vector3 playerPosition = _playerTransform.position;
         Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
-        // 디버그 라인
+        
         Debug.DrawLine(bossPosition, playerPosition, Color.red, 2f);
         
         DamageablePoolManager.Instance.GetObject(
@@ -98,72 +97,40 @@ public partial class BossShootAction : Action, IBossAttack
 
     }
     
-    private void ShootBezier(RaycastHit obstacleHit)
+    private void ShootHemiteCurveBullet(RaycastHit obstacleHit)
     {
         Vector3 shootStart = _bossController.ShootPositionTransform.position;
         Vector3 shootEnd = _playerTransform.position;
-
-        Vector3 controlPoint = CalculateControlPoint(obstacleHit, shootStart, shootEnd);
-
-        // 시각화
-        const int segmentCount = 20;
-        Vector3 previousPoint = shootStart;
-        for (int i = 1; i <= segmentCount; i++)
-        {
-            float t = i / (float)segmentCount;
-            Vector3 point = CalculateQuadraticBezierPoint(t, shootStart, controlPoint, shootEnd);
-            Debug.DrawLine(previousPoint, point, Color.green, 2f);
-            previousPoint = point;
-        }
-
+        Vector3 shootMid = GetRandomMidPoint(obstacleHit);
+        
         GameObject bullet = DamageablePoolManager.Instance.GetObject(
-            EDamageableType.BossBulletBezier,
+            EDamageableType.BossBulletCurve,
             shootStart,
             Quaternion.identity
         );
 
-        if (bullet.TryGetComponent(out BezierBullet bezierBullet))
+        if (bullet.TryGetComponent(out CurveBullet hermiteBullet))
         {
-            bezierBullet.InitializePoints(shootStart, controlPoint, shootEnd);
-        }
-    }
-
-    private Vector3 CalculateControlPoint(RaycastHit obstacleHit, Vector3 shootStart, Vector3 shootEnd)
-    {
-        Bounds obstacleBounds = obstacleHit.collider.bounds;
-        Vector3 obstacleCenter = obstacleBounds.center;
-        Transform obstacleTransform = obstacleHit.collider.transform;
-
-        float verticalMarginHigh = UnityEngine.Random.Range(obstacleBounds.size.y * 0.8f, obstacleBounds.size.y * 1.5f);
-        float verticalMarginLow = UnityEngine.Random.Range(obstacleBounds.size.y * 0.1f, obstacleBounds.size.y * 0.3f);  // 낮은 높이
-        float horizontalMarginX = UnityEngine.Random.Range(obstacleBounds.size.x * 0.8f, obstacleBounds.size.x * 1.5f);
-
-        Vector3 rightDir = obstacleTransform.right;
-
-        float choice = UnityEngine.Random.value;
-
-        if (choice < 0.33f)
-        {
-            // 위로 꺾기 (높은 y값)
-            Vector3 midPoint = (shootStart + shootEnd) * 0.5f;
-            return new Vector3(midPoint.x, obstacleBounds.max.y + verticalMarginHigh, midPoint.z);
-        }
-        else if (choice < 0.66f)
-        {
-            // 오른쪽으로 꺾기 (낮은 y값)
-            return obstacleCenter + rightDir * horizontalMarginX + Vector3.up * verticalMarginLow;
-        }
-        else
-        {
-            // 왼쪽으로 꺾기 (낮은 y값)
-            return obstacleCenter - rightDir * horizontalMarginX + Vector3.up * verticalMarginLow;
+            hermiteBullet.InitializePoints(shootStart, shootMid, shootEnd);
         }
     }
     
-    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+    private Vector3 GetRandomMidPoint(RaycastHit obstacleHit)
     {
-        return Mathf.Pow(1 - t, 2) * p0
-               + 2 * (1 - t) * t * p1
-               + Mathf.Pow(t, 2) * p2;
+        Bounds bound = obstacleHit.collider.bounds;
+        Vector3 center = bound.center;
+        Vector3 extents = bound.extents;
+        float safetyMargin = _bossController.BossData.SafetyMargin;
+
+        Vector3[] candidates = new Vector3[]
+        {
+            center + new Vector3(extents.x + safetyMargin, 0, 0),     // Right
+            center + new Vector3(-(extents.x + safetyMargin), 0, 0),  // Left
+            center + new Vector3(0, extents.y + safetyMargin, 0),     // Up
+        };
+
+        int index = UnityEngine.Random.Range(0, candidates.Length);
+        Vector3 midPoint = candidates[index];
+        return midPoint;
     }
 }

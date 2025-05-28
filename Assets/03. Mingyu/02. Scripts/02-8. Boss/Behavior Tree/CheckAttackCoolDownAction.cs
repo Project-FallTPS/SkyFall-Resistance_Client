@@ -20,7 +20,7 @@ public partial class CheckAttackCoolDownAction : Action
 
     protected override Status OnUpdate()
     {
-        if (_bossData.LastAttackTime == 0f || _bossData.LastAttackTime + _bossData.AttackCooltime <= Time.time)
+        if (_bossData.LastAttackTime + _bossData.AttackCooltime <= Time.time)
         {
             return Status.Success;
         }

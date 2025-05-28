@@ -48,6 +48,10 @@ public class BossData
         get => _lastAttackTime;
         set => _lastAttackTime = value;
     }
+
+    [Header("Attack Logic - Shoot")] 
+    [Tooltip("곡사에서 발사체가 장애물을 피해가는 여유 간격")]
+    public float SafetyMargin;
     
     [Header("Attack Logic - Rush")] 
     [Tooltip("돌진 공격이 가능한 보스 - 플레이어간 최대 거리")]
@@ -78,8 +82,10 @@ public class BossData
     public int MaxPhase;
 
     [Header("System - Weakness Attack")] 
+    [Tooltip("[3페이즈 한정] 약점 공격 성공 시 기본 데미지에 곱해지는 배수")]
+    
     public float WeaknessAttackDamageMultiplier;
-
+    [Tooltip("[3페이즈 한정] 일반 공격 성공 시 기본 데미지에 나눠지는 약수")]
     public float NormalAttackDamageDivisor;
 
     private int _currentPhase = 1;

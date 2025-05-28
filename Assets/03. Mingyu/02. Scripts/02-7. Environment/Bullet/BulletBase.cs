@@ -49,7 +49,23 @@ public abstract class BulletBase : MonoBehaviour
         Move();
     }
     
-    protected abstract void OnTriggerEnter(Collider other);
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(nameof(ETags.Player)))
+        {
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(_damage);
+            }
+        }
+        DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
+    }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
+    }
     protected virtual void OnDisable()
     {
         StopAllCoroutines();

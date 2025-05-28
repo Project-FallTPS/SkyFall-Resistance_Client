@@ -3,7 +3,7 @@ public enum EDamageableType
     EnemyBullet,
     EnemyBomb,
     BossBulletStraight,
-    BossBulletBezier,
+    BossBulletCurve,
     BossLaser,
     Count
 }
