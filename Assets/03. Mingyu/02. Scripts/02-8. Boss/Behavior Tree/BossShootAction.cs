@@ -131,6 +131,7 @@ public partial class BossShootAction : Action, IBossAttack
 
         int index = UnityEngine.Random.Range(0, candidates.Length);
         Vector3 midPoint = candidates[index];
+        
         return midPoint;
     }
 }

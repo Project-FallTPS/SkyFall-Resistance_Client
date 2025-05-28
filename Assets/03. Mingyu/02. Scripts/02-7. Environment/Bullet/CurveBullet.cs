@@ -64,7 +64,12 @@ public class CurveBullet : BulletBase
             {
                 _phase = 2;
                 _t = 0f;
+                _endTangent = _endTangent.normalized;
             }
+        }
+        else
+        {
+            transform.Translate(_endTangent * _speed * Time.deltaTime);
         }
     }
 
