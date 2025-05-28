@@ -7,7 +7,7 @@ public abstract class AccessoryBase : MonoBehaviour
 
     public AccessoryData Data { get; private set; }
     private Collider _collider;
-    public bool IsEqiupped { get; private set; }
+    public bool IsEqiupped { get; protected set; }
 
     private void Awake()
     {
@@ -24,8 +24,13 @@ public abstract class AccessoryBase : MonoBehaviour
         SetEquipped(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
+        if(IsEqiupped)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
             SetEquipped(true);
@@ -33,7 +38,7 @@ public abstract class AccessoryBase : MonoBehaviour
         }
     }
 
-    public void SetEquipped(bool flag)
+    public virtual void SetEquipped(bool flag)
     {
         _collider.enabled = !flag;
         IsEqiupped = flag;

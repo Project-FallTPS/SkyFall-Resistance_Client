@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public struct Jetpack
 {
     public ParticleSystem BigSmoke;
-    public ParticleSystem SmallSmoke;
 }
 
 public class PlayerMovement : MonoBehaviour
