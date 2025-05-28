@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rob07ShootingMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/floor_Root
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/body
+    m_Weight: 1
+  - m_Path: Armature/floor_Root/root/gun_L
+    m_Weight: 1
+  - m_Path: Armature/floor_Root/root/gun_R
+    m_Weight: 1
+  - m_Path: Armature/floor_Root/root/hip_L
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_L/leg1_L
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_L/leg1_L/leg2_L
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_L/leg1_L/leg2_L/leg3_L
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_L/leg1_L/leg2_L/leg3_L/heel_L
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_L/leg1_L/leg2_L/leg3_L/toe_L
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_R
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_R/leg1_R
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_R/leg1_R/leg2_R
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_R/leg1_R/leg2_R/leg3_R
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_R/leg1_R/leg2_R/leg3_R/heel_R
+    m_Weight: 0
+  - m_Path: Armature/floor_Root/root/hip_R/leg1_R/leg2_R/leg3_R/toe_R
+    m_Weight: 0
+  - m_Path: Rob07
+    m_Weight: 0

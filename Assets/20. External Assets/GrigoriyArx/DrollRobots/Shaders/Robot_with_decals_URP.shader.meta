@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ff3ed732e4f0d1a47b5e02848406075c
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 268984
+  packageName: Droll Robots Pack1
+  packageVersion: 1.0
+  assetPath: Assets/GrigoriyArx/DrollRobots/Shaders/Robot_with_decals_URP.shader
+  uploadId: 623943

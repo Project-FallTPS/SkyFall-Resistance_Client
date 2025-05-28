@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 78f95861c601bee489ac76636e993073
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 268984
+  packageName: Droll Robots Pack1
+  packageVersion: 1.0
+  assetPath: Assets/GrigoriyArx/DrollRobots/Scripts/HomeMissile.cs
+  uploadId: 623943
