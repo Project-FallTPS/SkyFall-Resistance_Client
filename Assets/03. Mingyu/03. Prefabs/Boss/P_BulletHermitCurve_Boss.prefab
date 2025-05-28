@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 874983024548535551}
   - component: {fileID: 4607872384869556278}
   - component: {fileID: 1654000175361673184}
-  - component: {fileID: -1669536924553513486}
+  - component: {fileID: 6531541544144958530}
+  - component: {fileID: -4807447924041690560}
   m_Layer: 0
-  m_Name: P_BulletBezier_Boss
+  m_Name: P_BulletHermitCurve_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +110,34 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1669536924553513486
+--- !u!54 &6531541544144958530
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331364910304127374}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-4807447924041690560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1331364910304127374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 516e811dfaa5aba43b3c853f4f63fc5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f3ec18a39d8b8a41809f19171666edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
