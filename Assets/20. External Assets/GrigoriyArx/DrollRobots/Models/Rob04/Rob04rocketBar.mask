@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Rob04rocketBar
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/base
+    m_Weight: 0
+  - m_Path: Armature/base/Body
+    m_Weight: 0
+  - m_Path: Armature/base/Body/Rockets
+    m_Weight: 1
+  - m_Path: Armature/base/Body/Rockets/rocketSpawnPlace0
+    m_Weight: 0
+  - m_Path: Armature/base/Body/Rockets/rocketSpawnPlace1
+    m_Weight: 0
+  - m_Path: Armature/base/Body/Rockets/rocketSpawnPlace2
+    m_Weight: 0
+  - m_Path: Armature/base/Body/Rockets/rocketSpawnPlace3
+    m_Weight: 0
+  - m_Path: Armature/base/Body/Rockets/rocketSpawnPlace4
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_L
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_L/legFront2_L
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_L/legFront2_L/legFront3_L
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_L/legFront2_L/legFront3_L/ToeFront_L
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_R
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_R/legFront2_R
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_R/legFront2_R/legFront3_R
+    m_Weight: 0
+  - m_Path: Armature/base/legFront1_R/legFront2_R/legFront3_R/ToeFront_R
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_L
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_L/legRear2_L
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_L/legRear2_L/legRear3_L
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_L/legRear2_L/legRear3_L/legRear4_L
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_L/legRear2_L/legRear3_L/legRear4_L/ToeRear_L
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_R
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_R/legRear2_R
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_R/legRear2_R/legRear3_R
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_R/legRear2_R/legRear3_R/legRear4_R
+    m_Weight: 0
+  - m_Path: Armature/base/legRear1_R/legRear2_R/legRear3_R/legRear4_R/ToeRear_R
+    m_Weight: 0
+  - m_Path: Armature/IK_legFront_L
+    m_Weight: 0
+  - m_Path: Armature/IK_legFront_R
+    m_Weight: 0
+  - m_Path: Armature/IK_legRear4_L
+    m_Weight: 0
+  - m_Path: Armature/IK_legRear4_R
+    m_Weight: 0
+  - m_Path: Rob4
+    m_Weight: 0
