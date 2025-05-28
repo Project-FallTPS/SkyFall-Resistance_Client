@@ -112,25 +112,25 @@ Material:
     - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Decals1Opacity: 1
-    - _Decals2Opacity: 1
+    - _Decals1Opacity: 0
+    - _Decals2Opacity: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionIntencity: 1
+    - _EmissionIntencity: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Metallic: 0.809
+    - _Metallic: 0
     - _Mode: 0
     - _NormalIntencity: 1
-    - _OcclusionIntencity: 0.366
+    - _OcclusionIntencity: 0.75
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.891
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
