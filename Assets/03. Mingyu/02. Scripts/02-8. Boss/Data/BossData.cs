@@ -112,6 +112,8 @@ public class BossData
         AttackDamage = original.AttackDamage;
         AttackCooltime = original.AttackCooltime;
         LastAttackTime = original.LastAttackTime;
+
+        SafetyMargin = original.SafetyMargin;
         
         MaxRushDistance = original.MaxRushDistance;
         MinRushDistance = original.MinRushDistance;
