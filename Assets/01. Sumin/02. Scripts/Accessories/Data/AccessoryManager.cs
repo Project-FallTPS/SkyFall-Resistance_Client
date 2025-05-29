@@ -17,18 +17,31 @@ public class AccessoryManager : Singleton<AccessoryManager>
     public void Equip(EAccessoryType type, IAccessory obj)
     {
         ActiveAccessory acc = null;
+
         if (!EquippedAccessories.ContainsKey(type))
         {
             acc = new ActiveAccessory(GetData(obj.Type), obj);
             acc.Count = 1;
             EquippedAccessories.Add(type, acc);
+
+            obj.OnEquip();
         }
         else
         {
             acc = EquippedAccessories[type];
             acc.Count++;
+
+            // 같은 오브젝트면 반납하지 않음
+            if (acc.Object != obj)
+            {
+                MonoBehaviour mono = obj as MonoBehaviour;
+                if (mono != null)
+                {
+                    AccessoryPoolManager.Instance.ReturnObject(mono.gameObject, type);
+                }
+            }
+            acc.Object.OnEquip(); // 기존 것에 대해 다시 호출
         }
-        obj.OnEquip();
     }
 
     public void UnEquip(EAccessoryType type)
