@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1654000175361673184}
   - component: {fileID: 6531541544144958530}
   - component: {fileID: -4807447924041690560}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_BulletHermitCurve_Boss
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
