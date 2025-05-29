@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5356239072234743638}
   - component: {fileID: 5356239072234743641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,9 +160,9 @@ GameObject:
   - component: {fileID: 6115871117804727897}
   - component: {fileID: 3572452618867083296}
   - component: {fileID: 2195651631418908891}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_Enemy_Bullet_Shooting1
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 5356239073193757855}
   - component: {fileID: 5356239073193757825}
   - component: {fileID: 5356239073193757854}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5093,7 +5093,7 @@ GameObject:
   - component: {fileID: 5356239073262605852}
   - component: {fileID: 5356239073262605854}
   - component: {fileID: 5356239073262605855}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4957094739141692117}
   - component: {fileID: 2707416303702530525}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rob4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8140005075905896664}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFront1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8818325848066646287}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9207698783759161880}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9049328517010040409}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFront3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8960461245130478937}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 543328989514320122}
   - component: {fileID: -9203882911292905256}
   - component: {fileID: -4783397622314922415}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: P_Enemy_Supporting
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyType: 2
   _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
+  _bulletShootPositions: []
 --- !u!1 &2187229751164075555
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8481373388144894621}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7724082631247495211}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6924081170737440150}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToeFront_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2209898423247269311}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToeRear_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7072766588601492801}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rocketSpawnPlace3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8265930781046904935}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5374196444008827765}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToeRear_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6738813519654665479}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rocketSpawnPlace0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7560642525053914824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rockets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5623944634463595162}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rocketSpawnPlace1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8114079647356231373}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rocketSpawnPlace4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2653150742675655058}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFront1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,7 +783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641604007621080057}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3056759490464380933}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 49472472891671188}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFront3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -882,7 +883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8451709361644050227}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFront2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6863393385483941100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rocketSpawnPlace2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 508821627554381799}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6240801488474224038}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,7 +1010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5392423414912355754}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToeFront_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1040,7 +1041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 794769184678280503}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFront2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1072,7 +1073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2753611713524093814}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
