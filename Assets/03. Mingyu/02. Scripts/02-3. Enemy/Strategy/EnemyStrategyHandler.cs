@@ -20,6 +20,7 @@ public class EnemyStrategyHandler : Singleton<EnemyStrategyHandler>
         _enemyAttackStrategyDict.Add(EEnemyType.Shooting2, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Shooting3, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Bombing, new AttackBombing());
+        _enemyAttackStrategyDict.Add(EEnemyType.Supporting, new AttackSupporting());
     }
 
     public ITraceStrategy PickTraceStrategy()
