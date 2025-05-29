@@ -1514,8 +1514,8 @@ MonoBehaviour:
     Prefab: {fileID: 4095814785860643335, guid: 6eec2a7a386fe7c47ae239b178b01034, type: 3}
     Container: {fileID: 1173354012}
   - Type: 3
-    InitCount: 5
-    Prefab: {fileID: 4095814785860643335, guid: 6eec2a7a386fe7c47ae239b178b01034, type: 3}
+    InitCount: 20
+    Prefab: {fileID: 4663079095948233050, guid: be0ad8f8a9e324d4eb36ef5c1bfa4798, type: 3}
     Container: {fileID: 1173354012}
 --- !u!114 &624429167
 MonoBehaviour:
@@ -2612,6 +2612,10 @@ PrefabInstance:
     - target: {fileID: 5184958744159570684, guid: bae079e521e79dc42972e7ad658636de, type: 3}
       propertyPath: m_Name
       value: P_Spawner_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184958744159570684, guid: bae079e521e79dc42972e7ad658636de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7778307424478090956, guid: bae079e521e79dc42972e7ad658636de, type: 3}
       propertyPath: _spawnInterval
