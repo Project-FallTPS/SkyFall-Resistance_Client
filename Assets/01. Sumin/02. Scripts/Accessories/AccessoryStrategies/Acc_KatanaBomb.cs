@@ -32,11 +32,12 @@ public class Acc_KatanaBomb : AccessoryBase, IAccessory
 
     public void OnAttack()
     {
-        if(_bombEffectPrefab != null)
-        {
-            Instantiate(_bombEffectPrefab, transform.position, Quaternion.identity);
-        }
         Collider[] hits = Physics.OverlapSphere(transform.position, _explodeRange, LayerMask.GetMask("Enemy"));
+        if (hits.Length > 0)
+        {
+            //Instantiate(_bombEffectPrefab, transform.position, Quaternion.identity);
+            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.BombEffect, transform.position, Quaternion.identity);
+        }
 
         foreach (var hit in hits)
         {
