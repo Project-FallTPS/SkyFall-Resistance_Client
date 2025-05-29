@@ -547,6 +547,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2064129416445666488}
   - {fileID: 8419645854836188928}
   - {fileID: 7282074653570526565}
   m_Father: {fileID: 0}
@@ -1332,3 +1333,65 @@ Transform:
   - {fileID: 633872047088473841}
   m_Father: {fileID: 3935697277492525816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4958902352405855476
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2088733470566228778}
+    m_Modifications:
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424583148328831481, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_Name
+      value: P_VFX_EnemyShield
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+--- !u!4 &2064129416445666488 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+  m_PrefabInstance: {fileID: 4958902352405855476}
+  m_PrefabAsset: {fileID: 0}

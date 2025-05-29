@@ -302,6 +302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2200172274436982995}
   - {fileID: 8265930781046904935}
   - {fileID: 4957094739141692117}
   m_Father: {fileID: 0}
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0cd01f594154e48b04971ac8261b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyType: 2
+  _enemyType: 4
   _enemyDataSO: {fileID: 11400000, guid: 24c584620302e4542a2c5b905abcef90, type: 2}
   _bulletShootPositions: []
 --- !u!1 &2187229751164075555
@@ -1096,3 +1097,77 @@ Transform:
   - {fileID: 508821627554381799}
   m_Father: {fileID: 7724082631247495211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5115060758939996319
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7097359658200363876}
+    m_Modifications:
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424583148328831481, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_Name
+      value: P_VFX_EnemyShield
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+--- !u!4 &2200172274436982995 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+  m_PrefabInstance: {fileID: 5115060758939996319}
+  m_PrefabAsset: {fileID: 0}
