@@ -23,7 +23,6 @@ public class EnemyController : MonoBehaviour, IDamageable
     public Animator EnemyAnimator => _enemyAnimator;
 
     private ParticleSystem[] _shieldParticleSystems;
-    public ParticleSystem[] ShieldParticleSystems => _shieldParticleSystems;
 
     [Header("Data")]
     [SerializeField]
@@ -61,8 +60,8 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (_enemyStateDict.Count != 0)
         {
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
-            _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
             _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
+            _enemyData.Init();
         }
     }
     private void Start()

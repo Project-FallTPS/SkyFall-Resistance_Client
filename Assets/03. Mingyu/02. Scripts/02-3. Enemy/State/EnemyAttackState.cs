@@ -8,7 +8,6 @@ public class EnemyAttackState : IEnemyState
     private EnemyData _enemyData;
     private IAttackStrategy _attackStrategy;
     private ITransitionStrategy _transitionStrategy;
-    private float _nextAttackableTime;
 
     public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy,
         ITransitionStrategy transitionStrategy)
@@ -31,17 +30,24 @@ public class EnemyAttackState : IEnemyState
 
     public void Exit()
     {
-        _enemyController.StopAllCoroutines();
+        _enemyController.StopCoroutine(AttackCoroutine());
     }
     
     private IEnumerator AttackCoroutine()
     {
-        while (_transitionStrategy.CanChangeToTraceState(_enemyController))
+        while (true)
         {
-            yield return new WaitUntil(() => _nextAttackableTime <= Time.time);
+            yield return new WaitUntil(() => _enemyController.EnemyData.NextAttackableTime <= Time.time);
             _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
             _attackStrategy.Attack(_enemyController);
-            _nextAttackableTime = Time.time + _enemyData.AttackDelay;
+            _enemyController.EnemyData.NextAttackableTime 
+                = Time.time + _enemyController.EnemyData.AttackDelay;
+
+            if (_transitionStrategy.CanChangeToTraceState(_enemyController))
+            {
+                break;
+            }
+            yield return null;
         }
         _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
     }
