@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackBombing : IAttackStrategy
+public class AttackBombing : IAttackStrategy, ITransitionStrategy
 {
     public void Attack(EnemyController self)
     {
@@ -8,6 +8,19 @@ public class AttackBombing : IAttackStrategy
         PlayBombVFX(self.transform.position);
         self.EnemyStateContext.ChangeState(self.EnemyStateDict[EEnemyState.Die]);
     }
+    
+    public bool CanChangeToAttackState(EnemyController self)
+    {
+        return Vector3.Distance(self.transform.position, self.Player.transform.position)
+               <= self.EnemyData.AttackableRange;
+    }
+
+    public bool CanChangeToTraceState(EnemyController self)
+    {
+        return self.EnemyData.AttackableRange
+               < Vector3.Distance(self.transform.position, self.Player.transform.position);
+    }
+    
     private void ApplyBombDamage(EnemyController enemyController)
     {
         Collider[] hitColiiders = 
@@ -16,13 +29,10 @@ public class AttackBombing : IAttackStrategy
 
         foreach (Collider hitCollider in hitColiiders)
         {
-            // ���� Ÿ�� ���� ������ �÷��̾�Ը� ���� �Ǵ°�?
-            if (hitCollider.CompareTag(nameof(ETags.Player)))
+            if (hitCollider.CompareTag(nameof(ETags.Player)) &&
+                hitCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
-                if(hitCollider.TryGetComponent<IDamageable>(out IDamageable damageable))
-                {
-                    // damageable.TakeDamage(enemyController.EnemyData.AttackDamage);
-                }
+                damageable.TakeDamage(enemyController.EnemyData.AttackDamage);
             }
         }
 

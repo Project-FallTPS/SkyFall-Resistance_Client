@@ -7,15 +7,18 @@ public class EnemyAttackState : IEnemyState
     private EnemyController _enemyController;
     private EnemyData _enemyData;
     private IAttackStrategy _attackStrategy;
+    private ITransitionStrategy _transitionStrategy;
     private float _nextAttackableTime;
 
-    public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy)
+    public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy,
+        ITransitionStrategy transitionStrategy)
     {
         _enemyController = enemyController;
         _enemyData = enemyController.EnemyData;
         _attackStrategy = attackStrategy;
+        _transitionStrategy = transitionStrategy;
     }
-
+    
     public void Enter()
     {
         _enemyController.StartCoroutineInEnemyState(AttackCoroutine());
@@ -33,7 +36,7 @@ public class EnemyAttackState : IEnemyState
     
     private IEnumerator AttackCoroutine()
     {
-        while (CanAttack())
+        while (_transitionStrategy.CanChangeToTraceState(_enemyController))
         {
             yield return new WaitUntil(() => _nextAttackableTime <= Time.time);
             _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
@@ -41,12 +44,6 @@ public class EnemyAttackState : IEnemyState
             _nextAttackableTime = Time.time + _enemyData.AttackDelay;
         }
         _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
-    }
-
-    private bool CanAttack()
-    {
-        return Vector3.Distance(_enemyController.transform.position, _enemyController.Player.transform.position)
-               <= _enemyData.AttackableRange;
     }
     
     private void LookAtPlayer()
