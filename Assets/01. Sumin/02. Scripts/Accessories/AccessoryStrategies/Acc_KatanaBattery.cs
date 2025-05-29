@@ -14,6 +14,20 @@ public class Acc_KatanaBattery : AccessoryBase, IAccessory
         _fianlAdditionalDamage = _additionalDamage;
     }
 
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (IsEqiupped)
+        {
+            return;
+        }
+
+        if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
+        {
+            SetEquipped(true);
+            receiver.ReceiveAccessory(Type, this);
+        }
+    }
+
     public void OnAttack()
     {
         // 공격 시작 시 호출되는 로직

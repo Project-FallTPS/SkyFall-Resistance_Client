@@ -36,7 +36,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         CurrentStrategy?.Update();
     }
 
-    public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
+    public void ReceiveAccessory(EAccessoryType type, IAccessory accessory)
     {
         CurrentStrategy?.AddAccessory(type, accessory);
     }

@@ -864,7 +864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: Mapper.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: 'Mapper.Array.data[0]'
@@ -872,7 +872,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: 'Mapper.Array.data[1]'
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+      propertyPath: 'Mapper.Array.data[2]'
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -936,7 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: Mapper.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: 'Mapper.Array.data[0]'
@@ -944,7 +948,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: 'Mapper.Array.data[1]'
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+      propertyPath: 'Mapper.Array.data[2]'
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1529,7 +1537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: Mapper.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: 'Mapper.Array.data[0]'
@@ -1537,7 +1545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: 'Mapper.Array.data[1]'
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+      propertyPath: 'Mapper.Array.data[2]'
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -57,10 +57,7 @@ public class KatanaStrategy : IWeaponStrategy
         float accBonuses = 1f;
         foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            if (data != null)
-            {
-                accBonuses *= (1 + (data.GetStatBonusData(type) - 1) * data.Count);
-            }
+            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Data.Count);
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -131,20 +128,23 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public void AddAccessory(EAccessoryType type, GameObject obj)
+    public void AddAccessory(EAccessoryType type, IAccessory acc)
     {
         if (!_accessorySockets.ContainsKey(type))
         {
             return;
         }
-        AccessoryManager.Instance.Equip(type);
+        AccessoryManager.Instance.Equip(type, acc);
+
+        MonoBehaviour obj = acc as MonoBehaviour;
         if (type.ToString().StartsWith(WEAPON_NAME))
         {
+            acc.OnEquip();
+
             obj.transform.SetParent(_accessorySockets[type]);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
             obj.GetComponent<AccessoryBase>().SetEquipped(true);
-            obj.GetComponent<IAccessory>().OnEquip();
         }
     }
 
@@ -167,10 +167,7 @@ public class KatanaStrategy : IWeaponStrategy
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
-            if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accessory))
-            {
-                accessory.OnAttack();
-            }
+            acc.Value.Object.OnAttack();
         }
     }
 }

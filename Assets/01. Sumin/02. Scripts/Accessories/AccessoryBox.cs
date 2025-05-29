@@ -44,7 +44,10 @@ public class AccessoryBox : MonoBehaviour
                 if (item == _type)
                 {
                     finalItem = item;
-                    receiver.ReceiveAccessory(_type, AccessoryPoolManager.Instance.GetObject(finalItem));
+                    if(AccessoryPoolManager.Instance.GetObject(finalItem).TryGetComponent<IAccessory>(out var acc))
+                    {
+                        receiver.ReceiveAccessory(_type, acc);
+                    }
                     break;
                 }
             }

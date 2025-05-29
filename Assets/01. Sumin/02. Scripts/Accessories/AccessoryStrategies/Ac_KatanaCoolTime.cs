@@ -28,7 +28,7 @@ public class Ac_KatanaCoolTime : MonoBehaviour, IAccessory
     {
         if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
-            receiver.ReceiveAccessory(_type, gameObject);
+            receiver.ReceiveAccessory(_type, this);
             SetEquipped(true);
         }
     }

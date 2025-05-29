@@ -24,10 +24,7 @@ public class Katana : MonoBehaviour
                 // 각 액세서리의 OnHit 이벤트 호출
                 foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
                 {
-                    if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accessory))
-                    {
-                        accessory.OnHit(damageable, baseDamage);
-                    }
+                    acc.Value.Object.OnHit(damageable, baseDamage);
                 }
             }
         }

@@ -10,7 +10,7 @@ public interface IWeaponStrategy
 
     // 악세서리 관련 메서드
     public void InitializeAccessorySockets();
-    public void AddAccessory(EAccessoryType type, GameObject obj);
+    public void AddAccessory(EAccessoryType type, IAccessory obj);
     public void RemoveAccessory(EAccessoryType type);
     public void ExecuteAccesories();
 }

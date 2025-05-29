@@ -1,31 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct EquippedAccessory
+{
+    public AccessoryData Data;
+    public IAccessory Object;
+
+    public EquippedAccessory(AccessoryData data, IAccessory obj)
+    {
+        Data = data;
+        Object = obj;
+    }
+}
+
 public class AccessoryManager : Singleton<AccessoryManager>
 {
     [SerializeField] private AccessoryDataSO _dataSO;
 
-    public Dictionary<EAccessoryType, AccessoryData> EquippedAccessories { get; private set; }
+    public Dictionary<EAccessoryType, EquippedAccessory> EquippedAccessories { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        EquippedAccessories = new Dictionary<EAccessoryType, AccessoryData>();
+        EquippedAccessories = new Dictionary<EAccessoryType, EquippedAccessory>();
     }
 
-    public void Equip(EAccessoryType type)
+    public void Equip(EAccessoryType type, IAccessory obj)
     {
-        AccessoryData data = GetData(type);
+        EquippedAccessory acc = new EquippedAccessory(GetData(obj.Type), obj);
         if (!EquippedAccessories.ContainsKey(type))
         {
-            data.Count = 1;
-            EquippedAccessories.Add(type, data);
+            acc.Data.Count = 1;
+            EquippedAccessories.Add(type, acc);
         }
         else
         {
-            data.Count++;
-            EquippedAccessories[type] = data;
+            acc.Data.Count++;
+            EquippedAccessories[type] = acc;
         }
     }
 
@@ -47,13 +59,13 @@ public class AccessoryManager : Singleton<AccessoryManager>
         return _dataSO.GetData(type);
     }
 
-    public List<AccessoryData> GetEquippedAccessories(EWeaponType type)
+    public List<EquippedAccessory> GetEquippedAccessories(EWeaponType type)
     {
-        var filtered = new List<AccessoryData>();
+        var filtered = new List<EquippedAccessory>();
 
         foreach (var accessory in EquippedAccessories.Values)
         {
-            string name = accessory.Type.ToString();
+            string name = accessory.Data.Type.ToString();
             if (name.StartsWith(type.ToString()))
             {
                 filtered.Add(accessory);
