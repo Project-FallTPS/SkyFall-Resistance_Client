@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private Animator _enemyAnimator;
     public Animator EnemyAnimator => _enemyAnimator;
 
-    private ParticleSystem[] _shieldParticleSystems;
+    private GameObject _shieldGameObject;
 
     [Header("Data")]
     [SerializeField]
@@ -48,9 +48,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         _enemyCollider = GetComponent<CapsuleCollider>();
         _rigidbody = GetComponent<Rigidbody>();
         _enemyAnimator = GetComponent<Animator>();
-        _shieldParticleSystems
-            = GetComponentsInChildren<ParticleSystem>(true);
-
+        _shieldGameObject
+            = GetComponentInChildren<ParticleSystem>().gameObject;
+        _shieldGameObject.SetActive(false);
         _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
         _player = GameObject.FindGameObjectWithTag(nameof(ETags.Player));
     }
@@ -62,6 +62,7 @@ public class EnemyController : MonoBehaviour, IDamageable
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
             _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
             _enemyData.Init();
+            _shieldGameObject.SetActive(false);
         }
     }
     private void Start()
@@ -105,19 +106,13 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void ActivateShield()
     {
         _enemyData.IsShieldActive = true;
-        foreach (ParticleSystem ps in _shieldParticleSystems)
-        {
-            ps.Play();
-        }
+        _shieldGameObject.SetActive(true);
     }
 
     public void DeactivateShield()
     {
         _enemyData.IsShieldActive = false;
-        foreach (ParticleSystem ps in _shieldParticleSystems)
-        {
-            ps.Stop();
-        }
+        _shieldGameObject.SetActive(false);
     }
     
     public void StartCoroutineInEnemyState(IEnumerator coroutine)
