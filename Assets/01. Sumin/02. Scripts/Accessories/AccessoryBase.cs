@@ -9,7 +9,7 @@ public abstract class AccessoryBase : MonoBehaviour
     private Collider _collider;
     public bool IsEqiupped { get; protected set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _collider = GetComponent<Collider>();
     }

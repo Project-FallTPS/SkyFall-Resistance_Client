@@ -50,7 +50,7 @@ public class RangeStrategy : IWeaponStrategy
         {
             if (data != null)
             {
-                accBonuses *= (1 + (data.GetData(type) - 1) * data.Count);
+                accBonuses *= (1 + (data.GetStatBonusData(type) - 1) * data.Count);
             }
         }
 

@@ -7,10 +7,29 @@ public class Katana : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<IDamageable>(out var damageable))
+        if(!GetComponent<Collider>().enabled)
         {
-            damageable.TakeDamage(_player.CurrentStrategy.GetStat(EStatType.Damage));
-            Debug.Log(_player.CurrentStrategy.GetStat(EStatType.Damage));
+            return;
+        }    
+        if(!other.CompareTag("Player") && other.TryGetComponent<IDamageable>(out var damageable))
+        {
+            float baseDamage = _player.CurrentStrategy.GetStat(EStatType.Damage);
+            damageable.TakeDamage(baseDamage);
+            
+            // 액세서리 이벤트 실행
+            if (_player.CurrentStrategy is KatanaStrategy katanaStrategy)
+            {
+                katanaStrategy.ExecuteAccesories();
+                
+                // 각 액세서리의 OnHit 이벤트 호출
+                foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
+                {
+                    if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accessory))
+                    {
+                        accessory.OnHit(damageable, baseDamage);
+                    }
+                }
+            }
         }
     }
 }

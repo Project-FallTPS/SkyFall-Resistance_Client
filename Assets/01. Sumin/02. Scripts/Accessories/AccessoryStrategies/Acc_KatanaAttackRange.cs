@@ -14,4 +14,8 @@ public class Acc_KatanaAttackRange : AccessoryBase, IAccessory
     {
         IsEqiupped = flag;
     }
+
+    public void OnHit(IDamageable target, float baseDamage)
+    {
+    }
 }

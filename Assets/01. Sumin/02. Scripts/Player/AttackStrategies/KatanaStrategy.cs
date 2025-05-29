@@ -59,7 +59,7 @@ public class KatanaStrategy : IWeaponStrategy
         {
             if (data != null)
             {
-                accBonuses *= (1 + (data.GetData(type) - 1) * data.Count);
+                accBonuses *= (1 + (data.GetStatBonusData(type) - 1) * data.Count);
             }
         }
 
@@ -167,9 +167,9 @@ public class KatanaStrategy : IWeaponStrategy
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
-            if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
+            if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accessory))
             {
-                accesory.OnAttack();
+                accessory.OnAttack();
             }
         }
     }

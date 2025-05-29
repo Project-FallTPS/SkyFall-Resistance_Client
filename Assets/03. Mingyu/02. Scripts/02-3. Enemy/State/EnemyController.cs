@@ -84,6 +84,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Damaged]);
         }
+        Debug.Log($"{gameObject.name} 공격받음 : {damage}");
     }
 
     public void StartCoroutineInEnemyState(IEnumerator coroutine)

@@ -50,7 +50,8 @@ public class AccessoryBox : MonoBehaviour
             }
 
             // TODO : 풀 반환
-            BoxPoolManager.Instance.ReturnObject(gameObject, EBoxType.AccessoryBox);
+            gameObject.SetActive(false);
+            //BoxPoolManager.Instance.ReturnObject(gameObject, EBoxType.AccessoryBox);
         }
     }
 }

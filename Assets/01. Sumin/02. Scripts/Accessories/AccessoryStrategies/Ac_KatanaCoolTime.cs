@@ -46,4 +46,8 @@ public class Ac_KatanaCoolTime : MonoBehaviour, IAccessory
     {
         _collider.enabled = !flag;
     }
+
+    public void OnHit(IDamageable target, float baseDamage)
+    {
+    }
 }

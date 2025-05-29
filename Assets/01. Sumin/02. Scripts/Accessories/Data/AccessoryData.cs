@@ -20,7 +20,7 @@ public class AccessoryData
         }
     }
 
-    public float GetData(EStatType type)
+    public float GetStatBonusData(EStatType type)
     {
         if(_dataDict == null)
         {

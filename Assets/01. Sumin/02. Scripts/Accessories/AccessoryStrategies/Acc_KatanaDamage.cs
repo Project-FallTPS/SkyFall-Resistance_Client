@@ -10,4 +10,8 @@ public class Acc_KatanaDamage : AccessoryBase, IAccessory
     public void OnAttack()
     {
     }
+
+    public void OnHit(IDamageable target, float baseDamage)
+    {
+    }
 }
