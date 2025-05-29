@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7444587849887711598}
   m_Layer: 0
   m_Name: P_Enemy_Shooting2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
