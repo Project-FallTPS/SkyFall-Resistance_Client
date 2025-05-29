@@ -15,19 +15,19 @@ MonoBehaviour:
   AccessoryDatas:
   - Type: 1
     Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
-    Count: 1
+    Count: 0
     Bonuses:
     - Type: 3
       Value: 1.1
   - Type: 2
     Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
-    Count: 1
+    Count: 0
     Bonuses:
     - Type: 11
       Value: 1.1
   - Type: 3
     Prefab: {fileID: 6457354906676372157, guid: 22dd772d96af24f4b83a9aec3702a282, type: 3}
-    Count: 1
+    Count: 0
     Bonuses:
     - Type: 15
-      Value: 10
+      Value: 3

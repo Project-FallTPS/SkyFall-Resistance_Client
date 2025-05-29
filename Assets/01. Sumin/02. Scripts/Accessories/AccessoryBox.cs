@@ -35,6 +35,10 @@ public class AccessoryBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.name == "AimCube")
+        {
+            return;
+        }
         if (other.CompareTag(nameof(ETags.Player)) && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
             EAccessoryType finalItem = EAccessoryType.Count;

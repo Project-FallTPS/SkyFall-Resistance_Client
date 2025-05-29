@@ -30,15 +30,14 @@ public class Acc_KatanaBattery : AccessoryBase, IAccessory
 
     public void OnAttack()
     {
-        // 공격 시작 시 호출되는 로직
     }
 
     public void OnEquip()
     {
         Debug.LogWarning("1" + gameObject.name);
 
-        _fianlAdditionalDamage = _additionalDamage * AccessoryManager.Instance.GetData(Type).Count;
-        Debug.Log($"{AccessoryManager.Instance.GetData(Type).Count}, {_fianlAdditionalDamage}");
+        _fianlAdditionalDamage = _additionalDamage * AccessoryManager.Instance.GetAccessory(Type).Count;
+        Debug.Log($"{AccessoryManager.Instance.GetAccessory(Type).Count}, {_fianlAdditionalDamage}");
     }
 
     public void OnHit(IDamageable target, float baseDamage)

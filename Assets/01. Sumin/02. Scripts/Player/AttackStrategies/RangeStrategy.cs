@@ -48,7 +48,7 @@ public class RangeStrategy : IWeaponStrategy
         float accBonuses = 1f;
         foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Data.Count);
+            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Count);
         }
 
         return baseDamage * perkBonus * accBonuses;

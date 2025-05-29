@@ -1,57 +1,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct EquippedAccessory
-{
-    public AccessoryData Data;
-    public IAccessory Object;
-
-    public EquippedAccessory(AccessoryData data, IAccessory obj)
-    {
-        Data = data;
-        Object = obj;
-    }
-}
-
 public class AccessoryManager : Singleton<AccessoryManager>
 {
     [SerializeField] private AccessoryDataSO _dataSO;
 
-    public Dictionary<EAccessoryType, EquippedAccessory> EquippedAccessories { get; private set; }
+    public Dictionary<EAccessoryType, ActiveAccessory> EquippedAccessories { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        EquippedAccessories = new Dictionary<EAccessoryType, EquippedAccessory>();
+        EquippedAccessories = new Dictionary<EAccessoryType, ActiveAccessory>();
     }
 
     public void Equip(EAccessoryType type, IAccessory obj)
     {
-        EquippedAccessory acc = new EquippedAccessory(GetData(obj.Type), obj);
+        ActiveAccessory acc = null;
         if (!EquippedAccessories.ContainsKey(type))
         {
-            acc.Data.Count = 1;
+            acc = new ActiveAccessory(GetData(obj.Type), obj);
+            acc.Count = 1;
             EquippedAccessories.Add(type, acc);
         }
         else
         {
-            acc.Data.Count++;
-            EquippedAccessories[type] = acc;
+            acc = EquippedAccessories[type];
+            acc.Count++;
         }
+        obj.OnEquip();
     }
 
     public void UnEquip(EAccessoryType type)
     {
         if (EquippedAccessories.ContainsKey(type))
         {
+            ActiveAccessory acc = EquippedAccessories[type];
             AccessoryData data = GetData(type);
-            data.Count--;
-            if(data.Count <= 0)
+            acc.Count--;
+            if(acc.Count <= 0)
             {
                 EquippedAccessories.Remove(type);
             }
         }
+    }
+
+    public bool IsEquipped(EAccessoryType type)
+    {
+        return EquippedAccessories.ContainsKey(type);
+    }
+
+    public ActiveAccessory GetAccessory(EAccessoryType type)
+    {
+        if (EquippedAccessories.TryGetValue(type, out var acc))
+        {
+            return acc;
+        }
+        else return null;
     }
 
     public AccessoryData GetData(EAccessoryType type)
@@ -59,9 +64,9 @@ public class AccessoryManager : Singleton<AccessoryManager>
         return _dataSO.GetData(type);
     }
 
-    public List<EquippedAccessory> GetEquippedAccessories(EWeaponType type)
+    public List<ActiveAccessory> GetEquippedAccessories(EWeaponType type)
     {
-        var filtered = new List<EquippedAccessory>();
+        var filtered = new List<ActiveAccessory>();
 
         foreach (var accessory in EquippedAccessories.Values)
         {

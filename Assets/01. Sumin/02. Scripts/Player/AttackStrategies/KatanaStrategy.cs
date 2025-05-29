@@ -57,7 +57,7 @@ public class KatanaStrategy : IWeaponStrategy
         float accBonuses = 1f;
         foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Data.Count);
+            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Count);
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -127,25 +127,36 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public void AddAccessory(EAccessoryType type, IAccessory acc)
+    public void AddAccessory(EAccessoryType type, IAccessory newAccessory)
     {
-        if (!_accessorySockets.ContainsKey(type))
+        // 슬롯 존재 여부와 타입 유효성 검사
+        if (!_accessorySockets.TryGetValue(type, out var socket) || !type.ToString().StartsWith(WEAPON_NAME))
+            return;
+
+        // 이미 액세서리가 장착된 경우: 기존 것을 등록만
+        if (socket.childCount > 0)
         {
+            IAccessory existingAccessory = socket.GetChild(0).GetComponent<IAccessory>();
+            AccessoryManager.Instance.Equip(type, existingAccessory);
             return;
         }
-        AccessoryManager.Instance.Equip(type, acc);
 
-        MonoBehaviour obj = acc as MonoBehaviour;
-        if (type.ToString().StartsWith(WEAPON_NAME))
+        // 새 액세서리 장착
+        AccessoryManager.Instance.Equip(type, newAccessory);
+
+        if (newAccessory is MonoBehaviour accessoryObj)
         {
-            acc.OnEquip();
+            accessoryObj.transform.SetParent(socket);
+            accessoryObj.transform.localPosition = Vector3.zero;
+            accessoryObj.transform.localRotation = Quaternion.identity;
 
-            obj.transform.SetParent(_accessorySockets[type]);
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localRotation = Quaternion.identity;
-            obj.GetComponent<AccessoryBase>().SetEquipped(true);
+            if (accessoryObj.TryGetComponent(out AccessoryBase baseComponent))
+            {
+                baseComponent.SetEquipped(true);
+            }
         }
     }
+
 
     public void RemoveAccessory(EAccessoryType type)
     {
