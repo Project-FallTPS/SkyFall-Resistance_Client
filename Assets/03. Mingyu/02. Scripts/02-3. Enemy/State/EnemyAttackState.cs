@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using VInspector.Libs;
 
 public class EnemyAttackState : IEnemyState
 {
     private EnemyController _enemyController;
     private EnemyData _enemyData;
     private IAttackStrategy _attackStrategy;
-    private float _nextAttackTime;
+    private float _nextAttackableTime;
 
     public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy)
     {
@@ -20,29 +18,49 @@ public class EnemyAttackState : IEnemyState
 
     public void Enter()
     {
+        _enemyController.StartCoroutineInEnemyState(AttackCoroutine());
     }
 
     public void Update()
     {
-        if (_enemyData.AttackableRange <
-            Vector3.Distance(_enemyController.transform.position, _enemyController.Player.transform.position))
-        {
-            _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
-        }
-        TryAttack();
+        LookAtPlayer();
     }
 
     public void Exit()
     {
+        _enemyController.StopAllCoroutines();
     }
-    private void TryAttack()
+    
+    private IEnumerator AttackCoroutine()
     {
-        if (Time.time < _nextAttackTime)
+        while (CanAttack())
         {
-            return;
+            yield return new WaitUntil(() => _nextAttackableTime <= Time.time);
+            _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
+            _attackStrategy.Attack(_enemyController);
+            _nextAttackableTime = Time.time + _enemyData.AttackDelay;
         }
-        _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
-        _attackStrategy.Attack(_enemyController);
-        _nextAttackTime = Time.time + _enemyData.AttackDelay;
+        _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
+    }
+
+    private bool CanAttack()
+    {
+        return Vector3.Distance(_enemyController.transform.position, _enemyController.Player.transform.position)
+               <= _enemyData.AttackableRange;
+    }
+    
+    private void LookAtPlayer()
+    {
+        Vector3 direction = 
+            (_enemyController.Player.transform.position - _enemyController.transform.position).normalized;
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+        
+            _enemyController.transform.rotation = Quaternion.Slerp(
+                _enemyController.transform.rotation,
+                targetRotation,
+                5f * Time.deltaTime);
+        }
     }
 } 
