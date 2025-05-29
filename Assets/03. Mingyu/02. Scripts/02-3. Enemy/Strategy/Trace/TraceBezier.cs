@@ -2,6 +2,7 @@
 
 public class TraceBezier : ITraceStrategy
 {
+    
     private Vector3[] _points = new Vector3[3];
     private Vector3 _prevControlPoint = new Vector3(0f, 0f, 0f);
     private float _t = 0f;
@@ -17,7 +18,7 @@ public class TraceBezier : ITraceStrategy
             _t = 0f;
         }
         _t += (self.EnemyData.MoveSpeed * Time.deltaTime) / _approxCurveLength;
-        DrawTrajectory(self);
+        MoveOnBezierCurve(self);
     }
 
     private void SetPath(EnemyController self)
@@ -49,17 +50,21 @@ public class TraceBezier : ITraceStrategy
         }
     }
 
-    private void DrawTrajectory(EnemyController self)
+    private void MoveOnBezierCurve(EnemyController self)
     {
         Vector3 currentPosition = GetBezierPoint(_t);
+        Vector3 direction = (currentPosition - self.transform.position).normalized;
 
-        Vector3 direction = (currentPosition - _prevPosition).normalized;
-        self.transform.rotation = Quaternion.LookRotation(direction);
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            self.Rigidbody.MoveRotation(
+                Quaternion.Slerp(self.transform.rotation, targetRotation, 5f * Time.deltaTime));
+        }
 
-        self.transform.position = currentPosition;
+        self.Rigidbody.MovePosition(currentPosition);
         _prevPosition = currentPosition;
     }
-
 
     private Vector3 GetBezierPoint(float t)
     {
