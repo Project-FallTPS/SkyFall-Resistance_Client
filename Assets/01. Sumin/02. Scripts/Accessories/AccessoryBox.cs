@@ -35,7 +35,7 @@ public class AccessoryBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
+        if (other.CompareTag(nameof(ETags.Player)) && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
             EAccessoryType finalItem = EAccessoryType.Count;
 
@@ -50,7 +50,7 @@ public class AccessoryBox : MonoBehaviour
             }
 
             // TODO : 풀 반환
-            gameObject.SetActive(false);
+            BoxPoolManager.Instance.ReturnObject(gameObject, EBoxType.AccessoryBox);
         }
     }
 }
