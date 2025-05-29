@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 527276232504458301}
   - component: {fileID: 2635717738010392240}
   m_Layer: 0
-  m_Name: Acc_AttackRange
+  m_Name: Acc_KatanaAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

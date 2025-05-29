@@ -11,4 +11,4 @@ public enum EAccessoryType
     Body_Barrier,
     Body_Wing,
     Count,
-} 
+}
