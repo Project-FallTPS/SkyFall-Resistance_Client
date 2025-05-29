@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Acc_KatanaAttackRange : AccessoryBase, IAccessory
 {
-    private float _scaleAmount = 1.5f;
+    private float _scaleAmount = 1.1f;
 
     protected void OnTriggerEnter(Collider other)
     {
