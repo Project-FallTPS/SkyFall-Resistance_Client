@@ -10,7 +10,7 @@ public class Acc_KatanaBattery : AccessoryBase, IAccessory
     {
         base.Awake();
 
-        _additionalDamage = AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.BonusDamage);
+        _additionalDamage = AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.BatteryDamage);
         _fianlAdditionalDamage = _additionalDamage;
     }
 
@@ -34,22 +34,16 @@ public class Acc_KatanaBattery : AccessoryBase, IAccessory
 
     public void OnEquip()
     {
-        Debug.LogWarning("1" + gameObject.name);
-
         _fianlAdditionalDamage = _additionalDamage * AccessoryManager.Instance.GetAccessory(Type).Count;
-        Debug.Log($"{AccessoryManager.Instance.GetAccessory(Type).Count}, {_fianlAdditionalDamage}");
     }
 
-    public void OnHit(IDamageable target, float baseDamage)
+    public void OnHit(IDamageable target)
     {
-        Debug.LogWarning("2" + gameObject.name);
-        Debug.Log($"OnHit Damage : {_fianlAdditionalDamage}");
-        // 전기 데미지 추가
         target.TakeDamage(_fianlAdditionalDamage);
         
-        // 전기 이펙트 생성S
         if (_electricEffectPrefab != null)
         {
+            //TODO : 이펙트 풀
             MonoBehaviour t = target as MonoBehaviour;
             Instantiate(_electricEffectPrefab, t.transform.position, Quaternion.identity);
         }

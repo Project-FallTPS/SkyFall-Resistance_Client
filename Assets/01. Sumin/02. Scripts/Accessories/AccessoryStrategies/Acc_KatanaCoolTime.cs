@@ -24,7 +24,7 @@ public class Acc_KatanaCoolTime : AccessoryBase, IAccessory
     {
     }
 
-    public void OnHit(IDamageable target, float baseDamage)
+    public void OnHit(IDamageable target)
     {
     }
 }

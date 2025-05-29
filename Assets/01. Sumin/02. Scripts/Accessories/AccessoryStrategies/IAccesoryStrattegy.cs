@@ -4,5 +4,5 @@ public interface IAccessory
     public AccessoryData Data { get; }
     public void OnEquip(); // 장착 시 호출
     public void OnAttack(); // 공격 시 호출
-    public void OnHit(IDamageable target, float baseDamage); // 타격 시 호출
+    public void OnHit(IDamageable target); // 타격 시 호출
 }

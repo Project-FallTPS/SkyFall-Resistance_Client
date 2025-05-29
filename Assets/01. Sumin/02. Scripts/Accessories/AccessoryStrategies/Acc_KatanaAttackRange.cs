@@ -34,7 +34,7 @@ public class Acc_KatanaAttackRange : AccessoryBase, IAccessory
     {
     }
 
-    public void OnHit(IDamageable target, float baseDamage)
+    public void OnHit(IDamageable target)
     {
     }
 }

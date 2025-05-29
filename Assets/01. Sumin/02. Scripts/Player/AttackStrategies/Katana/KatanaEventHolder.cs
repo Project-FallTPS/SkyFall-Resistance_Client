@@ -3,20 +3,24 @@ using UnityEngine;
 public class KatanaEventHolder : MonoBehaviour
 {
     [Header("# Hierarchy")]
-    [SerializeField] private GameObject _katana;
-    private Collider _katanaCollider;
+    [SerializeField] private GameObject _katanaObject;
+    private Katana _katana;
 
     private void Awake()
     {
-        _katanaCollider = _katana.GetComponent<Collider>();
+        _katana = _katanaObject.GetComponent<Katana>();
     }
 
     public void SetCollider(int flag) // 애니메이션 이벤트로 호출
     {
-        _katanaCollider.enabled = flag == 1 ? true : false;
         if (flag == 1)
         {
-            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MeleeAttackEffect, _katana.transform.position, _katana.transform.rotation);
+            _katana.EnableAttack();
+            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MeleeAttackEffect, _katanaObject.transform.position, _katanaObject.transform.rotation);
+        }
+        else
+        {
+            _katana.DisableAttack();
         }
     }
 }

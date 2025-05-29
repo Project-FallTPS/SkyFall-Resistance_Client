@@ -25,7 +25,7 @@ public class Acc_KatanaDamage : AccessoryBase, IAccessory
     {
     }
 
-    public void OnHit(IDamageable target, float baseDamage)
+    public void OnHit(IDamageable target)
     {
     }
 }
