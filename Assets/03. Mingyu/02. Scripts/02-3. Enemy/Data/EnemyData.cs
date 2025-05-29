@@ -1,5 +1,3 @@
-using VInspector;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,9 +24,11 @@ public class EnemyData
     public float AttackDamage;
     public float AttackDelay;
     
-    [ShowIf("EnemyType", EEnemyType.Bombing)]
+    [Header("Bombing Type")]
     public float ExplosionRadius;
     
+    [Header("Item Drop")]
+    public float AccessoryBoxDropProbability;
 
     public void AdjustEnemyDataOnWave(float multiplier)
     {
