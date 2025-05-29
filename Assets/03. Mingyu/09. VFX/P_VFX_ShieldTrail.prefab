@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979317068840916683}
   - component: {fileID: 6218913054751741555}
+  - component: {fileID: 7051164293496944235}
   m_Layer: 0
   m_Name: P_VFX_ShieldTrail
   m_TagString: Untagged
@@ -77,11 +78,11 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -139,3 +140,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7051164293496944235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663079095948233050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f85f48384e635a489ad5e9193d53421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 50
