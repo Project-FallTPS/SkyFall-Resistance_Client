@@ -864,19 +864,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: Mapper.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[0]'
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[1]'
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[2]'
+      propertyPath: 'Mapper.Array.data[0]'
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+      propertyPath: 'Mapper.Array.data[1]'
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -940,19 +936,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: Mapper.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[0]'
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[1]'
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[2]'
+      propertyPath: 'Mapper.Array.data[0]'
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+      propertyPath: 'Mapper.Array.data[1]'
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1537,19 +1529,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
       propertyPath: Mapper.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[0]'
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[1]'
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
-      propertyPath: 'Mapper.Array.data[2]'
+      propertyPath: 'Mapper.Array.data[0]'
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778748585063717801, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+      propertyPath: 'Mapper.Array.data[1]'
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1988,6 +1976,10 @@ PrefabInstance:
       propertyPath: _katana
       value: 
       objectReference: {fileID: 1943680869}
+    - target: {fileID: 5733583008490809108, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5794373047683204225, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.07

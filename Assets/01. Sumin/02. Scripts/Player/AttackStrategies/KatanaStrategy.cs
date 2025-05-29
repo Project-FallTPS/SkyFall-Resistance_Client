@@ -133,7 +133,7 @@ public class KatanaStrategy : IWeaponStrategy
         if (!_accessorySockets.TryGetValue(type, out var socket) || !type.ToString().StartsWith(WEAPON_NAME))
             return;
 
-        // 이미 액세서리가 장착된 경우: 기존 것을 등록만
+        // 이미 액세서리가 장착된 경우: 기존 것에 Count 추가만
         if (socket.childCount > 0)
         {
             IAccessory existingAccessory = socket.GetChild(0).GetComponent<IAccessory>();
@@ -156,7 +156,6 @@ public class KatanaStrategy : IWeaponStrategy
             }
         }
     }
-
 
     public void RemoveAccessory(EAccessoryType type)
     {

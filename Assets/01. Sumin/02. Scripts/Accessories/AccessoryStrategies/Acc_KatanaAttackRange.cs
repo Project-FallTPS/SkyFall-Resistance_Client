@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Acc_KatanaAttackRange : AccessoryBase, IAccessory
 {
+    private float _scaleAmount = 1.5f;
+
     protected void OnTriggerEnter(Collider other)
     {
         if (IsEqiupped)
@@ -23,6 +25,9 @@ public class Acc_KatanaAttackRange : AccessoryBase, IAccessory
 
     public void OnEquip()
     {
+        int count = AccessoryManager.Instance.GetAccessory(Type).Count;
+
+        transform.localScale = new Vector3(1, 1, Mathf.Pow(_scaleAmount, count));
     }
 
     public void OnAttack()

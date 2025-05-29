@@ -36,7 +36,6 @@ public class AccessoryManager : Singleton<AccessoryManager>
         if (EquippedAccessories.ContainsKey(type))
         {
             ActiveAccessory acc = EquippedAccessories[type];
-            AccessoryData data = GetData(type);
             acc.Count--;
             if(acc.Count <= 0)
             {
