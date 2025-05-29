@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 3925502928509805439}
   m_Layer: 0
   m_Name: P_Enemy_Shooting3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -619,9 +619,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3925502928509805439
 MonoBehaviour:
