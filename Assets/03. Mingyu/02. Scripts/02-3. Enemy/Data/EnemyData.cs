@@ -10,11 +10,11 @@ public class EnemyData
     public float MaxHealth;
 
     [SerializeField]
-    private float _currentHealthPoint;
+    private float _currentHealth;
     public float CurrentHealth 
     { 
-        get => _currentHealthPoint;
-        set => _currentHealthPoint = Mathf.Clamp(value, 0f, MaxHealth); 
+        get => _currentHealth;
+        set => _currentHealth = Mathf.Clamp(value, 0f, MaxHealth); 
     }
 
     public float MoveSpeed;
@@ -44,5 +44,29 @@ public class EnemyData
         MaxHealth *= multiplier;
         CurrentHealth *= multiplier;
         AttackDamage *= multiplier;
+    }
+
+    public void Init()
+    {
+        _nextAttackableTime = Time.time;
+        _currentHealth = MaxHealth;
+        _isShieldActive = false;
+    }
+    public EnemyData(EnemyData original)
+    {
+        EnemyType = original.EnemyType;
+        DamageableType = original.DamageableType;
+        
+        MaxHealth = original.MaxHealth;
+        MoveSpeed = original.MoveSpeed;
+        
+        AttackableRange = original.AttackableRange;
+        AttackDamage = original.AttackDamage;
+        AttackDelay = original.AttackDelay;
+        
+        NextAttackableTime = original.NextAttackableTime;
+        AccessoryBoxDropProbability = original.AccessoryBoxDropProbability;
+        IsShieldActive = original.IsShieldActive;
+        ShieldBuffRadius = original.ShieldBuffRadius;
     }
 }

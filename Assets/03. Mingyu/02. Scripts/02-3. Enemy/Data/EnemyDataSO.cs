@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,12 @@ public class EnemyDataSO : ScriptableObject
         foreach (var data in EnemyDatas)
         {
             if (!_enemyDict.ContainsKey(data.EnemyType))
+            {
+                data.NextAttackableTime = 0f;
+                data.CurrentHealth = data.MaxHealth;
+                data.IsShieldActive = false;
                 _enemyDict.Add(data.EnemyType, data);
+            }
         }
     }
     public EnemyData GetEnemyData(EEnemyType type)
@@ -25,7 +29,7 @@ public class EnemyDataSO : ScriptableObject
         }
         if (_enemyDict.TryGetValue(type, out var data))
         {
-            return data;
+            return new EnemyData(data);
         }
         Debug.LogWarning($"Enemy ID '{type}' not found!");
         return null;
