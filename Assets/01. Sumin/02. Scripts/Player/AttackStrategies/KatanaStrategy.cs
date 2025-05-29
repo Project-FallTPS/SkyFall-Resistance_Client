@@ -144,7 +144,7 @@ public class KatanaStrategy : IWeaponStrategy
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
             obj.GetComponent<AccessoryBase>().SetEquipped(true);
-            obj.GetComponent<IAccessory>().Execute();
+            obj.GetComponent<IAccessory>().OnEquip();
         }
     }
 
@@ -169,7 +169,7 @@ public class KatanaStrategy : IWeaponStrategy
         {
             if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
             {
-                accesory.Execute();
+                accesory.OnAttack();
             }
         }
     }
