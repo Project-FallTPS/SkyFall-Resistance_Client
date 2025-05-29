@@ -12,5 +12,5 @@ public interface IWeaponStrategy
     public void InitializeAccessorySockets();
     public void AddAccessory(EAccessoryType type, IAccessory obj);
     public void RemoveAccessory(EAccessoryType type);
-    public void ExecuteAccesories();
+    public void AccessoryOnAttack();
 }

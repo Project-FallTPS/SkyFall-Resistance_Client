@@ -114,7 +114,7 @@ public class RangeStrategy : IWeaponStrategy
         }
     }
 
-    public void ExecuteAccesories()
+    public void AccessoryOnAttack()
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {

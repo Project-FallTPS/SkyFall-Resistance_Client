@@ -19,7 +19,7 @@ public class Katana : MonoBehaviour
             // 액세서리 이벤트 실행
             if (_player.CurrentStrategy is KatanaStrategy katanaStrategy)
             {
-                katanaStrategy.ExecuteAccesories();
+                katanaStrategy.AccessoryOnAttack();
                 
                 // 각 액세서리의 OnHit 이벤트 호출
                 foreach (var acc in AccessoryManager.Instance.EquippedAccessories)

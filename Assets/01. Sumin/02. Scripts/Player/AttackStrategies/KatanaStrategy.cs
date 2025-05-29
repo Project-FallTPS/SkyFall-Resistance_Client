@@ -118,7 +118,6 @@ public class KatanaStrategy : IWeaponStrategy
                 }
                 _targetDashTimer = 0f;
                 _target = null;
-                //ExecuteAccesories();
             }
             else
             {
@@ -163,7 +162,7 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public void ExecuteAccesories()
+    public void AccessoryOnAttack()
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
