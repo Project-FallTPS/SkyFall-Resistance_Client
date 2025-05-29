@@ -25,10 +25,6 @@ public class EnemyDieState : IEnemyState
 
     public void Update()
     {
-        //if (_animatorStateInfo.IsName(nameof(EEnemyAnimationTransitionParam.Die)) && 1.0f <= _animatorStateInfo.normalizedTime)
-        //{
-        //    ReturnToPool();
-        //}
     }
 
     public void Exit()
@@ -37,10 +33,26 @@ public class EnemyDieState : IEnemyState
         _enemyController.EnemyCollider.enabled = true;
     }
 
+    private void TryDropAccessoryBox()
+    {
+        int rand = Random.Range(0, 100);
+        if (rand < _enemyController.EnemyData.AccessoryBoxDropProbability)
+        {
+            BoxPoolManager.Instance.GetObject(EBoxType.AccessoryBox, _enemyController.transform.position);
+        }
+    }
     private void ReturnToPool()
     {
+        EnemyPoolManager.Instance.ReturnObject(_enemyController.gameObject, _enemyData.EnemyType);
+    }
+
+    private IEnumerator DieAnimation()
+    {
+        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), true);
+        _enemyController.EnemyCollider.enabled = false;
         TargetManager.Instance.RemoveEnemyFromHashSet(_enemyController.gameObject);
         ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
-        EnemyPoolManager.Instance.ReturnObject(_enemyController.gameObject, _enemyData.EnemyType);
+        yield return new WaitForSeconds(1f);
+        ReturnToPool();
     }
 } 
