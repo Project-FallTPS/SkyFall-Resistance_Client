@@ -44827,7 +44827,7 @@ GameObject:
   - component: {fileID: 1082339557642875785}
   - component: {fileID: 5517452149047925752}
   m_Layer: 0
-  m_Name: KatanaBombEffect
+  m_Name: P_VFX_KatanaBombEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

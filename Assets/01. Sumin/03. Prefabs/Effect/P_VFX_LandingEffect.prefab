@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1349097401947177324}
   - component: {fileID: 7063959824174221788}
   m_Layer: 0
-  m_Name: LandingEffect
+  m_Name: P_VFX_LandingEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

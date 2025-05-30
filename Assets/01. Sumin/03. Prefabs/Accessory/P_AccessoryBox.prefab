@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3777580687535907136}
   - component: {fileID: 4811265033513002697}
   m_Layer: 0
-  m_Name: AccessoryBox
+  m_Name: P_AccessoryBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
