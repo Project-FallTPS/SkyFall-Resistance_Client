@@ -72,6 +72,7 @@ public class WaveManager : Singleton<WaveManager>
     private void ChangeWave()       
     { 
         _currentWaveIndex++;
+        Debug.Log($"Change Wave! 현재 웨이브 : {_currentWaveIndex}, 현재 시간 : {Time.time}");
         if (_currentWaveIndex < _waveDatas.Count)
         {
             CurrentWaveData = _waveDatas[_currentWaveIndex];
@@ -80,7 +81,7 @@ public class WaveManager : Singleton<WaveManager>
         else
         {
             _currentWaveIndex = 0;
-            // TODO : 씬 전환
+            SceneTransitionManager.Instance.LoadScene(ESceneNames.BossEntryCutScene);
         }
     }
 }
