@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 3122692697123830935}
   - component: {fileID: 3251429378631659727}
   m_Layer: 0
-  m_Name: Rob06
+  m_Name: Rob06_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
