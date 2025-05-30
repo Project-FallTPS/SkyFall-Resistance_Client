@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1821646677443790788}
   - component: {fileID: 6316473656350197884}
   - component: {fileID: 2336547205302752867}
+  - component: {fileID: 4067441626946308721}
   m_Layer: 0
-  m_Name: PoolManagers
+  m_Name: PlayerPoolManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1133154337304082887}
+  - {fileID: 5206507339312593560}
   - {fileID: 2547457532785253196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69,12 +71,85 @@ MonoBehaviour:
   _poolInfoList:
   - Type: 0
     InitCount: 1
-    Prefab: {fileID: 1872147318604286, guid: 5bea49531fc500c408823a2e2863106f, type: 3}
+    Prefab: {fileID: 3951179781273751610, guid: d4316c0558d73114aac5fed0584a5b92, type: 3}
     Container: {fileID: 2547457532785253196}
   - Type: 1
     InitCount: 1
-    Prefab: {fileID: 1893033738566276, guid: 3e04efdf8ee665d48962b33b06e8e3d3, type: 3}
+    Prefab: {fileID: 960562521658836951, guid: 34b6a7ef2ee41af46beb202974ace21d, type: 3}
     Container: {fileID: 2547457532785253196}
+  - Type: 2
+    InitCount: 1
+    Prefab: {fileID: 2392719246109613848, guid: ae10980feb5d58c4dbd266fed696ac61, type: 3}
+    Container: {fileID: 0}
+  - Type: 4
+    InitCount: 1
+    Prefab: {fileID: 5161585459019388959, guid: 81a47d1fcbf09b54ab280f87b4a4c6e5, type: 3}
+    Container: {fileID: 2547457532785253196}
+--- !u!114 &4067441626946308721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181499950494939186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d03a1b063f58774b9518ec317d5f26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 0
+  _poolInfoList:
+  - Type: 1
+    InitCount: 1
+    Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 2
+    InitCount: 1
+    Prefab: {fileID: 1899342940594638778, guid: 1ca83c0881f9e1f4d8051357596ca9a6, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 3
+    InitCount: 1
+    Prefab: {fileID: 6457354906676372157, guid: 22dd772d96af24f4b83a9aec3702a282, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 7
+    InitCount: 1
+    Prefab: {fileID: 6208985102155455514, guid: dd22e96a981f81840bc38f1f26b7fe35, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 4
+    InitCount: 1
+    Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
+    Container: {fileID: 5206507339312593560}
+--- !u!1 &1217687436568008110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5206507339312593560}
+  m_Layer: 0
+  m_Name: AccessoryContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5206507339312593560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217687436568008110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1821646677443790788}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654763809594459536
 GameObject:
   m_ObjectHideFlags: 0
