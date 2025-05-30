@@ -27,7 +27,7 @@ public class PlayerBullet : MonoBehaviour, IBullet
         //    damageable.TakeDamage(_damage);
         //    BulletPoolManager.Instance.ReturnObject(gameObject, EBulletType.PlayerBullet);
         //}
-        if (other.gameObject.layer == LayerMask.NameToLayer("AimCube"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("AimCube") || other.CompareTag(nameof(ETags.Player)))
             return;
 
         if(other.TryGetComponent<IDamageable>(out var damageable))
@@ -39,9 +39,9 @@ public class PlayerBullet : MonoBehaviour, IBullet
         BulletPoolManager.Instance.ReturnObject(gameObject, EBulletType.PlayerBullet);
     }
 
-    void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("AimCube"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("AimCube") || collision.gameObject.CompareTag(nameof(ETags.Player)))
             return;
 
         if (collision.gameObject.TryGetComponent<IDamageable>(out var damageable))
@@ -49,12 +49,13 @@ public class PlayerBullet : MonoBehaviour, IBullet
             damageable.TakeDamage(_damage);
         }
         ContactPoint contact = collision.contacts[0];
-        Vector3 hitPoint = contact.point;       // Ãæµ¹ ÁöÁ¡
-        Vector3 hitNormal = contact.normal;     // Ãæµ¹ ¸éÀÇ ¹ı¼± ¹æÇâ
-        Debug.Log($"Ãæµ¹ ÁöÁ¡: {hitPoint}, ¹ı¼±: {hitNormal}");
+        Vector3 hitPoint = contact.point;       // ì¶©ëŒ ì§€ì 
+        Vector3 hitNormal = contact.normal;     // ì¶©ëŒ ë©´ì˜ ë²•ì„  ë°©í–¥
+        Debug.Log($"ì¶©ëŒ ì§€ì : {hitPoint}, ë²•ì„ : {hitNormal}");
 
-        //hitpoint¿¡ hitnormal ¹æÇâÀ¸·Î ÇÇ°İ ÀÌÆåÆ® »ı¼º
-    }
+        //hitpointì— hitnormal ë°©í–¥ìœ¼ë¡œ í”¼ê²© ì´í™íŠ¸ ìƒì„±
+        BulletPoolManager.Instance.ReturnObject(gameObject, EBulletType.PlayerBullet);
+    }*/
 
     private void Move()
     {
@@ -71,6 +72,6 @@ public class PlayerBullet : MonoBehaviour, IBullet
 
     public void SetTarget(GameObject target)
     {
-        //³ªÁß¿¡ Å¸°ÙÆÃ »ı±â¸é
+        //ë‚˜ì¤‘ì— íƒ€ê²ŸíŒ… ìƒê¸°ë©´
     }
 }

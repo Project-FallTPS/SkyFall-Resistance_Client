@@ -33,3 +33,8 @@ MonoBehaviour:
       Value: 5
     - Type: 11
       Value: 5
+  - Type: 4
+    Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
+    Bonuses:
+    - Type: 3
+      Value: 5

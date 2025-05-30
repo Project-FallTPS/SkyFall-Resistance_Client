@@ -70,7 +70,9 @@ public class RangeStrategy : IWeaponStrategy
                     obj.GetComponent<IBullet>().SetStats(GetStat(EStatType.Damage), dir);
                 });
             _timer = 0f;
-            _player.Anim.SetTrigger("anim_Player_Trigger_RangeAttack");
+            
+            // 액세서리 효과 트리거
+            AccessoryOnAttack();
         }
     }
 
@@ -85,26 +87,24 @@ public class RangeStrategy : IWeaponStrategy
         if (!_accessorySockets.TryGetValue(type, out var socket) || !type.ToString().StartsWith(WEAPON_NAME))
             return;
 
-        // 이미 액세서리가 장착된 경우: 기존 것을 등록만
         if (socket.childCount > 0)
         {
-            IAccessory existingAccessory = socket.GetChild(0).GetComponent<IAccessory>();
-            AccessoryManager.Instance.Equip(type, existingAccessory);
-            return;
+            AccessoryManager.Instance.Equip(type, newAccessory);
         }
-
-        // 새 액세서리 장착
-        AccessoryManager.Instance.Equip(type, newAccessory);
-
-        if (newAccessory is MonoBehaviour accessoryObj)
+        else
         {
-            accessoryObj.transform.SetParent(socket);
-            accessoryObj.transform.localPosition = Vector3.zero;
-            accessoryObj.transform.localRotation = Quaternion.identity;
+            AccessoryManager.Instance.Equip(type, newAccessory);
 
-            if (accessoryObj.TryGetComponent(out AccessoryBase baseComponent))
+            if (newAccessory is MonoBehaviour accessoryObj)
             {
-                baseComponent.SetEquipped(true);
+                accessoryObj.transform.SetParent(socket);
+                accessoryObj.transform.localPosition = Vector3.zero;
+                accessoryObj.transform.localRotation = Quaternion.identity;
+
+                if (accessoryObj.TryGetComponent(out AccessoryBase baseComponent))
+                {
+                    baseComponent.SetEquipped(true);
+                }
             }
         }
     }
@@ -128,7 +128,7 @@ public class RangeStrategy : IWeaponStrategy
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
-            acc.Value.Object.OnEquip();
+            acc.Value.Object.OnAttack();
         }
     }
 

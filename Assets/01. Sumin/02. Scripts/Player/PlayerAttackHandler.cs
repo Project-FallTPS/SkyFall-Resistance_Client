@@ -38,7 +38,15 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void ReceiveAccessory(EAccessoryType type, IAccessory accessory)
     {
-        CurrentStrategy?.AddAccessory(type, accessory);
+        if(type.ToString().StartsWith("Range"))
+        {
+            _strategies[EWeaponType.Range].AddAccessory(type, accessory);
+        }
+        else if(type.ToString().StartsWith("Katana"))
+        {
+            _strategies[EWeaponType.Katana].AddAccessory(type, accessory);
+        }
+        //CurrentStrategy?.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
