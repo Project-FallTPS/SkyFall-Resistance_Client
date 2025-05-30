@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 2935671062497853610}
   - component: {fileID: 4154911715592957043}
   - component: {fileID: 6175904816138413049}
+  - component: {fileID: 1401783383967680382}
+  - component: {fileID: -944573646262024289}
   m_Layer: 0
   m_Name: Acc_Battery
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,3 +88,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1401783383967680382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6457354906676372157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903bbf04f72389b4e9e1d13712dbe226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 3
+  _electricEffectPrefab: {fileID: 0}
+  _additionalDamage: 10
+--- !u!65 &-944573646262024289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6457354906676372157}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020000001, y: 0.012, z: 0.042354688}
+  m_Center: {x: -0.012446427, y: 0.0000000018626451, z: 0.045390226}

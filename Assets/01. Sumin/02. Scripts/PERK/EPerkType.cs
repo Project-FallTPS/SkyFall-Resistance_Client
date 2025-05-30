@@ -4,5 +4,6 @@ public enum EPerkType
     CoolTime,
     Special,
     Speed,
+    OverloadJetPack,
     Count,
 }

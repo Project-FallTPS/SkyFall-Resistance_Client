@@ -7,6 +7,7 @@ public class RangeStrategy : IWeaponStrategy
     private WeaponData _weaponData;
     private PlayerAttackHandler _player;
     private Transform _muzzle;
+    private RangeHeatController _overheat;
     private Dictionary<EAccessoryType, Transform> _accessorySockets = new Dictionary<EAccessoryType, Transform>();
 
     private float _timer = 0f;
@@ -16,6 +17,15 @@ public class RangeStrategy : IWeaponStrategy
         _weaponData = WeaponDataManager.Instance.GetWeaponData(EWeaponType.Range);
         _player = player;
         InitializeAccessorySockets();
+
+        foreach (var weapon in _player.Weapons)
+        {
+            if (weapon.name == WEAPON_NAME)
+            {
+                _overheat = weapon.GetComponent<RangeHeatController>();
+                break;
+            }
+        }
     }
 
     public void InitializeAccessorySockets()
@@ -48,10 +58,7 @@ public class RangeStrategy : IWeaponStrategy
         float accBonuses = 1f;
         foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            if (data != null)
-            {
-                accBonuses *= (1 + (data.GetData(type) - 1) * data.Count);
-            }
+            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Count);
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -59,7 +66,7 @@ public class RangeStrategy : IWeaponStrategy
 
     public void Attack(GameObject target)
     {
-        if (_timer >= GetStat(EStatType.CoolTime))
+        if (_timer >= GetStat(EStatType.CoolTime) && (_overheat == null || _overheat.TryConsumeHeat()))
         {
             Vector3 dir = SetDirection();
             Quaternion rot = Quaternion.LookRotation(dir);
@@ -69,11 +76,12 @@ public class RangeStrategy : IWeaponStrategy
                 _muzzle.position,
                 rot,
                 (obj) =>
-                {  
+                {
                     obj.GetComponent<IBullet>().SetStats(GetStat(EStatType.Damage), dir);
                 });
+
             _timer = 0f;
-            _player.Anim.SetTrigger("anim_Player_Trigger_RangeAttack");
+            AccessoryOnAttack();
         }
     }
 
@@ -82,20 +90,31 @@ public class RangeStrategy : IWeaponStrategy
         _timer += Time.deltaTime;
     }
 
-    public void AddAccessory(EAccessoryType type, GameObject obj)
+    public void AddAccessory(EAccessoryType type, IAccessory newAccessory)
     {
-        if (!_accessorySockets.ContainsKey(type))
-        {
+        // 슬롯 존재 여부와 타입 유효성 검사
+        if (!_accessorySockets.TryGetValue(type, out var socket) || !type.ToString().StartsWith(WEAPON_NAME))
             return;
-        }
-        AccessoryManager.Instance.Equip(type);
-        if (type.ToString().StartsWith(WEAPON_NAME))
+
+        if (socket.childCount > 0)
         {
-            obj.transform.SetParent(_accessorySockets[type]);
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localRotation = Quaternion.identity;
-            obj.GetComponent<AccessoryBase>().SetEquipped(true);
-            obj.GetComponent<IAccessory>().Execute();
+            AccessoryManager.Instance.Equip(type, newAccessory);
+        }
+        else
+        {
+            AccessoryManager.Instance.Equip(type, newAccessory);
+
+            if (newAccessory is MonoBehaviour accessoryObj)
+            {
+                accessoryObj.transform.SetParent(socket);
+                accessoryObj.transform.localPosition = Vector3.zero;
+                accessoryObj.transform.localRotation = Quaternion.identity;
+
+                if (accessoryObj.TryGetComponent(out AccessoryBase baseComponent))
+                {
+                    baseComponent.SetEquipped(true);
+                }
+            }
         }
     }
 
@@ -114,14 +133,11 @@ public class RangeStrategy : IWeaponStrategy
         }
     }
 
-    public void ExecuteAccesories()
+    public void AccessoryOnAttack()
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
-            if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
-            {
-                accesory.Execute();
-            }
+            acc.Value.Object.OnAttack();
         }
     }
 

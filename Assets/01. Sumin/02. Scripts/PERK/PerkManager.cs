@@ -6,12 +6,12 @@ public class PerkManager : Singleton<PerkManager>
     private const string PERK_SAVE_DATA = "PerkSaveData";
 
     [Header("# Project")]
-    [SerializeField] private PerkDataCollectionSO _perkDataCollection; // º£ÀÌ½º µ¥ÀÌÅÍ
+    [SerializeField] private PerkDataCollectionSO _perkDataCollection; // ë² ì´ìŠ¤ ë°ì´í„°
 
-    public Dictionary<EPerkType, PerkDataEntry> PerkDatas { get; private set; } //¸ğµç ÆÜ µ¥ÀÌÅÍ
-    public Dictionary<EPerkType, int> HavingPerks { get; private set; } //º¸À¯ÇÑ ÆÜ
-    public Dictionary<EPerkType, List<PerkDataEntry>> EquippedPerks { get; private set; } // ÀåÂøÇÑ ÆÜ
-    public Dictionary<EStatType, float> EquippedPerkBonuses { get; private set; } //ÀåÂøÇÑ ÆÜ ½ºÅÈ º¸³Ê½º ÇÕ»ê
+    public Dictionary<EPerkType, PerkDataEntry> PerkDatas { get; private set; } //ëª¨ë“  í½ ë°ì´í„°
+    public Dictionary<EPerkType, int> HavingPerks { get; private set; } //ë³´ìœ í•œ í½
+    public Dictionary<EPerkType, List<PerkDataEntry>> EquippedPerks { get; private set; } // ì¥ì°©í•œ í½
+    public Dictionary<EStatType, float> EquippedPerkBonuses { get; private set; } //ì¥ì°©í•œ í½ ìŠ¤íƒ¯ ë³´ë„ˆìŠ¤ í•©ì‚°
 
     protected override void Awake()
     {
@@ -21,6 +21,8 @@ public class PerkManager : Singleton<PerkManager>
         InitPerkBonuses();
         PerkDatas = _perkDataCollection.MakeDictionary();
         InitHavingPerks();
+
+        EquipPerk(EPerkType.OverloadJetPack);
     }
 
     private void InitHavingPerks()
@@ -31,7 +33,7 @@ public class PerkManager : Singleton<PerkManager>
         {
             data = JsonDataManager.LoadFromFile<PerkSaveData>(PERK_SAVE_DATA);
         }
-        else //¾øÀ¸¸é »õ·Î ¸¸µé±â -> default·Î ¸¸µé¸é nullÂüÁ¶°¡ ÀÏ¾î³ª±â ¶§¹®¿¡ ÀÎ½ºÅÏ½º¸¦ Á÷Á¢ ¸¸µé¾î¼­ ÇÒ´ç
+        else //ì—†ìœ¼ë©´ ìƒˆë¡œ ë§Œë“¤ê¸° -> defaultë¡œ ë§Œë“¤ë©´ nullì°¸ì¡°ê°€ ì¼ì–´ë‚˜ê¸° ë•Œë¬¸ì— ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì§ì ‘ ë§Œë“¤ì–´ì„œ í• ë‹¹
         {
             data = new PerkSaveData();
             foreach (EPerkType perkType in (EPerkType[])System.Enum.GetValues(typeof(EPerkType)))
@@ -67,7 +69,7 @@ public class PerkManager : Singleton<PerkManager>
             Debug.Log($"UnEquip {type}");
             EquippedPerks[type].RemoveAt(0);
 
-            // ¸®½ºÆ®°¡ ºñ¸é ¾Æ¿¹ Á¦°Å
+            // ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ë©´ ì•„ì˜ˆ ì œê±°
             if (EquippedPerks[type].Count == 0)
             {
                 EquippedPerks.Remove(type);
@@ -77,7 +79,7 @@ public class PerkManager : Singleton<PerkManager>
         }
     }
 
-    public void InitPerkBonuses() // ÀåÂøµÈ ÆÜ ±â¹İ ½ºÅÈº¸³Ê½º °è»ê
+    public void InitPerkBonuses() // ì¥ì°©ëœ í½ ê¸°ë°˜ ìŠ¤íƒ¯ë³´ë„ˆìŠ¤ ê³„ì‚°
     {
         EquippedPerkBonuses.Clear();
 

@@ -20,6 +20,21 @@ MonoBehaviour:
       Value: 1.1
   - Type: 2
     Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
+    Bonuses: []
+  - Type: 3
+    Prefab: {fileID: 6457354906676372157, guid: 22dd772d96af24f4b83a9aec3702a282, type: 3}
     Bonuses:
+    - Type: 15
+      Value: 3
+  - Type: 7
+    Prefab: {fileID: 6208985102155455514, guid: dd22e96a981f81840bc38f1f26b7fe35, type: 3}
+    Bonuses:
+    - Type: 16
+      Value: 5
     - Type: 11
-      Value: 1.1
+      Value: 5
+  - Type: 4
+    Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
+    Bonuses:
+    - Type: 3
+      Value: 5

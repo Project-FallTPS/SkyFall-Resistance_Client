@@ -34,7 +34,7 @@ public class KatanaStrategy : IWeaponStrategy
         Transform weaponTransform = null;
         foreach(var weapon in _player.Weapons)
         {
-            if(weapon.name == WEAPON_NAME)
+            if(weapon.name == nameof(EWeaponType.Katana))
             {
                 weaponTransform = weapon.transform;
                 break;
@@ -57,10 +57,7 @@ public class KatanaStrategy : IWeaponStrategy
         float accBonuses = 1f;
         foreach (var data in AccessoryManager.Instance.GetEquippedAccessories(_weaponData.WeaponType))
         {
-            if (data != null)
-            {
-                accBonuses *= (1 + (data.GetData(type) - 1) * data.Count);
-            }
+            accBonuses *= (1 + (data.Data.GetStatBonusData(type) - 1) * data.Count);
         }
 
         return baseDamage * perkBonus * accBonuses;
@@ -121,7 +118,6 @@ public class KatanaStrategy : IWeaponStrategy
                 }
                 _targetDashTimer = 0f;
                 _target = null;
-                //ExecuteAccesories();
             }
             else
             {
@@ -131,20 +127,31 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public void AddAccessory(EAccessoryType type, GameObject obj)
+    public void AddAccessory(EAccessoryType type, IAccessory newAccessory)
     {
-        if (!_accessorySockets.ContainsKey(type))
-        {
+        // 슬롯 존재 여부와 타입 유효성 검사
+        if (!_accessorySockets.TryGetValue(type, out var socket) || !type.ToString().StartsWith(WEAPON_NAME))
             return;
-        }
-        AccessoryManager.Instance.Equip(type);
-        if (type.ToString().StartsWith(WEAPON_NAME))
+
+        if (socket.childCount > 0)
         {
-            obj.transform.SetParent(_accessorySockets[type]);
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localRotation = Quaternion.identity;
-            obj.GetComponent<AccessoryBase>().SetEquipped(true);
-            obj.GetComponent<IAccessory>().Execute();
+            AccessoryManager.Instance.Equip(type, newAccessory);
+        }
+        else
+        {
+            AccessoryManager.Instance.Equip(type, newAccessory);
+
+            if (newAccessory is MonoBehaviour accessoryObj)
+            {
+                accessoryObj.transform.SetParent(socket);
+                accessoryObj.transform.localPosition = Vector3.zero;
+                accessoryObj.transform.localRotation = Quaternion.identity;
+
+                if (accessoryObj.TryGetComponent(out AccessoryBase baseComponent))
+                {
+                    baseComponent.SetEquipped(true);
+                }
+            }
         }
     }
 
@@ -163,14 +170,11 @@ public class KatanaStrategy : IWeaponStrategy
         }
     }
 
-    public void ExecuteAccesories()
+    public void AccessoryOnAttack()
     {
         foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
         {
-            if (acc.Value.Prefab.TryGetComponent<IAccessory>(out var accesory))
-            {
-                accesory.Execute();
-            }
+            acc.Value.Object.OnAttack();
         }
     }
 }

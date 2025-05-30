@@ -36,9 +36,17 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         CurrentStrategy?.Update();
     }
 
-    public void ReceiveAccessory(EAccessoryType type, GameObject accessory)
+    public void ReceiveAccessory(EAccessoryType type, IAccessory accessory)
     {
-        CurrentStrategy?.AddAccessory(type, accessory);
+        if(type.ToString().StartsWith(nameof(EWeaponType.Range)))
+        {
+            _strategies[EWeaponType.Range].AddAccessory(type, accessory);
+        }
+        else if(type.ToString().StartsWith(nameof(EWeaponType.Katana)))
+        {
+            _strategies[EWeaponType.Katana].AddAccessory(type, accessory);
+        }
+        //CurrentStrategy?.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
@@ -76,6 +84,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void PerformAttack()
     {
-        CurrentStrategy.Attack(TargetManager.Instance.Target);
+        CurrentStrategy?.Attack(TargetManager.Instance.Target);
     }
 }
