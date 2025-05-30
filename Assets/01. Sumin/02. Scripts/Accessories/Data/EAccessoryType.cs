@@ -8,6 +8,7 @@ public enum EAccessoryType
     Range_Fridger,
     Common_EngineOil,
     Katana_Bomb,
+    Range_Bomb,
     Body_Fuel,
     Body_Barrier,
     Body_Wing,
