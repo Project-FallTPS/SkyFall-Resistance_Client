@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InGame1_UI_PlayerOutBoundaryAlert : MonoBehaviour
 {
     public static InGame1_UI_PlayerOutBoundaryAlert instance;
 
     [SerializeField] private GameObject _alertUI;
-    [SerializeField] private Text _timerText;
+    [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private PlayerArea _playerArea;
 
     private void Awake()
