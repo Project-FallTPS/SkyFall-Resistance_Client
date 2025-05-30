@@ -81,7 +81,7 @@ public class WaveManager : Singleton<WaveManager>
         else
         {
             _currentWaveIndex = 0;
-            SceneTransitionManager.Instance.LoadScene(ESceneNames.BossEntryCutScene);
+            SceneTransitionManager.Instance.LoadScene(nameof(ESceneNames.BossEntryCutScene));
         }
     }
 }

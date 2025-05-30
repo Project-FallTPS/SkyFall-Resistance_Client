@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f06a847790ff304e88c9952c29f8f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _katana: {fileID: 5881326148834482013}
+  _katanaObject: {fileID: 5881326148834482013}
 --- !u!1 &288399261687338233
 GameObject:
   m_ObjectHideFlags: 0
