@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField]
-    private bool _isDontDestroy = false;
+    [SerializeField] 
+    private bool _isDontDestroy;
 
-    private static bool _isQuitting = false;
+    private static bool _isQuitting;
     private static T _instance;
 
     public static T Instance
