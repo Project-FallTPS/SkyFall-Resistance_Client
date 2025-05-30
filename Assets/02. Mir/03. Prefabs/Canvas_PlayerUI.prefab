@@ -1488,7 +1488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 0}
   _speedSlider: {fileID: 7500554598304869918}
-  _speedText: {fileID: 0}
+  _speedText: {fileID: 8855803704504246703}
   minSpeed: 110
   midSpeed: 130
   maxSpeed: 150
