@@ -92,7 +92,6 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
     public void OnClickedGameStart()
     {
         Debug.Log("Scene Load");
-
-        // SceneTransitionManager.Instance.LoadScene("FallScene");
+        SceneTransitionManager.Instance.LoadScene(nameof(ESceneNames.FallScene));
     }
 }
