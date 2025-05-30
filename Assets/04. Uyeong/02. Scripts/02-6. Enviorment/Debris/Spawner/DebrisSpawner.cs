@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class DebrisSpawner : Spawner<SpawnedObjectInfo<EDebrisType>, EDebrisType>
 {
-    [Header("∆¯πﬂ »˚")]
+    [Header("Ìè≠Î∞ú Ìûò")]
     [SerializeField]
-    private float _minExplosionForce = 3f;
+    private float _minExplosionForce = 500f;
     [SerializeField]
-    private float _maxExplosionForce = 10f;
+    private float _maxExplosionForce = 1000f;
 
-    // Test øÎ
+    // Test Ïö©
     public SphereCollider PlayerAreaCollider;
     private float _playerAreaRadius;
 
@@ -19,7 +19,7 @@ public class DebrisSpawner : Spawner<SpawnedObjectInfo<EDebrisType>, EDebrisType
 
     protected override void Spawn()
     {
-        GameObject debrisObject = DebrisPoolManager.Instance.GetObject(PickRandomObject(), SetRandomSpawnPosition());
+        GameObject debrisObject = DebrisPoolManager.Instance.GetObjectByRandom(PickRandomObject(), SetRandomSpawnPosition());
         if (debrisObject == null)
         {
             return;
@@ -32,7 +32,7 @@ public class DebrisSpawner : Spawner<SpawnedObjectInfo<EDebrisType>, EDebrisType
         }
 
         debris.Initialize();
-
+        
         Vector3 launchDirection = Random.insideUnitSphere;
         launchDirection.y = Mathf.Abs(launchDirection.y);
         debris.Launch(launchDirection, Random.Range(_minExplosionForce, _maxExplosionForce));
