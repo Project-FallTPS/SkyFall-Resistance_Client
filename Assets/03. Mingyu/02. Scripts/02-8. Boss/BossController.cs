@@ -34,9 +34,13 @@ public class BossController : MonoBehaviour, IDamageable
 
     public List<Collider> WeaknessPoints => _weaknessPoints;
 
+
+    [Header("# UI Event")]
     public Action<float> OnHit;
-    
-    
+
+    // 추가한 내용
+    public static Action<float, float, int> OnBossHealthChange;
+
     private void Awake()
     {
         Init();
@@ -54,6 +58,9 @@ public class BossController : MonoBehaviour, IDamageable
             Debug.Log("Boss Damaged");
         }
         OnHit?.Invoke(damage);
+
+        // 추가한 부분 <Health Invoke>
+        OnBossHealthChange?.Invoke(_bossData.CurrentHealth, _bossData.MaxHealth, _bossData.CurrentPhase);
     }
 
     private void Init()
