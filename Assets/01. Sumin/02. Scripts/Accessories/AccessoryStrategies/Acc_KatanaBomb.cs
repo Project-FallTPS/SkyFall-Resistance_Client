@@ -52,9 +52,9 @@ public class Acc_KatanaBomb : AccessoryBase, IAccessory
     public void OnEquip()
     {
         Debug.LogWarning("1" + gameObject.name);
-
+        gameObject.name = "OriginBomb";
         _fianlAdditionalDamage = _additionalDamage * AccessoryManager.Instance.GetAccessory(Type).Count;
-        Debug.Log($"{AccessoryManager.Instance.GetAccessory(Type).Count}, {_fianlAdditionalDamage}");
+        Debug.Log($"{gameObject.name}, {AccessoryManager.Instance.GetAccessory(Type).Count}, {_fianlAdditionalDamage}");
     }
 
     public void OnHit(IDamageable target)

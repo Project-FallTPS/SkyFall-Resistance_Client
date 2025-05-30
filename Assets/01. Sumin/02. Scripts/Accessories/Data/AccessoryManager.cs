@@ -25,6 +25,7 @@ public class AccessoryManager : Singleton<AccessoryManager>
             EquippedAccessories.Add(type, acc);
 
             obj.OnEquip();
+            Debug.Log($"새거 {acc}");
         }
         else
         {
@@ -34,6 +35,7 @@ public class AccessoryManager : Singleton<AccessoryManager>
             // 같은 오브젝트면 반납하지 않음
             if (acc.Object != obj)
             {
+                Debug.Log($"원래거 {acc}");
                 MonoBehaviour mono = obj as MonoBehaviour;
                 if (mono != null)
                 {
