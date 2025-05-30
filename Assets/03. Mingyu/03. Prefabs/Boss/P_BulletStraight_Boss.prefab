@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1654000175361673184}
   - component: {fileID: 5524606812843468385}
   - component: {fileID: 4800837089614650704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_BulletStraight_Boss
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

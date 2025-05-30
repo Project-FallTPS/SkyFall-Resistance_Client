@@ -7,15 +7,17 @@ public class EnemyAttackState : IEnemyState
     private EnemyController _enemyController;
     private EnemyData _enemyData;
     private IAttackStrategy _attackStrategy;
-    private float _nextAttackableTime;
+    private ITransitionStrategy _transitionStrategy;
 
-    public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy)
+    public EnemyAttackState(EnemyController enemyController, IAttackStrategy attackStrategy,
+        ITransitionStrategy transitionStrategy)
     {
         _enemyController = enemyController;
         _enemyData = enemyController.EnemyData;
         _attackStrategy = attackStrategy;
+        _transitionStrategy = transitionStrategy;
     }
-
+    
     public void Enter()
     {
         _enemyController.StartCoroutineInEnemyState(AttackCoroutine());
@@ -28,25 +30,26 @@ public class EnemyAttackState : IEnemyState
 
     public void Exit()
     {
-        _enemyController.StopAllCoroutines();
+        _enemyController.StopCoroutine(AttackCoroutine());
     }
     
     private IEnumerator AttackCoroutine()
     {
-        while (CanAttack())
+        while (true)
         {
-            yield return new WaitUntil(() => _nextAttackableTime <= Time.time);
+            yield return new WaitUntil(() => _enemyController.EnemyData.NextAttackableTime <= Time.time);
             _enemyController.EnemyAnimator.SetTrigger(nameof(EEnemyAnimationTransitionParam.attack));
             _attackStrategy.Attack(_enemyController);
-            _nextAttackableTime = Time.time + _enemyData.AttackDelay;
+            _enemyController.EnemyData.NextAttackableTime 
+                = Time.time + _enemyController.EnemyData.AttackDelay;
+
+            if (_transitionStrategy.CanChangeToTraceState(_enemyController))
+            {
+                break;
+            }
+            yield return null;
         }
         _enemyController.EnemyStateContext.ChangeState(_enemyController.EnemyStateDict[EEnemyState.Trace]);
-    }
-
-    private bool CanAttack()
-    {
-        return Vector3.Distance(_enemyController.transform.position, _enemyController.Player.transform.position)
-               <= _enemyData.AttackableRange;
     }
     
     private void LookAtPlayer()

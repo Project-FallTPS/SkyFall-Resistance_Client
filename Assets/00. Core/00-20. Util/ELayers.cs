@@ -11,4 +11,6 @@ AimCube = 6,
 Bullet = 7,
 Obstacle = 8,
 Boss = 9,
+Ground = 10,
+Enemy = 11,
 }

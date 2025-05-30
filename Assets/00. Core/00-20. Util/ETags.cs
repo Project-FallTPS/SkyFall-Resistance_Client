@@ -13,4 +13,5 @@ Enemy,
 Accessory,
 Boss,
 BossWeakness,
+Bullet,
 }

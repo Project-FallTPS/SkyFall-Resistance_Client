@@ -30,7 +30,18 @@ public class EnemyDieState : IEnemyState
         _enemyController.EnemyCollider.enabled = true;
         _enemyController.StopAllCoroutines();
     }
-
+    
+    private IEnumerator DieCoroutine()
+    {
+        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), true);
+        _enemyController.EnemyCollider.enabled = false;
+        TargetManager.Instance.RemoveEnemyFromHashSet(_enemyController.gameObject);
+        ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
+        yield return new WaitForSeconds(1f);
+        TryDropAccessoryBox();
+        ReturnToPool();
+    }
+    
     private void TryDropAccessoryBox()
     {
         int rand = Random.Range(0, 100);
@@ -42,16 +53,5 @@ public class EnemyDieState : IEnemyState
     private void ReturnToPool()
     {
         EnemyPoolManager.Instance.ReturnObject(_enemyController.gameObject, _enemyData.EnemyType);
-    }
-
-    private IEnumerator DieCoroutine()
-    {
-        _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), true);
-        _enemyController.EnemyCollider.enabled = false;
-        TargetManager.Instance.RemoveEnemyFromHashSet(_enemyController.gameObject);
-        ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
-        yield return new WaitForSeconds(1f);
-        TryDropAccessoryBox();
-        ReturnToPool();
     }
 } 
