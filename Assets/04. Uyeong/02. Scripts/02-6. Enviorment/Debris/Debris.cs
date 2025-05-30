@@ -78,7 +78,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     public void Launch(Vector3 direction, float magnitude)
     {
         _rigidbody.linearVelocity = Vector3.zero;
-        _rigidbody.angularVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.one;
         _rigidbody.AddForce(direction * magnitude, ForceMode.Impulse);
     }
 

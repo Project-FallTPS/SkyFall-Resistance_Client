@@ -25,19 +25,22 @@ public class BossController : MonoBehaviour, IDamageable
     private Transform _playerTransform;
     public Transform PlayerTransform => _playerTransform;
     
-    [SerializeField] 
-    private Transform _shootPositionTransform;
-
-    public Transform ShootPositionTransform { get => _shootPositionTransform; }
+    [SerializeField]
+    private List<Transform> _bulletShootPositions;
+    public List<Transform> BulletShootPositions { get => _bulletShootPositions; }
     
     [Header("Weakness Points")]
     private List<Collider> _weaknessPoints = new List<Collider>();
 
     public List<Collider> WeaknessPoints => _weaknessPoints;
 
+
+    [Header("# UI Event")]
     public Action<float> OnHit;
-    
-    
+
+    // 추가한 내용
+    public static Action<float, float, int> OnBossHealthChange;
+
     private void Awake()
     {
         Init();
@@ -55,6 +58,9 @@ public class BossController : MonoBehaviour, IDamageable
             Debug.Log("Boss Damaged");
         }
         OnHit?.Invoke(damage);
+
+        // 추가한 부분 <Health Invoke>
+        OnBossHealthChange?.Invoke(_bossData.CurrentHealth, _bossData.MaxHealth, _bossData.CurrentPhase);
     }
 
     private void Init()

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 111990488360090284}
   - component: {fileID: 6277376462674975809}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: P_BossLaser
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

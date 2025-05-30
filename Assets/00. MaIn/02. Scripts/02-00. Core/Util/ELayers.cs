@@ -13,4 +13,5 @@ Obstacle = 8,
 Boss = 9,
 Ground = 10,
 Enemy = 11,
+EnemyBullet = 12,
 }

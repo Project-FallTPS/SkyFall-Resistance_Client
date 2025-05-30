@@ -15,5 +15,5 @@ Boss,
 BossWeakness,
 Bullet,
 Manager,
-Obstacle,
+EnemyBullet,
 }
