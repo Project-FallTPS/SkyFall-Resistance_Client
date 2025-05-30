@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8607959425754249620}
   - component: {fileID: 5137655749476993}
   m_Layer: 0
-  m_Name: DonutClouds
+  m_Name: P_Cloud_Donut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
