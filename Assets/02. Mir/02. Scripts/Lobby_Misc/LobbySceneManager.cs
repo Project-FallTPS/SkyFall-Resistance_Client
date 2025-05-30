@@ -41,8 +41,7 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
             }
             else
             {
-                UI_Popup ui = OpenUIStack.Pop();
-                ui.Close();
+                CloseUI();
             }
         }
     }
@@ -82,5 +81,18 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
     {
         ui.Open();
         OpenUIStack.Push(ui);
+    }
+
+    public void CloseUI()
+    {
+        UI_Popup ui = OpenUIStack.Pop();
+        ui.Close();
+    }
+
+    public void OnClickedGameStart()
+    {
+        Debug.Log("Scene Load");
+
+        // SceneTransitionManager.Instance.LoadScene("FallScene");
     }
 }
