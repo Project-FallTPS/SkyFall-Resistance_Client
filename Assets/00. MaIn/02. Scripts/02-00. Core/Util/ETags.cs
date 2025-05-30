@@ -14,4 +14,5 @@ Accessory,
 Boss,
 BossWeakness,
 Bullet,
+Manager,
 }
