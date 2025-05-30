@@ -9,7 +9,7 @@ public class BossEntryCutSceneLogic : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SceneTransitionManager.Instance.LoadSceneAsync(
-            ESceneNames.BossScene,
+            nameof(ESceneNames.BossScene),
             () => isCutSceneFinished, // PlayCutscene() 코루틴 종료후 true로 바꿔야 씬 전환 진행
             () => Debug.Log("보스씬 로딩 중..."),
             () => Debug.Log("보스씬 로딩 완료, 컷씬이 끝나기를 기다리는 중")
