@@ -33,3 +33,12 @@ MonoBehaviour:
     Bonuses:
     - StatType: 5
       Value: 1
+    - StatType: 0
+      Value: 1
+    - StatType: 13
+      Value: 1
+    - StatType: 14
+      Value: 1
+  - Type: 4
+    Icon: {fileID: 0}
+    Bonuses: []

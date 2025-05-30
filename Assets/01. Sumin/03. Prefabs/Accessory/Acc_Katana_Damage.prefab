@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6504552271080319797}
   m_Layer: 0
   m_Name: Acc_Katana_Damage
-  m_TagString: Accessory
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

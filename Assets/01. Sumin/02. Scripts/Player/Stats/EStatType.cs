@@ -15,5 +15,7 @@ public enum EStatType
     JumpPower,
     GroundMoveSpeed,
     GroundSprintSpeed,
+    BatteryDamage,
+    BombDamage,
     Count
 }

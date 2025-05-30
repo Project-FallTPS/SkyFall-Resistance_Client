@@ -35,6 +35,10 @@ public class AccessoryBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.name == "AimCube")
+        {
+            return;
+        }
         if (other.CompareTag(nameof(ETags.Player)) && other.TryGetComponent<IItemReceiver>(out var receiver))
         {
             EAccessoryType finalItem = EAccessoryType.Count;
@@ -44,13 +48,17 @@ public class AccessoryBox : MonoBehaviour
                 if (item == _type)
                 {
                     finalItem = item;
-                    receiver.ReceiveAccessory(_type, AccessoryPoolManager.Instance.GetObject(finalItem));
+                    if(AccessoryPoolManager.Instance.GetObject(finalItem).TryGetComponent<IAccessory>(out var acc))
+                    {
+                        receiver.ReceiveAccessory(_type, acc);
+                    }
                     break;
                 }
             }
 
             // TODO : 풀 반환
-            BoxPoolManager.Instance.ReturnObject(gameObject, EBoxType.AccessoryBox);
+            gameObject.SetActive(false);
+            //BoxPoolManager.Instance.ReturnObject(gameObject, EBoxType.AccessoryBox);
         }
     }
 }

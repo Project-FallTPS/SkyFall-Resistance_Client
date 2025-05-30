@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Header(" Movement Settings")]
     public float RotateSpeed = 10f;
     public float CurrentSpeed { get; set; }
-    public Vector3 MoveDirection { get; private set; }
+    public Vector3 MoveDirection { get; set; }
     public bool IsSprint { get; set; }
 
     [Header("# Jump")]
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("# Jetpack")]
     [SerializeField] private List<Jetpack> Jetpacks;
+    public bool HasOverloadJetpack { get; private set; }
 
     private void Awake()
     {
@@ -54,12 +55,13 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         CurrentSpeed = PlayerStatManager.GetStat(EStatType.MoveSpeed);
+        HasOverloadJetpack = PerkManager.Instance.EquippedPerks.ContainsKey(EPerkType.OverloadJetPack);
     }
 
     private void Update()
     {
         CurrentState?.Update();
-        if (!IsSprint)
+        if (!IsSprint || HasOverloadJetpack)
         {
             PlayerStatManager.RegenStamina();
         }
@@ -98,10 +100,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetSprint(bool isSprint)
     {
+        if (HasOverloadJetpack)
+        {
+            isSprint = true;
+        }
+
         CurrentState?.SetSprint(isSprint);
+
         foreach (var smoke in Jetpacks)
         {
-            if(isSprint)
+            if (isSprint)
             {
                 smoke.BigSmoke.Play();
             }

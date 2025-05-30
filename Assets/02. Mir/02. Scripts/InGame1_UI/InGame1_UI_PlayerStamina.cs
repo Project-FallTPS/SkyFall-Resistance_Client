@@ -4,12 +4,15 @@ using UnityEngine.UI;
 
 public class InGame1_UI_PlayerStamina : MonoBehaviour
 {
-    //test
-    [SerializeField] private Slider _staminaSlider;
+    [SerializeField] 
+    private Slider _staminaSlider;
 
     private void Awake()
     {
-        if (_staminaSlider == null) Debug.LogError("Stamina Slider is Not Assigned");
+        if (_staminaSlider == null)
+        {
+            Debug.LogError("Stamina Slider is Not Assigned");
+        }
     }
 
     private void OnEnable()

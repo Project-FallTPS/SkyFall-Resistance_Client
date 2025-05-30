@@ -6,7 +6,6 @@ public class AccessoryData
 {
     public EAccessoryType Type;
     public GameObject Prefab;
-    public int Count = 0;
     public List<WeaponStatEntry> Bonuses;
     private Dictionary<EStatType, float> _dataDict;
 
@@ -20,7 +19,7 @@ public class AccessoryData
         }
     }
 
-    public float GetData(EStatType type)
+    public float GetStatBonusData(EStatType type)
     {
         if(_dataDict == null)
         {

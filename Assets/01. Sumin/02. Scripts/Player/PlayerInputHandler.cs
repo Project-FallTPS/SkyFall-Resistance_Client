@@ -32,15 +32,25 @@ public class PlayerInputHandler : MonoBehaviour
     private void GetInput()
     {
         _isKeyDown = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            _playerAttackHandler.Anim.SetBool("anim_Player_IsShooting", true);
+        }
         if(Input.GetMouseButton(0))
         {
             _playerAttackHandler.PerformAttack();
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        else if(Input.GetMouseButtonUp(0))
+        {
+            _playerAttackHandler.Anim.SetBool("anim_Player_IsShooting", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             _playerMovement.SetSprint(true);
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _playerMovement.SetSprint(false);
             Debug.Log("스프린트 해제");
