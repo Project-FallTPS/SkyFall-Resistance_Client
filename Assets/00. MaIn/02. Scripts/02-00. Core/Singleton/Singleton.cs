@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField]
-    private bool _isDontDestroy = false;
+    [SerializeField] 
+    private bool _isDontDestroy;
 
-    private static bool _isQuitting = false;
+    private static bool _isQuitting;
     private static T _instance;
 
     public static T Instance
@@ -67,7 +65,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         T[] instances = FindObjectsByType<T>(FindObjectsSortMode.None);
         if (instances.Length > 1)
         {
-            Debug.LogError($"Áßº¹µÈ Singleton {typeof(T)} ÀÎ½ºÅÏ½º°¡ »ý¼ºµÇ¾î, Áßº¹ ÀÎ½ºÅÏ½ºµéÀ» Á¦°ÅÇÕ´Ï´Ù.");
+            Debug.LogError($"ï¿½ßºï¿½ï¿½ï¿½ Singleton {typeof(T)} ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½, ï¿½ßºï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             for (int i = 1; i < instances.Length; i++)
             {
                 Destroy(instances[i].gameObject);
@@ -88,7 +86,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return;
         }
 
-        GameObject rootManagerGO = GameObject.FindGameObjectWithTag("Manager");
+        GameObject rootManagerGO = GameObject.FindGameObjectWithTag(nameof(ETags.Manager));
         if (!ReferenceEquals(rootManagerGO, null))
         {
             transform.SetParent(rootManagerGO.transform);

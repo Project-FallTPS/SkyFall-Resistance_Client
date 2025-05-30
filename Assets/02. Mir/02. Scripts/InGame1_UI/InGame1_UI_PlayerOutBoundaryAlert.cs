@@ -20,20 +20,24 @@ public class InGame1_UI_PlayerOutBoundaryAlert : MonoBehaviour
         if (_playerArea != null)
             _playerArea.OnOutBoundaryTimerUpdate += UpdateOutBoundaryTimerUI;
     }
+    
+    private void Start()
+    {
+        if (_alertUI != null)
+        {
+            _alertUI.SetActive(false);
+        }
+
+        if (_timerText != null)
+        {
+            _timerText.text = "";
+        }
+    }
 
     private void OnDisable()
     {
         if (_playerArea != null)
             _playerArea.OnOutBoundaryTimerUpdate -= UpdateOutBoundaryTimerUI;
-    }
-
-    private void Start()
-    {
-        if (_alertUI == null) Debug.LogError("AlertUI Canvas is Not Assigned");
-        else _alertUI.SetActive(false);
-
-        if (_timerText != null)
-            _timerText.text = "";
     }
 
     public void OutBoundaryAlertOn()
@@ -55,7 +59,7 @@ public class InGame1_UI_PlayerOutBoundaryAlert : MonoBehaviour
 
     public void UpdateOutBoundaryTimerUI(float currentTime)
     {
-        float remaining = Mathf.Max(0f, _playerArea.PlayerZoneRadius - currentTime); // ¶Ç´Â KillTime - currentTime
+        float remaining = Mathf.Max(0f, _playerArea.PlayerZoneRadius - currentTime); // ï¿½Ç´ï¿½ KillTime - currentTime
         if (_timerText != null)
             _timerText.text = $"{remaining:F1}s";
     }
