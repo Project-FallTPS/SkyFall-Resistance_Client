@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
+public class Acc_RangeBomb : AccessoryBase, IAccessory
 {
     private int _attackCount = 0;
     private PlayerAttackHandler _playerAttackHandler = null;
@@ -13,7 +13,7 @@ public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
             if (_playerAttackHandler == null) return;
         }
 
-        if(_playerAttackHandler.CurrentStrategy is not RangeStrategy)
+        if (_playerAttackHandler.CurrentStrategy is not RangeStrategy)
         {
             return;
         }
@@ -35,12 +35,16 @@ public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
             Vector3 dirWithSpread = spreadRot * Vector3.forward;
 
             GameObject bullet = BulletPoolManager.Instance.GetObject(
-                EBulletType.PlayerBullet,
+                EBulletType.PlayerExplodeBullet,
                 transform.position,
                 Quaternion.LookRotation(dirWithSpread),
                 (obj) =>
                 {
-                    obj.GetComponent<IBullet>().SetStats(AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.Damage), dirWithSpread);
+                    obj.GetComponent<IBullet>().SetStats (
+                        AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.Damage),
+                        dirWithSpread,
+                        AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.ExplodeRange)
+                    );
                 });
         }
     }

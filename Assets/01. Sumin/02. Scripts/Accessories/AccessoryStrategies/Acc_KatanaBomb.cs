@@ -16,20 +16,6 @@ public class Acc_KatanaBomb : AccessoryBase, IAccessory
         _explodeRange = AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.ExplodeRange);
     }
 
-    protected void OnTriggerEnter(Collider other)
-    {
-        if (IsEqiupped)
-        {
-            return;
-        }
-
-        if (other.CompareTag("Player") && other.TryGetComponent<IItemReceiver>(out var receiver))
-        {
-            SetEquipped(true);
-            receiver.ReceiveAccessory(Type, this);
-        }
-    }
-
     public void OnAttack()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, _explodeRange, LayerMask.GetMask("Enemy"));

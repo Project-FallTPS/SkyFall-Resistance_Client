@@ -55,6 +55,10 @@ MonoBehaviour:
     InitCount: 5
     Prefab: {fileID: 487574896357323414, guid: 3c5ef38e8bfe5f34d8fe027c2e491afb, type: 3}
     Container: {fileID: 1133154337304082887}
+  - Type: 2
+    InitCount: 5
+    Prefab: {fileID: 487574896357323414, guid: 0c4afba8c577edb4fb1714efa46523ab, type: 3}
+    Container: {fileID: 1133154337304082887}
 --- !u!114 &2336547205302752867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +88,10 @@ MonoBehaviour:
   - Type: 4
     InitCount: 1
     Prefab: {fileID: 5161585459019388959, guid: 81a47d1fcbf09b54ab280f87b4a4c6e5, type: 3}
+    Container: {fileID: 2547457532785253196}
+  - Type: 3
+    InitCount: 1
+    Prefab: {fileID: 6569460941600861601, guid: 542234caeafbdfb42bf97ce7fe1629d3, type: 3}
     Container: {fileID: 2547457532785253196}
 --- !u!114 &4067441626946308721
 MonoBehaviour:
@@ -118,6 +126,10 @@ MonoBehaviour:
   - Type: 4
     InitCount: 1
     Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 8
+    InitCount: 1
+    Prefab: {fileID: 656246334433332586, guid: 48b2589f6837b6d4c8609b3c1abdae7b, type: 3}
     Container: {fileID: 5206507339312593560}
 --- !u!1 &1217687436568008110
 GameObject:
