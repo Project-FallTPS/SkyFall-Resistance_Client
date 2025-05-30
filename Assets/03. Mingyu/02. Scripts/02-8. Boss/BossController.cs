@@ -25,10 +25,9 @@ public class BossController : MonoBehaviour, IDamageable
     private Transform _playerTransform;
     public Transform PlayerTransform => _playerTransform;
     
-    [SerializeField] 
-    private Transform _shootPositionTransform;
-
-    public Transform ShootPositionTransform { get => _shootPositionTransform; }
+    [SerializeField]
+    private List<Transform> _bulletShootPositions;
+    public List<Transform> BulletShootPositions { get => _bulletShootPositions; }
     
     [Header("Weakness Points")]
     private List<Collider> _weaknessPoints = new List<Collider>();
