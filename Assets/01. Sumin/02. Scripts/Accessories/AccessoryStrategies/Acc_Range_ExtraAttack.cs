@@ -30,7 +30,6 @@ public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
             // 중심에서 좌우로 퍼지게 하기 위해 -spread/2 ~ +spread/2
             float angleOffset = Mathf.Lerp(-spreadAngle / 2f, spreadAngle / 2f, count == 1 ? 0.5f : (float)i / (count - 1));
 
-            // 방향 회전 (2D라면 Vector3.forward 대신 Vector3.up)
             Quaternion spreadRot = Quaternion.AngleAxis(angleOffset, Vector3.forward) * rot;
 
             Vector3 dirWithSpread = spreadRot * Vector3.forward;
@@ -44,7 +43,6 @@ public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
                     obj.GetComponent<IBullet>().SetStats(AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.Damage), dirWithSpread);
                 });
         }
-
     }
 
     private Vector3 SetDirection()

@@ -35,11 +35,17 @@ public class PlayerAirborneState : IPlayerState
 
         if (_moveDirection.sqrMagnitude > 0.01f)
         {
-            if (!_player.IsSprint || !_player.PlayerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate))
+            if (!_player.IsSprint)
             {
-                _player.SetSprint(false);
+                _player.SetSprint(false); // 보통 이동
             }
-
+            else
+            {
+                if (!_player.HasOverloadJetpack && !_player.PlayerStatManager.TryUseStamina(EStatType.SprintStaminaUseRate))
+                {
+                    _player.SetSprint(false);
+                }
+            }
             Vector3 moveOffset = _moveDirection * _player.CurrentSpeed * Time.fixedDeltaTime;
             _player.Rigid.MovePosition(_player.Rigid.position + moveOffset);
         }

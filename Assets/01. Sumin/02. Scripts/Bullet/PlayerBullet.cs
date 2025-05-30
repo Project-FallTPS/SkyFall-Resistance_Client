@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour, IBullet
@@ -10,6 +11,8 @@ public class PlayerBullet : MonoBehaviour, IBullet
     private void OnEnable()
     {
         _isDirectionSet = false;
+
+        StartCoroutine(CoReturn());
     }
 
     private void Update()
@@ -73,5 +76,12 @@ public class PlayerBullet : MonoBehaviour, IBullet
     public void SetTarget(GameObject target)
     {
         //나중에 타겟팅 생기면
+    }
+
+    private IEnumerator CoReturn()
+    {
+        yield return new WaitForSeconds(5f);
+
+        BulletPoolManager.Instance.ReturnObject(gameObject, EBulletType.PlayerBullet);
     }
 }
