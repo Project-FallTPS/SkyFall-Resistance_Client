@@ -88,30 +88,35 @@ public partial class BossShootAction : Action, IBossAttack
         Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
         
         Debug.DrawLine(bossPosition, playerPosition, Color.red, 2f);
-        
-        DamageablePoolManager.Instance.GetObject(
-            EDamageableType.BossBulletStraight,
-            _bossController.ShootPositionTransform.position,
-            Quaternion.LookRotation(directionToPlayer)
-        );
 
+        foreach (Transform shootTransform in _bossController.BulletShootPositions)
+        {
+            DamageablePoolManager.Instance.GetObject(
+                EDamageableType.BossBulletStraight,
+                shootTransform.position,
+                Quaternion.LookRotation(directionToPlayer)
+            );
+        }
     }
     
     private void ShootHemiteCurveBullet(RaycastHit obstacleHit)
     {
-        Vector3 shootStart = _bossController.ShootPositionTransform.position;
-        Vector3 shootEnd = _playerTransform.position;
-        Vector3 shootMid = GetRandomMidPoint(obstacleHit);
-        
-        GameObject bullet = DamageablePoolManager.Instance.GetObject(
-            EDamageableType.BossBulletCurve,
-            shootStart,
-            Quaternion.identity
-        );
-
-        if (bullet.TryGetComponent(out CurveBullet hermiteBullet))
+        foreach (Transform shootTransform in _bossController.BulletShootPositions)
         {
-            hermiteBullet.InitializePoints(shootStart, shootMid, shootEnd);
+            Vector3 shootStart = shootTransform.position;
+            Vector3 shootEnd = _playerTransform.position;
+            Vector3 shootMid = GetRandomMidPoint(obstacleHit);
+        
+            GameObject bullet = DamageablePoolManager.Instance.GetObject(
+                EDamageableType.BossBulletCurve,
+                shootStart,
+                Quaternion.identity
+            );
+
+            if (bullet.TryGetComponent(out CurveBullet hermiteBullet))
+            {
+                hermiteBullet.InitializePoints(shootStart, shootMid, shootEnd);
+            }
         }
     }
     

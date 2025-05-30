@@ -30,7 +30,6 @@ public partial class BossRushAction : Action, IBossAttack
             _playerTransform = _bossController.PlayerTransform;
             _originalSpeed = _bossController.BossData.MoveSpeed;
         }
-
         if (CanAttack())
         {
             Attack();
@@ -95,7 +94,7 @@ public partial class BossRushAction : Action, IBossAttack
     {
         // 4. 매우 빠른 속도로 플레이어를 향해 돌진
         _bossController.NavMeshAgent.speed = _originalSpeed * _bossData.RushSpeedMultiplier;
-        _rushDestination = _playerTransform.position;
+        _rushDestination = new Vector3(_playerTransform.position.x, 0f, _playerTransform.position.z);
         _bossController.NavMeshAgent.SetDestination(_rushDestination);
     }
 
