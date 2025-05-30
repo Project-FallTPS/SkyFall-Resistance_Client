@@ -16,6 +16,11 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
         SceneManager.LoadScene(sceneName);
     }
 
+    public void LoadScene(ESceneNames sceneName)
+    {
+        SceneManager.LoadScene(nameof(sceneName));
+    }
+
     public IEnumerator LoadSceneAsync(int sceneIndex, Action onLoading = null, Action onComplete = null)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -40,6 +45,25 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
     public IEnumerator LoadSceneAsync(string sceneName, Action onLoading = null, Action onComplete = null)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        if (asyncOperation != null)
+        {
+            asyncOperation.allowSceneActivation = false;
+            while (!asyncOperation.isDone)
+            {
+                onLoading?.Invoke();
+                if (0.9f <= asyncOperation.progress)
+                {
+                    onComplete?.Invoke();
+                    asyncOperation.allowSceneActivation = true;
+                }
+                yield return null;
+            }
+        }
+    }
+
+    public IEnumerator LoadSceneAsync(ESceneNames sceneName, Action onLoading = null, Action onComplete = null)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(nameof(sceneName));
         if (asyncOperation != null)
         {
             asyncOperation.allowSceneActivation = false;
