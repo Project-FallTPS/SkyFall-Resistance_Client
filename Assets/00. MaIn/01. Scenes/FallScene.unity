@@ -1845,6 +1845,82 @@ MonoBehaviour:
     InitCount: 10
     Prefab: {fileID: 4663079095948233050, guid: be0ad8f8a9e324d4eb36ef5c1bfa4798, type: 3}
     Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 1768429335395192149, guid: c08be681b38b76d48b0cb136e6a3196e, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 7836919400023202981, guid: b4646a4da5187d040a863e8b0bdeac07, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 4787676138182364167, guid: df08a44eb1d887245a950f2a3923a61b, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 6041960330867092291, guid: d453a5b8f6dd9154ab23b3b735274025, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 5148824015362562484, guid: ea4efa4520bc48b44837b2728f496cf1, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 3420266878779534656, guid: 3985418e6950a6c408cd19f770f6c999, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 979786942527725020, guid: b2e81e54d2355a94fa9e213ac73e88af, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 995499298168902743, guid: 053ae08542bf312499ecb23cca9ced92, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 8541221217822443659, guid: 76e88a4b7b298e548a63ed819fdd49a3, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 2
+    InitCount: 10
+    Prefab: {fileID: 4095814785860643335, guid: 6eec2a7a386fe7c47ae239b178b01034, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 6993138693700745975, guid: e545f0b2ea5a57743a4b60cf295a7579, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 6122756080714069595, guid: 599e0f4bf7875c442894b6f8c2d51441, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 2560062238698625991, guid: e35b86419854bdd46a2a0efc35f3f487, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 8031971784172862861, guid: cadf613284271ac46bd75206459fbad1, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 8937566888094769985, guid: 3b1511b0e1b981946b6be232d7bc1201, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 5600804895615036550, guid: 8fc68181f050c3c43a3f86371b3def41, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 3907247454676143321, guid: 0f9e113d8c989e54c8b809e64656415f, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 4517815292847021178, guid: 61bf435782180014492fb49ff438ad2c, type: 3}
+    Container: {fileID: 1725932442}
+  - Type: 1
+    InitCount: 10
+    Prefab: {fileID: 7520866864245979018, guid: d3f2c331e90a44946be54c3b4fe3da4e, type: 3}
+    Container: {fileID: 1725932442}
 --- !u!4 &1382128949 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8839757181009395329, guid: d0ef22fa8a0e93648ac66667368d8e68, type: 3}
@@ -2120,7 +2196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1573208508
 Transform:
   m_ObjectHideFlags: 0
@@ -2157,7 +2233,7 @@ MonoBehaviour:
   _spawnRadius: 10
   _minExplosionForce: 5
   _maxExplosionForce: 15
-  PlayerAreaCollider: {fileID: 0}
+  PlayerAreaCollider: {fileID: 244308123}
 --- !u!1001 &1588950014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2405,13 +2481,13 @@ MonoBehaviour:
   _waveDatas:
   - EnemyStatMultiplier: 1
     EnemySpawnerInterval: 5
-    WaveDuration: 3
+    WaveDuration: 10
   - EnemyStatMultiplier: 1.2
     EnemySpawnerInterval: 4.5
-    WaveDuration: 3
+    WaveDuration: 10
   - EnemyStatMultiplier: 1.4
     EnemySpawnerInterval: 4
-    WaveDuration: 3
+    WaveDuration: 10
   _enemySpawnerHandler: {fileID: 1887002311}
 --- !u!4 &1868748514 stripped
 Transform:
@@ -2480,7 +2556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1887002311
 MonoBehaviour:
   m_ObjectHideFlags: 0
