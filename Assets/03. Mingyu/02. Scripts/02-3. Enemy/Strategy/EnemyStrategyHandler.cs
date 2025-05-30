@@ -8,18 +8,32 @@ public class EnemyStrategyHandler : Singleton<EnemyStrategyHandler>
     public HashSet<ITraceStrategy> EnemyTraceStrategySet => _enemyTraceStrategySet;
 
     [Header("Attack Strategy")]
-    private Dictionary<EEnemyType, IAttackStrategy> _enemyAttackStrategyDict = new Dictionary<EEnemyType, IAttackStrategy>();
+    private Dictionary<EEnemyType, IAttackStrategy> _enemyAttackStrategyDict = 
+        new Dictionary<EEnemyType, IAttackStrategy>();
     public Dictionary<EEnemyType, IAttackStrategy> EnemyAttackStrategyDict => _enemyAttackStrategyDict;
+
+    [Header("Trace <-> Attack Transition Strategy")]
+    private Dictionary<EEnemyType, ITransitionStrategy> _enemyTransitionStrategyDict =
+        new Dictionary<EEnemyType, ITransitionStrategy>();
+    public Dictionary<EEnemyType, ITransitionStrategy> EnemyTransitionStrategyDict => _enemyTransitionStrategyDict;
 
     protected override void Awake()
     {
         base.Awake();
         _enemyTraceStrategySet.Add(new TraceNormal());
         _enemyTraceStrategySet.Add(new TraceBezier());
+        
         _enemyAttackStrategyDict.Add(EEnemyType.Shooting1, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Shooting2, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Shooting3, new AttackShooting());
         _enemyAttackStrategyDict.Add(EEnemyType.Bombing, new AttackBombing());
+        _enemyAttackStrategyDict.Add(EEnemyType.Supporting, new AttackSupporting());
+        
+        _enemyTransitionStrategyDict.Add(EEnemyType.Shooting1, new AttackShooting());
+        _enemyTransitionStrategyDict.Add(EEnemyType.Shooting2, new AttackShooting());
+        _enemyTransitionStrategyDict.Add(EEnemyType.Shooting3, new AttackShooting());
+        _enemyTransitionStrategyDict.Add(EEnemyType.Bombing, new AttackBombing());
+        _enemyTransitionStrategyDict.Add(EEnemyType.Supporting, new AttackSupporting());
     }
 
     public ITraceStrategy PickTraceStrategy()

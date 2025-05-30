@@ -9,6 +9,7 @@ TagManager:
   - Accessory
   - Boss
   - BossWeakness
+  - Bullet
   layers:
   - Default
   - TransparentFX

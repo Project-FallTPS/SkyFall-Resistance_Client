@@ -15,11 +15,14 @@ public class EnemyController : MonoBehaviour, IDamageable
     [Header("Components")]
     private CapsuleCollider _enemyCollider;
     public CapsuleCollider EnemyCollider => _enemyCollider;
+    
     private Rigidbody _rigidbody;
     public Rigidbody Rigidbody => _rigidbody;
 
     private Animator _enemyAnimator;
     public Animator EnemyAnimator => _enemyAnimator;
+
+    private GameObject _shieldGameObject;
 
     [Header("Data")]
     [SerializeField]
@@ -45,7 +48,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         _enemyCollider = GetComponent<CapsuleCollider>();
         _rigidbody = GetComponent<Rigidbody>();
         _enemyAnimator = GetComponent<Animator>();
-
+        _shieldGameObject
+            = GetComponentInChildren<ParticleSystem>().gameObject;
+        _shieldGameObject.SetActive(false);
         _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
         _player = GameObject.FindGameObjectWithTag(nameof(ETags.Player));
     }
@@ -55,14 +60,21 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (_enemyStateDict.Count != 0)
         {
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
-            _enemyData = _enemyDataSO.GetEnemyData(_enemyType);
             _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
+            _enemyData.Init();
+            _shieldGameObject.SetActive(false);
         }
     }
     private void Start()
     {
-        _enemyStateDict.Add(EEnemyState.Trace, new EnemyTraceState(this, EnemyStrategyHandler.Instance.PickTraceStrategy()));
-        _enemyStateDict.Add(EEnemyState.Attack, new EnemyAttackState(this, EnemyStrategyHandler.Instance.EnemyAttackStrategyDict[_enemyData.EnemyType]));
+        _enemyStateDict.Add(EEnemyState.Trace, new EnemyTraceState
+        (this, 
+            EnemyStrategyHandler.Instance.PickTraceStrategy(), 
+            EnemyStrategyHandler.Instance.EnemyTransitionStrategyDict[_enemyData.EnemyType]));
+        _enemyStateDict.Add(EEnemyState.Attack, new EnemyAttackState
+        (this, 
+            EnemyStrategyHandler.Instance.EnemyAttackStrategyDict[_enemyData.EnemyType],
+            EnemyStrategyHandler.Instance.EnemyTransitionStrategyDict[_enemyData.EnemyType]));
         _enemyStateDict.Add(EEnemyState.Damaged, new EnemyDamagedState(this));
         _enemyStateDict.Add(EEnemyState.Die, new EnemyDieState(this));
         _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
@@ -75,6 +87,11 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (_enemyData.IsShieldActive)
+        {
+            DeactivateShield();
+            return;
+        }
         _enemyData.CurrentHealth -= damage;
         if (_enemyData.CurrentHealth <= 0)
         {
@@ -87,6 +104,18 @@ public class EnemyController : MonoBehaviour, IDamageable
         Debug.Log($"{gameObject.name} 공격받음 : {damage}");
     }
 
+    public void ActivateShield()
+    {
+        _enemyData.IsShieldActive = true;
+        _shieldGameObject.SetActive(true);
+    }
+
+    public void DeactivateShield()
+    {
+        _enemyData.IsShieldActive = false;
+        _shieldGameObject.SetActive(false);
+    }
+    
     public void StartCoroutineInEnemyState(IEnumerator coroutine)
     {
         StartCoroutine(coroutine);

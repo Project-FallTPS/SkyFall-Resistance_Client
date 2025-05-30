@@ -16,23 +16,25 @@ MonoBehaviour:
   - EnemyType: 0
     DamageableType: 0
     MaxHealth: 10
-    _currentHealthPoint: 0
+    _currentHealthPoint: 10
     MoveSpeed: 10
     AttackableRange: 7
     AttackDamage: 1
     AttackDelay: 3
     ExplosionRadius: 0
     AccessoryBoxDropProbability: 100
+    ShieldBuffRadius: 0
   - EnemyType: 1
     DamageableType: 1
     MaxHealth: 10
-    _currentHealthPoint: 0
+    _currentHealthPoint: 10
     MoveSpeed: 10
     AttackableRange: 7
     AttackDamage: 1
     AttackDelay: 3
     ExplosionRadius: 0
     AccessoryBoxDropProbability: 100
+    ShieldBuffRadius: 0
   - EnemyType: 2
     DamageableType: 2
     MaxHealth: 10
@@ -43,6 +45,7 @@ MonoBehaviour:
     AttackDelay: 3
     ExplosionRadius: 0
     AccessoryBoxDropProbability: 100
+    ShieldBuffRadius: 0
   - EnemyType: 3
     DamageableType: 3
     MaxHealth: 10
@@ -53,3 +56,15 @@ MonoBehaviour:
     AttackDelay: 3
     ExplosionRadius: 5
     AccessoryBoxDropProbability: 50
+    ShieldBuffRadius: 0
+  - EnemyType: 4
+    DamageableType: 7
+    MaxHealth: 10
+    _currentHealthPoint: 10
+    MoveSpeed: 10
+    AttackableRange: 2
+    AttackDamage: 5
+    AttackDelay: 5
+    ExplosionRadius: 5
+    AccessoryBoxDropProbability: 50
+    ShieldBuffRadius: 10

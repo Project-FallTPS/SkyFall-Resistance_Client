@@ -10,13 +10,7 @@ public class EnemyStateContext
     {
         _enemyController = controller;
     }
-
-    public void ChangeState()
-    {
-        _currentState = new EnemyTraceState(_enemyController, new TraceNormal());
-        _currentState.Enter();
-    }
-
+    
     public void ChangeState(IEnemyState newState)
     {
         if (!ReferenceEquals(_currentState, null))

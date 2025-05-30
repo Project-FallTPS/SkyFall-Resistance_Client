@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7401018758542533454}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6770193475931484479}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRearToe_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7422496807398967312}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: sideB_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 921585094989616886}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFronToe_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9031986097563407907}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8959721633684124567}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7920468912776905454}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 251456013930037594}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4632199337847756782}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7620682485172389308}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4182490624838650447}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1094734926253166145}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942984206809732850}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7030063004148397771}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRearToe_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 1090606882587600644}
   - component: {fileID: -8042124825137620968}
   - component: {fileID: 5291158638261659495}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: P_Enemy_Bombing
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -480,6 +480,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 5042762554610791974}
   - {fileID: 5082192722684406534}
   - {fileID: 4390044412864835674}
   m_Father: {fileID: 0}
@@ -580,7 +581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282265336702825890}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +613,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1428066867503302611}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletSpawnRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3583411880652944506}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4390044412864835674}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rob01_arma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6151181477902474326}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFronToe_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8227123758884552654}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4773028463794668987}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5082192722684406534}
   - component: {fileID: 1587849627257418415}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rob1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5325544752627865414}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6233611066140470801}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: side_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,7 +987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7905289563206379449}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletSpawnLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1017,7 +1018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309457997202756438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: side_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1065015342821049359}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: sideB_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,7 +1080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8075287874817019394}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3318965261126359474}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legRear3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1143,7 +1144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7949416797489969826}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: legFron3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1175,7 +1176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2672855219070790321}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1198,3 +1199,77 @@ Transform:
   - {fileID: 3583411880652944506}
   m_Father: {fileID: 4390044412864835674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2130115201723657834
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3604243588130492893}
+    m_Modifications:
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424583148328831481, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+      propertyPath: m_Name
+      value: P_VFX_EnemyShield
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+--- !u!4 &5042762554610791974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6373945520302479436, guid: faca40e8452473046aaaae77cfeeb8ab, type: 3}
+  m_PrefabInstance: {fileID: 2130115201723657834}
+  m_PrefabAsset: {fileID: 0}
