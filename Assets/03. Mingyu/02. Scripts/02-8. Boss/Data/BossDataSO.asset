@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossDatas:
   - MaxHealth: 100
-    MoveSpeed: 5
+    MoveSpeed: 2
     AttackDamage: 10
     AttackCooltime: 5
     SafetyMargin: 5

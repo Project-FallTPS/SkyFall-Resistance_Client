@@ -30,6 +30,7 @@ public class BossData
             if ((_currentHealth / MaxHealth * 100f) <= PhaseChangeHealthPercentage[_currentPhase - 1])
             {
                 CurrentPhase++;
+                Debug.Log($"페이즈 증가! 현재 페이즈 : {_currentPhase}");
             }
         }
     }

@@ -9758,9 +9758,9 @@ GameObject:
   - component: {fileID: 5356239073171952971}
   - component: {fileID: 6115871117804727897}
   - component: {fileID: 3572452618867083296}
-  - component: {fileID: -4351050482032794557}
+  - component: {fileID: -5300462483382143359}
   m_Layer: 12
-  m_Name: P_BulletStraight_Boss
+  m_Name: P_BulletHermiteCurve_Boss
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9833,7 +9833,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0.13}
---- !u!114 &-4351050482032794557
+--- !u!114 &-5300462483382143359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9842,13 +9842,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5356239073171952968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933e3170b4ef9d649a6a028725bee7ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f3ec18a39d8b8a41809f19171666edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
   _lifeTime: 5
   _damage: 10
-  _damageableType: 4
+  _damageableType: 5
 --- !u!1 &5356239073193757852
 GameObject:
   m_ObjectHideFlags: 0

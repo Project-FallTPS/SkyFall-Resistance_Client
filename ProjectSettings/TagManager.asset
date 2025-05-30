@@ -11,6 +11,7 @@ TagManager:
   - BossWeakness
   - Bullet
   - Manager
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Boss
   - Ground
   - Enemy
-  - 
+  - EnemyBullet
   - 
   - 
   - 
