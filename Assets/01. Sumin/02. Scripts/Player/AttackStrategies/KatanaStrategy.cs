@@ -34,7 +34,7 @@ public class KatanaStrategy : IWeaponStrategy
         Transform weaponTransform = null;
         foreach(var weapon in _player.Weapons)
         {
-            if(weapon.name == WEAPON_NAME)
+            if(weapon.name == nameof(EWeaponType.Katana))
             {
                 weaponTransform = weapon.transform;
                 break;

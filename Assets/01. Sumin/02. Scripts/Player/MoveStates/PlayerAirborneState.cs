@@ -32,7 +32,7 @@ public class PlayerAirborneState : IPlayerState
         camRight.Normalize();
 
         _moveDirection = (camForward * v + camRight * h).normalized;
-
+        _player.MoveDirection = _moveDirection;
         if (_moveDirection.sqrMagnitude > 0.01f)
         {
             if (!_player.IsSprint)

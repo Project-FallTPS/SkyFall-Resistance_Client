@@ -40,7 +40,7 @@ public class PlayerGroundState : IPlayerState
         camRight.Normalize();
 
         _moveDirection = (camForward * rawV + camRight * rawH).normalized;
-
+        _player.MoveDirection = _moveDirection;
         if (_moveDirection.sqrMagnitude > 0.01f)
         {
             if (!_player.IsSprint)

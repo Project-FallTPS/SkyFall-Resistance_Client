@@ -580,7 +580,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4443284465460140154, guid: 506cd94992d676845beb5df6142d89f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1931240716}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3954836683713872576, guid: 506cd94992d676845beb5df6142d89f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 534718646}
   m_SourcePrefab: {fileID: 100100000, guid: 506cd94992d676845beb5df6142d89f5, type: 3}
 --- !u!4 &534718644 stripped
 Transform:
@@ -592,6 +595,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3954836683713872576, guid: 506cd94992d676845beb5df6142d89f5, type: 3}
   m_PrefabInstance: {fileID: 534718643}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &534718646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534718645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5c64a889a1fd24bbe77bf8149e58e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHeat: 100
+  HeatPerShot: 5
+  CooldownRate: 25
+  OverHeatTime: 5
 --- !u!1 &562273411
 GameObject:
   m_ObjectHideFlags: 0

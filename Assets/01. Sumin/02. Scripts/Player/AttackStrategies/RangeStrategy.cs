@@ -7,6 +7,7 @@ public class RangeStrategy : IWeaponStrategy
     private WeaponData _weaponData;
     private PlayerAttackHandler _player;
     private Transform _muzzle;
+    private RangeHeatController _overheat;
     private Dictionary<EAccessoryType, Transform> _accessorySockets = new Dictionary<EAccessoryType, Transform>();
 
     private float _timer = 0f;
@@ -16,6 +17,15 @@ public class RangeStrategy : IWeaponStrategy
         _weaponData = WeaponDataManager.Instance.GetWeaponData(EWeaponType.Range);
         _player = player;
         InitializeAccessorySockets();
+
+        foreach (var weapon in _player.Weapons)
+        {
+            if (weapon.name == WEAPON_NAME)
+            {
+                _overheat = weapon.GetComponent<RangeHeatController>();
+                break;
+            }
+        }
     }
 
     public void InitializeAccessorySockets()
@@ -56,7 +66,7 @@ public class RangeStrategy : IWeaponStrategy
 
     public void Attack(GameObject target)
     {
-        if (_timer >= GetStat(EStatType.CoolTime))
+        if (_timer >= GetStat(EStatType.CoolTime) && (_overheat == null || _overheat.TryConsumeHeat()))
         {
             Vector3 dir = SetDirection();
             Quaternion rot = Quaternion.LookRotation(dir);
@@ -66,12 +76,11 @@ public class RangeStrategy : IWeaponStrategy
                 _muzzle.position,
                 rot,
                 (obj) =>
-                {  
+                {
                     obj.GetComponent<IBullet>().SetStats(GetStat(EStatType.Damage), dir);
                 });
+
             _timer = 0f;
-            
-            // 액세서리 효과 트리거
             AccessoryOnAttack();
         }
     }

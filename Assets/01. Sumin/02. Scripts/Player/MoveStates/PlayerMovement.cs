@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Header(" Movement Settings")]
     public float RotateSpeed = 10f;
     public float CurrentSpeed { get; set; }
-    public Vector3 MoveDirection { get; private set; }
+    public Vector3 MoveDirection { get; set; }
     public bool IsSprint { get; set; }
 
     [Header("# Jump")]

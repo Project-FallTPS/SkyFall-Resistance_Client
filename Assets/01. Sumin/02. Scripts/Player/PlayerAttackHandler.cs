@@ -38,11 +38,11 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void ReceiveAccessory(EAccessoryType type, IAccessory accessory)
     {
-        if(type.ToString().StartsWith("Range"))
+        if(type.ToString().StartsWith(nameof(EWeaponType.Range)))
         {
             _strategies[EWeaponType.Range].AddAccessory(type, accessory);
         }
-        else if(type.ToString().StartsWith("Katana"))
+        else if(type.ToString().StartsWith(nameof(EWeaponType.Katana)))
         {
             _strategies[EWeaponType.Katana].AddAccessory(type, accessory);
         }
@@ -84,6 +84,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void PerformAttack()
     {
-        CurrentStrategy.Attack(TargetManager.Instance.Target);
+        CurrentStrategy?.Attack(TargetManager.Instance.Target);
     }
 }
