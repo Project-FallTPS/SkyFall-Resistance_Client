@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5653401664981922423}
   - component: {fileID: 5315253301475343763}
   m_Layer: 0
-  m_Name: DebrisPoolManager
+  m_Name: P_DebrisPoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
