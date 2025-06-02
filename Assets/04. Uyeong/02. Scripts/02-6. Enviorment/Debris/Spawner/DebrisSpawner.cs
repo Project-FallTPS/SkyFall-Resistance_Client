@@ -8,15 +8,6 @@ public class DebrisSpawner : Spawner<SpawnedObjectInfo<EDebrisType>, EDebrisType
     [SerializeField]
     private float _maxExplosionForce = 1000f;
 
-    // Test 용
-    public SphereCollider PlayerAreaCollider;
-    private float _playerAreaRadius;
-
-    private void Awake()
-    {
-        _playerAreaRadius = PlayerAreaCollider.radius;
-    }
-
     protected override void Spawn()
     {
         GameObject debrisObject = DebrisPoolManager.Instance.GetObjectByRandom(PickRandomObject(), SetRandomSpawnPosition());
@@ -36,7 +27,6 @@ public class DebrisSpawner : Spawner<SpawnedObjectInfo<EDebrisType>, EDebrisType
         Vector3 launchDirection = Random.insideUnitSphere;
         launchDirection.y = Mathf.Abs(launchDirection.y);
         debris.Launch(launchDirection, Random.Range(_minExplosionForce, _maxExplosionForce));
-        debris.PlayerAreaRadius = _playerAreaRadius;
     }
 
     protected override EDebrisType PickRandomObject()
