@@ -48,12 +48,13 @@ public class PlayerMovement : MonoBehaviour
             { EPlayerMoveState.Ground, new PlayerGroundState() },
             { EPlayerMoveState.Airborne, new PlayerAirborneState() },
         };
-        ChangeState(EPlayerMoveState.Airborne);
-        SetSprint(false);
     }
 
     private void Start()
     {
+        ChangeState(EPlayerMoveState.Airborne);
+        SetSprint(false);
+
         CurrentSpeed = PlayerStatManager.GetStat(EStatType.MoveSpeed);
         HasOverloadJetpack = PerkManager.Instance.EquippedPerks.ContainsKey(EPerkType.OverloadJetPack);
     }
