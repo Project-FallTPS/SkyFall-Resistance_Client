@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 5073430733396315606}
   - component: {fileID: 1105388345930669144}
   m_Layer: 0
-  m_Name: P_Parallax_EnvironmentRoot
+  m_Name: P_ParallaxManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
