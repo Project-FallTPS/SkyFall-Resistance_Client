@@ -57,10 +57,6 @@ public class InGame1_TargetingCheckerFrustumFromUI : MonoBehaviour
         verts[6] = new Vector3(farSize.x / 2, farSize.y / 2, far);
         verts[7] = new Vector3(-farSize.x / 2, farSize.y / 2, far);
 
-        // 월드 좌표 변환
-        for (int i = 0; i < verts.Length; i++)
-            verts[i] = _camera.transform.TransformPoint(verts[i]);
-
         // 메쉬 설정
         _frustumMesh.vertices = verts;
         _frustumMesh.triangles = new int[]
