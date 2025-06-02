@@ -16,4 +16,5 @@ BossWeakness,
 Bullet,
 Manager,
 EnemyBullet,
+PlayerArea,
 }

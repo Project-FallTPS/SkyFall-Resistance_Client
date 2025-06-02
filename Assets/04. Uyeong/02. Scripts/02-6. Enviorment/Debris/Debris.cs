@@ -64,6 +64,14 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
         _fireTrail.SetVector3(_smokeVelocityName, fireVelocity);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(nameof(ETags.PlayerArea)))
+        {
+            _rigidbody.maxLinearVelocity = 10;
+        }
+    }
+
     public void Initialize()
     {
         _meshObject.SetActive(true);
