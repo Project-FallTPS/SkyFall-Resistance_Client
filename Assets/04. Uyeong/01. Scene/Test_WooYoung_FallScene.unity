@@ -1601,7 +1601,6 @@ MonoBehaviour:
   _spawnRadius: 10
   _minExplosionForce: 500
   _maxExplosionForce: 1000
-  PlayerAreaCollider: {fileID: 1940001288}
 --- !u!1001 &1655791350
 PrefabInstance:
   m_ObjectHideFlags: 0
