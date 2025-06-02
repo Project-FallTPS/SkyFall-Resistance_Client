@@ -14,19 +14,17 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     private void Awake()
     {
         StatDict = _playerStatCollection.GetBaseStatDict();
-        
-        
     }
 
     private void Start()
     {
-        foreach(var perk in PerkManager.Instance.EquippedPerkBonuses)
-        {
-            if(StatDict.ContainsKey(perk.Key))
-            {
-                StatDict[perk.Key] *= perk.Value;
-            }
-        }    
+        //foreach(var perk in PerkManager.Instance.EquippedPerkBonuses)
+        //{
+        //    if(StatDict.ContainsKey(perk.Key))
+        //    {
+        //        StatDict[perk.Key] *= perk.Value;
+        //    }
+        //}    
     }
 
     public float GetStat(EStatType type)

@@ -5,17 +5,17 @@ public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
     private int _attackCount = 0;
     private PlayerAttackHandler _playerAttackHandler = null;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     public void OnAttack()
     {
         if (_playerAttackHandler == null)
         {
             _playerAttackHandler = GetComponentInParent<PlayerAttackHandler>();
             if (_playerAttackHandler == null) return;
+        }
+
+        if(_playerAttackHandler.CurrentStrategy is not RangeStrategy)
+        {
+            return;
         }
 
         // 추가 총알 발사

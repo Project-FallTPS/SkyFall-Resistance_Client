@@ -11,8 +11,6 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     private Rigidbody _rigidbody;
 
     private float _currentHealth = 10f;
-    private float _playerAreaRadius;
-    public float PlayerAreaRadius { set => _playerAreaRadius = value; }
 
     [Header("반환 거리")]
     [SerializeField]
@@ -57,7 +55,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
             return;
         }
 
-        if (transform.position.y <= -(_playerAreaRadius + _releaseOffset))
+        if (transform.position.y <= -_releaseOffset)
         {
             ReleaseAfterEffect();
         }
@@ -78,7 +76,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     public void Launch(Vector3 direction, float magnitude)
     {
         _rigidbody.linearVelocity = Vector3.zero;
-        _rigidbody.angularVelocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.one;
         _rigidbody.AddForce(direction * magnitude, ForceMode.Impulse);
     }
 

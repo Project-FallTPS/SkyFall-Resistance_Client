@@ -22,7 +22,7 @@ public class PerkManager : Singleton<PerkManager>
         PerkDatas = _perkDataCollection.MakeDictionary();
         InitHavingPerks();
 
-        EquipPerk(EPerkType.OverloadJetPack);
+        //EquipPerk(EPerkType.OverloadJetPack);
     }
 
     private void InitHavingPerks()
