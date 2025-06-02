@@ -1,69 +1,9 @@
 fileFormatVersion: 2
-guid: d97e695c5dcc0144caeda5faa958f419
+guid: 7ccc3ff78831f3946a89154ba62c57f0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door_Main
-    second: {fileID: 2100000, guid: f9206552e5dd72a4f9e620182b9adbd5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door_Wall
-    second: {fileID: 2100000, guid: e9200a8a19bb73f4e93badae61e02ec3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Frame
-    second: {fileID: 2100000, guid: c08c33efbc6eb2f4c9335268427f4d44, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Granish
-    second: {fileID: 2100000, guid: 2e00192d736a747469c514ccc7702579, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 8974c175b8b698d4ab40d264ac15ff48, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Below
-    second: {fileID: 2100000, guid: a8e688c17304fa74892a9f843678045f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Ceilling
-    second: {fileID: 2100000, guid: 025a6b8485a35934998eff1ef61a13ea, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Floor
-    second: {fileID: 2100000, guid: e8bd065e529ef524c898dbd7be9c50c1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Light
-    second: {fileID: 2100000, guid: 7d2cdc22aabf45d4a89e677b289c451b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Middle
-    second: {fileID: 2100000, guid: 04be7a9abcfcf8a4ca95cd4eee726710, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Pillar
-    second: {fileID: 2100000, guid: bbeb92cab39778c4299f540c40946ce3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall_Pipe
-    second: {fileID: 2100000, guid: 98061948059447747a18197cc36cec1c, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
