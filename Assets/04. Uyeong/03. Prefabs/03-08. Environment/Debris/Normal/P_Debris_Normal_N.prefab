@@ -44,8 +44,8 @@ Rigidbody:
   m_GameObject: {fileID: 1911891793528327492}
   serializedVersion: 4
   m_Mass: 50
-  m_Drag: 0.7
-  m_AngularDrag: 0.03
+  m_Drag: 5
+  m_AngularDrag: 0.3
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -137,15 +137,18 @@ VisualEffect:
       - m_Value: 4
         m_Name: VoronoiScale
         m_Overridden: 0
-      - m_Value: 10
+      - m_Value: 14
         m_Name: SmokeSize
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0, y: 2, z: 0}
+      - m_Value: {x: 0, y: 9, z: 0}
         m_Name: SmokeVelocity
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 1, z: 0}
+        m_Name: SpawnPosition
         m_Overridden: 1
     m_Vector4f:
       m_Array: []
