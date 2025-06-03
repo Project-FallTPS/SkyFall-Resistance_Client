@@ -51,5 +51,5 @@ MonoBehaviour:
     Probability: 20
   _spawnInterval: 1
   _spawnRadius: 10
-  _minExplosionForce: 5
-  _maxExplosionForce: 15
+  _minExplosionForce: 500
+  _maxExplosionForce: 1000
