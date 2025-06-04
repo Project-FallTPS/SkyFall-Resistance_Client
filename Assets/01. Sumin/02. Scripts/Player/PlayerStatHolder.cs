@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using UnityEngine;
 
 public class PlayerStatHolder : MonoBehaviour, IDamageable
 {
     [Header("# UI Event")]
     public static Action<float, float> OnStaminaChange;
+    public MMF_Player OnHitEffect;
 
     [Header("# Project")]
     [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // 원본
@@ -14,6 +17,8 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     private void Awake()
     {
         StatDict = _playerStatCollection.GetBaseStatDict();
+
+        if (OnHitEffect == null) Debug.LogError("MMFeedBack is Not Assigned (GameFeel_Hit)");
     }
 
     private void Start()
@@ -63,6 +68,9 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         StatDict[EStatType.Health] -= damage;
+
+        OnHitEffect.PlayFeedbacks();
+
         if (StatDict[EStatType.Health] <= 0)
         {
             Die();
