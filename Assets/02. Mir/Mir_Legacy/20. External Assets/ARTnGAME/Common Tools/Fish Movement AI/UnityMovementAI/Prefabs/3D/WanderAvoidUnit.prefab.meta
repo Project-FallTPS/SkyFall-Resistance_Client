@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bd1d62c70d726f34eb654e97eb3686cd
+timeCreated: 1445290612
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
+  assetPath: Assets/ARTnGAME/Common Tools/Fish Movement AI/UnityMovementAI/Prefabs/3D/WanderAvoidUnit.prefab
+  uploadId: 760807

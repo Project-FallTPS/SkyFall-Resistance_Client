@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: e3265ab4bf004d28a9537516768c1c75
 timeCreated: 1484171297
-licenseType: Pro
+licenseType: Store
 TrueTypeFontImporter:
   serializedVersion: 2
   fontSize: 16
@@ -19,8 +19,8 @@ TrueTypeFontImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 268984
-  packageName: Droll Robots Pack1
-  packageVersion: 1.0
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
   assetPath: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
-  uploadId: 623943
+  uploadId: 760807
