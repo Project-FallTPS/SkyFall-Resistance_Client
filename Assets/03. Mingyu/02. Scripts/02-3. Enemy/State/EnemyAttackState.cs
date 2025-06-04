@@ -30,7 +30,7 @@ public class EnemyAttackState : IEnemyState
 
     public void Exit()
     {
-        _enemyController.StopCoroutine(AttackCoroutine());
+        _enemyController.StopAllCoroutines();
     }
     
     private IEnumerator AttackCoroutine()
