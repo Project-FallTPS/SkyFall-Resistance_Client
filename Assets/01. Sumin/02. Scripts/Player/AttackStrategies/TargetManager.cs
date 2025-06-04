@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class TargetManager : Singleton<TargetManager>
 {
@@ -19,6 +20,10 @@ public class TargetManager : Singleton<TargetManager>
     [SerializeField] private Camera _camera;
     [SerializeField] private float _maxDistance;
 
+    [Header("# Hit Event")]
+    [SerializeField] private Image _hitCrossHairImage;
+    private Tween _hitCrossHairTween;
+
     private GameObject _targetLockedUIInstance;
     private Vector3 _targetScreenPos;
 
@@ -35,6 +40,7 @@ public class TargetManager : Singleton<TargetManager>
         _targetLockedUIInstance.SetActive(false);
 
         UIEventHandler.Instance.OnPlayerWeaponChange += SetTargetDetectionActivate;
+        UIEventHandler.Instance.OnPlayerAttackHit += SetHitCrossHair;
     }
 
     private void Update()
@@ -131,5 +137,26 @@ public class TargetManager : Singleton<TargetManager>
                 _originalCrossHairUIPrefab.sprite = ch.Sprite;
             }
         }
+    }
+
+    private void SetHitCrossHair()
+    {
+        _hitCrossHairImage.gameObject.SetActive(true);
+
+        _hitCrossHairTween?.Kill();
+
+        Color color = _hitCrossHairImage.color;
+        color.a = 1f;
+        _hitCrossHairImage.color = color;
+
+        // 서서히 알파값을 0으로 만들며 사라지게
+        _hitCrossHairTween = DOTween.ToAlpha(
+            () => _hitCrossHairImage.color,
+            x => _hitCrossHairImage.color = x,
+            0f,            // target alpha
+            0.3f           // duration
+        )
+        .SetDelay(0.1f)    // 잠깐 보였다가 사라지게
+        .OnComplete(() => _hitCrossHairImage.gameObject.SetActive(false));
     }
 }
