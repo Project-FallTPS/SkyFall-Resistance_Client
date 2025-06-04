@@ -36,6 +36,8 @@ public class Katana : MonoBehaviour
         {
             float baseDamage = _player.CurrentStrategy.GetStat(EStatType.Damage);
             damageable.TakeDamage(baseDamage);
+            UIEventHandler.Instance.OnPlayerAttackHit?.Invoke();
+            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.KatanaHitEffect, damageable.GameObject.transform.position, Quaternion.identity);
 
             foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
             {

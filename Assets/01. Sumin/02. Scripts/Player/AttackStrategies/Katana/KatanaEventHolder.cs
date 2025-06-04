@@ -16,7 +16,7 @@ public class KatanaEventHolder : MonoBehaviour
         if (flag == 1)
         {
             _katana.EnableAttack();
-            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MeleeAttackEffect, _katanaObject.transform.position, _katanaObject.transform.rotation);
+            PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.KatanaAttackEffect, _katanaObject.transform.position, _katanaObject.transform.rotation);
         }
         else
         {

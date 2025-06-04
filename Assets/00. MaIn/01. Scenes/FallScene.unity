@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 244308122}
   m_Layer: 0
   m_Name: PlayerArea
-  m_TagString: Untagged
+  m_TagString: PlayerArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,6 +1615,81 @@ MonoBehaviour:
   _player: {fileID: 1741040447}
   _driftMultiplier: 0.2
   _followSpeed: 1
+--- !u!1 &868369216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868369217}
+  - component: {fileID: 868369219}
+  - component: {fileID: 868369218}
+  m_Layer: 5
+  m_Name: HitCrossHair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &868369217
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868369216}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.71, y: 1.71, z: 1.71}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 470975083440253790}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 382, y: 370}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &868369218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868369216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7789b657ea330f94d9b70d6d4a117aed, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &868369219
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868369216}
+  m_CullTransparentMesh: 1
 --- !u!1 &868498256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,6 +1752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1120103925249475124, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
+      propertyPath: _muzzle
+      value: 
+      objectReference: {fileID: 949092615}
     - target: {fileID: 2550993480347551584, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 60
@@ -1806,6 +1885,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e7f198a9708344b8213cce4143be72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &949092615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6202418250371796806, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
+  m_PrefabInstance: {fileID: 925047578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &957422396
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,9 +3151,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[5].Type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[5].Prefab
+      value: 
+      objectReference: {fileID: 6206068423671499898, guid: 18b479a3081dc8946b61b93676717725, type: 3}
+    - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
       propertyPath: _poolInfoList.Array.data[2].Container
       value: 
       objectReference: {fileID: 354501354}
+    - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[5].Container
+      value: 
+      objectReference: {fileID: 1949588661}
+    - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[5].InitCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3322,6 +3426,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDontDestroy: 0
+--- !u!4 &1949588661 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2547457532785253196, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+  m_PrefabInstance: {fileID: 1699406577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1977620687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,6 +4506,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5743391881410555581}
+  - {fileID: 868369217}
   m_Father: {fileID: 2021710003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5428,10 +5538,16 @@ MonoBehaviour:
   _isDontDestroy: 0
   _crossHair: {fileID: 1503410828067811237}
   _targetLockedUIPrefab: {fileID: 1637108076316869242, guid: 6ccc1f6847239a644b3ef6ba562ad081, type: 3}
-  _originalCrossHairUIPrefab: {fileID: 7448380887546306518}
-  _uiLockArea: {fileID: 470975083440253790}
+  _originalCrossHairUIPrefab: {fileID: 8369165356852796518}
+  _uiLockArea: {fileID: 5743391881410555581}
+  _crossHairSprites:
+  - Type: 0
+    Sprite: {fileID: 21300000, guid: 5130fb44c02841e449e95dc2c79ed750, type: 3}
+  - Type: 1
+    Sprite: {fileID: 21300000, guid: 3fc11d94e5d6e1344905d9d3f1423ad6, type: 3}
   _camera: {fileID: 1950769462035173212}
   _maxDistance: 20
+  _hitCrossHairImage: {fileID: 868369218}
   Target: {fileID: 0}
 --- !u!224 &5743391881410555581
 RectTransform:
@@ -5741,6 +5857,7 @@ GameObject:
   - component: {fileID: 5095523376238203822}
   - component: {fileID: 5637494490190570100}
   - component: {fileID: 848553549}
+  - component: {fileID: 8563022176667200685}
   m_Layer: 5
   m_Name: Canvas_PlayerUI
   m_TagString: Untagged
@@ -6238,6 +6355,19 @@ Canvas:
   m_SortingLayerID: 753347803
   m_SortingOrder: 1503
   m_TargetDisplay: 0
+--- !u!114 &8563022176667200685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750301829024498874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88495eb7ae6e85641a9c701b49e4ad6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 0
 --- !u!224 &8581737569250391261
 RectTransform:
   m_ObjectHideFlags: 0
