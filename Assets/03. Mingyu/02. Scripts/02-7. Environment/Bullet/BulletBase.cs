@@ -51,18 +51,24 @@ public abstract class BulletBase : MonoBehaviour
     
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(nameof(ETags.Player)))
+        if (other.CompareTag(nameof(ETags.Player)) ||
+            other.CompareTag(nameof(ETags.Obstacle)) ||
+            other.CompareTag(nameof(ETags.Ground)))
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
             if (damageable != null)
             {
                 damageable.TakeDamage(_damage);
             }
-            DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
-        }
-
-        if (other.CompareTag(nameof(ETags.Obstacle)) || other.CompareTag(nameof(ETags.Ground)))
-        {
+            
+            // 충돌 지점 추정: 상대 콜라이더와의 Closest Point
+            Vector3 contactPoint = other.ClosestPoint(transform.position);
+            if (_damageableType == EDamageableType.BossBulletCurve ||
+                _damageableType == EDamageableType.BossBulletStraight)
+            {
+                VFXPoolManager.Instance.GetObject
+                    (EVFXType.BossBulletHit, contactPoint, Quaternion.identity);
+            }
             DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
         }
     }
