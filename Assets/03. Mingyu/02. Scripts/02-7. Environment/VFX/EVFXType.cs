@@ -5,5 +5,9 @@ public enum EVFXType
     ExplosiveDebrisExplosion,
     EnemySupportTypeShieldTrail,
     EnemyExplosionOnDead,
+    BossShootMuzzle,
+    BossBulletHit,
+    BossRush,
+    BossLaserWindup,
     Count,
 }

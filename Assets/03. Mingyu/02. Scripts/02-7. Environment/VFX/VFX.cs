@@ -7,6 +7,9 @@ public class VFX : MonoBehaviour
 {
     [SerializeField]
     private EVFXType _vfxType;
+
+    [SerializeField] 
+    private bool _isPoolAble = true;
     
     private ParticleSystem[] _particleSystems;
 
@@ -41,6 +44,10 @@ public class VFX : MonoBehaviour
             }
             yield return null;
         } while (isAlive);
-        VFXPoolManager.Instance.ReturnObject(gameObject, _vfxType);
+
+        if (_isPoolAble)
+        {
+            VFXPoolManager.Instance.ReturnObject(gameObject, _vfxType);
+        }
     }
 }

@@ -37,9 +37,23 @@ public class BossController : MonoBehaviour, IDamageable
 
     [Header("# UI Event")]
     public Action<float> OnHit;
-
     // 추가한 내용
     public static Action<float, float, int> OnBossHealthChange;
+
+    [SerializeField]
+    private GameObject _laserStartGO;
+    public GameObject LaserStartGo
+    {
+        get => _laserStartGO;
+        set => _laserStartGO = value;
+    }
+    [SerializeField]
+    private GameObject _laserEndGO;
+    public GameObject LaserEndGo
+    {
+        get => _laserEndGO;
+        set => _laserEndGO = value;
+    }
 
     private void Awake()
     {
@@ -85,6 +99,8 @@ public class BossController : MonoBehaviour, IDamageable
     private void InitNavMesh()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        Debug.Log(_navMeshAgent);
+        
         _navMeshAgent.speed = _bossData.MoveSpeed;
         _navMeshAgent.updateRotation = true;
     }
