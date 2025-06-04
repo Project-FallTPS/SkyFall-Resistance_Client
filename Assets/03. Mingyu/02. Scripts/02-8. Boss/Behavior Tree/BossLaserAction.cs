@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using GAP_LaserSystem;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -21,6 +22,8 @@ public partial class BossLaserAction : Action, IBossAttack
     private Vector3 _laserEndPosition;
     private LayerMask _hitMask;
     private bool _isLaserDisappeared;
+
+    private VFX _bossLaseWindupVFX;
     
     protected override Status OnStart()
     {
@@ -31,6 +34,7 @@ public partial class BossLaserAction : Action, IBossAttack
             _bossTransform = _bossController.transform;
             _playerTransform = _bossController.PlayerTransform;
             _hitMask = LayerMask.GetMask(nameof(ELayers.Player));
+            _bossLaseWindupVFX = _bossController.GetComponentInChildren<VFX>();
         }
         
         if (CanAttack())
@@ -82,6 +86,7 @@ public partial class BossLaserAction : Action, IBossAttack
     private IEnumerator WindupCoroutine()
     {
         _bossController.Animator.SetBool(nameof(EBossAnimationParam.Windup), true);
+        _bossLaseWindupVFX.PlayVFX();
         float timer = 0f;
         while (timer < _bossData.WindupTimeForLaser)
         {
@@ -97,7 +102,6 @@ public partial class BossLaserAction : Action, IBossAttack
     {
         RefreshLaserVector();
         LookPlayer();
-        // TODO : 기모으는 VFX, 애니메이션
     }
     
     private void RefreshLaserVector()
@@ -126,13 +130,15 @@ public partial class BossLaserAction : Action, IBossAttack
 
     private GameObject ActivateLaser()
     {
-        LineRenderer lineRenderer = 
+        LaserScript laserScript =
             DamageablePoolManager.Instance.GetObject(EDamageableType.BossLaser, _bossTransform.position)
-                .GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, _bossTransform.position);
-        lineRenderer.SetPosition(1, _laserEndPosition);
-        return lineRenderer.gameObject;
+                .GetComponent<LaserScript>();
+        laserScript.firePoint = _bossController.LaserStartGo;
+        laserScript.firePoint.transform.position = _bossTransform.position + new Vector3(0f, 1f, 0f);
+        laserScript.endPoint = _bossController.LaserEndGo;
+        laserScript.endPoint.transform.position = _laserEndPosition;
+        laserScript.ShootLaser(_bossData.LaserDuration);
+        return laserScript.gameObject;
     }
     
     private IEnumerator LaserLifeCycle(GameObject laserObject)
