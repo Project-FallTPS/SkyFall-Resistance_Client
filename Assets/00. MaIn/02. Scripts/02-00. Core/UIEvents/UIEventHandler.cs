@@ -7,4 +7,5 @@ public class UIEventHandler : Singleton<UIEventHandler>
     public Action OnPlayerAttackHit;
     public Action<EWeaponType> OnPlayerWeaponChange;
     public Action OnPlayerDie;
+    public Action OnBossDie;
 }
