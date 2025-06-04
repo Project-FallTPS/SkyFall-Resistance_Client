@@ -96,8 +96,23 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     {
         _anim.SetTrigger("anim_Player_Trigger_Die");
 
-        //TODO : GameOverRoutine
+        DisableAllScriptsExceptThis();
+
         UIEventHandler.Instance.OnPlayerDie?.Invoke();
+        _isDead = true;
+    }
+
+    private void DisableAllScriptsExceptThis()
+    {
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+        foreach (var script in scripts)
+        {
+            if (script != this) // PlayerStatHolder 자신은 제외
+            {
+                script.enabled = false;
+            }
+        }
+        _rigid.useGravity = true;
     }
 
     public void RegenStamina()
