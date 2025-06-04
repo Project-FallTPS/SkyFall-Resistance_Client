@@ -7,5 +7,6 @@ public enum EPlayerEffectType
     BombEffect,
     MuzzleFlash,
     KatanaHitEffect,
+    RangeHitEffect,
     Count,
 }

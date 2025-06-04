@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 57dca0566d98f0540b0475f3f2fde86d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
+  assetPath: Assets/ARTnGAME/GIBLI/TOON SHADERS/Daniel-ilett SHADERS/metaballs-urp/Materials/Bouncy.physicsMaterial2D
+  uploadId: 760807

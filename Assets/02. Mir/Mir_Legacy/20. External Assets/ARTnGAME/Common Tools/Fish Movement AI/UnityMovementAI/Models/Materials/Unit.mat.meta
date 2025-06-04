@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 91a6a98d47f55e347a20c2dadf7a8b73
+timeCreated: 1444774090
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
+  assetPath: Assets/ARTnGAME/Common Tools/Fish Movement AI/UnityMovementAI/Models/Materials/Unit.mat
+  uploadId: 760807

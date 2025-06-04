@@ -31,4 +31,12 @@ public class OutlineHighlighter : MonoBehaviour
     {
         if (isHighlighted && cameraType != ELobbyCameraType.MainSpot) LobbySceneManager.Instance.SwitchToCamera(cameraType);
     }
+
+    public void EnableOutline() => _outline.enabled = true;
+    public void DisableOutline() => _outline.enabled = false;
+    public void TriggerAction()
+    {
+        if (cameraType != ELobbyCameraType.MainSpot)
+            LobbySceneManager.Instance.SwitchToCamera(cameraType);
+    }
 }

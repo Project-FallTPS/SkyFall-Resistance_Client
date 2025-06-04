@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 050cd2ec4cc25ac4aa4842eb72394f5c
+timeCreated: 1477413135
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
+  assetPath: Assets/ARTnGAME/Common Tools/Fish Movement AI/SampleAssets_ECSSamples_UNITY/Shaders/Wiggle.shader
+  uploadId: 760807
