@@ -15,8 +15,14 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
     [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // 원본
     public Dictionary<EStatType, float> StatDict { get; private set; } // 캐싱
 
+    private Animator _anim;
+    private Rigidbody _rigid;
+    private bool _isDead = false;
+
     private void Awake()
     {
+        _anim = GetComponentInChildren<Animator>();
+        _rigid = GetComponentInChildren<Rigidbody>();
         StatDict = _playerStatCollection.GetBaseStatDict();
 
         if (OnHitEffect == null) Debug.LogError("MMFeedBack is Not Assigned (GameFeel_Hit)");
@@ -68,6 +74,11 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if(_isDead)
+        {
+            return;
+        }
+
         StatDict[EStatType.Health] -= damage;
 
         OnHitEffect.PlayFeedbacks();
@@ -77,12 +88,31 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
         if (StatDict[EStatType.Health] <= 0)
         {
             Die();
+            _isDead = true;
         }
     }
 
     private void Die()
     {
+        _anim.SetTrigger("anim_Player_Trigger_Die");
 
+        DisableAllScriptsExceptThis();
+
+        UIEventHandler.Instance.OnPlayerDie?.Invoke();
+        _isDead = true;
+    }
+
+    private void DisableAllScriptsExceptThis()
+    {
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+        foreach (var script in scripts)
+        {
+            if (script != this) // PlayerStatHolder 자신은 제외
+            {
+                script.enabled = false;
+            }
+        }
+        _rigid.useGravity = true;
     }
 
     public void RegenStamina()
