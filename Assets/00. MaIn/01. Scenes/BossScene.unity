@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 80184208}
   m_Layer: 8
   m_Name: Obstacle (4)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 487657128}
   m_Layer: 8
   m_Name: Obstacle (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 513254688}
   m_Layer: 8
   m_Name: Obstacle (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1225,7 +1225,7 @@ GameObject:
   - component: {fileID: 793855791}
   m_Layer: 8
   m_Name: Obstacle (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2063,21 +2063,9 @@ MonoBehaviour:
     Container: {fileID: 1780571233}
   - Type: 5
     InitCount: 10
-    Prefab: {fileID: 786717176829389734, guid: 3c2e95663032765468095c9538259ad0, type: 3}
+    Prefab: {fileID: 2965222256817593503, guid: 9a896e2994b02434f81e7da80126cade, type: 3}
     Container: {fileID: 1780571233}
   - Type: 6
-    InitCount: 10
-    Prefab: {fileID: 786717176829389734, guid: 3c2e95663032765468095c9538259ad0, type: 3}
-    Container: {fileID: 1780571233}
-  - Type: 7
-    InitCount: 10
-    Prefab: {fileID: 786717176829389734, guid: 3c2e95663032765468095c9538259ad0, type: 3}
-    Container: {fileID: 1780571233}
-  - Type: 8
-    InitCount: 10
-    Prefab: {fileID: 786717176829389734, guid: 3c2e95663032765468095c9538259ad0, type: 3}
-    Container: {fileID: 1780571233}
-  - Type: 9
     InitCount: 10
     Prefab: {fileID: 786717176829389734, guid: 3c2e95663032765468095c9538259ad0, type: 3}
     Container: {fileID: 1780571233}
@@ -2847,7 +2835,7 @@ GameObject:
   - component: {fileID: 2130317726}
   m_Layer: 8
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
