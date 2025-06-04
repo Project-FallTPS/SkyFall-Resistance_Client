@@ -1,9 +1,11 @@
 public enum EPlayerEffectType
 {
-    MeleeAttackEffect,
+    KatanaAttackEffect,
     TargetDashEffect,
     LandingEffect,
     BatteryEffect,
     BombEffect,
+    MuzzleFlash,
+    KatanaHitEffect,
     Count,
 }

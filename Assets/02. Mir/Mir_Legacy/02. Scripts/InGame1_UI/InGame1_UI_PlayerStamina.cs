@@ -13,16 +13,8 @@ public class InGame1_UI_PlayerStamina : MonoBehaviour
         {
             Debug.LogError("Stamina Slider is Not Assigned");
         }
-    }
 
-    private void OnEnable()
-    {
-        PlayerStatHolder.OnStaminaChange += UpdateStaminaUI;
-    }
-
-    private void OnDisable()
-    {
-        PlayerStatHolder.OnStaminaChange -= UpdateStaminaUI;
+        UIEventHandler.Instance.OnStaminaChange += UpdateStaminaUI;
     }
 
     private void UpdateStaminaUI(float current, float max)

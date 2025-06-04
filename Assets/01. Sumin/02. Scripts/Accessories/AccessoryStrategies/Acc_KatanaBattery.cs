@@ -28,5 +28,6 @@ public class Acc_KatanaBattery : AccessoryBase, IAccessory
 
         MonoBehaviour t = target as MonoBehaviour;
         PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.BatteryEffect, t.transform.position, Quaternion.identity);
+        UIEventHandler.Instance.OnPlayerAttackHit?.Invoke();
     }
 }

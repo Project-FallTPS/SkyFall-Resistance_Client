@@ -30,6 +30,7 @@ public class PlayerBullet : MonoBehaviour, IBullet
         if(other.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TakeDamage(_damage);
+            UIEventHandler.Instance.OnPlayerAttackHit?.Invoke();
         }
         Debug.Log(other.name);
 

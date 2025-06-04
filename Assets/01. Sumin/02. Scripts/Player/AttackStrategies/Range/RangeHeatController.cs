@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class RangeHeatController : MonoBehaviour
 {
-    /// <summary>
-    /// bool로 과열 경고 UI나 머티리얼 빨갛게 띄울거면 ㄱㄱ
-    /// </summary>
     public static Action<float, float, bool> OnHeatChanged;
 
     public float Heat { get; private set; }
@@ -15,59 +12,122 @@ public class RangeHeatController : MonoBehaviour
     public float CooldownRate = 25f;
     public float OverHeatTime = 5f;
 
-    public bool IsOverheated = false;
+    [Header("# OverHeat Manage")]
+    private bool _isOverheated = false;
+    private float _disabledTime;
+    private bool _wasOverheated = false;
+
+    [Header("# Muzzle Flash")]
+    [SerializeField] private GameObject _muzzle;
+
+    private Coroutine _coolingCoroutine;
+
+    private void OnDisable()
+    {
+        _disabledTime = Time.realtimeSinceStartup;
+
+        if (_isOverheated)
+        {
+            _wasOverheated = true;
+        }
+
+        if (_coolingCoroutine != null)
+        {
+            StopCoroutine(_coolingCoroutine);
+            _coolingCoroutine = null;
+        }
+    }
+
+    private void OnEnable()
+    {
+        float timePassed = Time.realtimeSinceStartup - _disabledTime;
+
+        // 비오버히트 상태였으면 그냥 쿨다운 처리
+        if (!_wasOverheated)
+        {
+            if (!_isOverheated && Heat > 0f)
+            {
+                Heat -= CooldownRate * timePassed;
+                Heat = Mathf.Max(Heat, 0f);
+                OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
+            }
+        }
+        else
+        {
+            // 오버히트 상태였다면, 시간 흐름 고려해서 코루틴 다시 진행
+            if (timePassed >= OverHeatTime + 0.5f)
+            {
+                Heat = 0f;
+                _isOverheated = false;
+                _wasOverheated = false;
+                OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
+            }
+            else
+            {
+                _coolingCoroutine = StartCoroutine(CoOverHeat(timePassed));
+            }
+        }
+    }
+
 
     private void Update()
     {
-        if (!Mathf.Approximately(Heat, 0f) && !Input.GetMouseButton(0) && !IsOverheated)
+        if (!Mathf.Approximately(Heat, 0f) && !Input.GetMouseButton(0) && !_isOverheated)
         {
             Heat -= CooldownRate * Time.deltaTime;
             Heat = Mathf.Max(Heat, 0f);
-            OnHeatChanged?.Invoke(Heat, MaxHeat, IsOverheated);
+            OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
         }
-
-        Debug.Log($"과열 : {Heat}");
+        Debug.Log(Heat);
     }
 
-    /// <summary>
-    /// 발사를 시도하고 성공 여부를 반환
-    /// </summary>
     public bool TryConsumeHeat()
     {
-        if (IsOverheated)
+        if (_isOverheated)
+        {
             return false;
+        }
 
         Heat += HeatPerShot;
         Heat = Mathf.Min(Heat, MaxHeat);
-        OnHeatChanged?.Invoke(Heat, MaxHeat, IsOverheated);
-        if(Mathf.Approximately(Heat, MaxHeat))
+        OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
+        if (Mathf.Approximately(Heat, MaxHeat))
         {
-            StartCoroutine(CoOverHeat());
+            _coolingCoroutine = StartCoroutine(CoOverHeat(0f));
         }
+        PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MuzzleFlash, _muzzle.transform.position, Quaternion.identity);
 
         return true;
     }
 
-    private IEnumerator CoOverHeat()
+    private IEnumerator CoOverHeat(float timePassed)
     {
-        IsOverheated = true;
+        _isOverheated = true;
+        _wasOverheated = true;
 
-        yield return new WaitForSeconds(OverHeatTime);
+        // 남은 대기 시간
+        float waitTime = Mathf.Max(0f, OverHeatTime - timePassed);
+        if (waitTime > 0f)
+        {
+            yield return new WaitForSeconds(waitTime);
+        }
 
         float duration = 0.5f;
-        float elapsed = 0f;
+        float elapsed = Mathf.Clamp(timePassed - OverHeatTime, 0f, duration);
         float startHeat = Heat;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             Heat = Mathf.Lerp(startHeat, 0f, elapsed / duration);
-            OnHeatChanged?.Invoke(Heat, MaxHeat, IsOverheated);
+            OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
             yield return null;
         }
 
         Heat = 0f;
-        IsOverheated = false;
-        OnHeatChanged?.Invoke(Heat, MaxHeat, IsOverheated);
+        _isOverheated = false;
+        _wasOverheated = false;
+        _coolingCoroutine = null;
+        OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
     }
 }

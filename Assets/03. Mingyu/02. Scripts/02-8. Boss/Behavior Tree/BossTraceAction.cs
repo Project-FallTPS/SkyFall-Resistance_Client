@@ -11,7 +11,6 @@ public partial class BossTraceAction : Action
 {
     [SerializeReference]
     public BlackboardVariable<GameObject> _boss;
-
     private BossController _bossController;
     
     protected override Status OnStart()

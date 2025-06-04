@@ -36,6 +36,7 @@ public class PlayerExplodeBullet : MonoBehaviour, IBullet
                 {
                     damage.TakeDamage(_damage);
                     Debug.Log($"폭탄! {_damage}");
+                    UIEventHandler.Instance.OnPlayerAttackHit?.Invoke();
                 }
             }
         }

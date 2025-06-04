@@ -28,6 +28,10 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         _strategies.Add(EWeaponType.Range, new RangeStrategy(this));
+    }
+
+    private void Start()
+    {
         ChangeWeapon(EWeaponType.Katana);
     }
 
@@ -51,6 +55,8 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     public void ChangeWeapon(EWeaponType type)
     {
+        UIEventHandler.Instance.OnPlayerWeaponChange?.Invoke(type);
+
         if (_strategies.TryGetValue(type, out var strategy))
         {
             CurrentStrategy = strategy;

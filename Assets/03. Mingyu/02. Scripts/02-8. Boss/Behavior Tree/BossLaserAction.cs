@@ -30,7 +30,7 @@ public partial class BossLaserAction : Action, IBossAttack
             _bossData = _bossController.BossData;
             _bossTransform = _bossController.transform;
             _playerTransform = _bossController.PlayerTransform;
-            _hitMask = LayerMask.GetMask(nameof(ELayers.Player), nameof(ELayers.Boss));
+            _hitMask = LayerMask.GetMask(nameof(ELayers.Player));
         }
         
         if (CanAttack())
@@ -53,6 +53,7 @@ public partial class BossLaserAction : Action, IBossAttack
 
     protected override void OnEnd()
     {
+        _bossController.NavMeshAgent.isStopped = false;
     }
 
     public bool CanAttack()
@@ -63,10 +64,7 @@ public partial class BossLaserAction : Action, IBossAttack
 
     public void Attack()
     {
-        if (_bossController.NavMeshAgent.hasPath)
-        {
-            _bossController.NavMeshAgent.ResetPath();
-        }
+        _bossController.NavMeshAgent.isStopped = true;
         _bossController.StartCoroutine(WindupCoroutine());
     }
 
@@ -83,6 +81,7 @@ public partial class BossLaserAction : Action, IBossAttack
 
     private IEnumerator WindupCoroutine()
     {
+        _bossController.Animator.SetBool(nameof(EBossAnimationParam.Windup), true);
         float timer = 0f;
         while (timer < _bossData.WindupTimeForLaser)
         {
@@ -90,6 +89,7 @@ public partial class BossLaserAction : Action, IBossAttack
             timer += Time.deltaTime;
             yield return null;
         }
+        _bossController.Animator.SetBool(nameof(EBossAnimationParam.Windup), false);
         Laser();
     }
     
@@ -120,7 +120,6 @@ public partial class BossLaserAction : Action, IBossAttack
         {
             _laserEndPosition = hitInfo.point;
         }
-
         GameObject laserObject = ActivateLaser();
         _bossController.StartCoroutine(LaserLifeCycle(laserObject));
     }
@@ -135,8 +134,10 @@ public partial class BossLaserAction : Action, IBossAttack
         lineRenderer.SetPosition(1, _laserEndPosition);
         return lineRenderer.gameObject;
     }
+    
     private IEnumerator LaserLifeCycle(GameObject laserObject)
     {
+        _bossController.Animator.SetBool(nameof(EBossAnimationParam.AttackLaser), true);
         float timer = 0f;
         while (timer < _bossData.LaserDuration)
         {
@@ -145,6 +146,7 @@ public partial class BossLaserAction : Action, IBossAttack
         }
         DamageablePoolManager.Instance.ReturnObject(laserObject, EDamageableType.BossLaser);
         _isLaserDisappeared = true;
+        _bossController.Animator.SetBool(nameof(EBossAnimationParam.AttackLaser), false);
     }
 }
 
