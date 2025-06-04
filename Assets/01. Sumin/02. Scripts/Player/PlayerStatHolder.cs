@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerStatHolder : MonoBehaviour, IDamageable
 {
+    public GameObject GameObject => gameObject;
+
     [Header("# UI Event")]
     public MMF_Player OnHitEffect;
 
