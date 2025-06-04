@@ -9760,7 +9760,7 @@ GameObject:
   - component: {fileID: 3572452618867083296}
   - component: {fileID: -5300462483382143359}
   m_Layer: 12
-  m_Name: P_BulletHermiteCurve_Boss
+  m_Name: P_Boss_Attack_BulletHermiteCurve
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
