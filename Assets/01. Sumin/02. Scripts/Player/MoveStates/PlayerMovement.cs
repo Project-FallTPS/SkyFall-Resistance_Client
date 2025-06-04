@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using DG.Tweening;                 // ★ DOTween
+using DG.Tweening;
+using MoreMountains.Feedbacks;                 // ★ DOTween
 
 [System.Serializable]
 public class Jetpack             // struct → class (참조형)
@@ -39,9 +40,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<Jetpack> Jetpacks;
     public bool HasOverloadJetpack { get; private set; }
 
+    [Header("# Game Feel Action Line")]
+    [SerializeField] private MMF_Player _sprintActionLine;
     // 트윈용 상수
     private const float TARGET_RATE = 60f;
     private const float LERP_DURATION = 0.7f;
+
+    // Feel 용 Flag
+    private bool _hasPlayedSprintActionLine = false; // 상태 추적용 변수
 
     // ──────────────────────────────────────────────────────
     private void Awake()
@@ -109,6 +115,26 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>스프린트 토글 + 제트팩 연기 트윈</summary>
     public void SetSprint(bool isSprint)
     {
+        if (HasOverloadJetpack) isSprint = true;
+
+        CurrentState?.SetSprint(isSprint);
+        IsSprint = isSprint;
+
+        // ▶ Feedback 트리거 조건
+        if (isSprint)
+        {
+            if (!_hasPlayedSprintActionLine)
+            {
+                _sprintActionLine?.PlayFeedbacks();
+                _hasPlayedSprintActionLine = true;
+            }
+        }
+        else
+        {
+            _sprintActionLine?.StopFeedbacks();
+            _hasPlayedSprintActionLine = false;
+        }
+
         if (HasOverloadJetpack) isSprint = true;
 
         CurrentState?.SetSprint(isSprint);
