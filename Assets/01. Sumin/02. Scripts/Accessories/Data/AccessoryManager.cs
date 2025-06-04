@@ -1,17 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AccessoryManager : Singleton<AccessoryManager>
 {
     [SerializeField] private AccessoryDataSO _dataSO;
 
     public Dictionary<EAccessoryType, ActiveAccessory> EquippedAccessories { get; private set; }
+    public Dictionary<EAccessoryType, ActiveAccessory> CopyEquippedAcc { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
         EquippedAccessories = new Dictionary<EAccessoryType, ActiveAccessory>();
+
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public void Equip(EAccessoryType type, IAccessory obj)
@@ -92,5 +97,15 @@ public class AccessoryManager : Singleton<AccessoryManager>
         }
 
         return filtered;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.name)
+        {
+            case "LobbyScene":
+                Destroy(gameObject);
+                break;
+        }
     }
 }

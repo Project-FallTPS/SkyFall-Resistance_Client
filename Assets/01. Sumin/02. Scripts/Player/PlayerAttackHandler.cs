@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
@@ -28,6 +29,9 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         _strategies.Add(EWeaponType.Range, new RangeStrategy(this));
+
+        //DontDestroyOnLoad(gameObject);
+        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
@@ -91,5 +95,15 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     public void PerformAttack()
     {
         CurrentStrategy?.Attack(TargetManager.Instance.Target);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch(scene.name)
+        {
+            case "LobbyScene":
+                Destroy(gameObject);
+                break;
+        }
     }
 }
