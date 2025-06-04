@@ -51,6 +51,11 @@ public abstract class BulletBase : MonoBehaviour
     
     protected virtual void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag(nameof(ETags.Boss)))
+        {
+            return;
+        }
+        
         if (other.CompareTag(nameof(ETags.Player)))
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
