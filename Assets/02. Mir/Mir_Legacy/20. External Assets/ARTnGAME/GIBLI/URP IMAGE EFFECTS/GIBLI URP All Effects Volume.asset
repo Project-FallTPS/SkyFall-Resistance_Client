@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8885045366956896369
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c294a1a6c0c5a4ea29a9737b8b5977, type: 3}
+  m_Name: DrawingVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  debugPass:
+    m_OverrideState: 1
+    m_Value: 4
+  drawingTex:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 45aebe3677658474a9b27bdb2e509cd7, type: 3}
+    dimension: 1
+  shiftCycleTime:
+    m_OverrideState: 1
+    m_Value: 11
+  strength:
+    m_OverrideState: 1
+    m_Value: 511
+  tiling:
+    m_OverrideState: 1
+    m_Value: 512
+  smudge:
+    m_OverrideState: 1
+    m_Value: 8.5
+  depthThreshold:
+    m_OverrideState: 1
+    m_Value: 0.99
+  wobbTex:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 674fdd3f8d09e0e45a15696f72d4f758, type: 3}
+    dimension: 1
+  wobbScale:
+    m_OverrideState: 1
+    m_Value: 0.4
+  wobbPower:
+    m_OverrideState: 1
+    m_Value: 2.5
+  edgeSize:
+    m_OverrideState: 1
+    m_Value: 1522.2
+  edgePower:
+    m_OverrideState: 1
+    m_Value: 2
+  paperTexA:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: f1ffe6e8f5f6a794891bc292e7dcfab1, type: 3}
+    dimension: 1
+  paperScaleA:
+    m_OverrideState: 1
+    m_Value: 1
+  paperPowerA:
+    m_OverrideState: 1
+    m_Value: 1
+  paperTexB:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 6e2a48c211de9f542b735fe66b56be26, type: 3}
+    dimension: 1
+  paperScaleB:
+    m_OverrideState: 1
+    m_Value: 1
+  paperPowerB:
+    m_OverrideState: 1
+    m_Value: 1
+  paperTexC:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 6e2a48c211de9f542b735fe66b56be26, type: 3}
+    dimension: 1
+  paperScaleC:
+    m_OverrideState: 1
+    m_Value: 0.1
+  paperPowerC:
+    m_OverrideState: 1
+    m_Value: -2.65
+  edgeWidth:
+    m_OverrideState: 1
+    m_Value: -0.39
+  edgeColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.027634395, g: 0.054458734, b: 0.254717, a: 1}
+  backgroundFade:
+    m_OverrideState: 1
+    m_Value: 0.05
+  backgroundColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.5518868, b: 0.56608564, a: 0.5803922}
+  SampleDistance:
+    m_OverrideState: 1
+    m_Value: 3.64
+  StrengthPow:
+    m_OverrideState: 1
+    m_Value: 10000
+--- !u!114 &-7960996701988058429
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b634000b1fe567b4c94f944178b5e9a5, type: 3}
+  m_Name: OutlineVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  SampleDistance:
+    m_OverrideState: 1
+    m_Value: 4.23
+  StrengthPow:
+    m_OverrideState: 1
+    m_Value: 1
+--- !u!114 &-7702168271625211787
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fd7d3882af82046b3945e7a77b5ef3, type: 3}
+  m_Name: CloudShadowVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  ShadowStrength:
+    m_OverrideState: 1
+    m_Value: 0.4
+  SmoothStepRange:
+    m_OverrideState: 1
+    m_Value: {x: 0.5040297, y: 0.6040297}
+  NoiseScale1:
+    m_OverrideState: 1
+    m_Value: {x: 0.1, y: 0.1}
+  NoiseTime1:
+    m_OverrideState: 1
+    m_Value: 0.17
+  DebugMode:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &-2938394303207439756
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7443357ba9cb024f9e0f59d75c1c066, type: 3}
+  m_Name: HalfToneOnlyPointVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  _visibleInSceneview:
+    m_OverrideState: 1
+    m_Value: 1
+  _Density:
+    m_OverrideState: 1
+    m_Value: 400
+  _Radius:
+    m_OverrideState: 1
+    m_Value: -1.7
+  _SmoothEdge:
+    m_OverrideState: 1
+    m_Value: 2.4
+  _HalfToneFactor:
+    m_OverrideState: 1
+    m_Value: 0.6
+  _SourceFactor:
+    m_OverrideState: 1
+    m_Value: 0.67
+  _Lightness:
+    m_OverrideState: 1
+    m_Value: 0.53
+  _PointColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0.69419146, b: 1, a: 1}
+  _ColorFactor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: GIBLI URP All Effects Volume
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -2938394303207439756}
+  - {fileID: -7960996701988058429}
+  - {fileID: -8885045366956896369}
+  - {fileID: -7702168271625211787}
+--- !u!114 &7466674041223615091
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c592f8609bbaa404b8c91d85a7293970, type: 3}
+  m_Name: Flare
+  m_EditorClassIdentifier: 
+  active: 1
+  flareColor:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  flarePosition:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0}
+  flareSize:
+    m_OverrideState: 0
+    m_Value: 0
+  paraColor:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  paraPosition:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0}
+  paraSize:
+    m_OverrideState: 0
+    m_Value: 0

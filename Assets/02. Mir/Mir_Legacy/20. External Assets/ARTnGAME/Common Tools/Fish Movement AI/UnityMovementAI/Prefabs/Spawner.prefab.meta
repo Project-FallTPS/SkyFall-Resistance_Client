@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5c40413500bcaa84f884e9834bc27ec9
+timeCreated: 1445264925
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
+  assetPath: Assets/ARTnGAME/Common Tools/Fish Movement AI/UnityMovementAI/Prefabs/Spawner.prefab
+  uploadId: 760807

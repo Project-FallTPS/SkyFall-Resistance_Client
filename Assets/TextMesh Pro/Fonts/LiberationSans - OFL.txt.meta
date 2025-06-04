@@ -1,15 +1,15 @@
 fileFormatVersion: 2
 guid: 6e59c59b81ab47f9b6ec5781fa725d2c
 timeCreated: 1484171296
-licenseType: Pro
+licenseType: Store
 TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 268984
-  packageName: Droll Robots Pack1
-  packageVersion: 1.0
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
   assetPath: Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
-  uploadId: 623943
+  uploadId: 760807
