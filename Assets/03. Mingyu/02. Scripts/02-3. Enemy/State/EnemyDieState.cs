@@ -10,8 +10,11 @@ public class EnemyDieState : IEnemyState
     private CapsuleCollider _enemyCollider;
 
     private AnimatorStateInfo _animatorStateInfo;
-
     private Vector3 _deathPosition;
+
+    private float _deathLogicDelay = 3f;
+    private float _minKnockbackPower = 15f;
+    private float _maxKnockbackPower = 30f;
 
     public EnemyDieState(EnemyController enemyController)
     {
@@ -34,7 +37,9 @@ public class EnemyDieState : IEnemyState
     public void Exit()
     {
         _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), false);
-        _enemyController.EnemyCollider.enabled = true;
+        _enemyCollider.enabled = true;
+        _rigidbody.isKinematic = true;
+        _rigidbody.useGravity = false;
         _enemyController.StopAllCoroutines();
     }
     
@@ -43,8 +48,9 @@ public class EnemyDieState : IEnemyState
         _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), true);
         TargetManager.Instance.RemoveEnemyFromHashSet(_enemyController.gameObject);
         ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
+        VFXPoolManager.Instance.GetObjectByRandom(EVFXType.EnemyExplosionOnDead, _deathPosition);
         ApplyDeathPhysics();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(_deathLogicDelay);
         TryDropAccessoryBox();
         ReturnToPool();
     }
@@ -56,9 +62,8 @@ public class EnemyDieState : IEnemyState
         _rigidbody.useGravity = true;
 
         Vector3 forceDirection = (_deathPosition - _enemyController.Player.transform.position).normalized;
-        Vector3 finalForce = forceDirection * Random.Range(10f, 15f);
-        Debug.Log(finalForce);
-        // _rigidbody.AddForce(finalForce, ForceMode.Impulse);
+        Vector3 finalForce = forceDirection * Random.Range(_minKnockbackPower, _maxKnockbackPower);
+        _rigidbody.AddForce(finalForce, ForceMode.Impulse);
     }
     
     private void TryDropAccessoryBox()

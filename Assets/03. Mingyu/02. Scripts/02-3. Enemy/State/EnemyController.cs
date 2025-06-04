@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VInspector;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
@@ -57,29 +56,26 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        if (_enemyStateDict.Count != 0)
-        {
-            _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
-            _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
-            _enemyData.Init();
-            _enemyCollider.enabled = true;
-            _rigidbody.isKinematic = true;
-            _rigidbody.useGravity = false;
-            _shieldGameObject.SetActive(false);
-        }
+        
     }
-    private void Start()
+    public void Init()
     {
-        _enemyStateDict.Add(EEnemyState.Trace, new EnemyTraceState
-        (this, 
-            EnemyStrategyHandler.Instance.PickTraceStrategy(), 
-            EnemyStrategyHandler.Instance.EnemyTransitionStrategyDict[_enemyData.EnemyType]));
-        _enemyStateDict.Add(EEnemyState.Attack, new EnemyAttackState
-        (this, 
-            EnemyStrategyHandler.Instance.EnemyAttackStrategyDict[_enemyData.EnemyType],
-            EnemyStrategyHandler.Instance.EnemyTransitionStrategyDict[_enemyData.EnemyType]));
-        _enemyStateDict.Add(EEnemyState.Damaged, new EnemyDamagedState(this));
-        _enemyStateDict.Add(EEnemyState.Die, new EnemyDieState(this));
+        if (_enemyStateDict.Count == 0)
+        {
+            _enemyStateDict.Add(EEnemyState.Trace, new EnemyTraceState
+            (this, 
+                EnemyStrategyHandler.Instance.PickTraceStrategy(), 
+                EnemyStrategyHandler.Instance.EnemyTransitionStrategyDict[_enemyData.EnemyType]));
+            _enemyStateDict.Add(EEnemyState.Attack, new EnemyAttackState
+            (this, 
+                EnemyStrategyHandler.Instance.EnemyAttackStrategyDict[_enemyData.EnemyType],
+                EnemyStrategyHandler.Instance.EnemyTransitionStrategyDict[_enemyData.EnemyType]));
+            _enemyStateDict.Add(EEnemyState.Damaged, new EnemyDamagedState(this));
+            _enemyStateDict.Add(EEnemyState.Die, new EnemyDieState(this));
+        }
+        _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
+        _enemyData.Init();
+        _shieldGameObject.SetActive(false);
         _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
     }
 
