@@ -282,7 +282,7 @@ public class AudioEditor : EditorWindow
             return;
         }
 
-        string path = Path.Combine("Assets", "Sounds", audioClip.name + "_EDITED.wav");
+        string path = Path.Combine("Assets", "99. Sounds", audioClip.name + "_EDITED.wav");
 
         // Ensure the directory exists
         string directory = Path.GetDirectoryName(path);
