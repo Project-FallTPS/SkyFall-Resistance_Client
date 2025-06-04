@@ -44395,7 +44395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e7f198a9708344b8213cce4143be72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: 10
+  RotateSpeed: 1000
   Jetpacks:
   - BigSmoke: {fileID: 5068031474866585133}
   - BigSmoke: {fileID: 5692594080176897017}
