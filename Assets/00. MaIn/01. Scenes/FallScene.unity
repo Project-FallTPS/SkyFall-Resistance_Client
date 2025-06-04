@@ -3387,6 +3387,7 @@ GameObject:
   - component: {fileID: 1887002312}
   - component: {fileID: 1887002311}
   - component: {fileID: 1887002313}
+  - component: {fileID: 1887002314}
   m_Layer: 0
   m_Name: === [ Enemy Spawners ] ===
   m_TagString: Untagged
@@ -3435,6 +3436,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0cfa01f18d5b7c4ebbc965bf16bcfee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 0
+--- !u!114 &1887002314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887002310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa9bfaf0c649054185bb2efedee2bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isDontDestroy: 0
