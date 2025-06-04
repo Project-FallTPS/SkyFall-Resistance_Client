@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8799473749063990133}
   - component: {fileID: 3267800821446584414}
   m_Layer: 0
-  m_Name: BoxPoolManager
+  m_Name: P_BoxPoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

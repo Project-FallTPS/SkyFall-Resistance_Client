@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6218913054751741555}
   - component: {fileID: 7051164293496944235}
   m_Layer: 0
-  m_Name: P_VFX_ShieldTrail
+  m_Name: P_Enemy_VFX_ShieldTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

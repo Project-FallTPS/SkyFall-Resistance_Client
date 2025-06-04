@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 111990488360090284}
   - component: {fileID: 6277376462674975809}
   m_Layer: 12
-  m_Name: P_BossLaser
+  m_Name: P_Boss_Attack_Laser
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
