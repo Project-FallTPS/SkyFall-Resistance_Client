@@ -6,18 +6,25 @@ public class EnemyDieState : IEnemyState
 {
     private EnemyController _enemyController;
     private EnemyData _enemyData;
+    private Rigidbody _rigidbody;
+    private CapsuleCollider _enemyCollider;
 
     private AnimatorStateInfo _animatorStateInfo;
+
+    private Vector3 _deathPosition;
 
     public EnemyDieState(EnemyController enemyController)
     {
         _enemyController = enemyController;
         _enemyData = enemyController.EnemyData;
+        _rigidbody = enemyController.Rigidbody;
+        _enemyCollider = enemyController.EnemyCollider;
     }
 
     public void Enter()
     {
         _enemyController.StartCoroutineInEnemyState(DieCoroutine());
+        _deathPosition = _enemyController.transform.position;
     }
 
     public void Update()
@@ -34,12 +41,24 @@ public class EnemyDieState : IEnemyState
     private IEnumerator DieCoroutine()
     {
         _enemyController.EnemyAnimator.SetBool(nameof(EEnemyAnimationTransitionParam.die), true);
-        _enemyController.EnemyCollider.enabled = false;
         TargetManager.Instance.RemoveEnemyFromHashSet(_enemyController.gameObject);
         ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Remove(_enemyController.gameObject);
-        yield return new WaitForSeconds(1f);
+        ApplyDeathPhysics();
+        yield return new WaitForSeconds(3f);
         TryDropAccessoryBox();
         ReturnToPool();
+    }
+    
+    private void ApplyDeathPhysics()
+    {
+        _enemyCollider.enabled = false;
+        _rigidbody.isKinematic = false;
+        _rigidbody.useGravity = true;
+
+        Vector3 forceDirection = (_deathPosition - _enemyController.Player.transform.position).normalized;
+        Vector3 finalForce = forceDirection * Random.Range(10f, 15f);
+        Debug.Log(finalForce);
+        // _rigidbody.AddForce(finalForce, ForceMode.Impulse);
     }
     
     private void TryDropAccessoryBox()
@@ -47,7 +66,7 @@ public class EnemyDieState : IEnemyState
         int rand = Random.Range(0, 100);
         if (rand < _enemyController.EnemyData.AccessoryBoxDropProbability)
         {
-            BoxPoolManager.Instance.GetObject(EBoxType.AccessoryBox, _enemyController.transform.position);
+            BoxPoolManager.Instance.GetObject(EBoxType.AccessoryBox, _deathPosition);
         }
     }
     private void ReturnToPool()
