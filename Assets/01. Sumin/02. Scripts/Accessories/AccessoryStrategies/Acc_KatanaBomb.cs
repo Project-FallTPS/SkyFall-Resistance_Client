@@ -31,6 +31,7 @@ public class Acc_KatanaBomb : AccessoryBase, IAccessory
             {
                 damageable.TakeDamage(_fianlAdditionalDamage);
                 Debug.Log($"폭탄! {_fianlAdditionalDamage}");
+                UIEventHandler.Instance.OnPlayerAttackHit?.Invoke();
             }
         }
     }

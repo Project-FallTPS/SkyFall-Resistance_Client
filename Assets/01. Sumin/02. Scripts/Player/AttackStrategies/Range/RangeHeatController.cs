@@ -17,6 +17,9 @@ public class RangeHeatController : MonoBehaviour
     private float _disabledTime;
     private bool _wasOverheated = false;
 
+    [Header("# Muzzle Flash")]
+    [SerializeField] private GameObject _muzzle;
+
     private Coroutine _coolingCoroutine;
 
     private void OnDisable()
@@ -92,6 +95,7 @@ public class RangeHeatController : MonoBehaviour
         {
             _coolingCoroutine = StartCoroutine(CoOverHeat(0f));
         }
+        PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MuzzleFlash, _muzzle.transform.position, Quaternion.identity);
 
         return true;
     }

@@ -143,20 +143,28 @@ public class TargetManager : Singleton<TargetManager>
     {
         _hitCrossHairImage.gameObject.SetActive(true);
 
+        // 트윈 중복 방지
         _hitCrossHairTween?.Kill();
+        _hitCrossHairImage.transform.DOKill(); // 스케일 트윈도 중단
+
+        // 초기 세팅
+        _hitCrossHairImage.transform.localScale = Vector3.zero;
 
         Color color = _hitCrossHairImage.color;
         color.a = 1f;
         _hitCrossHairImage.color = color;
 
-        // 서서히 알파값을 0으로 만들며 사라지게
+        // 스케일 0 → 1 (빠르게 확장)
+        _hitCrossHairImage.transform.DOScale(Vector3.one, 0.05f).SetEase(Ease.OutBack);
+
+        // 알파 1 → 0 (잠깐 보였다가 서서히 사라짐)
         _hitCrossHairTween = DOTween.ToAlpha(
             () => _hitCrossHairImage.color,
             x => _hitCrossHairImage.color = x,
-            0f,            // target alpha
-            0.3f           // duration
+            0f,
+            0.3f
         )
-        .SetDelay(0.1f)    // 잠깐 보였다가 사라지게
+        .SetDelay(0.1f)
         .OnComplete(() => _hitCrossHairImage.gameObject.SetActive(false));
     }
 }

@@ -5,5 +5,6 @@ public enum EPlayerEffectType
     LandingEffect,
     BatteryEffect,
     BombEffect,
+    MuzzleFlash,
     Count,
 }

@@ -70,6 +70,8 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
         OnHitEffect.PlayFeedbacks();
 
+        Debug.Log($"플레이어 공격받음! {StatDict[EStatType.Health]}");
+
         if (StatDict[EStatType.Health] <= 0)
         {
             Die();
