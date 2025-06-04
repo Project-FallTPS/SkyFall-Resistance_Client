@@ -75,11 +75,7 @@ public class PlayerAirborneState : IPlayerState
         if (camForward.sqrMagnitude > 0.01f)
         {
             Quaternion targetRot = Quaternion.LookRotation(camForward);
-            _player.transform.rotation = Quaternion.RotateTowards(
-                _player.transform.rotation,
-                targetRot,
-                _player.RotateSpeed * Time.deltaTime
-            );
+            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRot, _player.RotateSpeed * Time.deltaTime);
         }
     }
 }
