@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6489913257874686385}
   - component: {fileID: 98766300112478065}
   - component: {fileID: 2053807579894235529}
+  - component: {fileID: 2850312805411768430}
   m_Layer: 0
   m_Name: P_VFX_KatanaHitEffect
   m_TagString: Untagged
@@ -4905,6 +4906,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2850312805411768430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484163320971009062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de43eec0c1b945a4588f7ce2bd84c601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 6
 --- !u!1 &5435880014651135847
 GameObject:
   m_ObjectHideFlags: 0
