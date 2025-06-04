@@ -4,5 +4,6 @@ public enum EVFXType
     NormalDebrisExplosion,
     ExplosiveDebrisExplosion,
     EnemySupportTypeShieldTrail,
+    EnemyExplosionOnDead,
     Count,
 }

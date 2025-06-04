@@ -17,4 +17,6 @@ Bullet,
 Manager,
 EnemyBullet,
 PlayerArea,
+Ground,
+Obstacle,
 }
