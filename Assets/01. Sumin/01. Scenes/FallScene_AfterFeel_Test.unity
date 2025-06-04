@@ -953,11 +953,6 @@ Transform:
   - {fileID: 1131820418}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &354501354 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8460537792848114125, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
-  m_PrefabInstance: {fileID: 925047578}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &402780791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,14 +1776,10 @@ PrefabInstance:
       propertyPath: _sprintActionLine
       value: 
       objectReference: {fileID: 1983623144}
-    m_RemovedComponents:
-    - {fileID: 9022615890613399314, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6085627389564564106, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1874241459}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
 --- !u!4 &925047579 stripped
 Transform:
@@ -1800,7 +1791,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8530504118306249517, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
   m_PrefabInstance: {fileID: 925047578}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874241453}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74e7f198a9708344b8213cce4143be72, type: 3}
@@ -3069,7 +3060,7 @@ PrefabInstance:
     - target: {fileID: 2336547205302752867, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
       propertyPath: _poolInfoList.Array.data[2].Container
       value: 
-      objectReference: {fileID: 354501354}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3232,34 +3223,6 @@ MonoBehaviour:
     EnemySpawnerInterval: 4
     WaveDuration: 60
   _enemySpawnerHandler: {fileID: 1887002311}
---- !u!1 &1874241453 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6085627389564564106, guid: b8a973d0812d9174ca88df9126d71f48, type: 3}
-  m_PrefabInstance: {fileID: 925047578}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1874241459
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874241453}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1887002310
 GameObject:
   m_ObjectHideFlags: 0

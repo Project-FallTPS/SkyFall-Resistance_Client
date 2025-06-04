@@ -1,0 +1,6 @@
+public enum ESfxType
+{
+
+
+    Count,
+}

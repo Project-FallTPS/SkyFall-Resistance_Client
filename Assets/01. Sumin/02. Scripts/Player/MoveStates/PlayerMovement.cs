@@ -47,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
     private const float LERP_DURATION = 0.7f;
 
     // Feel 용 Flag
-    private bool _hasPlayedSprintActionLine = false; // 상태 추적용 변수
+    private bool _hasPlayedSprintActionLine;   // 이미 선언돼 있음
+    private bool _sprintActionLineReady;       // 새 플래그
 
     // ──────────────────────────────────────────────────────
     private void Awake()
@@ -65,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
         };
 
         ChangeState(EPlayerMoveState.Airborne);
+        _sprintActionLine?.Initialization();    // 강제 초기화
+        _sprintActionLineReady = true;          // 준비 완료
         SetSprint(false);
     }
 
@@ -120,42 +123,43 @@ public class PlayerMovement : MonoBehaviour
         CurrentState?.SetSprint(isSprint);
         IsSprint = isSprint;
 
-        // ▶ Feedback 트리거 조건
-        if (isSprint)
+        // ───────────── Feel Action Line ─────────────
+        if (_sprintActionLineReady)
         {
-            if (!_hasPlayedSprintActionLine)
+            if (isSprint)
             {
-                _sprintActionLine?.PlayFeedbacks();
-                _hasPlayedSprintActionLine = true;
+                if (!_hasPlayedSprintActionLine)
+                {
+                    _sprintActionLine.PlayFeedbacks();
+                    _hasPlayedSprintActionLine = true;
+                }
+            }
+            else
+            {
+                if (_hasPlayedSprintActionLine)   // 안전: 최소 1회 Play 이후에만 Stop
+                {
+                    _sprintActionLine.StopFeedbacks();
+                    _hasPlayedSprintActionLine = false;
+                }
             }
         }
-        else
-        {
-            _sprintActionLine?.StopFeedbacks();
-            _hasPlayedSprintActionLine = false;
-        }
 
-        if (HasOverloadJetpack) isSprint = true;
-
-        CurrentState?.SetSprint(isSprint);
-        IsSprint = isSprint;
-
+        // ───────────── Jetpack Smoke Tween ─────────────
         float targetRate = isSprint ? TARGET_RATE : 0f;
 
         foreach (var jp in Jetpacks)
         {
-            // 이전 트윈이 있으면 중단
             jp.RateTween?.Kill();
 
             var ps = jp.BigSmoke;
             var emission = ps.emission;
             float start = emission.rateOverTime.constant;
 
-            if (!ps.isPlaying && targetRate > 0f) ps.Play();   // 켜질 때는 먼저 Play
+            if (!ps.isPlaying && targetRate > 0f) ps.Play();
 
             jp.RateTween = DOTween.To(
                     () => start,
-                    x => { emission.rateOverTime = x; },
+                    x => emission.rateOverTime = x,
                     targetRate,
                     LERP_DURATION)
                 .SetEase(Ease.Linear)
