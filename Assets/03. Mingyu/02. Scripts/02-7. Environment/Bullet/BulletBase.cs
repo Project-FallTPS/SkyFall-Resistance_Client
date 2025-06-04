@@ -51,11 +51,6 @@ public abstract class BulletBase : MonoBehaviour
     
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(nameof(ETags.Boss)))
-        {
-            return;
-        }
-        
         if (other.CompareTag(nameof(ETags.Player)))
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
@@ -63,14 +58,15 @@ public abstract class BulletBase : MonoBehaviour
             {
                 damageable.TakeDamage(_damage);
             }
+            DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
         }
-        DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
+
+        if (other.CompareTag(nameof(ETags.Obstacle)) || other.CompareTag(nameof(ETags.Ground)))
+        {
+            DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
+        }
     }
 
-    protected virtual void OnCollisionEnter(Collision collision)
-    {
-        DamageablePoolManager.Instance.ReturnObject(gameObject, _damageableType);
-    }
     protected virtual void OnDisable()
     {
         StopAllCoroutines();
