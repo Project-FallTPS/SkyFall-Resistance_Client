@@ -65,6 +65,7 @@ public class EnemyData
         AttackDelay = original.AttackDelay;
         
         NextAttackableTime = original.NextAttackableTime;
+        ExplosionRadius = original.ExplosionRadius;
         AccessoryBoxDropProbability = original.AccessoryBoxDropProbability;
         IsShieldActive = original.IsShieldActive;
         ShieldBuffRadius = original.ShieldBuffRadius;
