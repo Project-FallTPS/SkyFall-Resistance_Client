@@ -1,27 +1,32 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class InGame1_UI_PlayerSpeed : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private PlayerMovement _playerMovement;
 
-    [SerializeField] 
+    [SerializeField]
     private Slider _speedSlider;
 
-    [SerializeField] 
+    [SerializeField]
     private TextMeshProUGUI _speedText;
 
     [Header("Speed Settings")]
-    [SerializeField] 
+    [SerializeField]
     private float minSpeed = 110f;
 
-    [SerializeField] 
+    [SerializeField]
     private float midSpeed = 130f;
 
-    [SerializeField] 
+    [SerializeField]
     private float maxSpeed = 150f;
+
+    private Tween _sliderTween;
+    private Tween _textTween;
+    private float _displayedSpeed;
 
     private void Update()
     {
@@ -38,8 +43,7 @@ public class InGame1_UI_PlayerSpeed : MonoBehaviour
 
     private float CalculateSpeed(float y)
     {
-        // 선형 보간: -1일 때 min, 0일 때 mid, 1일 때 max
-        if (0f <= y)
+        if (y >= 0f)
         {
             return Mathf.Lerp(midSpeed, minSpeed, y);
         }
@@ -51,16 +55,30 @@ public class InGame1_UI_PlayerSpeed : MonoBehaviour
 
     private void UpdateSlider(float speed)
     {
-        // 슬라이더 값 갱신 (0~1 정규화)
         float normalized = Mathf.InverseLerp(minSpeed, maxSpeed, speed);
-        _speedSlider.value = normalized;
+        _sliderTween?.Kill();
+        _sliderTween = DOTween.To(
+            () => _speedSlider.value,
+            x => _speedSlider.value = x,
+            normalized,
+            0.25f
+        ).SetEase(Ease.InOutSine);
     }
 
-    private void UpdateSpeedText(float speed)
+    private void UpdateSpeedText(float targetSpeed)
     {
-        if (!ReferenceEquals(_speedText, null))
-        {
-            _speedText.text = $"{Mathf.RoundToInt(speed)} km/h";
-        }
+        if (_speedText == null) return;
+
+        _textTween?.Kill();
+        _textTween = DOTween.To(
+            () => _displayedSpeed,
+            x => {
+                _displayedSpeed = x;
+                _speedText.text = $"{Mathf.RoundToInt(_displayedSpeed)} km/h";
+            },
+            targetSpeed,
+            0.25f
+        ).SetEase(Ease.InOutSine);
     }
 }
+
