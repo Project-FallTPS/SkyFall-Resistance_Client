@@ -4,6 +4,6 @@ public enum EEnemyAnimationTransitionParam
 {
     die, // Bool
     attack, // Trigger
-    hitLeft, // Trigger
-    hitRight
+    HitTriggerLeft, // Trigger
+    HitTriggerRight // Trigger
 }

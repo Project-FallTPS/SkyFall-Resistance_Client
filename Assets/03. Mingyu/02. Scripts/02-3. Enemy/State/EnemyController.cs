@@ -62,6 +62,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         if (_enemyStateDict.Count == 0)
         {
+            Debug.Log("적 상태 딕셔너리 초기화");
             _enemyStateDict.Add(EEnemyState.Trace, new EnemyTraceState
             (this, 
                 EnemyStrategyHandler.Instance.PickTraceStrategy(), 
