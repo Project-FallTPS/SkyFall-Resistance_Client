@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5c09ec492074d214fbe1a19781ad15e8
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 299579
+  packageName: 'GIBLION 2024: Anime-NPR-Toon Framework'
+  packageVersion: 2.0.7
+  assetPath: Assets/ARTnGAME/GIBLI/TOON SHADERS/URP_WatercolourShaders/Shaders/CustomLighting/customLighting.hlsl
+  uploadId: 760807
