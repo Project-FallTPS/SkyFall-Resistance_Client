@@ -22,6 +22,8 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     private EWeaponType _currentWeapon;
     public IWeaponStrategy CurrentStrategy { get; private set; }
 
+    private bool isInitializedAcc = false;
+
     private void Awake()
     {
         Rigid = GetComponentInChildren<Rigidbody>();
@@ -52,7 +54,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         }
 
         // 씬 로드가 완료된 후 악세서리 복원
-        RestoreAccessories();
+        //RestoreAccessories();
     }
 
     private void RestoreAccessories()
@@ -85,10 +87,15 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
                 }
             }
         }
+        isInitializedAcc = true;
     }
 
     private void Update()
     {
+        if (!isInitializedAcc)
+        {
+            RestoreAccessories();
+        }
         CurrentStrategy?.Update();
     }
 
