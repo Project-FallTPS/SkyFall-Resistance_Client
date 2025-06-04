@@ -10,6 +10,8 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
     [Header("# UI Event")]
     public MMF_Player OnHitEffect;
+    [SerializeField] private UIDriftOnCamera driftScript;
+
 
     [Header("# Project")]
     [SerializeField] private PlayerStatCollectionSO _playerStatCollection; // 원본
@@ -82,6 +84,9 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
         StatDict[EStatType.Health] -= damage;
 
         OnHitEffect.PlayFeedbacks();
+        driftScript.TemporarilyDisable(1f);  // 1초간 UI 드리프트 중지
+
+        UIEventHandler.Instance.OnHealthChange?.Invoke(StatDict[EStatType.Health], StatDict[EStatType.MaxHealth]);
 
         Debug.Log($"플레이어 공격받음! {StatDict[EStatType.Health]}");
 
