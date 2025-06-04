@@ -6,7 +6,7 @@ public class AttackBombing : IAttackStrategy, ITransitionStrategy
     {
         ApplyBombDamage(self);
         PlayBombVFX(self.transform.position);
-        self.EnemyStateContext.ChangeState(self.EnemyStateDict[EEnemyState.Die]);
+        EnemyPoolManager.Instance.ReturnObject(self.gameObject, EEnemyType.Bombing);
     }
     
     public bool CanChangeToAttackState(EnemyController self)
@@ -26,7 +26,6 @@ public class AttackBombing : IAttackStrategy, ITransitionStrategy
         Collider[] hitColiiders = 
             Physics.OverlapSphere
             (enemyController.transform.position, enemyController.EnemyData.ExplosionRadius);
-
         foreach (Collider hitCollider in hitColiiders)
         {
             if (hitCollider.CompareTag(nameof(ETags.Player)) &&
