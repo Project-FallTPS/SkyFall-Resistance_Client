@@ -12,9 +12,13 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 
     private float _currentHealth = 10f;
 
+    [Header("최대 속력")]
+    [SerializeField]
+    private float _maxSpeed = 5f;
+
     [Header("반환 거리")]
     [SerializeField]
-    private float _releaseOffset = 10f;
+    private float _releaseOffset = 50f;
 
     [Header("반환 시간")]
     [SerializeField]
@@ -68,7 +72,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     {
         if (other.CompareTag(nameof(ETags.PlayerArea)))
         {
-            _rigidbody.maxLinearVelocity = 10;
+            _rigidbody.maxLinearVelocity = _maxSpeed;
         }
     }
 
