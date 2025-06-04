@@ -89,7 +89,7 @@ public class BossData
     [Tooltip("[3페이즈 한정] 일반 공격 성공 시 기본 데미지에 나눠지는 약수")]
     public float NormalAttackDamageDivisor;
 
-    private int _currentPhase = 3;
+    private int _currentPhase = 1;
     public int CurrentPhase
     {
         get => _currentPhase;
