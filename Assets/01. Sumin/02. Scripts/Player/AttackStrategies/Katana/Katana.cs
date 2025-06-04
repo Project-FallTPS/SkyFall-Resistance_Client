@@ -36,6 +36,7 @@ public class Katana : MonoBehaviour
         {
             float baseDamage = _player.CurrentStrategy.GetStat(EStatType.Damage);
             damageable.TakeDamage(baseDamage);
+            UIEventHandler.Instance.OnPlayerAttackHit?.Invoke();
 
             foreach (var acc in AccessoryManager.Instance.EquippedAccessories)
             {

@@ -17,12 +17,12 @@ public class InGame1_UI_PlayerStamina : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerStatHolder.OnStaminaChange += UpdateStaminaUI;
+        UIEventHandler.Instance.OnStaminaChange += UpdateStaminaUI;
     }
 
     private void OnDisable()
     {
-        PlayerStatHolder.OnStaminaChange -= UpdateStaminaUI;
+        UIEventHandler.Instance.OnStaminaChange -= UpdateStaminaUI;
     }
 
     private void UpdateStaminaUI(float current, float max)

@@ -18,14 +18,6 @@ public class SoundManager : Singleton<SoundManager>
     private AudioSource[] _sfxPlayers;                  // SFX는 동시에 여러개가 실행됨
     private int _channelIndex;
 
-    public enum EBGM
-    {
-    }
-
-    public enum ESFX
-    {
-    }
-
     public float BGMVolume
     {
         get => GetVolume(EAudioType.BGM);
@@ -78,7 +70,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     // BGM 사용을 위한 함수
-    public void PlayBgm(EBGM bgm)
+    public void PlayBgm(EBgmType bgm)
     {
         if (_bgmPlayer == null) return;
         _bgmPlayer.clip = BgmClips[(int)bgm];
@@ -91,7 +83,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     // 효과음 사용을 위한 함수
-    public void PlaySfx(ESFX sfx)
+    public void PlaySfx(ESfxType sfx)
     {
         // 쉬고 있는 하나의 sfxPlayer에게 clip을 할당하고 실행
         for (int idx = 0; idx < _sfxPlayers.Length; idx++)

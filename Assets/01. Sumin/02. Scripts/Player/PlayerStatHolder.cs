@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerStatHolder : MonoBehaviour, IDamageable
 {
     [Header("# UI Event")]
-    public static Action<float, float> OnStaminaChange;
     public MMF_Player OnHitEffect;
 
     [Header("# Project")]
@@ -61,7 +60,7 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
             return false;
         }
 
-        OnStaminaChange?.Invoke(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]);
+        UIEventHandler.Instance.OnStaminaChange?.Invoke(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]);
         return true;
     }
 
@@ -89,6 +88,6 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
             return;
         }
         StatDict[EStatType.CurrentStamina] = Mathf.Min(StatDict[EStatType.MaxStamina], StatDict[EStatType.CurrentStamina] + StatDict[EStatType.StaminaRegenRate] * Time.deltaTime);
-        OnStaminaChange?.Invoke(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]);
+        UIEventHandler.Instance.OnStaminaChange?.Invoke(StatDict[EStatType.CurrentStamina], StatDict[EStatType.MaxStamina]);
     }
 }

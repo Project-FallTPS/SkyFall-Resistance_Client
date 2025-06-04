@@ -5428,8 +5428,13 @@ MonoBehaviour:
   _isDontDestroy: 0
   _crossHair: {fileID: 1503410828067811237}
   _targetLockedUIPrefab: {fileID: 1637108076316869242, guid: 6ccc1f6847239a644b3ef6ba562ad081, type: 3}
-  _originalCrossHairUIPrefab: {fileID: 7448380887546306518}
-  _uiLockArea: {fileID: 470975083440253790}
+  _originalCrossHairUIPrefab: {fileID: 8369165356852796518}
+  _uiLockArea: {fileID: 5743391881410555581}
+  _crossHairSprites:
+  - Type: 0
+    Sprite: {fileID: 21300000, guid: 5130fb44c02841e449e95dc2c79ed750, type: 3}
+  - Type: 1
+    Sprite: {fileID: 21300000, guid: 3fc11d94e5d6e1344905d9d3f1423ad6, type: 3}
   _camera: {fileID: 1950769462035173212}
   _maxDistance: 20
   Target: {fileID: 0}
@@ -5741,6 +5746,7 @@ GameObject:
   - component: {fileID: 5095523376238203822}
   - component: {fileID: 5637494490190570100}
   - component: {fileID: 848553549}
+  - component: {fileID: 8563022176667200685}
   m_Layer: 5
   m_Name: Canvas_PlayerUI
   m_TagString: Untagged
@@ -6238,6 +6244,19 @@ Canvas:
   m_SortingLayerID: 753347803
   m_SortingOrder: 1503
   m_TargetDisplay: 0
+--- !u!114 &8563022176667200685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750301829024498874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88495eb7ae6e85641a9c701b49e4ad6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDontDestroy: 0
 --- !u!224 &8581737569250391261
 RectTransform:
   m_ObjectHideFlags: 0

@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class TargetManager : Singleton<TargetManager>
 {
+    [Header("# Detection Activate")]
+    private bool _isKatana = false;
+
     [Header("UI & Camera Reference")]
     [SerializeField] private Image _crossHair;
     [SerializeField] private GameObject _targetLockedUIPrefab;
-    [SerializeField] private GameObject _originalCrossHairUIPrefab;
+    [SerializeField] private Image _originalCrossHairUIPrefab;
     [SerializeField] private RectTransform _uiLockArea;
+    [SerializeField] private List<CrossHair> _crossHairSprites;
 
     [Header("Target Detection")]
     [SerializeField] private Camera _camera;
@@ -29,12 +33,13 @@ public class TargetManager : Singleton<TargetManager>
 
         _targetLockedUIInstance = Instantiate(_targetLockedUIPrefab, _uiLockArea.parent);
         _targetLockedUIInstance.SetActive(false);
+
+        UIEventHandler.Instance.OnPlayerWeaponChange += SetTargetDetectionActivate;
     }
 
     private void Update()
     {
         SetTarget();
-        UpdateLockedUI();
     }
 
     private void SetTarget()
@@ -64,22 +69,23 @@ public class TargetManager : Singleton<TargetManager>
 
         Target = closest;
         _crossHair.color = Target != null ? Color.red : Color.white;
+        UpdateLockedUI();
     }
 
     private void UpdateLockedUI()
     {
-        if (_targetLockedUIInstance == null) return;
+        if (_targetLockedUIInstance == null || !_isKatana) return;
 
         if (Target != null)
         {
             _targetLockedUIInstance.transform.position = _targetScreenPos;
             _targetLockedUIInstance.SetActive(true);
-            _originalCrossHairUIPrefab.SetActive(false);
+            _originalCrossHairUIPrefab.gameObject.SetActive(false);
         }
         else
         {
             _targetLockedUIInstance.SetActive(false);
-            _originalCrossHairUIPrefab.SetActive(true);
+            _originalCrossHairUIPrefab.gameObject.SetActive(true);
         }
     }
 
@@ -95,10 +101,6 @@ public class TargetManager : Singleton<TargetManager>
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-    }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(nameof(ETags.Enemy)) || other.CompareTag(nameof(ETags.Boss)))
@@ -110,5 +112,24 @@ public class TargetManager : Singleton<TargetManager>
     public void RemoveEnemyFromHashSet(GameObject target)
     {
         _enemiesInFrustum.Remove(target);
+    }
+
+    private void SetTargetDetectionActivate(EWeaponType type)
+    {
+        if(type == EWeaponType.Range)
+        {
+            Target = null;
+            UpdateLockedUI();
+        }
+
+        _isKatana = type == EWeaponType.Katana ? true : false;
+
+        foreach (var ch in _crossHairSprites)
+        {
+            if(ch.Type == type)
+            {
+                _originalCrossHairUIPrefab.sprite = ch.Sprite;
+            }
+        }
     }
 }
