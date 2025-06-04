@@ -15,8 +15,8 @@ MonoBehaviour:
   EnemyDatas:
   - EnemyType: 0
     DamageableType: 0
-    MaxHealth: 100
-    _currentHealth: 100
+    MaxHealth: 20
+    _currentHealth: 20
     MoveSpeed: 10
     AttackableRange: 7
     AttackDamage: 1
