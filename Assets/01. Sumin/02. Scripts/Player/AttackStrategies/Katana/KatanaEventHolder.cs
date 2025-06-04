@@ -23,4 +23,9 @@ public class KatanaEventHolder : MonoBehaviour
             _katana.DisableAttack();
         }
     }
+
+    public void PlaySfx()
+    {
+        SoundManager.Instance.PlaySfx(ESfxType.PlayerSword1);
+    }
 }

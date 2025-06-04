@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -10,6 +11,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip[] BgmClips;                        // BGM 클립 여러개
     public float BgmVolume;
     private AudioSource _bgmPlayer;                     // BGM 플레이어는 단일
+    private int _currentSceneIndex = 0;
 
     [Header("#SFX")]
     public AudioClip[] SfxClips;
@@ -34,6 +36,11 @@ public class SoundManager : Singleton<SoundManager>
     {
         base.Awake();
         Init();
+    }
+
+    private void Start()
+    {
+        SceneTransitionManager.Instance.OnChangeScene += ChangeBgm;
     }
 
     private void Init()
@@ -71,12 +78,22 @@ public class SoundManager : Singleton<SoundManager>
         SfxVolume = 1.0f - PlayerPrefs.GetFloat("Effect_Volume");
     }
 
+    private void ChangeBgm()
+    {
+        if (_currentSceneIndex >= (int)EBgmType.Count) return;
+
+        StopBgm();
+        StopAllSfx();
+        PlayBgm((EBgmType)_currentSceneIndex);
+    }
+
     // BGM 사용을 위한 함수
     public void PlayBgm(EBgmType bgm)
     {
         if (_bgmPlayer == null) return;
         _bgmPlayer.clip = BgmClips[(int)bgm];
         _bgmPlayer.Play();
+        _currentSceneIndex++;
     }
 
     public void StopBgm()
@@ -96,8 +113,8 @@ public class SoundManager : Singleton<SoundManager>
 
             _channelIndex = loopIndex;
             _sfxPlayers[loopIndex].clip = SfxClips[(int)sfx];
-            _sfxPlayers[loopIndex].spatialBlend = 1f;
-            _sfxPlayers[loopIndex].dopplerLevel = 1f;
+            _sfxPlayers[loopIndex].spatialBlend = 0f;
+            _sfxPlayers[loopIndex].dopplerLevel = 0f;
             _sfxPlayers[loopIndex].Play();
             break;
         }
@@ -115,9 +132,24 @@ public class SoundManager : Singleton<SoundManager>
             _channelIndex = loopIndex;
             _sfxPlayers[loopIndex].clip = SfxClips[(int)sfx];
             _sfxPlayers[loopIndex].gameObject.transform.position = position;
-            _sfxPlayers[loopIndex].spatialBlend = 0f;
-            _sfxPlayers[loopIndex].dopplerLevel = 0f;
+            _sfxPlayers[loopIndex].spatialBlend = 1f;
+            _sfxPlayers[loopIndex].dopplerLevel = 1f;
             _sfxPlayers[loopIndex].Play();
+            break;
+        }
+    }
+
+    private void StopAllSfx()
+    {
+        for (int idx = 0; idx < _sfxPlayers.Length; idx++)
+        {
+            int loopIndex = (idx + _channelIndex) % _sfxPlayers.Length;    // 채널 개수만큼 순회하도록 채널인덱스 변수 활용
+
+            if (_sfxPlayers[loopIndex].isPlaying) continue;               // 진행 중인 sfxPlayer는 쭉 진행
+
+            _channelIndex = loopIndex;
+            _sfxPlayers[loopIndex].Stop();
+            _sfxPlayers[loopIndex].clip = null;
             break;
         }
     }
