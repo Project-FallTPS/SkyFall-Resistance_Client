@@ -5,7 +5,7 @@ public class EnemySpawner : Spawner<SpawnedObjectInfo<EEnemyType>, EEnemyType>
     protected override void Spawn()
     {
         GameObject enemyGO = 
-            EnemyPoolManager.Instance.GetObject(PickRandomObject(), SetRandomSpawnPosition());
+            EnemyPoolManager.Instance.GetObject(PickRandomObject(), SetRandomSpawnPosition(), Quaternion.identity);
         ((EnemyPoolManager)EnemyPoolManager.Instance).ActiveEnemies.Add(enemyGO);
     }
     protected override EEnemyType PickRandomObject()
