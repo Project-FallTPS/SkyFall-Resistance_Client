@@ -17,6 +17,8 @@ public partial class BossShootAction : Action, IBossAttack
     private Transform _playerTransform;
     private LayerMask _obstacleMask;
 
+    private AnimatorStateInfo stateInfo;
+
     protected override Status OnStart()
     {
         if (_bossController == null || _bossData == null)
@@ -27,9 +29,10 @@ public partial class BossShootAction : Action, IBossAttack
             _playerTransform = _bossController.PlayerTransform;
             _obstacleMask = LayerMask.GetMask(nameof(ELayers.Obstacle));
         }
-
+        
         if (CanAttack())
         {
+            Attack();
             return Status.Running;
         }
 
@@ -38,12 +41,17 @@ public partial class BossShootAction : Action, IBossAttack
 
     protected override Status OnUpdate()
     {
-        _bossData.LastAttackTime = Time.time;
-        Attack();
-        return Status.Success;
+        if (CheckShootAnimationComplete())
+        {
+            return Status.Success;
+        }
+        return Status.Running;
     }
 
-    protected override void OnEnd() { }
+    protected override void OnEnd()
+    {
+        _bossController.NavMeshAgent.isStopped = false;
+    }
 
     public bool CanAttack()
     {
@@ -54,14 +62,21 @@ public partial class BossShootAction : Action, IBossAttack
     {
         if (IsPlayerObscured(out RaycastHit obstacleHit))
         {
-            Debug.Log("곡사");
             ShootHemiteCurveBullet(obstacleHit);
         }
         else
         {
-            Debug.Log("직사");
             ShootStraightBullet();
         }
+        _bossData.LastAttackTime = Time.time;
+        _bossController.NavMeshAgent.isStopped = true;
+        _bossController.Animator.SetTrigger(nameof(EBossAnimationParam.AttackShootTrigger));
+        stateInfo = _bossController.Animator.GetCurrentAnimatorStateInfo(0);
+    }
+
+    private bool CheckShootAnimationComplete()
+    {
+        return _bossData.LastAttackTime + stateInfo.normalizedTime / 2 <= Time.time;
     }
     
     private bool IsPlayerObscured(out RaycastHit obstacleHit)

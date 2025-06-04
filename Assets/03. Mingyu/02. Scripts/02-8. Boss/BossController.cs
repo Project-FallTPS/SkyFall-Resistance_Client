@@ -51,10 +51,12 @@ public class BossController : MonoBehaviour, IDamageable
         _bossData.CurrentHealth -= damage;
         if (_bossData.CurrentHealth <= 0)
         {
+            _animator.SetBool(nameof(EBossAnimationParam.Death), true);
             Debug.Log("Boss Dead");
         }
         else
         {
+            _animator.SetTrigger(nameof(EBossAnimationParam.HitLeftTrigger));
             Debug.Log("Boss Damaged");
         }
         OnHit?.Invoke(damage);
