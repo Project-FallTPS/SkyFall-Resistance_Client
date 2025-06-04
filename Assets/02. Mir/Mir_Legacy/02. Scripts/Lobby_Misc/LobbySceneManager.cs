@@ -29,6 +29,8 @@ public class LobbySceneManager : Singleton<LobbySceneManager>
             _monitorUI.SetActive(false);
             _characterUI.SetActive(false);
         }
+
+        SoundManager.Instance.PlayBgm(EBgmType.Lobby);
     }
 
     private void Update()
