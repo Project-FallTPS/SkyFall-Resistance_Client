@@ -13,6 +13,8 @@ TagManager:
   - Manager
   - EnemyBullet
   - PlayerArea
+  - Ground
+  - Obstacle
   layers:
   - Default
   - TransparentFX
