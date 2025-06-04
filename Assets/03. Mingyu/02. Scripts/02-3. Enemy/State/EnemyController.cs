@@ -62,6 +62,9 @@ public class EnemyController : MonoBehaviour, IDamageable
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Trace]);
             _enemyData.AdjustEnemyDataOnWave(WaveManager.Instance.CurrentWaveData.EnemyStatMultiplier);
             _enemyData.Init();
+            _enemyCollider.enabled = true;
+            _rigidbody.isKinematic = true;
+            _rigidbody.useGravity = false;
             _shieldGameObject.SetActive(false);
         }
     }
@@ -85,6 +88,8 @@ public class EnemyController : MonoBehaviour, IDamageable
         _enemyStateContext.CurrentState.Update();
     }
 
+    public GameObject GameObject => gameObject;
+    
     public void TakeDamage(float damage)
     {
         if (_enemyData.IsShieldActive)
@@ -101,7 +106,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             _enemyStateContext.ChangeState(_enemyStateDict[EEnemyState.Damaged]);
         }
-        Debug.Log($"{gameObject.name} 공격받음 : {damage}");
     }
 
     public void ActivateShield()

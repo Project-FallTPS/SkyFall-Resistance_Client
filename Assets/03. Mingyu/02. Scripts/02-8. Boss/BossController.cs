@@ -46,6 +46,8 @@ public class BossController : MonoBehaviour, IDamageable
         Init();
     }
 
+    public GameObject GameObject => gameObject;
+
     public void TakeDamage(float damage)
     {
         _bossData.CurrentHealth -= damage;

@@ -9,8 +9,8 @@ public class WeaknessCollider : MonoBehaviour, IDamageable
     private void Awake()
     {
         _bossController = GetComponentInParent<BossController>();
-    }
-
+    }   
+    public GameObject GameObject => gameObject;
     public void TakeDamage(float damage)
     {
         float criticalDamage = damage * _bossController.BossData.WeaknessAttackDamageMultiplier;

@@ -92,6 +92,8 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
         _rigidbody.AddForce(direction * magnitude, ForceMode.Impulse);
     }
 
+    public GameObject GameObject => gameObject;
+
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
