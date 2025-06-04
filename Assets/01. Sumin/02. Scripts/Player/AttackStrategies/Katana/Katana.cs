@@ -20,9 +20,6 @@ public class Katana : MonoBehaviour
         {
             katanaStrategy.AccessoryOnAttack(); // 필요한 초기화 로직
         }
-
-        int index = Random.Range(0, 3);
-        SoundManager.Instance.PlaySfx((ESfxType)index);
     }
 
     public void DisableAttack()

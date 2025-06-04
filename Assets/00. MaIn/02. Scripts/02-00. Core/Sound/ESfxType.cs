@@ -20,7 +20,5 @@ public enum ESfxType
 
     Warning,
 
-    Wind,
-
     Count,
 }

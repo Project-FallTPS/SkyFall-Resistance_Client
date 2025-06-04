@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDontDestroy: 1
   BgmClips:
-  - {fileID: 8300000, guid: 23eb0cbc0e6499b40a7e09055f60b2db, type: 3}
-  - {fileID: 8300000, guid: d9cc1b6ed79d8c747a81de7b0ef75e46, type: 3}
+  - {fileID: 8300000, guid: f397533712f00a8439c4367bef27e4d7, type: 3}
+  - {fileID: 8300000, guid: f7133b64fb477fc41af44085074a3f1c, type: 3}
   - {fileID: 8300000, guid: ee50d7d7471db1f4194ca4db4dba3bcd, type: 3}
-  - {fileID: 8300000, guid: 6a5d103a5dd9d2646a52b0b99623f16c, type: 3}
+  - {fileID: 8300000, guid: bb259bbc5fb417742aeb00c2a50d466b, type: 3}
   BgmVolume: 1
   SfxClips:
   - {fileID: 8300000, guid: 2334ebc4f621c124094300ec81ed1393, type: 3}
@@ -66,6 +66,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b5e1bc3f2bbc0f04fbea21b87c806efa, type: 3}
   - {fileID: 8300000, guid: d6d32362b559fab4f9861b3afe0eeec6, type: 3}
   - {fileID: 8300000, guid: aef67933666d2784699a3c504a7c01f5, type: 3}
-  - {fileID: 8300000, guid: 39c4e24e67b289641b3d6a05a2fc648d, type: 3}
   SfxVolume: 1
   Channels: 10
