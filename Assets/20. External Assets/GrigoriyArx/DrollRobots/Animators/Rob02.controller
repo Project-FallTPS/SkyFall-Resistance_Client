@@ -270,7 +270,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: hitLeft
+    m_ConditionEvent: HitTriggerLeft
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2064265032749291044}
@@ -278,9 +278,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_TransitionDuration: 0.024867684
+  m_TransitionOffset: 0.008258937
+  m_ExitTime: 0.8850794
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -517,7 +517,7 @@ AnimatorStateMachine:
     m_Position: {x: -360, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2064265032749291044}
-    m_Position: {x: -320, y: -120, z: 0}
+    m_Position: {x: -320, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6635539470915494494}
     m_Position: {x: -80, y: -130, z: 0}
@@ -787,18 +787,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: hitLeft
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: hitRight
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: look1
     m_Type: 4
     m_DefaultFloat: 0
@@ -807,6 +795,18 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: look2
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: HitTriggerLeft
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: HitTriggerRight
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -1128,7 +1128,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: hitRight
+    m_ConditionEvent: HitTriggerRight
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6635539470915494494}
@@ -1136,9 +1136,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_TransitionDuration: 0.01899466
+  m_TransitionOffset: 0.008258937
+  m_ExitTime: 0.89095247
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

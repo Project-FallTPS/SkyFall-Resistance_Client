@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 6848619536117591900}
   - component: {fileID: 3426383904465463725}
   m_Layer: 11
-  m_Name: Rob03
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
