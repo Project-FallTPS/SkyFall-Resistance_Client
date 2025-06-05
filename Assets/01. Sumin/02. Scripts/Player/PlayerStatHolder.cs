@@ -55,7 +55,6 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
                 return false;
             }
             StatDict[EStatType.CurrentStamina] = Mathf.Max(0, StatDict[EStatType.CurrentStamina] - StatDict[type] * Time.deltaTime);
-            Debug.Log($"스프린트 스태미너 사용{StatDict[EStatType.CurrentStamina]}");
         }
         else if(type == EStatType.TargetDashStaminaUseRate)
         {

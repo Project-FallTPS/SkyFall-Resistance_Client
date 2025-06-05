@@ -1,28 +1,86 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
+/// <summary>
+/// 보스 체력바 ― 3 Phase × (Front·Back) Filled Image 방식
+/// ▸ frontBar : 즉시 반응  ▸ backBar : 부드럽게 따라옴
+/// </summary>
 public class UI_BossHealth : MonoBehaviour
 {
-    [SerializeField] private Slider _sliderPhase0;
-    [SerializeField] private Slider _sliderPhase1;
-    [SerializeField] private Slider _sliderPhase2;
+    [Header("Phase 0")]
+    [SerializeField] private Image frontBarP0;
+    [SerializeField] private Image backBarP0;
 
-    private void OnEnable()
-    {
-        BossController.OnBossHealthChange += UpdateHealthUI;
-    }
+    [Header("Phase 1")]
+    [SerializeField] private Image frontBarP1;
+    [SerializeField] private Image backBarP1;
 
-    private void OnDisable()
-    {
-        BossController.OnBossHealthChange -= UpdateHealthUI;
-    }
+    [Header("Phase 2")]
+    [SerializeField] private Image frontBarP2;
+    [SerializeField] private Image backBarP2;
 
+    [Header("Tween Options")]
+    [SerializeField] private float delay = 0.05f;   // backBar 시작 지연
+    [SerializeField] private float smooth = 0.35f;   // backBar 이동시간
+    [SerializeField] private Ease ease = Ease.OutCubic;
+
+    private void OnEnable() => BossController.OnBossHealthChange += UpdateHealthUI;
+    private void OnDisable() => BossController.OnBossHealthChange -= UpdateHealthUI;
+
+    /// <param name="current">현재 체력</param>
+    /// <param name="max">최대 체력</param>
+    /// <param name="phase">현재 페이즈 (0 ~ 2)</param>
     private void UpdateHealthUI(float current, float max, int phase)
     {
-        float ratio = current / max;
+        float ratio = Mathf.Clamp01(current / max);
 
-        _sliderPhase0.value = (phase == 0) ? ratio : 0f;
-        _sliderPhase1.value = (phase == 1) ? ratio : (phase < 1 ? 1f : 0f);
-        _sliderPhase2.value = (phase == 2) ? ratio : (phase < 2 ? 1f : 0f);
+        UpdatePhaseBar(phase, ratio);
+        FillClearedPhases(phase);   // 이미 깎인 페이즈 0 처리
+        ResetUpcomingPhases(phase); // 아직 시작 안한 페이즈는 1 유지
     }
+
+    // ──────────────────────────────────────────────────────
+    #region 내부 메서드
+    void UpdatePhaseBar(int phase, float ratio)
+    {
+        (Image front, Image back) = phase switch
+        {
+            0 => (frontBarP0, backBarP0),
+            1 => (frontBarP1, backBarP1),
+            2 => (frontBarP2, backBarP2),
+            _ => (null, null)
+        };
+
+        if (front == null || back == null) return;
+
+        // 앞바 : 즉시
+        front.fillAmount = ratio;
+
+        // 뒷바 : 트윈으로 부드럽게
+        back.DOKill();
+        back.DOFillAmount(ratio, smooth)
+            .SetDelay(delay)
+            .SetEase(ease);
+    }
+
+    void FillClearedPhases(int currentPhase)
+    {
+        if (currentPhase > 0)
+        {
+            frontBarP0.fillAmount = backBarP0.fillAmount = 0f;
+            if (currentPhase > 1)
+                frontBarP1.fillAmount = backBarP1.fillAmount = 0f;
+        }
+    }
+
+    void ResetUpcomingPhases(int currentPhase)
+    {
+        if (currentPhase < 2)
+            frontBarP2.fillAmount = backBarP2.fillAmount = 1f;
+        if (currentPhase < 1)
+            frontBarP1.fillAmount = backBarP1.fillAmount = 1f;
+    }
+    #endregion
 }
+
