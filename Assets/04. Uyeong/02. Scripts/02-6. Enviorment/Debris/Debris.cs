@@ -121,6 +121,8 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
             _meshObject.SetActive(false);
         }
 
+        SoundManager.Instance.PlaySfx(ESfxType.Explosion1, transform.position);
+
         _fireTrail.SetBool(_canSpawnName, false);
 
         EVFXType vfxType = (EVFXType)((int)EVFXType.NormalDebrisExplosion + (int)DebrisType);
