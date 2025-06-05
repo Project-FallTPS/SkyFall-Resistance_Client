@@ -53,6 +53,10 @@ public class RangeStrategy : IWeaponStrategy
 
     public float GetStat(EStatType type)
     {
+        if(type == EStatType.RangeHeatUseRate)
+        {
+            Debug.Log($"히트 : {_weaponData.GetStat(type)}");
+        }
         float baseDamage = _weaponData.GetStat(type);
         float perkBonus = PerkManager.Instance.EquippedPerkBonuses[type];
         float accBonuses = 1f;
@@ -66,8 +70,7 @@ public class RangeStrategy : IWeaponStrategy
 
     public void Attack(GameObject target)
     {
-        Debug.Log($"총 쿨타임 : {GetStat(EStatType.CoolTime)}");
-        if (_timer >= GetStat(EStatType.CoolTime) && (_overheat == null || _overheat.TryConsumeHeat(GetStat(EStatType.RangeHeatUseRate))))
+        if (_timer >= GetStat(EStatType.CoolTime) && _overheat.TryConsumeHeat(GetStat(EStatType.RangeHeatUseRate)))
         {
             Vector3 dir = SetDirection();
             Quaternion rot = Quaternion.LookRotation(dir);
