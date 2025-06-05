@@ -48,5 +48,5 @@ MonoBehaviour:
   _poolInfoList:
   - Type: 0
     InitCount: 30
-    Prefab: {fileID: 4203940930554743506, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
+    Prefab: {fileID: 594878313347933263, guid: 114e5532e2376eb4da541e99e1d2bd7c, type: 3}
     Container: {fileID: 0}
