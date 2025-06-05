@@ -23,7 +23,7 @@ public partial class BossLaserAction : Action, IBossAttack
     private LayerMask _hitMask;
     private bool _isLaserDisappeared;
 
-    private VFX _bossLaseWindupVFX;
+    private VFX _bossLaserWindupVFX;
     
     protected override Status OnStart()
     {
@@ -34,12 +34,10 @@ public partial class BossLaserAction : Action, IBossAttack
             _bossTransform = _bossController.transform;
             _playerTransform = _bossController.PlayerTransform;
             _hitMask = LayerMask.GetMask(nameof(ELayers.Player));
-            _bossLaseWindupVFX = _bossController.GetComponentInChildren<VFX>();
+            GetBossLaserWindupVFX();
         }
-        
         if (CanAttack())
         {
-            _isLaserDisappeared = false;
             Attack();
             return Status.Running;
         }
@@ -60,6 +58,18 @@ public partial class BossLaserAction : Action, IBossAttack
         _bossController.NavMeshAgent.isStopped = false;
     }
 
+    private void GetBossLaserWindupVFX()
+    {
+        VFX[] vfxes = _bossController.GetComponentsInChildren<VFX>();
+        foreach (VFX vfx in vfxes)
+        {
+            if (vfx.VFXType == EVFXType.BossLaserWindup)
+            {
+                _bossLaserWindupVFX = vfx;
+            }
+        }
+    }
+
     public bool CanAttack()
     {
         float distanceToPlayer = Vector3.Distance(_bossTransform.position, _playerTransform.position);
@@ -68,6 +78,7 @@ public partial class BossLaserAction : Action, IBossAttack
 
     public void Attack()
     {
+        _isLaserDisappeared = false;
         _bossController.NavMeshAgent.isStopped = true;
         _bossController.StartCoroutine(WindupCoroutine());
     }
@@ -86,7 +97,7 @@ public partial class BossLaserAction : Action, IBossAttack
     private IEnumerator WindupCoroutine()
     {
         _bossController.Animator.SetBool(nameof(EBossAnimationParam.Windup), true);
-        _bossLaseWindupVFX.PlayVFX();
+        _bossLaserWindupVFX.PlayVFX();
         float timer = 0f;
         while (timer < _bossData.WindupTimeForLaser)
         {

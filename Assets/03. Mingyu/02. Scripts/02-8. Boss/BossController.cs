@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,8 @@ public class BossController : MonoBehaviour, IDamageable
     
     private Animator _animator;
     public Animator Animator { get => _animator; }
+    
+    private BehaviorGraphAgent _behaviorGraphAgent;
 
     [Header("External References")] 
     private Transform _playerTransform;
@@ -60,6 +63,16 @@ public class BossController : MonoBehaviour, IDamageable
         Init();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(nameof(ETags.Player)) && 
+            other.TryGetComponent<IDamageable>(out var damage))
+        {
+            damage.TakeDamage(_bossData.AttackDamage);
+            Debug.Log("플레이어가 보스와 접촉하여 데미지를 입습니다.");
+        }
+    }
+
     public GameObject GameObject => gameObject;
 
     public void TakeDamage(float damage)
@@ -68,6 +81,7 @@ public class BossController : MonoBehaviour, IDamageable
         if (_bossData.CurrentHealth <= 0)
         {
             _animator.SetBool(nameof(EBossAnimationParam.Death), true);
+            _behaviorGraphAgent.enabled = false;
             Debug.Log("Boss Dead");
         }
         else
@@ -78,13 +92,13 @@ public class BossController : MonoBehaviour, IDamageable
             OnBossHealthChange?.Invoke(_bossData.CurrentHealth, _bossData.MaxHealth, _bossData.CurrentPhase);
         }
         OnHit?.Invoke(damage);
-
     }
 
     private void Init()
     {
         _animator = GetComponent<Animator>();
         _playerTransform = GameObject.FindGameObjectWithTag(nameof(ETags.Player)).transform;
+        _behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         InitBossData();
         InitNavMesh();
         InitWeaknessColliders();

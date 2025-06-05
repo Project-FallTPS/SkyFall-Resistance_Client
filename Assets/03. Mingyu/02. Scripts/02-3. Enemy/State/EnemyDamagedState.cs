@@ -21,7 +21,6 @@ public class EnemyDamagedState : IEnemyState
     public void Update()
     {
         _animatorStateInfo = _enemyController.EnemyAnimator.GetCurrentAnimatorStateInfo(0);
-        Debug.Log( _animatorStateInfo.normalizedTime);
         if (1.0f <= _animatorStateInfo.normalizedTime)
         {
             ChangeStateOnDistanceFromPlayer();

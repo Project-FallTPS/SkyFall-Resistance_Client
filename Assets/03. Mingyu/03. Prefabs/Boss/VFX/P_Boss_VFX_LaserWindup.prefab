@@ -14749,7 +14749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vfxType: 8
-  _isPoolAble: 1
+  _isPoolAble: 0
 --- !u!1 &8759792057648169449
 GameObject:
   m_ObjectHideFlags: 0
