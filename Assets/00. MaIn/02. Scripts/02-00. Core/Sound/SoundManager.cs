@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -10,6 +11,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip[] BgmClips;                        // BGM 클립 여러개
     public float BgmVolume;
     private AudioSource _bgmPlayer;                     // BGM 플레이어는 단일
+    private int _currentSceneIndex = 0;
 
     [Header("#SFX")]
     public AudioClip[] SfxClips;
@@ -36,6 +38,11 @@ public class SoundManager : Singleton<SoundManager>
         Init();
     }
 
+    private void Start()
+    {
+        SceneTransitionManager.Instance.OnChangeScene += ChangeBgm;
+    }
+
     private void Init()
     {
         // 배경음 플레이어 초기화
@@ -52,12 +59,14 @@ public class SoundManager : Singleton<SoundManager>
         //bgmPlayer.clip = bgmClips;
 
         // 효과음 플레이어 초기화
-        GameObject sfxObject = new GameObject("SFXPlayer");
-        sfxObject.transform.parent = transform;
+        GameObject sfxParentObject = new GameObject("SFXPlayers");
+        sfxParentObject.transform.parent = transform;
         _sfxPlayers = new AudioSource[Channels];
 
         for (int idx = 0; idx < _sfxPlayers.Length; idx++)
         {
+            GameObject sfxObject = new GameObject("SFXPlayer");
+            sfxObject.transform.parent = sfxParentObject.transform;
             _sfxPlayers[idx] = sfxObject.AddComponent<AudioSource>();
             _sfxPlayers[idx].playOnAwake = false;
             _sfxPlayers[idx].volume = SfxVolume;
@@ -69,12 +78,22 @@ public class SoundManager : Singleton<SoundManager>
         SfxVolume = 1.0f - PlayerPrefs.GetFloat("Effect_Volume");
     }
 
+    private void ChangeBgm()
+    {
+        if (_currentSceneIndex >= (int)EBgmType.Count) return;
+
+        StopBgm();
+        StopAllSfx();
+        PlayBgm((EBgmType)_currentSceneIndex);
+    }
+
     // BGM 사용을 위한 함수
     public void PlayBgm(EBgmType bgm)
     {
         if (_bgmPlayer == null) return;
         _bgmPlayer.clip = BgmClips[(int)bgm];
         _bgmPlayer.Play();
+        _currentSceneIndex++;
     }
 
     public void StopBgm()
@@ -94,7 +113,43 @@ public class SoundManager : Singleton<SoundManager>
 
             _channelIndex = loopIndex;
             _sfxPlayers[loopIndex].clip = SfxClips[(int)sfx];
+            _sfxPlayers[loopIndex].spatialBlend = 0f;
+            _sfxPlayers[loopIndex].dopplerLevel = 0f;
             _sfxPlayers[loopIndex].Play();
+            break;
+        }
+    }
+
+    public void PlaySfx(ESfxType sfx, Vector3 position)
+    {
+        // 쉬고 있는 하나의 sfxPlayer에게 clip을 할당하고 실행
+        for (int idx = 0; idx < _sfxPlayers.Length; idx++)
+        {
+            int loopIndex = (idx + _channelIndex) % _sfxPlayers.Length;    // 채널 개수만큼 순회하도록 채널인덱스 변수 활용
+
+            if (_sfxPlayers[loopIndex].isPlaying) continue;               // 진행 중인 sfxPlayer는 쭉 진행
+
+            _channelIndex = loopIndex;
+            _sfxPlayers[loopIndex].clip = SfxClips[(int)sfx];
+            _sfxPlayers[loopIndex].gameObject.transform.position = position;
+            _sfxPlayers[loopIndex].spatialBlend = 1f;
+            _sfxPlayers[loopIndex].dopplerLevel = 1f;
+            _sfxPlayers[loopIndex].Play();
+            break;
+        }
+    }
+
+    private void StopAllSfx()
+    {
+        for (int idx = 0; idx < _sfxPlayers.Length; idx++)
+        {
+            int loopIndex = (idx + _channelIndex) % _sfxPlayers.Length;    // 채널 개수만큼 순회하도록 채널인덱스 변수 활용
+
+            if (_sfxPlayers[loopIndex].isPlaying) continue;               // 진행 중인 sfxPlayer는 쭉 진행
+
+            _channelIndex = loopIndex;
+            _sfxPlayers[loopIndex].Stop();
+            _sfxPlayers[loopIndex].clip = null;
             break;
         }
     }

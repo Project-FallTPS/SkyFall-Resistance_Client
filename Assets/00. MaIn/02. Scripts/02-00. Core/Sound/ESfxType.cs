@@ -15,14 +15,10 @@ public enum ESfxType
     Explosion2,
     Explosion3,
 
-    DebrisFall,
-
     Perk1,
     Perk2,
 
     Warning,
-
-    Wind,
 
     Count,
 }

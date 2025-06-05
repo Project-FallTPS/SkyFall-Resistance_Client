@@ -111,6 +111,11 @@ public partial class BossShootAction : Action, IBossAttack
                 shootTransform.position,
                 Quaternion.LookRotation(directionToPlayer)
             );
+            VFXPoolManager.Instance.GetObject(
+                EVFXType.BossShootMuzzle,
+                shootTransform.position,
+                Quaternion.LookRotation(directionToPlayer)
+            );
         }
     }
     
@@ -127,11 +132,15 @@ public partial class BossShootAction : Action, IBossAttack
                 shootStart,
                 Quaternion.identity
             );
-
             if (bullet.TryGetComponent(out CurveBullet hermiteBullet))
             {
                 hermiteBullet.InitializePoints(shootStart, shootMid, shootEnd);
             }
+            VFXPoolManager.Instance.GetObject(
+                EVFXType.BossShootMuzzle,
+                shootTransform.position,
+                Quaternion.LookRotation((shootStart - shootEnd).normalized)
+            );
         }
     }
     

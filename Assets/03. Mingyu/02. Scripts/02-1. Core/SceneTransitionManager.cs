@@ -5,20 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : Singleton<SceneTransitionManager>
 {
-    
+    public Action OnChangeScene;
+
     public void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+        OnChangeScene?.Invoke();
     }
 
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        OnChangeScene?.Invoke();
     }
 
     public void LoadScene(ESceneNames sceneName)
     {
         SceneManager.LoadScene(nameof(sceneName));
+        OnChangeScene?.Invoke();
     }
 
     public IEnumerator LoadSceneAsync(int sceneIndex, 
@@ -41,6 +45,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
                     if (canActivateScene != null && canActivateScene())
                     {
                         asyncOperation.allowSceneActivation = true;
+                        OnChangeScene?.Invoke();
                     }
                 }
                 yield return null;
@@ -68,6 +73,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
                     if (canActivateScene != null && canActivateScene())
                     {
                         asyncOperation.allowSceneActivation = true;
+                        OnChangeScene?.Invoke();
                     }
                 }
                 yield return null;
@@ -95,6 +101,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
                     if (canActivateScene != null && canActivateScene())
                     {
                         asyncOperation.allowSceneActivation = true;
+                        OnChangeScene?.Invoke();
                     }
                 }
                 yield return null;
