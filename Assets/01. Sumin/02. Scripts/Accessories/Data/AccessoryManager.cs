@@ -1,17 +1,81 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AccessoryManager : Singleton<AccessoryManager>
 {
     [SerializeField] private AccessoryDataSO _dataSO;
+    private static AccessoryDataSO _persistentDataSO;
 
     public Dictionary<EAccessoryType, ActiveAccessory> EquippedAccessories { get; private set; }
+    public Dictionary<EAccessoryType, ActiveAccessory> SavedAccessories { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
+        if (_persistentDataSO == null)
+        {
+            _persistentDataSO = _dataSO;
+            DontDestroyOnLoad(_dataSO);
+        }
+        else
+        {
+            _dataSO = _persistentDataSO;
+        }
 
-        EquippedAccessories = new Dictionary<EAccessoryType, ActiveAccessory>();
+        if (EquippedAccessories == null)
+        {
+            EquippedAccessories = new Dictionary<EAccessoryType, ActiveAccessory>();
+        }
+        if (SavedAccessories == null)
+        {
+            SavedAccessories = new Dictionary<EAccessoryType, ActiveAccessory>();
+        }
+
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnSceneUnloaded(Scene scene)
+    {
+        // 씬이 언로드될 때 현재 악세서리 정보 저장
+        SaveCurrentAccessories();
+    }
+
+    public void SaveCurrentAccessories()
+    {
+        foreach (var kvp in EquippedAccessories)
+        {
+            SavedAccessories[kvp.Key] = new ActiveAccessory(kvp.Value.Data, kvp.Value.Object)
+            {
+                Count = kvp.Value.Count
+            };
+        }
+    }
+
+    public void RestoreAccessories(PlayerAttackHandler player)
+    {
+        foreach (var kvp in SavedAccessories)
+        {
+            var type = kvp.Key;
+            var savedAcc = kvp.Value;
+            
+            // 저장된 악세서리 정보를 기반으로 새로운 악세서리 생성
+            var accessoryObj = AccessoryPoolManager.Instance.GetObject(type);
+            if (accessoryObj != null)
+            {
+                var accessory = accessoryObj.GetComponent<IAccessory>();
+                if (accessory != null)
+                {
+                    // 저장된 악세서리의 카운트만큼 장착
+                    for (int i = 0; i < savedAcc.Count; i++)
+                    {
+                        player.ReceiveAccessory(type, accessory);
+                    }
+                }
+            }
+        }
     }
 
     public void Equip(EAccessoryType type, IAccessory obj)
@@ -92,5 +156,18 @@ public class AccessoryManager : Singleton<AccessoryManager>
         }
 
         return filtered;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.name)
+        {
+            case "LobbyScene":
+                Destroy(gameObject);
+                break;
+            case "BossScene":
+                EquippedAccessories.Clear();
+                break;
+        }
     }
 }
