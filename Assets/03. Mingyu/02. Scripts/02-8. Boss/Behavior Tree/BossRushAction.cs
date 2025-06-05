@@ -19,6 +19,8 @@ public partial class BossRushAction : Action, IBossAttack
 
     private Vector3 _rushDestination;
     private float _originalSpeed;
+
+    private VFX _bossRushVFX;
     
     protected override Status OnStart()
     {
@@ -29,6 +31,7 @@ public partial class BossRushAction : Action, IBossAttack
             _bossTransform = _bossController.transform;
             _playerTransform = _bossController.PlayerTransform;
             _originalSpeed = _bossController.BossData.MoveSpeed;
+            GetBossRushVFX();
         }
         if (CanAttack())
         {
@@ -49,9 +52,21 @@ public partial class BossRushAction : Action, IBossAttack
 
     protected override void OnEnd()
     {
-        
+        _bossRushVFX.gameObject.SetActive(false);
     }
 
+    private void GetBossRushVFX()
+    {
+        VFX[] vfxes = _bossController.GetComponentsInChildren<VFX>();
+        foreach (VFX vfx in vfxes)
+        {
+            if (vfx.VFXType == EVFXType.BossRush)
+            {
+                _bossRushVFX = vfx;
+            }
+        }
+    }
+    
     public bool CanAttack()
     {
         float distanceToPlayer = Vector3.Distance(_bossTransform.position, _playerTransform.position);
@@ -93,6 +108,7 @@ public partial class BossRushAction : Action, IBossAttack
     private void Rush()
     {
         // 4. 매우 빠른 속도로 플레이어를 향해 돌진
+        _bossRushVFX.gameObject.SetActive(true);
         _bossController.NavMeshAgent.speed = _originalSpeed * _bossData.RushSpeedMultiplier;
         _rushDestination = new Vector3(_playerTransform.position.x, 0f, _playerTransform.position.z);
         _bossController.NavMeshAgent.SetDestination(_rushDestination);

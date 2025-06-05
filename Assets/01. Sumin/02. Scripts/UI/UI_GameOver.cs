@@ -12,6 +12,7 @@ public class UI_GameOver : MonoBehaviour
     private void Awake()
     {
         UIEventHandler.Instance.OnPlayerDie += GameOver;
+        UIEventHandler.Instance.OnBossDie += GameClear;
 
         _gameOverCanvasGroup = SetupCanvasGroup(_gameOverPanel);
         _gameClearCanvasGroup = SetupCanvasGroup(_gameClearPanel);

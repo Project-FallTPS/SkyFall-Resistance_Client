@@ -1265,7 +1265,6 @@ GameObject:
   - component: {fileID: 6263954381931078710}
   - component: {fileID: 8820021117173477008}
   - component: {fileID: 7355375763985900265}
-  - component: {fileID: 3734348747438284706}
   - component: {fileID: 308596524150309485}
   - component: {fileID: 8290329997087571001}
   - component: {fileID: 1581480185422501408}
@@ -1376,19 +1375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _staminaSlider: {fileID: 2718343844921108403}
---- !u!114 &3734348747438284706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4619131641746611754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db2ebb60fde6c1449833a51ccb4728f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sliderAltitude: {fileID: 8170173430680924505}
 --- !u!114 &308596524150309485
 MonoBehaviour:
   m_ObjectHideFlags: 0

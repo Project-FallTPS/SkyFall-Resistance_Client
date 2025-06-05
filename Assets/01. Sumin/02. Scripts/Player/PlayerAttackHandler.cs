@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 {
@@ -21,6 +22,8 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
     private EWeaponType _currentWeapon;
     public IWeaponStrategy CurrentStrategy { get; private set; }
 
+    private bool isInitializedAcc = false;
+
     private void Awake()
     {
         Rigid = GetComponentInChildren<Rigidbody>();
@@ -28,11 +31,60 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         PlayerStat = GetComponent<PlayerStatHolder>();
         _strategies.Add(EWeaponType.Katana, new KatanaStrategy(this));
         _strategies.Add(EWeaponType.Range, new RangeStrategy(this));
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
     {
         ChangeWeapon(EWeaponType.Katana);
+        RestoreAccessories();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "LobbyScene")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Debug.Log($"모드 : {mode}");
+        // 씬 로드가 완료된 후 악세서리 복원
+        //RestoreAccessories();
+    }
+
+    private void RestoreAccessories()
+    {
+        if (AccessoryManager.Instance == null || AccessoryManager.Instance.SavedAccessories == null) return;
+
+        // 저장된 악세서리 정보를 기반으로 복원
+        foreach(var kvp in AccessoryManager.Instance.SavedAccessories)
+        {
+            var type = kvp.Key;
+            var savedAcc = kvp.Value;
+            
+            // 저장된 개수만큼 반복
+            for (int i = 0; i < savedAcc.Count; i++)
+            {
+                // 악세서리 오브젝트 생성
+                GameObject accObj = AccessoryPoolManager.Instance.GetObject(type);
+                if (accObj != null)
+                {
+                    // 오브젝트 활성화
+                    accObj.SetActive(true);
+
+                    // IAccessory 인터페이스 가져오기
+                    var accessory = accObj.GetComponent<IAccessory>();
+                    if (accessory != null)
+                    {
+                        // 직접 인터페이스를 전달하여 장착
+                        ReceiveAccessory(type, accessory);
+                    }
+                }
+            }
+        }
+        isInitializedAcc = true;
     }
 
     private void Update()
@@ -50,7 +102,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         {
             _strategies[EWeaponType.Katana].AddAccessory(type, accessory);
         }
-        //CurrentStrategy?.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
