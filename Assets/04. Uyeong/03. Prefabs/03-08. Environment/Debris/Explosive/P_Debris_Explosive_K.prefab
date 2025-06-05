@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b2937ca1f410f4e95102acc8e1ae67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 5
+  _maxSpeed: 2.5
   _releaseOffset: 50
   _releaseTime: 3
   _meshObject: {fileID: 5328198812111181684}
