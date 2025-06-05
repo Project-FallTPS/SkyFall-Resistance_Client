@@ -14,7 +14,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 
     [Header("최대 속력")]
     [SerializeField]
-    private float _maxSpeed = 5f;
+    private float _maxSpeed = 2.5f;
 
     [Header("반환 거리")]
     [SerializeField]
@@ -120,6 +120,8 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
         {
             _meshObject.SetActive(false);
         }
+
+        SoundManager.Instance.PlaySfx(ESfxType.Explosion1, transform.position);
 
         _fireTrail.SetBool(_canSpawnName, false);
 
