@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,8 @@ public class BossController : MonoBehaviour, IDamageable
     
     private Animator _animator;
     public Animator Animator { get => _animator; }
+    
+    private BehaviorGraphAgent _behaviorGraphAgent;
 
     [Header("External References")] 
     private Transform _playerTransform;
@@ -68,6 +71,7 @@ public class BossController : MonoBehaviour, IDamageable
         if (_bossData.CurrentHealth <= 0)
         {
             _animator.SetBool(nameof(EBossAnimationParam.Death), true);
+            _behaviorGraphAgent.enabled = false;
             Debug.Log("Boss Dead");
         }
         else
@@ -85,6 +89,7 @@ public class BossController : MonoBehaviour, IDamageable
     {
         _animator = GetComponent<Animator>();
         _playerTransform = GameObject.FindGameObjectWithTag(nameof(ETags.Player)).transform;
+        _behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         InitBossData();
         InitNavMesh();
         InitWeaknessColliders();
