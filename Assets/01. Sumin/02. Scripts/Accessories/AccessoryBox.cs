@@ -51,7 +51,6 @@ public class AccessoryBox : MonoBehaviour
                     if(AccessoryPoolManager.Instance.GetObject(finalItem).TryGetComponent<IAccessory>(out var acc))
                     {
                         receiver.ReceiveAccessory(_type, acc);
-                        SoundManager.Instance.PlaySfx(ESfxType.Perk1);
                     }
                     break;
                 }

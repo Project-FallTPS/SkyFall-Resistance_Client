@@ -61,33 +61,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPower: 6.18
+    - _FresnelPower: -0.22
     - _Metallic: 5
-    - _NoiseDissolve: -3.19
+    - _NoiseDissolve: -1.06
     - _NoiseScale: 9
-    - _NormalStrength: -1.97
+    - _NormalStrength: 4.45
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Roughness: 100
     - _Smoothness: 0
-<<<<<<< Updated upstream
-    - _Transparent: 0.14
-    - _VoronoiDissolve: 5.91
-    - _VoronoiScale: 0.05
-    m_Colors:
-    - _FresnelColor: {r: 0.000014718557, g: 0.000020684054, b: 0.00012222801, a: 0}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 0.12156863}
-=======
-    - _Transparent: 3.15
+    - _Transparent: 3.11
     - _VoronoiDissolve: 7
     - _VoronoiScale: 0.04
     m_Colors:
-    - _FresnelColor: {r: 0.00097656244, g: 0.00097656244, b: 0.00097656244, a: 0}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
->>>>>>> Stashed changes
+    - _FresnelColor: {r: 0.000088082124, g: 0.0001237822, b: 0.00073146453, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0.12156863}
     - _NoiseSpeed: {r: -0.1, g: 0.1, b: 0, a: 0}
-    - _VoronoiColor: {r: 0.13443395, g: 0.1373499, b: 0.5, a: 0}
-    - _VoronoiSpeed: {r: 15, g: 15, b: 0, a: 0}
+    - _VoronoiColor: {r: 0.1623036, g: 0.16376437, b: 0.9999999, a: 0}
+    - _VoronoiSpeed: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1830489368499921059
