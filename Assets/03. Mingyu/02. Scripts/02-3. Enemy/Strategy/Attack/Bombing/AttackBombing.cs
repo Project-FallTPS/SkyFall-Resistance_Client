@@ -6,6 +6,7 @@ public class AttackBombing : IAttackStrategy, ITransitionStrategy
     {
         ApplyBombDamage(self);
         PlayBombVFX(self.transform.position);
+        SoundManager.Instance.PlaySfx(ESfxType.Explosion1, self.transform.position);
         EnemyPoolManager.Instance.ReturnObject(self.gameObject, EEnemyType.Bombing);
     }
     

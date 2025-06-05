@@ -10,6 +10,8 @@ public class AttackShooting : IAttackStrategy, ITransitionStrategy
             (self.EnemyData.DamageableType, shootTransform.position, shootTransform.rotation);
             bullet.GetComponent<StraightBullet>().Damage = self.EnemyData.AttackDamage;
         }
+
+        SoundManager.Instance.PlaySfx(ESfxType.EnemyBlaster1, self.transform.position);
     }
     public bool CanChangeToAttackState(EnemyController self)
     {
