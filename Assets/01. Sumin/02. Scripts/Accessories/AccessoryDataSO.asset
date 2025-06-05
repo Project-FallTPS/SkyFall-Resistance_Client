@@ -13,20 +13,25 @@ MonoBehaviour:
   m_Name: AccessoryDataSO
   m_EditorClassIdentifier: 
   AccessoryDatas:
+  - Type: 0
+    Prefab: {fileID: 5966997065088043352, guid: b7e803e488703bb408b916586cbf0b04, type: 3}
+    Bonuses:
+    - Type: 4
+      Value: 0.9
   - Type: 1
     Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
     Bonuses:
     - Type: 3
       Value: 1.1
   - Type: 2
-    Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
+    Prefab: {fileID: 1899342940594638778, guid: 1ca83c0881f9e1f4d8051357596ca9a6, type: 3}
     Bonuses: []
   - Type: 3
     Prefab: {fileID: 6457354906676372157, guid: 22dd772d96af24f4b83a9aec3702a282, type: 3}
     Bonuses:
     - Type: 15
       Value: 3
-  - Type: 7
+  - Type: 6
     Prefab: {fileID: 6208985102155455514, guid: dd22e96a981f81840bc38f1f26b7fe35, type: 3}
     Bonuses:
     - Type: 16
@@ -36,12 +41,25 @@ MonoBehaviour:
   - Type: 4
     Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
     Bonuses:
-    - Type: 3
+    - Type: 16
       Value: 5
-  - Type: 8
-    Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
+  - Type: 7
+    Prefab: {fileID: 656246334433332586, guid: 48b2589f6837b6d4c8609b3c1abdae7b, type: 3}
     Bonuses:
     - Type: 16
       Value: 5
-    - Type: 11
-      Value: 5
+  - Type: 8
+    Prefab: {fileID: 656246334433332586, guid: 67c9683175d39c1488da5e5a426c7259, type: 3}
+    Bonuses:
+    - Type: 3
+      Value: 1.1
+  - Type: 5
+    Prefab: {fileID: 656246334433332586, guid: 73bb7be06dfb9c6499e4926d76334e28, type: 3}
+    Bonuses:
+    - Type: 4
+      Value: 0.9
+  - Type: 9
+    Prefab: {fileID: 656246334433332586, guid: 73bb7be06dfb9c6499e4926d76334e28, type: 3}
+    Bonuses:
+    - Type: 17
+      Value: 0.9
