@@ -66,6 +66,8 @@ public partial class BossLaserAction : Action, IBossAttack
             if (vfx.VFXType == EVFXType.BossLaserWindup)
             {
                 _bossLaserWindupVFX = vfx;
+                _bossLaserWindupVFX.gameObject.SetActive(false);
+                break;
             }
         }
     }
@@ -149,6 +151,7 @@ public partial class BossLaserAction : Action, IBossAttack
         laserScript.endPoint = _bossController.LaserEndGo;
         laserScript.endPoint.transform.position = _laserEndPosition;
         laserScript.ShootLaser(_bossData.LaserDuration);
+        _playerTransform.gameObject.GetComponent<IDamageable>().TakeDamage(_bossController.BossData.AttackDamage);
         return laserScript.gameObject;
     }
     

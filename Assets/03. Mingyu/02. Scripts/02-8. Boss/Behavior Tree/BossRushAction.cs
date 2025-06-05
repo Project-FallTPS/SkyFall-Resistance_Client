@@ -62,6 +62,8 @@ public partial class BossRushAction : Action, IBossAttack
             if (vfx.VFXType == EVFXType.BossRush)
             {
                 _bossRushVFX = vfx;
+                _bossRushVFX.gameObject.SetActive(false);
+                break;
             }
         }
     }
