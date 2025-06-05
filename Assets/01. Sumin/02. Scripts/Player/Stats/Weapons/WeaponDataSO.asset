@@ -27,3 +27,5 @@ MonoBehaviour:
       Value: 10
     - Type: 4
       Value: 0.2
+    - Type: 17
+      Value: 5

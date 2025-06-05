@@ -119,9 +119,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDontDestroy: 0
   _poolInfoList:
+  - Type: 0
+    InitCount: 1
+    Prefab: {fileID: 5966997065088043352, guid: b7e803e488703bb408b916586cbf0b04, type: 3}
+    Container: {fileID: 5206507339312593560}
   - Type: 1
     InitCount: 1
-    Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
+    Prefab: {fileID: 5966997065088043352, guid: 742cfb3e8a872764e97daffee540745c, type: 3}
     Container: {fileID: 5206507339312593560}
   - Type: 2
     InitCount: 1
@@ -131,35 +135,26 @@ MonoBehaviour:
     InitCount: 1
     Prefab: {fileID: 6457354906676372157, guid: 22dd772d96af24f4b83a9aec3702a282, type: 3}
     Container: {fileID: 5206507339312593560}
-  - Type: 7
-    InitCount: 1
-    Prefab: {fileID: 6208985102155455514, guid: dd22e96a981f81840bc38f1f26b7fe35, type: 3}
-    Container: {fileID: 5206507339312593560}
   - Type: 4
     InitCount: 1
-    Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
-    Container: {fileID: 5206507339312593560}
-  - Type: 8
-    InitCount: 1
-    Prefab: {fileID: 656246334433332586, guid: 48b2589f6837b6d4c8609b3c1abdae7b, type: 3}
+    Prefab: {fileID: 2405878926142452614, guid: abe2416d228b6164594cc849f8e1de47, type: 3}
     Container: {fileID: 5206507339312593560}
   - Type: 5
     InitCount: 1
-    Prefab: {fileID: 1234689623521128932, guid: dacfcdaf3b23f294bbc337e07ef7df33, type: 3}
+    Prefab: {fileID: 7297933669545016633, guid: 9d8d0d9e4a4e9f9459adca163c001a40, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 6
+    InitCount: 1
+    Prefab: {fileID: 6208985102155455514, guid: dd22e96a981f81840bc38f1f26b7fe35, type: 3}
+    Container: {fileID: 5206507339312593560}
+  - Type: 7
+    InitCount: 1
+    Prefab: {fileID: 1592023474284122448, guid: fb2324e88a068f4419aef0bb5ae73561, type: 3}
     Container: {fileID: 5206507339312593560}
   - Type: 9
     InitCount: 1
-    Prefab: {fileID: 1234689623521128932, guid: 637fe267173c16c498138badd0867e81, type: 3}
+    Prefab: {fileID: 7297933669545016633, guid: 3b56eedf4debfbf4a8ef228bda04d4af, type: 3}
     Container: {fileID: 5206507339312593560}
-  - Type: 0
-    InitCount: 1
-    Prefab: {fileID: 5966997065088043352, guid: b7e803e488703bb408b916586cbf0b04, type: 3}
-    Container: {fileID: 5206507339312593560}
-  - Type: 8
-    InitCount: 1
-    Prefab: {fileID: 1661079568890502283, guid: 4b8440a8e25a86741b6003c396f679f3, type: 3}
-    Container: {fileID: 5206507339312593560}
-
 --- !u!1 &1217687436568008110
 GameObject:
   m_ObjectHideFlags: 0
