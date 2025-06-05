@@ -4986,7 +4986,7 @@ LineRenderer:
   - {x: 9.09, y: 2.87, z: 7.3}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1.5
+    widthMultiplier: 7.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -5134,7 +5134,7 @@ LineRenderer:
   - {x: 9.09, y: 2.87, z: 7.3}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 4
+    widthMultiplier: 20
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -48525,7 +48525,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 171535a69d8b739428c07eb4581c6c02, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
