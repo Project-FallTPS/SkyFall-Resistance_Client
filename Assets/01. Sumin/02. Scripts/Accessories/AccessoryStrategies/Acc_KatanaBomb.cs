@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Acc_KatanaBomb : AccessoryBase, IAccessory
 {
-    [SerializeField] private GameObject _bombEffectPrefab;
     [SerializeField] private float _additionalDamage = 10f;
     private float _fianlAdditionalDamage = 0f;
     private float _explodeRange;

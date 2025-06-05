@@ -66,7 +66,8 @@ public class RangeStrategy : IWeaponStrategy
 
     public void Attack(GameObject target)
     {
-        if (_timer >= GetStat(EStatType.CoolTime) && (_overheat == null || _overheat.TryConsumeHeat()))
+        Debug.Log($"총 쿨타임 : {GetStat(EStatType.CoolTime)}");
+        if (_timer >= GetStat(EStatType.CoolTime) && (_overheat == null || _overheat.TryConsumeHeat(GetStat(EStatType.RangeHeatUseRate))))
         {
             Vector3 dir = SetDirection();
             Quaternion rot = Quaternion.LookRotation(dir);
