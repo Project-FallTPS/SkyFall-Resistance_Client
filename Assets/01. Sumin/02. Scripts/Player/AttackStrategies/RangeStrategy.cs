@@ -82,6 +82,8 @@ public class RangeStrategy : IWeaponStrategy
                 });
 
             _timer = 0f;
+            SoundManager.Instance.PlaySfx(ESfxType.EnemyBlaster2);
+
             AccessoryOnAttack();
         }
     }
