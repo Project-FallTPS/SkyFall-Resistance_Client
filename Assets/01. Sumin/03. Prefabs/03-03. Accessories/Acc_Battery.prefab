@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2935671062497853610}
   - component: {fileID: 4154911715592957043}
   - component: {fileID: 6175904816138413049}
-  - component: {fileID: -944573646262024289}
+  - component: {fileID: 7608253378924200509}
   - component: {fileID: 1401783383967680382}
   m_Layer: 0
   m_Name: Acc_Battery
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-944573646262024289
+--- !u!65 &7608253378924200509
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,8 +108,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.020000001, y: 0.012, z: 0.042354688}
-  m_Center: {x: -0.012446427, y: 0.0000000018626451, z: 0.045390226}
+  m_Size: {x: 0.02, y: 0.012, z: 0.042354688}
+  m_Center: {x: -4.656613e-10, y: 0, z: 0.021177344}
 --- !u!114 &1401783383967680382
 MonoBehaviour:
   m_ObjectHideFlags: 0
