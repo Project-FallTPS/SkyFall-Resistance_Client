@@ -7,10 +7,14 @@ public class VFX : MonoBehaviour
 {
     [SerializeField]
     private EVFXType _vfxType;
+    public EVFXType VFXType
+    {
+        get => _vfxType;
+        set => _vfxType = value;
+    }
 
     [SerializeField] 
-    private bool _isPoolAble = true;
-    
+    private bool _isPoolAble;
     private ParticleSystem[] _particleSystems;
 
     private void Awake()

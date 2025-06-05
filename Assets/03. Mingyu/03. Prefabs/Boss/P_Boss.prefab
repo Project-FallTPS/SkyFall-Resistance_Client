@@ -990,6 +990,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4217253377175885550}
+  - {fileID: 5625030297290753366}
   - {fileID: 338977448341288905}
   - {fileID: 9215598651330787486}
   - {fileID: 9220314269296864656}
@@ -1230,6 +1231,76 @@ Transform:
   - {fileID: 42553839932725622}
   m_Father: {fileID: 5126331502840927000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3612767033235482928
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5126331502840927000}
+    m_Modifications:
+    - target: {fileID: 5158311535708934045, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063518424537689786, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_Name
+      value: P_Boss_VFX_Rush
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063518424537689786, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+--- !u!4 &5625030297290753366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8949566398710770790, guid: 644b85b3a02300946b9c310d577b46aa, type: 3}
+  m_PrefabInstance: {fileID: 3612767033235482928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5119087162627693273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1320,6 +1391,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5126331502840927000}
     m_Modifications:
+    - target: {fileID: 3239145646532323119, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4903624357972609933, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: looping
       value: 0
@@ -1335,14 +1410,26 @@ PrefabInstance:
     - target: {fileID: 5473588508934549075, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201419060205939432, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6769139871011014693, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: _vfxType
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6769139871011014693, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
+      propertyPath: _isPoolAble
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7647375919561907788, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: m_Name
       value: P_Boss_VFX_LaserWindup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647375919561907788, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7932950082945570079, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: looping
@@ -1400,6 +1487,10 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8759792057648169449, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8925829702398118937, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: looping
       value: 0
@@ -1407,6 +1498,10 @@ PrefabInstance:
     - target: {fileID: 8925829702398118937, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168550307570006772, guid: e5d9609412bebcd488be8f3531066e7f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
