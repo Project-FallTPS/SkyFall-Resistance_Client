@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class AccessoryManager : Singleton<AccessoryManager>
 {
-
     [SerializeField] private AccessoryDataSO _dataSO;
     private static AccessoryDataSO _persistentDataSO;
 
@@ -38,12 +37,6 @@ public class AccessoryManager : Singleton<AccessoryManager>
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
-    protected override void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.sceneUnloaded -= OnSceneUnloaded;
-    }
-
     private void OnSceneUnloaded(Scene scene)
     {
         // 씬이 언로드될 때 현재 악세서리 정보 저장
@@ -52,7 +45,6 @@ public class AccessoryManager : Singleton<AccessoryManager>
 
     public void SaveCurrentAccessories()
     {
-        SavedAccessories.Clear();
         foreach (var kvp in EquippedAccessories)
         {
             SavedAccessories[kvp.Key] = new ActiveAccessory(kvp.Value.Data, kvp.Value.Object)
@@ -172,6 +164,9 @@ public class AccessoryManager : Singleton<AccessoryManager>
         {
             case "LobbyScene":
                 Destroy(gameObject);
+                break;
+            case "BossScene":
+                EquippedAccessories.Clear();
                 break;
         }
     }

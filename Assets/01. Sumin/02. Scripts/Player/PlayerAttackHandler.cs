@@ -35,14 +35,10 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     private void Start()
     {
         ChangeWeapon(EWeaponType.Katana);
+        RestoreAccessories();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -53,6 +49,7 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
             return;
         }
 
+        Debug.Log($"모드 : {mode}");
         // 씬 로드가 완료된 후 악세서리 복원
         //RestoreAccessories();
     }
@@ -92,10 +89,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
 
     private void Update()
     {
-        if (!isInitializedAcc)
-        {
-            RestoreAccessories();
-        }
         CurrentStrategy?.Update();
     }
 
@@ -109,7 +102,6 @@ public class PlayerAttackHandler : MonoBehaviour, IItemReceiver
         {
             _strategies[EWeaponType.Katana].AddAccessory(type, accessory);
         }
-        //CurrentStrategy?.AddAccessory(type, accessory);
     }
 
     public void ChangeWeapon(EWeaponType type)
