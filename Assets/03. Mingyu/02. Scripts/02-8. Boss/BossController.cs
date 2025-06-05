@@ -74,11 +74,11 @@ public class BossController : MonoBehaviour, IDamageable
         {
             _animator.SetTrigger(nameof(EBossAnimationParam.HitLeftTrigger));
             Debug.Log("Boss Damaged");
+
+            OnBossHealthChange?.Invoke(_bossData.CurrentHealth, _bossData.MaxHealth, _bossData.CurrentPhase);
         }
         OnHit?.Invoke(damage);
 
-        // 추가한 부분 <Health Invoke>
-        OnBossHealthChange?.Invoke(_bossData.CurrentHealth, _bossData.MaxHealth, _bossData.CurrentPhase);
     }
 
     private void Init()
