@@ -39461,6 +39461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnHitEffect: {fileID: 0}
+  driftScript: {fileID: 0}
   _playerStatCollection: {fileID: 11400000, guid: 1eeb6a2c02944284ca3c74fb02054da0, type: 2}
 --- !u!54 &5763895104959899663
 Rigidbody:
