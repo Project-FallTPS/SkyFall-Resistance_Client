@@ -75726,7 +75726,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.702745
-    functionName: SetColllider
+    functionName: SetCollider
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 0f06a847790ff304e88c9952c29f8f9b, type: 3}
     floatParameter: 0
