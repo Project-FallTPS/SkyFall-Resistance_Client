@@ -87,6 +87,8 @@ public class PlayerStatHolder : MonoBehaviour, IDamageable
 
         UIEventHandler.Instance.OnHealthChange?.Invoke(StatDict[EStatType.Health], StatDict[EStatType.MaxHealth]);
 
+        SoundManager.Instance.PlaySfx(ESfxType.PlayerHit);
+
         Debug.Log($"플레이어 공격받음! {StatDict[EStatType.Health]}");
 
         if (StatDict[EStatType.Health] <= 0)

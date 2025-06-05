@@ -4,6 +4,8 @@ public enum ESfxType
     PlayerSword2,
     PlayerSword3,
 
+    PlayerHit,
+
     EnemyBlaster1,
     EnemyBlaster2,
 
