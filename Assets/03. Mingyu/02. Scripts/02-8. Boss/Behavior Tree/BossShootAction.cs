@@ -29,13 +29,11 @@ public partial class BossShootAction : Action, IBossAttack
             _playerTransform = _bossController.PlayerTransform;
             _obstacleMask = LayerMask.GetMask(nameof(ELayers.Obstacle));
         }
-        
         if (CanAttack())
         {
             Attack();
             return Status.Running;
         }
-
         return Status.Failure;
     }
 
@@ -100,12 +98,12 @@ public partial class BossShootAction : Action, IBossAttack
     {
         Vector3 bossPosition = _bossTransform.position;
         Vector3 playerPosition = _playerTransform.position;
-        Vector3 directionToPlayer = (playerPosition - bossPosition).normalized;
-        
+        Vector3 directionToPlayer;
         Debug.DrawLine(bossPosition, playerPosition, Color.red, 2f);
 
         foreach (Transform shootTransform in _bossController.BulletShootPositions)
         {
+            directionToPlayer = (playerPosition - shootTransform.position).normalized;
             DamageablePoolManager.Instance.GetObject(
                 EDamageableType.BossBulletStraight,
                 shootTransform.position,

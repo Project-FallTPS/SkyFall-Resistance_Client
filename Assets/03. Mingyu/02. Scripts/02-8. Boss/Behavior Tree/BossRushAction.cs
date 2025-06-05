@@ -52,7 +52,6 @@ public partial class BossRushAction : Action, IBossAttack
 
     protected override void OnEnd()
     {
-        _bossRushVFX.gameObject.SetActive(false);
     }
 
     private void GetBossRushVFX()
@@ -121,6 +120,7 @@ public partial class BossRushAction : Action, IBossAttack
             _bossData.LastAttackTime = Time.time;
             _bossController.NavMeshAgent.speed = _originalSpeed;
             _bossController.StopAllCoroutines();
+            _bossRushVFX.gameObject.SetActive(false);
             return true;
         }
         return false;
