@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7151509753411278619}
   - component: {fileID: 8683799607158080893}
   - component: {fileID: 8994272816624023863}
+  - component: {fileID: 8986188877990495858}
   - component: {fileID: 8049736942823185013}
-  - component: {fileID: 1030964160591229845}
   m_Layer: 0
   m_Name: Acc_KatanaBomb
   m_TagString: Player
@@ -89,21 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8049736942823185013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6208985102155455514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58410d2b8ef6bad4ba3101910d10a034, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 6
-  _additionalDamage: 10
---- !u!135 &1030964160591229845
+--- !u!135 &8986188877990495858
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,4 +109,19 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.014921769
-  m_Center: {x: 4.656613e-10, y: 9.313226e-10, z: 0}
+  m_Center: {x: -0.0078934375, y: 0.000000008381903, z: 0.12476008}
+--- !u!114 &8049736942823185013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208985102155455514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58410d2b8ef6bad4ba3101910d10a034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 7
+  _bombEffectPrefab: {fileID: 0}
+  _additionalDamage: 10
