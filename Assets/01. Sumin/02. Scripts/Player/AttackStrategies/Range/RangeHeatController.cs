@@ -100,6 +100,25 @@ public class RangeHeatController : MonoBehaviour
         return true;
     }
 
+    public bool TryConsumeHeat(float value)
+    {
+        if (_isOverheated)
+        {
+            return false;
+        }
+
+        Heat += value;
+        Heat = Mathf.Min(Heat, MaxHeat);
+        OnHeatChanged?.Invoke(Heat, MaxHeat, _isOverheated);
+        if (Mathf.Approximately(Heat, MaxHeat))
+        {
+            _coolingCoroutine = StartCoroutine(CoOverHeat(0f));
+        }
+        PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.MuzzleFlash, _muzzle.transform.position, Quaternion.identity);
+
+        return true;
+    }
+
     private IEnumerator CoOverHeat(float timePassed)
     {
         _isOverheated = true;

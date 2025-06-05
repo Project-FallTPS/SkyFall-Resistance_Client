@@ -20,7 +20,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         GetMoveInput();
-        _playerAttackHandler.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
+        //_playerAttackHandler.Anim.ResetTrigger("anim_Player_Trigger_MeleeAttack");
         GetInput();
     }
 

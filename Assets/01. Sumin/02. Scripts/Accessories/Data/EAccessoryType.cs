@@ -1,16 +1,14 @@
 public enum EAccessoryType
 {
-    Katana_AttackSpeed,
+    Katana_CoolTime,
     Katana_Damage,
     Katana_AttackRange,
     Katana_Battery,
     Range_ExtraAttack,
-    Range_Fridger,
-    Common_EngineOil,
+    Range_CoolTime,
     Katana_Bomb,
     Range_Bomb,
-    Body_Fuel,
-    Body_Barrier,
-    Body_Wing,
+    Range_Damage,
+    Range_Fridge,
     Count,
 }
