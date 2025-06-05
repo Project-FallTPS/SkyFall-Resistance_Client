@@ -70,12 +70,12 @@ Material:
     - _QueueOffset: 0
     - _Roughness: 100
     - _Smoothness: 0
-    - _Transparent: 0.5
+    - _Transparent: 0.14
     - _VoronoiDissolve: 5.91
     - _VoronoiScale: 0.05
     m_Colors:
     - _FresnelColor: {r: 0.000014718557, g: 0.000020684054, b: 0.00012222801, a: 0}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0.12156863}
     - _NoiseSpeed: {r: -0.1, g: 0.1, b: 0, a: 0}
     - _VoronoiColor: {r: 0.0405759, g: 0.040941093, b: 0.24999997, a: 0}
     - _VoronoiSpeed: {r: 15, g: 15, b: 0, a: 0}
