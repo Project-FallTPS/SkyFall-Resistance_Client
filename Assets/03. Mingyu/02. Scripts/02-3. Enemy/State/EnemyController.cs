@@ -94,6 +94,7 @@ public class EnemyController : MonoBehaviour, IDamageable
             DeactivateShield();
             return;
         }
+
         SoundManager.Instance.PlaySfx(ESfxType.EnemyHit1, transform.position);
         
         _enemyData.CurrentHealth -= damage;
