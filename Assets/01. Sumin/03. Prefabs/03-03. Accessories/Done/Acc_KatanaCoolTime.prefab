@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 990774577380852817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: -0.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 4517255517618082124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.16400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 239302897444581452}
   - component: {fileID: 454276262615728378}
   - component: {fileID: -1516132890667967450}
+  - component: {fileID: 6009157976059590156}
   m_Layer: 0
   m_Name: Acc_KatanaCoolTime
   m_TagString: Player
@@ -308,6 +309,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+--- !u!65 &6009157976059590156
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5966997065088043352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.028099999, y: 0.016789267, z: 0.058312833}
+  m_Center: {x: -0.014049999, y: 0, z: 0.000000038184226}
 --- !u!1 &6411036165014322911
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +388,7 @@ Transform:
   m_GameObject: {fileID: 7200020072447552575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.16400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -2273,9 +2273,9 @@ AnimatorStateMachine:
   m_EntryTransitions:
   - {fileID: -5894035820912389168}
   m_StateMachineTransitions:
-  - first: {fileID: -3832425702387176311}
-    second: []
   - first: {fileID: -2456550875840948488}
+    second: []
+  - first: {fileID: -3832425702387176311}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 0, y: 590, z: 0}
@@ -2349,7 +2349,7 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 1
+  m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
