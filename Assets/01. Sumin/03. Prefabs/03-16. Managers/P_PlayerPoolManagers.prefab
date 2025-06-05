@@ -121,7 +121,7 @@ MonoBehaviour:
   _poolInfoList:
   - Type: 1
     InitCount: 1
-    Prefab: {fileID: 5966997065088043352, guid: 46a2fe5e39eb1ee40b68bde13bcfea77, type: 3}
+    Prefab: {fileID: 656246334433332586, guid: 41f9f71cdcbd3cc478c80b0f54da65c9, type: 3}
     Container: {fileID: 5206507339312593560}
   - Type: 2
     InitCount: 1
@@ -137,27 +137,11 @@ MonoBehaviour:
     Container: {fileID: 5206507339312593560}
   - Type: 4
     InitCount: 1
-    Prefab: {fileID: 6267432987575682162, guid: dc96d89a1bbcc1f47bdef0373430da37, type: 3}
+    Prefab: {fileID: 656246334433332586, guid: 0d128fdf566a0244c9a3e60eba77850f, type: 3}
     Container: {fileID: 5206507339312593560}
   - Type: 8
     InitCount: 1
     Prefab: {fileID: 656246334433332586, guid: 48b2589f6837b6d4c8609b3c1abdae7b, type: 3}
-    Container: {fileID: 5206507339312593560}
-  - Type: 5
-    InitCount: 1
-    Prefab: {fileID: 1234689623521128932, guid: dacfcdaf3b23f294bbc337e07ef7df33, type: 3}
-    Container: {fileID: 5206507339312593560}
-  - Type: 9
-    InitCount: 1
-    Prefab: {fileID: 1234689623521128932, guid: 637fe267173c16c498138badd0867e81, type: 3}
-    Container: {fileID: 5206507339312593560}
-  - Type: 0
-    InitCount: 1
-    Prefab: {fileID: 5966997065088043352, guid: b7e803e488703bb408b916586cbf0b04, type: 3}
-    Container: {fileID: 5206507339312593560}
-  - Type: 8
-    InitCount: 1
-    Prefab: {fileID: 1234689623521128932, guid: 862380ac82143a74d9d13ef8eced193a, type: 3}
     Container: {fileID: 5206507339312593560}
 --- !u!1 &1217687436568008110
 GameObject:
