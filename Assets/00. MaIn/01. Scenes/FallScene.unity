@@ -685,8 +685,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 751054933}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1414361898885170667, guid: 72064082534218c448268d8f2973cbbd, type: 3}
+      propertyPath: _isDontDestroy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5485462378542125184, guid: 72064082534218c448268d8f2973cbbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6210861
@@ -705,15 +709,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5485462378542125184, guid: 72064082534218c448268d8f2973cbbd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5485462378542125184, guid: 72064082534218c448268d8f2973cbbd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5485462378542125184, guid: 72064082534218c448268d8f2973cbbd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5485462378542125184, guid: 72064082534218c448268d8f2973cbbd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -736,11 +740,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72064082534218c448268d8f2973cbbd, type: 3}
---- !u!4 &580858358 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5485462378542125184, guid: 72064082534218c448268d8f2973cbbd, type: 3}
-  m_PrefabInstance: {fileID: 580858357}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &751018780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -879,7 +878,6 @@ Transform:
   - {fileID: 1145077312}
   - {fileID: 1699406578}
   - {fileID: 1809007077}
-  - {fileID: 580858358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &754023152
@@ -2748,13 +2746,13 @@ MonoBehaviour:
   _waveDatas:
   - EnemyStatMultiplier: 1
     EnemySpawnerInterval: 5
-    WaveDuration: 60
+    WaveDuration: 10
   - EnemyStatMultiplier: 1.2
     EnemySpawnerInterval: 4.5
-    WaveDuration: 60
+    WaveDuration: 10
   - EnemyStatMultiplier: 1.4
     EnemySpawnerInterval: 4
-    WaveDuration: 60
+    WaveDuration: 10
   _enemySpawnerHandler: {fileID: 1887002311}
 --- !u!1 &1887002310
 GameObject:
@@ -63425,5 +63423,6 @@ SceneRoots:
   - {fileID: 6139898460045279132}
   - {fileID: 7048879728334270027}
   - {fileID: 7454883233390014056}
+  - {fileID: 580858357}
   - {fileID: 554910340}
   - {fileID: 1527282337}
