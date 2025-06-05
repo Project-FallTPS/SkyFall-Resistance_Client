@@ -17,5 +17,6 @@ public enum EStatType
     GroundSprintSpeed,
     BatteryDamage,
     BombDamage,
+    RangeHeatUseRate,
     Count
 }

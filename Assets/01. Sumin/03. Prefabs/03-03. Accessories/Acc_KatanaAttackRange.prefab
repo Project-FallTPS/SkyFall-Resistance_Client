@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 586936624710343355}
   - component: {fileID: 6416356468237015410}
   - component: {fileID: 5239578303547764763}
-  - component: {fileID: 527276232504458301}
   - component: {fileID: 7930971596903184470}
+  - component: {fileID: 527276232504458301}
   m_Layer: 0
   m_Name: Acc_KatanaAttackRange
   m_TagString: Player
@@ -89,19 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &527276232504458301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899342940594638778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11b84e54702e8cc4e80d0a59f3d43dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 2
 --- !u!65 &7930971596903184470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,6 +110,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.022984542, y: 0.010744382, z: 0.18469676}
   m_Center: {x: -0.0018551657, y: -0.0000000547152, z: 0.09234838}
+--- !u!114 &527276232504458301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899342940594638778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b84e54702e8cc4e80d0a59f3d43dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 2
 --- !u!1 &6996056830599769671
 GameObject:
   m_ObjectHideFlags: 0

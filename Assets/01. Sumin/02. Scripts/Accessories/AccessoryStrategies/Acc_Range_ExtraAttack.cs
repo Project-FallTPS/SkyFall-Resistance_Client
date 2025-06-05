@@ -40,7 +40,7 @@ public class Acc_Range_ExtraAttack : AccessoryBase, IAccessory
                 Quaternion.LookRotation(dirWithSpread),
                 (obj) =>
                 {
-                    obj.GetComponent<IBullet>().SetStats(AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.Damage), dirWithSpread);
+                    obj.GetComponent<IBullet>().SetStats(AccessoryManager.Instance.GetData(Type).GetStatBonusData(EStatType.BombDamage), dirWithSpread);
                 });
         }
     }
