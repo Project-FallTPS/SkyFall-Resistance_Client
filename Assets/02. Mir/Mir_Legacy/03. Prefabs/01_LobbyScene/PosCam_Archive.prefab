@@ -420,8 +420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanTilt: {fileID: 4425644681765491003}
-  PanSensitivity: 8
-  TiltSensitivity: 5
+  PanSensitivity: 5
+  TiltSensitivity: 3
   SmoothTime: 2
   PanOffset: -14
   TiltOffset: 0
