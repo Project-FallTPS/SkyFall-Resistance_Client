@@ -2569,6 +2569,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[8].Type
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[9].Type
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[8].Prefab
+      value: 
+      objectReference: {fileID: 1661079568890502283, guid: 4b8440a8e25a86741b6003c396f679f3, type: 3}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[9].Prefab
+      value: 
+      objectReference: {fileID: 7297933669545016633, guid: 3b56eedf4debfbf4a8ef228bda04d4af, type: 3}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[9].Container
+      value: 
+      objectReference: {fileID: 1699406579}
+    - target: {fileID: 4067441626946308721, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+      propertyPath: _poolInfoList.Array.data[9].InitCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2577,6 +2605,11 @@ PrefabInstance:
 --- !u!4 &1699406578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1821646677443790788, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
+  m_PrefabInstance: {fileID: 1699406577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1699406579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5206507339312593560, guid: 037881d37f1c4d74d9a07df13b7ccdb6, type: 3}
   m_PrefabInstance: {fileID: 1699406577}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1725932441
@@ -27567,6 +27600,18 @@ PrefabInstance:
     - target: {fileID: 3976907391008963765, guid: 7769dc5d80ecce941ace46d88fc80d52, type: 3}
       propertyPath: m_Name
       value: P_DebrisPoolManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5627008592237963427, guid: 7769dc5d80ecce941ace46d88fc80d52, type: 3}
+      propertyPath: _spawnInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5627008592237963427, guid: 7769dc5d80ecce941ace46d88fc80d52, type: 3}
+      propertyPath: _maxExplosionForce
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5627008592237963427, guid: 7769dc5d80ecce941ace46d88fc80d52, type: 3}
+      propertyPath: _minExplosionForce
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
