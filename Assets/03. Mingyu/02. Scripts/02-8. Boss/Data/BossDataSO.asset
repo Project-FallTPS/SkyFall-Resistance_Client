@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossDatas:
   - MaxHealth: 100
-    MoveSpeed: 2
+    MoveSpeed: 6
     AttackDamage: 10
     AttackCooltime: 5
     SafetyMargin: 5
-    MaxRushDistance: 20
-    MinRushDistance: 10
-    RushSpeedMultiplier: 50
+    MaxRushDistance: 60
+    MinRushDistance: 20
+    RushSpeedMultiplier: 15
     RushSpeedDivisorForWindup: 5
     WindupDistance: 5
     BeforeRushDelay: 1
     MinLaserDistance: 25
     WindupTimeForLaser: 1
-    LaserRange: 50
+    LaserRange: 200
     LaserDuration: 2
     MaxPhase: 3
     WeaknessAttackDamageMultiplier: 1.5
