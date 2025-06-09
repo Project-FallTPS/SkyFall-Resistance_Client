@@ -16,8 +16,10 @@ public class ExplosiveDebris : Debris
     [SerializeField]
     private float _damage = 5f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         int layer = LayerMask.NameToLayer(_explosionTriggerLayerName);
         if (layer == -1)
         {
