@@ -83,6 +83,7 @@ MonoBehaviour:
   _damagedLayer:
     serializedVersion: 2
     m_Bits: 2056
+  _explosionTriggerLayerName: Ground
   _explosionRange: 5
   _damage: 5
 --- !u!82 &5094091771024009736

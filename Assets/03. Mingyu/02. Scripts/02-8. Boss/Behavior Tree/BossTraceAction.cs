@@ -43,6 +43,15 @@ public partial class BossTraceAction : Action
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             _bossController.transform.rotation = Quaternion.Slerp(_bossController.transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
+
+        Vector3 velocity = _bossController.NavMeshAgent.velocity;
+        Vector3 localVelocity = _bossController.transform.InverseTransformDirection(velocity);
+
+        float speed = velocity.magnitude;
+        float turns = localVelocity.x;
+
+        _bossController.Animator.SetFloat("Speed", speed);
+        _bossController.Animator.SetFloat("Turns", turns);
     }
 }
 

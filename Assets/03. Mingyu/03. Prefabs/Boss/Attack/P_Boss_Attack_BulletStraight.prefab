@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.33595228, b: 1, a: 0.45490196}
+      maxColor: {r: 1, g: 0.06152262, b: 0, a: 0.45490196}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9845,7 +9845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933e3170b4ef9d649a6a028725bee7ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 30
   _lifeTime: 5
   _damage: 10
   _damageableType: 4
@@ -10072,7 +10072,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.5235849, g: 0.8660083, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.5457959, b: 0.5254902, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14905,7 +14905,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.2588235, g: 0.6218334, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.47168714, b: 0.2588235, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

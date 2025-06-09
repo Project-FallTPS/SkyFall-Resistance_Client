@@ -37,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
     public Animator Animator { get; private set; }
 
     [Header("# Jetpack")]
-    [SerializeField] private List<Jetpack> Jetpacks;
+    [SerializeField] private List<Jetpack> _jetpacks;
+    [SerializeField] private List<Jetpack> _subJetpacks;
     public bool HasOverloadJetpack { get; private set; }
 
     [Header("# Game Feel Action Line")]
@@ -95,6 +96,8 @@ public class PlayerMovement : MonoBehaviour
                 ChangeState(EPlayerMoveState.Ground);
                 PlayerEffectPoolManager.Instance.GetObject(EPlayerEffectType.LandingEffect, transform.position);
             }
+
+            TweenSubJetpackEmission(false); // 끄기
         }
     }
 
@@ -102,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             Animator.SetBool("anim_Player_IsGrounded", false);
+
+        TweenSubJetpackEmission(true); // 끄기
     }
 
     public void HandleMovement(float h, float v, bool isKeyDown)
@@ -147,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
         // ───────────── Jetpack Smoke Tween ─────────────
         float targetRate = isSprint ? TARGET_RATE : 0f;
 
-        foreach (var jp in Jetpacks)
+        foreach (var jp in _jetpacks)
         {
             jp.RateTween?.Kill();
 
@@ -197,6 +202,37 @@ public class PlayerMovement : MonoBehaviour
         {
             Animator.SetTrigger("anim_Player_GroundDoubleJump");
             ChangeState(EPlayerMoveState.Airborne);
+        }
+    }
+
+    private void TweenSubJetpackEmission(bool isActive)
+    {
+        float targetRate = isActive ? TARGET_RATE : 0f;
+
+        foreach (var sub in _subJetpacks)
+        {
+            sub.RateTween?.Kill();
+
+            var ps = sub.BigSmoke;
+            if (ps == null) continue;
+
+            var emission = ps.emission;
+            float start = emission.rateOverTime.constant;
+
+            if (!ps.isPlaying && isActive) ps.Play();
+
+            sub.RateTween = DOTween.To(
+                    () => start,
+                    x => emission.rateOverTime = x,
+                    targetRate,
+                    LERP_DURATION)
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    if (Mathf.Approximately(targetRate, 0f))
+                        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    sub.RateTween = null;
+                });
         }
     }
 }

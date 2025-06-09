@@ -15,6 +15,7 @@ TagManager:
   - PlayerArea
   - Ground
   - Obstacle
+  - PlayerArea_Boss
   layers:
   - Default
   - TransparentFX
