@@ -10,6 +10,9 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 
     private Rigidbody _rigidbody;
 
+    [Header("체력")]
+    [SerializeField]
+    private float _maxHealth = 10f;
     private float _currentHealth = 10f;
 
     [Header("최대 속력")]
@@ -36,7 +39,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
     private string _canSpawnName = "CanSpawn";
     private float _fireSpeed;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _fireTrail = GetComponentInChildren<VisualEffect>();
@@ -82,6 +85,7 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
 
         _fireTrail.SetBool(_canSpawnName, true);
 
+        _currentHealth = _maxHealth;
         _releaseTimer = 0f;
     }
 
