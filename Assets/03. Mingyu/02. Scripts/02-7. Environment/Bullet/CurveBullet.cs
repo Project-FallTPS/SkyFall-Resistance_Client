@@ -34,6 +34,7 @@ public class CurveBullet : BulletBase
         _midPosition = p1;
         _endPosition = p2;
         _t = 0f;
+        _phase = 0;
 
         Vector3 startToEnd = (_endPosition - _startPosition).normalized;
         _midTangent = startToEnd * 2 *_speed;
