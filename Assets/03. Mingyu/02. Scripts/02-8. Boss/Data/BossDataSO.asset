@@ -16,7 +16,7 @@ MonoBehaviour:
   - MaxHealth: 100
     MoveSpeed: 6
     AttackDamage: 10
-    AttackCooltime: 5
+    AttackCooltime: 2
     SafetyMargin: 5
     MaxRushDistance: 60
     MinRushDistance: 20

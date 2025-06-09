@@ -129,4 +129,15 @@ public abstract class Debris : MonoBehaviour, ILaunchable, IDamageable
         GameObject vfx = VFXPoolManager.Instance.GetObjectByRandom(vfxType, transform.position, Quaternion.identity);
         vfx.GetComponent<VFX>().PlayVFX();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        HandleCollision(collision.gameObject.layer);
+    }
+
+    // 템플릿 메서드: 하위 클래스가 override 가능
+    protected virtual void HandleCollision(int layer)
+    {
+
+    }
 }
