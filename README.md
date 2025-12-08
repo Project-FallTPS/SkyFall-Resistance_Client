@@ -19,8 +19,47 @@
 | **프로젝트 명** | SKYFALL : Resistance |
 |:---:|:---:|
 | **프로젝트 기간** | 2025.05 - 2025.06 |
-| **팀원** | 박미르,을 효율적으로 관리하기 위해 오브젝트 풀링을 도입했습니다.
+| **팀원** | 박미르, 박우영, 차수민, 최민규 |
+| **기술 스택** | <img src="https://img.shields.io/badge/Unity-6000.0.58f2-000000?style=for-the-badge&logo=unity" height="25"> <img src="https://img.shields.io/badge/C%23-512BD4?style=for-the-badge&logo=csharp&logoColor=white" height="25"> <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github" height="25"> |
+| **플랫폼 및 장르** | <img src="https://img.shields.io/badge/Platform-Windows-lightgrey?style=for-the-badge" height="25"> <img src="https://img.shields.io/badge/Genre-3D%20Flying%20tps-red?style=for-the-badge" height="25"> |
+
+<br>
+
+## 게임 설명
+|![image](https://github.com/user-attachments/assets/71a067e3-72a4-42cc-bbce-2ac70f75a829)|![image](https://github.com/user-attachments/assets/40474d49-b4ed-48d9-875c-ed3e71e27331)|
+|:---:|:---:|
+|로비 화면|인게임 화면|
+
+#### **하늘에서 지상까지, 마주하는 모든 적들을 섬멸하라!** 🛸<br>
+
+SKYFALL : Resistance는 무한한 하늘에서 시작하여 지상의 보스전으로 이어지는 고속 낙하 액션 TPS 게임입니다. 
+플레이어는 저항군의 일원이 되어, 낙하하는 동안 적들의 포화를 뚫고 지상에 착륙하여 강력한 보스를 쓰러뜨려야 합니다. 
+<br><br>
+
+#### 1. 고속 낙하 액션  ☁️
+- 끊임없이 추락하는 고속 상황 속에서, 하늘을 뒤덮는 적 기계 군단과 장애물을 피하며 전투를 펼칩니다.
+- **카타나**와 **총**을 자유롭게 스위칭하며 스타일리시한 액션을 구사할 수 있습니다.<br>
+
+#### 2. 다채로운 몬스터 👾
+- 단순히 플레이어를 향해 다가오는 몬스터뿐만 아니라 자폭, 지원 사격, 베지어 곡선 이동 등 다양한 행동 양식을 가진 적들이 등장하여 긴장감을 늦출 수 없게 합니다. <br>
+
+#### 3. 전략적 보스 레이드 🤖
+- 지상에 착륙한 후에는 거대 로봇 보스와의 치열한 전투가 기다리고 있습니다.
+- 보스의 **페이즈**별로 변화하는 강력한 패턴을 파악하고, 지형지물을 활용해 공격을 회피하며 약점을 공략해야 합니다.<br>
+  
+<br>
+
+## 사용 기술
+### 1. Strategy Pattern for Player's Attack
+- 카타나(근접)와 총(원거리)으로 실시간 전환되는 플레이어의 공격 방식을 유연하게 관리하기 위해 전략 패턴을 적용했습니다.
+- 공격 로직을 IAttackStrategy 인터페이스로 추상화하고, 무기 교체 시 전략 객체만 교체함으로써 조건문 없이 깔끔한 공격 로직을 구현했습니다.
+- 이를 통해 입력 처리부와 공격 구현부를 분리하여 코드의 결합도를 낮추고 확장성을 확보했습니다.
+<br>
+
+### 2. Object Pooling
+- 고속 비행 전투 특성상 끊임없이 생성되고 파괴되는 적, 추락 잔해, 투사체 오브젝트들을 효율적으로 관리하기 위해 오브젝트 풀링을 도입했습니다.
 - 빈번한 Instantiate와 Destroy 호출로 인한 메모리 단편화 및 빈번한 GC 호출로 인한 오버헤드를 방지할 수 있었습니다.
+<br>
 
 ### 3. Enemy FSM based on State Pattern
 - 몬스터의 상태(추적, 공격, 피격, 사망) 전이를 명확하게 관리하기 위해 **상태 패턴 기반의 FSM**을 설계했습니다.
